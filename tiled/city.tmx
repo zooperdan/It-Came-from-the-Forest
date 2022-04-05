@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="140">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="154">
  <editorsettings>
   <export target="../src/files/areas/city.lua" format="custom"/>
  </editorsettings>
@@ -8,146 +8,272 @@
   <property name="tileset" value="city"/>
  </properties>
  <tileset firstgid="1" source="MainTiles.tsx"/>
- <layer id="1" name="Walls" width="16" height="16">
+ <layer id="1" name="Walls" width="32" height="32">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1,1,1,0,1,1,1,0,1,1,0,0,0,0,
-0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,
-0,0,1,0,1,0,1,1,0,0,1,1,1,1,0,0,
-0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,
-0,0,1,1,1,0,0,0,1,0,1,1,0,1,0,0,
-0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,1,1,0,1,1,0,1,0,0,
-0,0,1,0,1,0,0,0,1,0,1,0,1,1,1,0,
-0,0,1,1,1,0,1,0,0,0,0,0,1,1,0,0,
-0,0,0,0,1,1,0,0,1,1,1,0,0,0,0,0,
-0,0,1,1,1,1,1,0,0,0,1,0,0,1,0,0,
-0,0,0,1,0,1,0,0,1,1,1,0,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,0,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,1,1,0,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,0,0,1,0,0,
+0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1,1,1,0,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="5" name="BoundaryWalls" width="16" height="16">
+ <layer id="5" name="BoundaryWalls" width="32" height="32">
   <data encoding="csv">
-33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,0,0,0,33,33,33,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,33,33,33,33,33,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,33,0,0,0,33,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,33,0,0,33,33,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,33,33,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,33,33,33,33,0,33,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,33,33,0,0,0,33,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,33,0,0,0,0,33,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,33,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,33,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,33,33,33,33,33,33,0,33,33,33,33,0,0,0,0,0,0,0,0,0,33,33,33,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,33,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,33,33,33,33,0,0,0,0,0,33,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,33,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,33,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,33,33,33,33,33,33,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="4" x="384" y="256" width="32" height="32"/>
-  <object id="116" gid="21" x="128" y="448" width="32" height="32">
+  <object id="34" gid="4" x="576" y="544" width="32" height="32"/>
+  <object id="116" gid="21" x="640" y="704" width="32" height="32">
    <properties>
     <property name="id" value="07bdc48a-2d80-c74b-9d89-66145c44fc2f"/>
    </properties>
   </object>
-  <object id="117" gid="21" x="288" y="416" width="32" height="32">
+  <object id="147" gid="21" x="352" y="704" width="32" height="32">
+   <properties>
+    <property name="id" value="92087f4a-650e-9131-5a20-96d455fcbc54"/>
+   </properties>
+  </object>
+  <object id="117" gid="21" x="800" y="672" width="32" height="32">
    <properties>
     <property name="id" value="1d2e81f3-94cc-cd3f-544f-5ad90f3194ce"/>
    </properties>
   </object>
-  <object id="118" gid="21" x="352" y="320" width="32" height="32">
+  <object id="149" gid="21" x="864" y="800" width="32" height="32">
+   <properties>
+    <property name="id" value="e95e2d58-d43a-e083-45e3-f6cf3cfe27bc"/>
+   </properties>
+  </object>
+  <object id="150" gid="21" x="832" y="864" width="32" height="32">
+   <properties>
+    <property name="id" value="2cc61ee8-795b-139f-d760-ec4cc2ad36ca"/>
+   </properties>
+  </object>
+  <object id="118" gid="21" x="864" y="576" width="32" height="32">
    <properties>
     <property name="id" value="c683cd38-045f-a877-81cb-94529d70de49"/>
    </properties>
   </object>
-  <object id="119" gid="21" x="192" y="384" width="32" height="32">
+  <object id="119" gid="21" x="704" y="640" width="32" height="32">
    <properties>
     <property name="id" value="16893c8e-d9ec-83c0-a57c-047b1b6f25ef"/>
    </properties>
   </object>
-  <object id="120" gid="21" x="96" y="320" width="32" height="32">
+  <object id="120" gid="21" x="608" y="576" width="32" height="32">
    <properties>
     <property name="id" value="e730ebd0-0abb-a956-b2e3-b998cbe6e35c"/>
    </properties>
   </object>
-  <object id="121" gid="21" x="128" y="192" width="32" height="32">
+  <object id="121" gid="21" x="640" y="448" width="32" height="32">
    <properties>
     <property name="id" value="52633cef-680c-c349-eb6b-99711ac5b96b"/>
    </properties>
   </object>
-  <object id="122" gid="21" x="192" y="128" width="32" height="32">
+  <object id="122" gid="21" x="704" y="384" width="32" height="32">
    <properties>
     <property name="id" value="b7f616dd-a0ed-a381-bbff-e8704706006f"/>
    </properties>
   </object>
-  <object id="123" gid="21" x="352" y="128" width="32" height="32">
+  <object id="123" gid="21" x="864" y="384" width="32" height="32">
    <properties>
     <property name="id" value="16c1d401-8d4a-eb60-4149-aa0542ab0b5c"/>
    </properties>
   </object>
-  <object id="124" gid="21" x="320" y="192" width="32" height="32">
+  <object id="124" gid="21" x="832" y="448" width="32" height="32">
    <properties>
     <property name="id" value="158ca082-1e49-0c45-9bd5-f486b6b2a50b"/>
    </properties>
   </object>
-  <object id="125" gid="21" x="384" y="224" width="32" height="32">
+  <object id="125" gid="21" x="896" y="480" width="32" height="32">
    <properties>
     <property name="id" value="22b62055-6cea-f40a-01c4-92429be338a6"/>
    </properties>
   </object>
-  <object id="126" gid="22" x="480" y="256" width="32" height="32">
+  <object id="126" gid="22" x="992" y="512" width="32" height="32">
    <properties>
     <property name="direction" type="int" value="-1"/>
     <property name="id" value="18cc962a-d531-edc0-2898-b64079f8c5be"/>
     <property name="targetarea" value="forest-1"/>
     <property name="targetdir" type="int" value="1"/>
-    <property name="targetx" type="int" value="17"/>
-    <property name="targety" type="int" value="46"/>
+    <property name="targetx" type="int" value="1"/>
+    <property name="targety" type="int" value="38"/>
    </properties>
   </object>
-  <object id="127" gid="17" x="448" y="352" width="32" height="32">
+  <object id="127" gid="17" x="960" y="608" width="32" height="32">
    <properties>
     <property name="id" value="ec6b61ca-86d4-dbef-f393-cdd421f3809c"/>
    </properties>
   </object>
-  <object id="128" gid="20" x="192" y="224" width="32" height="32">
+  <object id="148" gid="17" x="352" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="aa217000-73cc-fccd-11a5-28b341be2483"/>
+   </properties>
+  </object>
+  <object id="128" gid="20" x="704" y="480" width="32" height="32">
    <properties>
     <property name="id" value="1e925700-1ab2-e834-db6c-d802b5ae1b4a"/>
    </properties>
   </object>
-  <object id="129" gid="17" x="448" y="160" width="32" height="32">
+  <object id="129" gid="17" x="960" y="416" width="32" height="32">
    <properties>
     <property name="id" value="934a5ae7-7cbc-c48e-79a2-f7b51b4318a2"/>
    </properties>
   </object>
-  <object id="130" gid="8" x="224" y="416" width="32" height="32">
+  <object id="130" gid="8" x="800" y="512" width="32" height="32">
    <properties>
     <property name="id" value="3547dd42-7f31-420a-ce5a-a62a7e6e7f93"/>
+    <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="131" gid="8" x="256" y="160" width="32" height="32">
+  <object id="131" gid="8" x="928" y="512" width="32" height="32">
    <properties>
     <property name="id" value="8aeba64b-dec3-d0de-7614-977e1abd00b4"/>
+    <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="132" gid="8" x="384" y="128" width="32" height="32">
+  <object id="132" gid="8" x="800" y="608" width="32" height="32">
    <properties>
     <property name="id" value="639cda5c-6fa8-8ccc-e94a-0ca2a97cfa88"/>
+    <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="133" gid="8" x="352" y="384" width="32" height="32">
+  <object id="133" gid="8" x="896" y="896" width="32" height="32">
    <properties>
     <property name="id" value="66f746d9-eea3-d812-8251-a24768ad7d40"/>
+    <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="134" gid="21" x="96" y="224" width="32" height="32">
+  <object id="151" gid="8" x="960" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="b1cfe1ed-531a-06f4-5c99-b9ac31efdf38"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="134" gid="21" x="608" y="480" width="32" height="32">
    <properties>
     <property name="id" value="18256665-2cbf-0116-0372-98de2807d046"/>
+   </properties>
+  </object>
+  <object id="140" gid="7" x="736" y="704" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="2"/>
+    <property name="id" value="15b09945-429a-f3ca-da95-1d3a3ac6a297"/>
+    <property name="name" value="barricade"/>
+   </properties>
+  </object>
+  <object id="152" gid="7" x="704" y="704" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="2"/>
+    <property name="id" value="30c01699-07a8-76d6-0ac2-ee634eb28267"/>
+    <property name="name" value="barricade"/>
+   </properties>
+  </object>
+  <object id="141" gid="7" x="800" y="480" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="id" value="3a2da430-2c80-2079-d5d0-b8d07cb4d8b5"/>
+    <property name="name" value="barricade"/>
+   </properties>
+  </object>
+  <object id="142" gid="7" x="832" y="736" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="2d2c9685-2d0d-2343-5882-bed090e0b7b9"/>
+    <property name="name" value="barricade"/>
+   </properties>
+  </object>
+  <object id="146" gid="7" x="736" y="576" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="id" value="06ec4d52-ada5-9171-ecdd-5fa9d019cae6"/>
+    <property name="name" value="barricade"/>
+   </properties>
+  </object>
+  <object id="143" gid="7" x="768" y="832" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="id" value="c7aaf7ec-1750-67d2-02b9-ef626d846c1a"/>
+    <property name="name" value="barricade"/>
+   </properties>
+  </object>
+  <object id="144" gid="14" x="704" y="544" width="32" height="32">
+   <properties>
+    <property name="id" value="6ce22af2-fd0a-457a-4abc-90c3b36b8dae"/>
+    <property name="imageid" value="npc-guard"/>
+   </properties>
+  </object>
+  <object id="145" gid="7" x="704" y="576" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="49f44025-2c51-80d3-645a-c1087075ca52"/>
+    <property name="name" value="barricade"/>
+   </properties>
+  </object>
+  <object id="153" gid="34" x="960" y="512" width="32" height="32">
+   <properties>
+    <property name="id" value="b3a4a68f-b5b3-7858-300d-e730d10d7afd"/>
    </properties>
   </object>
  </objectgroup>

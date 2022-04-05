@@ -52,9 +52,7 @@ function Level:load(id, door)
 	else
 		numerrors = numerrors + 1
 	end
-	
-	self.loaded = true
-	
+
 	return (numerrors == 0)
 
 end
@@ -184,6 +182,75 @@ function Level:getObject(t, x, y)
 	end
 
 	return nil
+
+end
+
+function Level:generatePathMap()
+
+	local map = {}
+
+	for y = 1, self.data.mapSize do
+		map[y] = {}
+		for x = 1, self.data.mapSize do
+			
+			local walkable = 0
+
+			if self.data.walls[x] and self.data.walls[x][y] then
+				walkable = 1
+			end
+
+			if self.data.boundarywalls[x] and self.data.boundarywalls[x][y] then
+				walkable = 1
+			end
+
+			for key,value in pairs(self.data.staticprops) do
+				local prop = self.data.staticprops[key]
+				if prop.x == x and prop.y == y then
+					walkable = 1
+				end
+			end		
+
+			for key,value in pairs(self.data.npcs) do
+				local npc = self.data.npcs[key]
+				if npc.x == x and npc.y == y then
+					walkable = 1
+				end
+			end	
+		
+			for key,value in pairs(self.data.chests) do
+				local chest = self.data.chests[key]
+				if chest.x == nx and chest.y == ny then
+					walkable = 1
+				end
+			end
+
+			for key,value in pairs(self.data.wells) do
+				local well = self.data.wells[key]
+				if well.x == nx and well.y == ny then
+					walkable = 1
+				end
+			end
+			
+			for key,value in pairs(self.data.doors) do
+				local door = self.data.doors[key]
+				if door.x == nx and door.y == ny then
+					walkable = 1
+				end
+			end
+			
+			for key,value in pairs(self.data.portals) do
+				local portal = level.data.portals[key]
+				if portal.x == nx and portal.y == ny then
+					walkable = 1
+				end
+			end	
+		
+			table.insert(map[y], walkable) 
+		
+		end
+	end
+
+	return map
 
 end
 

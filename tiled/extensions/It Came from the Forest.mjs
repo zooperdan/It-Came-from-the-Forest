@@ -408,6 +408,7 @@ var customMapFormat = {
 			// objects
 			
 			if (layer.isObjectLayer) {
+				buffer += getByType("EnemyBlocker", "enemyblockers", layer);
 				buffer += getByType("Enemy", "enemies", layer);
 				buffer += getByType("Chest", "chests", layer);
 				buffer += getByType("Spinner", "spinners", layer);

@@ -2,6 +2,10 @@ class = require "libs/middleclass"
 inspect = require "libs/inspect"
 lume = require "libs/lume"
 json = require "libs/json"
+bresenham = require 'libs/bresenham'
+
+Grid = require ("libs/jumper.grid")
+Pathfinder = require ("libs/jumper.pathfinder")
 
 require "globals"
 require "util"

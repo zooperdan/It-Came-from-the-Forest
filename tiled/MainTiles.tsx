@@ -37,6 +37,8 @@
    <property name="direction" type="int" value="2"/>
    <property name="id" value=""/>
    <property name="name" value=""/>
+   <property name="state" type="int" value="1"/>
+   <property name="visible" type="int" value="1"/>
   </properties>
  </tile>
  <tile id="7" type="Enemy">
@@ -46,6 +48,7 @@
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="0"/>
    <property name="visible" type="int" value="1"/>
+   <property name="wanderer" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="8" type="Enemy">
@@ -55,6 +58,7 @@
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="1"/>
    <property name="visible" type="int" value="1"/>
+   <property name="wanderer" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="9" type="Enemy">
@@ -64,6 +68,7 @@
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="2"/>
    <property name="visible" type="int" value="1"/>
+   <property name="wanderer" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="13" type="NPC">
@@ -152,11 +157,15 @@
    <property name="type" type="int" value="2"/>
   </properties>
  </tile>
- <tile id="22" type="Sign"/>
  <tile id="23" type="Sign"/>
  <tile id="32" type="Wall">
   <properties>
    <property name="type" type="int" value="3"/>
+  </properties>
+ </tile>
+ <tile id="33" type="EnemyBlocker">
+  <properties>
+   <property name="id" value=""/>
   </properties>
  </tile>
 </tileset>

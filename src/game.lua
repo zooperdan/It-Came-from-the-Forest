@@ -4,34 +4,10 @@ local Assets = require "assets"
 local Party = require "party"
 local Level = require "level"
 local Atlases = require "atlases"
+local Enemy = require "enemy"
 
 local GlobalVariables = require "globalvariables"
 local ItemTemplates = require "itemtemplates"
-local EnemyTemplates = require "enemytemplates"
-
-local SpellTemplates = require "spelltemplates"
-
-local InventoryScreen = require "screens/inventoryscreen"
-local MapScreen = require "screens/mapscreen"
-local CampScreen = require "screens/campscreen"
-local CombatScreen = require "screens/combatscreen"
-local NPCScreen = require "screens/npcscreen"
-local ChestScreen = require "screens/chestscreen"
-local TreasureScreen = require "screens/treasurescreen"
-local SpellbookScreen = require "screens/spellbookscreen"
-local UseItemScreen = require "screens/useitemscreen"
-
-screens =  {
-	inventoryscreen = InventoryScreen:new(),
-	mapscreen = MapScreen:new(),
-	campscreen = CampScreen:new(),
-	combatscreen = CombatScreen:new(),
-	npcscreen = NPCScreen:new(),
-	chestscreen = ChestScreen:new(),
-	treasurescreen = TreasureScreen:new(),
-	spellbookscreen = SpellbookScreen:new(),
-	useitemscreen = UseItemScreen:new()
-}
 
 local GameStates = {
 	INIT = 0,
@@ -60,12 +36,8 @@ assets = Assets:new()
 renderer = Renderer:new()
 level = Level:new()
 atlases = Atlases:new()
-
 party = Party:new()
 messages = Messages:new()
-itemtemplates = ItemTemplates:new()
-enemytemplates = EnemyTemplates:new()
-spelltemplates = SpellTemplates:new()
 globalvariables = GlobalVariables:new()
 
 local Game = class('Game')
@@ -76,8 +48,6 @@ function Game:initialize()
 
 	self.gameState = GameStates.INIT
 	self.subState = SubStates.IDLE
-	self.isFullscreen = true
-	self.timeofday = 6
 	self.footStepIndex = 1
 	love.graphics.setDefaultFilter( "nearest", "nearest", 0)
 	
@@ -85,41 +55,18 @@ end
 
 function Game:init()
 
+	love.mouse.setVisible(false)
+	
 	self.isFullscreen = love.window.fullscreen
 	self.canvas = love.graphics.newCanvas(SCREEN_WIDTH, SCREEN_HEIGHT)
 
 	assets:load()
 	
-	if not atlases:load() then
-		love.graphics.setCanvas(self.canvas)
-		love.graphics.clear()
-		love.graphics.setColor(1,1,1,1)
-		love.graphics.setLineWidth(1)
-		love.graphics.setLineStyle("rough")
-
-		love.graphics.setColor(1,1,1,1)
-		love.graphics.setFont(assets.fonts["main"]);	
-		love.graphics.print("-- FATAL ERROR --",10,10)
-		love.graphics.print("> Error loading atlases. Check console output.",10,40)
-		love.graphics.print("Press any key to quit.",10,70)
-		love.graphics.setCanvas()
-		self.gameState = GameStates.FATAL_ERROR
-		self.subState = SubStates.IDLE
-		return
-	end	
-	
 	renderer:init(self)
-
-	for index,value in pairs(screens) do 
-		screens[index]:init(self)
-	end
 	
-	party:updateStats()
-	party:restUp()
-
 	self.gameState = GameStates.LOADING_LEVEL
 
-	self:loadArea("city")
+	self:loadArea("forest-1")
 	self.gameState = GameStates.EXPLORING
 	self.subState = SubStates.IDLE
 
@@ -128,7 +75,13 @@ end
 function Game:update(dt)
 
 	if self.gameState ~= GameStates.INIT then
+	
+		for key,value in pairs(self.enemies) do
+			self.enemies[key]:update(dt)
+		end
+		
 		renderer:update(dt)
+		
 	end
 	
 end
@@ -155,8 +108,7 @@ function Game:handleInput(key)
 	
     if key == 'return' then
 		if love.keyboard.isDown("lalt") then
-			self.isFullscreen = not self.isFullscreen
-			love.window.setFullscreen(self.isFullscreen)
+			love.window.setFullscreen(not love.window.getFullscreen())
 		end
     end
 
@@ -265,8 +217,6 @@ function Game:moveForward()
 
 	self:playFootstepSound()
 
-	self:tick()
-
 end
 
 function Game:moveBackward()
@@ -297,8 +247,6 @@ function Game:moveBackward()
 	self:stepOnGround()
 
 	self:playFootstepSound()
-
-	self:tick()
 
 end
 
@@ -331,8 +279,6 @@ function Game:strafeLeft()
 
 	self:playFootstepSound()
 
-	self:tick()
-
 end
 
 function Game:strafeRight()
@@ -363,8 +309,6 @@ function Game:strafeRight()
 	self:stepOnGround()
 
 	self:playFootstepSound()
-
-	self:tick()
 
 end
 
@@ -405,12 +349,29 @@ function Game:handleTileCollide(x, y)
 		return true
 	end
 	
+	-- enemies
+	
+	local enemy = level:getObject(level.data.enemies, x,y)
+	
+	if enemy then
+		return true
+	end
+	
 	-- portal
 	
 	local portal = level:getObject(level.data.portals, x,y)
 	
 	if portal then
 		-- walk through the portal
+		return true
+	end
+	
+	-- npc
+	
+	local npc = level:getObject(level.data.npcs, x,y)
+	
+	if npc then
+		-- trigger the npc
 		return true
 	end
 	
@@ -438,6 +399,13 @@ function Game:handleTileCollide(x, y)
 	local prop = level:getObject(level.data.staticprops, x,y)
 	
 	if prop then
+	
+		if prop.properties.name == "barricade" then
+			-- take damage by running into a barricade
+			assets:playSound("barricade-hurt")
+			return true
+		end
+	
 		return true
 	end		
 	
@@ -508,12 +476,40 @@ function Game:loadArea(id)
 
 	if level:load(id, self.currentDoor) then
 
+		if not atlases:load(level.data.tileset) then
+			love.graphics.setCanvas(self.canvas)
+			love.graphics.clear()
+			love.graphics.setColor(1,1,1,1)
+			love.graphics.setLineWidth(1)
+			love.graphics.setLineStyle("rough")
+
+			love.graphics.setColor(1,1,1,1)
+			love.graphics.setFont(assets.fonts["main"]);	
+			love.graphics.print("-- FATAL ERROR --",10,10)
+			love.graphics.print("> Error loading atlases. Check console output.",10,40)
+			love.graphics.print("Press any key to quit.",10,70)
+			love.graphics.setCanvas()
+			self.gameState = GameStates.FATAL_ERROR
+			self.subState = SubStates.IDLE
+			return
+		end	
+	
+		level.loaded = true
+	
+		local map = level:generatePathMap()
+
+		self.enemies = {}
+			
+		for key,value in pairs(level.data.enemies) do
+			local e = level.data.enemies[key]
+			local enemy = Enemy:new(e)
+			enemy:setMap(map)
+			table.insert(self.enemies, enemy)
+		end
+
 		self:stepOnGround()
-
 		self.footStepIndex = 1
-
-		assets.music[level.data.tileset]:setVolume(settings.musicVolume)
-		assets.music[level.data.tileset]:play()
+		assets:playMusic(level.data.tileset)
 
 	else
 		love.graphics.setCanvas(self.canvas)
@@ -542,7 +538,7 @@ end
 
 function Game:onBeforeLevelExit()
 
-	assets.music[level.data.tileset]:stop()
+	assets:stopMusic(level.data.tileset)
 	self:loadArea(self.currentDoor.properties.targetarea)
 
 	renderer:fadeIn()
@@ -553,19 +549,6 @@ function Game:onAfterLevelExit()
 
 	self.gameState = GameStates.EXPLORING
 	self.subState = SubStates.IDLE
-
-end
-
-function Game:tick(minutes)
-
-	minutes = minutes and minutes or 1
-
-	print("Tick ("..minutes..").")
-
-	self.timeofday = self.timeofday + minutes/60;
-
-	local r = math.floor(self.timeofday/24 * 14)
-	if r >= 14 then	self.timeofday = 0 end
 
 end
 

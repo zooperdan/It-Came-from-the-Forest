@@ -1,20 +1,34 @@
 local Atlases = class('Atlases')
 
 function Atlases:initialize()
-	
-	self.filenames = {
-		"forest-environment",
-		"forest-props",
-		"enemies",
-		"common-props",
-		"city-environment",
-	}
-	self.images = {}
-	self.jsondata = {}
-	
+
 end
 
-function Atlases:load()
+function Atlases:load(tileset)
+
+	local filenames = {}
+	
+	self.images = {}
+	self.jsondata = {}
+
+	if tileset == "city" then
+		self.filenames = {
+			"enemies",
+			"common-props",
+			"city-environment",
+			"city-props",
+			"npc",
+		}	
+	else
+		self.filenames = {
+			"forest-environment",
+			"forest-props",
+			"enemies",
+			"common-props",
+			"npc",
+		}	
+	end
+
 
 	local numerrors = 0
 	local path = "files/atlases/"

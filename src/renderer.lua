@@ -14,8 +14,6 @@ function Renderer:init(caller)
 	self.dungeonWidth = 4
 	self.backgroundIndex = 1
 	self.skyIndex = 1
-	self.offsetx = 11
-	self.offsety = 11
 	
 	self.fadeSpeed = 3.0
 	self.fadeCounter = 0
@@ -32,14 +30,18 @@ function Renderer:update(dt)
 	love.graphics.setFont(assets.fonts["main"]);
 	
 	self:drawViewport()
+	self:drawMinimap()
 	self:drawUI()
+	
+	self:drawPointer()
 	
 	love.graphics.setCanvas()
 
 	if self.dofadeIn then
-		love.graphics.setColor(1,1,1,self.fadeCounter)
+		love.graphics.setColor(self.fadeCounter,self.fadeCounter,self.fadeCounter,1)
 		self.fadeCounter = self.fadeCounter + (dt * self.fadeSpeed)
 		if self.fadeCounter >= 1 then
+			love.graphics.setColor(1,1,1,1)
 			self.dofadeIn = false
 			self.fadeCounter = 0
 			self.caller:onAfterLevelExit()
@@ -47,9 +49,10 @@ function Renderer:update(dt)
 	end	
 	
 	if self.dofadeOut then
-		love.graphics.setColor(1,1,1,self.fadeCounter)
+		love.graphics.setColor(self.fadeCounter,self.fadeCounter,self.fadeCounter,1)
 		self.fadeCounter = self.fadeCounter - (dt * self.fadeSpeed)
-		if self.fadeCounter <= 0 then
+		if self.fadeCounter <= -0.1 then
+			love.graphics.setColor(0,0,0,1)
 			self.dofadeOut = false
 			self.fadeCounter = 0
 			self.caller:onBeforeLevelExit()
@@ -211,13 +214,90 @@ function Renderer:drawText(x, y, text, align)
 	
 end
 
+function Renderer:drawPointer()
+
+	local x, y = love.mouse.getPosition()
+
+	x = x * (screen.width/love.graphics.getWidth())
+	y = y * (screen.width/love.graphics.getWidth())
+
+	love.graphics.draw(assets.images["pointer"], x, y)
+
+end
+
+function Renderer:drawMinimap()
+
+	local cellsize = 4
+	local offsetx = (screen.width - 10) - level.data.mapSize * cellsize
+	local offsety = (screen.height - 10) - level.data.mapSize * cellsize
+	
+	for y = 1, level.data.mapSize do
+		for x = 1, level.data.mapSize do
+		
+			local dx = offsetx + (x * cellsize)
+			local dy = offsety + (y * cellsize)
+		
+			if level.data.walls[x] and level.data.walls[x][y] then
+				love.graphics.setColor(1,1,1,1)
+				love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+			end
+
+			if level.data.boundarywalls[x] and level.data.boundarywalls[x][y] then
+				love.graphics.setColor(1,1,1,1)
+				love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+			end
+		
+		end
+	end
+
+	-- doors
+
+	for key,value in pairs(level.data.doors) do
+		local door = level.data.doors[key]
+		local dx = offsetx + (door.x * cellsize)
+		local dy = offsety + (door.y * cellsize)
+		love.graphics.setColor(1,0.5,0,1)
+		love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+	end
+	
+	-- wells
+
+	for key,value in pairs(level.data.wells) do
+		local well = level.data.wells[key]
+		local dx = offsetx + (well.x * cellsize)
+		local dy = offsety + (well.y * cellsize)
+		love.graphics.setColor(0,0.5,1,1)
+		love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+	end
+	
+	-- enemies
+
+	for key,value in pairs(level.data.enemies) do
+		local enemy = level.data.enemies[key]
+		local dx = offsetx + (enemy.x * cellsize)
+		local dy = offsety + (enemy.y * cellsize)
+		love.graphics.setColor(1,0,0,1)
+		love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+	end
+		
+	-- player
+	
+	local dx = offsetx + (party.x * cellsize)
+	local dy = offsety + (party.y * cellsize)
+	love.graphics.setColor(0,1,0,1)
+	love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+	
+		
+	love.graphics.setColor(1,1,1,1)
+	
+end
+
 function Renderer:drawUI()
 
 	self:drawText(10, 10, direction_names[party.direction])
 	self:drawText(-10, 10, party.x .. "/" .. party.y, "right")
 	self:drawText(10, 340, tostring(love.timer.getFPS()))
-	
-	self:drawText(10, 315, math.floor(collectgarbage('count')) .. " Kb")
+
 end
 
 function Renderer:drawObject(atlasId, layerId, x, z)
@@ -321,9 +401,20 @@ function Renderer:drawSquare(x, z)
 		for key,value in pairs(level.data.enemies) do
 			local enemy = level.data.enemies[key]
 			if enemy.x == p.x and enemy.y == p.y then
-				self:drawObject("enemies", self:getObjectDirectionID("ant", enemy.properties.direction), x, z)
+				if enemy.properties.attacking == 1 then
+					self:drawObject("enemies", self:getObjectDirectionID("ant-attack", enemy.properties.direction), x, z)
+				else
+					self:drawObject("enemies", self:getObjectDirectionID("ant", enemy.properties.direction), x, z)
+				end
 			end
 		end
+		
+		for key,value in pairs(level.data.npcs) do
+			local npc = level.data.npcs[key]
+			if npc.x == p.x and npc.y == p.y then
+				self:drawObject("npc", npc.properties.imageid, x, z)			
+			end
+		end		
 
 		for key,value in pairs(level.data.chests) do
 			local chest = level.data.chests[key]

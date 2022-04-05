@@ -1,130 +1,6 @@
-function randomPartyCharacter(row)
+function distanceFrom(x1,y1,x2,y2)
 
-	local found = false
-	local char = nil
-	
-	if party:defeated() then
-		return nil
-	end	
-	
-	while not found do
-
-		local r = math.random(1, #party.characters)
-	
-		if party.characters[r].status ~= STATUS_DEAD then
-		
-			if row and row == party.characters[r].row then
-				found = true
-				char = party.characters[r]
-			else
-				found = true
-				char = party.characters[r]
-			end
-		end
-		
-	end
-	
-	return char
-
-end
-
---[[-----------------------------------------------------------------------------------------------------------------------
-
-	randomizeDamage()
-	
-	randomizes the passed damage value 
-
------------------------------------------------------------------------------------------------------------------------]]--
-
-function randomizeDamage(damage)
-
-	local diff = damage * 0.25
-	local add = math.random(0, diff*2)-diff
-
-	damage = damage + add;
-
-	if damage < 0 then damage = 0 end
-	
-	return round(damage)
-
-end
-
---[[-----------------------------------------------------------------------------------------------------------------------
-
-	getEnemiesInBackRow()
-	
-	returns the enemies positioned in the front row during combat
-
------------------------------------------------------------------------------------------------------------------------]]--
-
-function getEnemiesInFrontRow(enemies)
-
-	local row = {}
-
-	for i = 1, #enemies do
-		if enemies[i].row == FRONT_ROW then
-			table.insert(row, i)
-		end
-	end
-
-	return row;
-
-end
-
---[[-----------------------------------------------------------------------------------------------------------------------
-
-	getEnemiesInBackRow()
-	
-	returns the enemies positioned in the back row during combat
-
------------------------------------------------------------------------------------------------------------------------]]--
-
-function getEnemiesInBackRow(enemies)
-
-	local row = {}
-
-	for i = 1, #enemies do
-		if enemies[i].row == BACK_ROW then
-			table.insert(row, i)
-		end
-	end
-
-	return row;
-
-end
-
-
-
---[[-----------------------------------------------------------------------------------------------------------------------
-
-	enemyCanAct()
-	
-	returns true if the passed in enemy is in a state which it can perform an action
-
------------------------------------------------------------------------------------------------------------------------]]--
-
-function enemyCanAct(enemy)
-
-	if enemy.status == STATUS_DEAD then return false end
-	if enemy.status == "paralyzed" then return false end
-
-	return true
-
-end
-
---[[-----------------------------------------------------------------------------------------------------------------------
-
-	playerCanAct()
-	
-	returns true if the passed in character is in a state which it can perform an action
-
------------------------------------------------------------------------------------------------------------------------]]--
-
-function playerCanAct(char)
-
-	if char.status == STATUS_DEAD then return false end
-
-	return true
+	return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
 
 end
 
@@ -209,11 +85,6 @@ function checkCriterias(criterias)
 
 end
 
-function sleep(n)  -- seconds
-  local t0 = clock()
-  while clock() - t0 <= n do end
-end
-
 function explode(line, delimiter)
 
 	if string.sub(line,#line,#line) ~= delimiter then
@@ -243,13 +114,6 @@ function round(num)
         return upper
     end
 end
-
---[[
-function round(number, decimals)
-    local power = 10^decimals
-    return math.floor(number * power) / power
-end
-]]--
 
 function table.shallow_copy(t)
   local t2 = {}

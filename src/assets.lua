@@ -52,22 +52,48 @@ function Assets:load()
 		"door-locked",
 		"bushes",
 		"drink-fountain",
+		"barricade-hurt",
+		"ant-move",
+		"ant-attack",
 	}	
 
 	for i = 1, #misc_sounds do
 		self.sfx.misc[misc_sounds[i]] = love.audio.newSource("files/sfx/"..misc_sounds[i]..".wav", "static")
 	end	
 
+	self.images["pointer"] = love.graphics.newImage("files/pointer.png")
+
 	self.images["sky"] = love.graphics.newImage("files/sky.png")
 
 	self.music["forest"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
 	self.music["forest"]:setLooping(true)
 
-	self.music["city"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
-	self.music["city"]:setLooping(true)
+	--self.music["city"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
+	--self.music["city"]:setLooping(true)
 
 	self.fonts["main"] = love.graphics.newFont("files/fonts/Berry Rotunda.ttf", 16, "none", love.graphics.getDPIScale())
 	
+end
+
+function Assets:playMusic(id)
+
+	if not self.music[id] then
+		return
+	end
+
+	self.music[id]:setVolume(settings.musicVolume)
+	self.music[id]:play()
+
+end
+
+function Assets:stopMusic(id)
+
+	if not self.music[id] then
+		return
+	end
+
+	self.music[id]:stop()
+
 end
 
 function Assets:playSound(value)
