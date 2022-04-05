@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NotepadPlus>
+    <Session activeView="0">
+        <mainView activeIndex="0">
+            <File firstVisibleLine="194" xOffset="0" scrollWidth="1296" startPos="5141" endPos="5141" selMode="0" offset="0" wrapCount="1" lang="Lua" encoding="-1" userReadOnly="no" filename="C:\Users\danth\source\repos\Lair-of-Lizards-love2d\src\renderer.lua" backupFilePath="" originalFileLastModifTimestamp="1182273239" originalFileLastModifTimestampHigh="30950870" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no" />
+        </mainView>
+        <subView activeIndex="0" />
+    </Session>
+</NotepadPlus>

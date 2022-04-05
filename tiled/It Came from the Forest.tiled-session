@@ -1,0 +1,76 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "forest-1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/MainTiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/area1.tmx": {
+            "scale": 0.838671875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 512.119236143456,
+                "y": 512.7154168607359
+            }
+        },
+        "MainTiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "area1.tmx": {
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 964.5,
+                "y": 1195
+            }
+        },
+        "city.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 302.33333333333337,
+                "y": 267.33333333333326
+            }
+        },
+        "forest-1.tmx": {
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1012.5,
+                "y": 1157
+            }
+        }
+    },
+    "last.exportedFilePath": "E:/development/Dungeon Crawler Game Jam 2022/src/src/files/areas",
+    "last.imagePath": "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled",
+    "map.height": 16,
+    "map.lastUsedExportFilter": "Lair of Lizards Area Export (*.lua)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 16,
+    "openFiles": [
+        "MainTiles.tsx",
+        "city.tmx",
+        "forest-1.tmx"
+    ],
+    "project": "It Came from the Forest.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "MainTiles.tsx",
+        "city.tmx",
+        "forest-1.tmx",
+        "area1.tmx",
+        "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/MainTiles.tsx",
+        "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/area1.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}

@@ -1,0 +1,42 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "area1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "MainTiles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "area1.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 618,
+                "y": 588.6666666666666
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/src/areas",
+    "last.imagePath": "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled",
+    "map.height": 16,
+    "map.lastUsedExportFilter": "Lair of Lizards Area Export (*.lua)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 16,
+    "openFiles": [
+        "area1.tmx",
+        "MainTiles.tsx"
+    ],
+    "project": "lair-of-lizards.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "MainTiles.tsx",
+        "area1.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
