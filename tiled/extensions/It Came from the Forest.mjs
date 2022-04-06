@@ -204,7 +204,7 @@ function generateIDS() {
 				if (layer.objects[j].tile.type != "Player") {
 					tiled.log(prop.value);
 					if (prop == "") {
-						layer.objects[j].setProperty("id", guid());
+						layer.objects[j].setProperty("id", map.property("id") + "_" + guid());
 						num++;
 					}
 				}

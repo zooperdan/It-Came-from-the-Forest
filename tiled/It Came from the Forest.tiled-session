@@ -35,27 +35,43 @@
             }
         },
         "city.tmx": {
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 740.6666666666667,
-                "y": 554.6666666666665
+                "x": 590.5,
+                "y": 496
             }
         },
         "forest-1.tmx": {
-            "scale": 0.75,
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 362.5,
+                "y": 264
+            }
+        },
+        "forest-2.tmx": {
+            "scale": 0.5591145833333333,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 555.3333333333333,
-                "y": 994.6666666666666
+                "x": 539.2454587796926,
+                "y": 110.88961341406616
+            }
+        },
+        "forest-3.tmx": {
+            "scale": 0.5591145833333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 769.9673963670238,
+                "y": 769.0731252911039
             }
         },
         "test.tmx": {
             "scale": 0.838671875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 242.64555193292966,
-                "y": 237.27992547741036
+                "x": 256.35770843036795,
+                "y": 255.76152771308807
             }
         }
     },
@@ -67,17 +83,19 @@
     "map.width": 16,
     "openFiles": [
         "test.tmx",
-        "forest-1.tmx",
-        "MainTiles.tsx",
-        "city.tmx"
-    ],
-    "project": "It Came from the Forest.tiled-project",
-    "property.type": "string",
-    "recentFiles": [
-        "test.tmx",
-        "forest-1.tmx",
         "MainTiles.tsx",
         "city.tmx",
+        "forest-2.tmx"
+    ],
+    "project": "It Came from the Forest.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "test.tmx",
+        "MainTiles.tsx",
+        "forest-2.tmx",
+        "city.tmx",
+        "forest-1.tmx",
+        "forest-3.tmx",
         "area1.tmx",
         "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/MainTiles.tsx",
         "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/area1.tmx"

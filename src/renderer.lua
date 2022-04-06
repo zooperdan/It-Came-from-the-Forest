@@ -20,6 +20,8 @@ function Renderer:init(caller)
 	self.dofadeIn = true	
 	self.dofadeOut = false	
 
+	self.showMinimap = false
+	
 end
 
 function Renderer:update(dt)
@@ -28,12 +30,26 @@ function Renderer:update(dt)
 	love.graphics.clear()
 	love.graphics.setColor(1,1,1,1)
 	love.graphics.setFont(assets.fonts["main"]);
+	love.graphics.setShader(highlightshader)
 	
 	self:drawViewport()
-	self:drawMinimap()
-	self:drawUI()
+
+	-- Enemy in front of player?
+
+	local enemy = level:getFacingEnemy()
 	
+	if enemy and enemy.properties.state == 1 then
+		self:drawEnemyStats(enemy)
+	end
+
+	if self.showMinimap then
+		self:drawMinimap()
+	end
+
+	self:drawUI()
 	self:drawPointer()
+	
+	--love.graphics.draw(assets.images["opening-image"], 0, 0)	
 	
 	love.graphics.setCanvas()
 
@@ -121,6 +137,11 @@ end
 function Renderer:getObjectDirectionID(prefix, direction)
 
 	local result = nil
+	
+	if direction == -1 then
+		return prefix
+	end
+	
 	
 	if direction == 0 then
 		if party.direction == 2 then
@@ -218,18 +239,23 @@ function Renderer:drawPointer()
 
 	local x, y = love.mouse.getPosition()
 
-	x = x * (screen.width/love.graphics.getWidth())
-	y = y * (screen.width/love.graphics.getWidth())
-
+	x = x / (love.graphics.getWidth()/screen.width)
+	y = y / (love.graphics.getHeight()/screen.height)
+	
 	love.graphics.draw(assets.images["pointer"], x, y)
 
 end
 
 function Renderer:drawMinimap()
 
-	local cellsize = 4
+	self:drawText(10, 340, tostring(love.timer.getFPS()))
+
+	local cellsize = 6
 	local offsetx = (screen.width - 10) - level.data.mapSize * cellsize
 	local offsety = (screen.height - 10) - level.data.mapSize * cellsize
+
+	offsetx = screen.width/2 - (level.data.mapSize * cellsize)/2
+	offsety = screen.height/2 - (level.data.mapSize * cellsize)/2
 	
 	for y = 1, level.data.mapSize do
 		for x = 1, level.data.mapSize do
@@ -239,12 +265,12 @@ function Renderer:drawMinimap()
 		
 			if level.data.walls[x] and level.data.walls[x][y] then
 				love.graphics.setColor(1,1,1,1)
-				love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+				love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
 			end
 
 			if level.data.boundarywalls[x] and level.data.boundarywalls[x][y] then
 				love.graphics.setColor(1,1,1,1)
-				love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+				love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
 			end
 		
 		end
@@ -257,7 +283,7 @@ function Renderer:drawMinimap()
 		local dx = offsetx + (door.x * cellsize)
 		local dy = offsety + (door.y * cellsize)
 		love.graphics.setColor(1,0.5,0,1)
-		love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+		love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
 	end
 	
 	-- wells
@@ -267,17 +293,19 @@ function Renderer:drawMinimap()
 		local dx = offsetx + (well.x * cellsize)
 		local dy = offsety + (well.y * cellsize)
 		love.graphics.setColor(0,0.5,1,1)
-		love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+		love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
 	end
 	
 	-- enemies
 
 	for key,value in pairs(level.data.enemies) do
 		local enemy = level.data.enemies[key]
-		local dx = offsetx + (enemy.x * cellsize)
-		local dy = offsety + (enemy.y * cellsize)
-		love.graphics.setColor(1,0,0,1)
-		love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+		if enemy.properties.state == 1 then
+			local dx = offsetx + (enemy.x * cellsize)
+			local dy = offsety + (enemy.y * cellsize)
+			love.graphics.setColor(1,0,0,1)
+			love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
+		end
 	end
 		
 	-- player
@@ -285,9 +313,9 @@ function Renderer:drawMinimap()
 	local dx = offsetx + (party.x * cellsize)
 	local dy = offsety + (party.y * cellsize)
 	love.graphics.setColor(0,1,0,1)
-	love.graphics.rectangle("fill", dx, dy, cellsize-1, cellsize-1)
+	love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
 	
-		
+
 	love.graphics.setColor(1,1,1,1)
 	
 end
@@ -296,7 +324,61 @@ function Renderer:drawUI()
 
 	self:drawText(10, 10, direction_names[party.direction])
 	self:drawText(-10, 10, party.x .. "/" .. party.y, "right")
-	self:drawText(10, 340, tostring(love.timer.getFPS()))
+
+	if party:hasCooldown(1) then
+		love.graphics.setColor(1,0,0,1)
+		love.graphics.rectangle("fill", 5, 40, 5, 5)
+	else
+		love.graphics.setColor(1,1,1,1)
+		love.graphics.rectangle("fill", 5, 40, 5, 5)
+	end
+
+	if party:hasCooldown(2) then
+		love.graphics.setColor(1,0,0,1)
+		love.graphics.rectangle("fill", 15, 40, 5, 5)
+	else
+		love.graphics.setColor(1,1,1,1)
+		love.graphics.rectangle("fill", 15, 40, 5, 5)
+	end
+	
+	love.graphics.setColor(1,1,1,1)
+
+end
+
+function Renderer:drawEnemyStats(enemy)
+
+	self:drawText(0, 10+50, enemy.properties.name, "center")
+	
+	local x = math.floor(screen.width/2 - assets.images["enemy-hit-bar-1"]:getWidth()/2)
+	local y = 30+50
+	
+	love.graphics.draw(assets.images["enemy-hit-bar-1"], x, y)
+
+	if enemy.properties.health > 0 then
+
+		local maxbarsize = 143
+
+		local f = enemy.properties.health/enemy.properties.health_max
+		local barsize = maxbarsize * f
+		local quad = nil
+
+		local offs = 3
+
+		-- bar body
+		quad = love.graphics.newQuad(1, 0, 1, 5, assets.images["enemy-hit-bar-2"]:getWidth(), assets.images["enemy-hit-bar-2"]:getHeight())
+		love.graphics.draw(assets.images["enemy-hit-bar-2"], quad, x + offs, y + offs, 0, barsize, 1)
+
+		-- left edge
+		
+		quad = love.graphics.newQuad(0, 0, 1, 5, assets.images["enemy-hit-bar-2"]:getWidth(), assets.images["enemy-hit-bar-2"]:getHeight())
+		love.graphics.draw(assets.images["enemy-hit-bar-2"], quad, x + offs, y + offs)
+
+		-- right edge
+		
+		quad = love.graphics.newQuad(2, 2, 1, 5, assets.images["enemy-hit-bar-2"]:getWidth(), assets.images["enemy-hit-bar-2"]:getHeight())
+		love.graphics.draw(assets.images["enemy-hit-bar-2"], quad, (x + offs) + (barsize-1), y + offs)
+
+	end
 
 end
 
@@ -401,11 +483,19 @@ function Renderer:drawSquare(x, z)
 		for key,value in pairs(level.data.enemies) do
 			local enemy = level.data.enemies[key]
 			if enemy.x == p.x and enemy.y == p.y then
-				if enemy.properties.attacking == 1 then
-					self:drawObject("enemies", self:getObjectDirectionID("ant-attack", enemy.properties.direction), x, z)
-				else
-					self:drawObject("enemies", self:getObjectDirectionID("ant", enemy.properties.direction), x, z)
+				if enemy.highlight and enemy.highlight == 1 then
+					highlightshader:send("WhiteFactor", 1)
 				end
+				if enemy.properties.state == 1 then
+					if enemy.properties.attacking == 1 then
+						self:drawObject("enemies", self:getObjectDirectionID("ant-attack", enemy.properties.direction), x, z)
+					else 
+						self:drawObject("enemies", self:getObjectDirectionID("ant", enemy.properties.direction), x, z)
+					end
+				elseif enemy.properties.state == 3 then
+					self:drawObject("enemies", self:getObjectDirectionID("ant-dead", enemy.properties.direction), x, z)
+				end			
+				highlightshader:send("WhiteFactor", 0)
 			end
 		end
 		

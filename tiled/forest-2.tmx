@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="156">
+ <editorsettings>
+  <export target="../src/files/areas/forest-2.lua" format="custom"/>
+ </editorsettings>
+ <properties>
+  <property name="id" value="forest-2"/>
+  <property name="name" value="Dark forest"/>
+  <property name="tileset" value="forest"/>
+ </properties>
+ <tileset firstgid="1" source="MainTiles.tsx"/>
+ <layer id="1" name="Walls" width="16" height="16">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+0,1,0,0,0,1,1,0,0,1,0,0,0,0,0,1,
+0,1,0,0,0,1,1,1,0,0,0,1,1,0,1,1,
+0,1,0,0,1,1,0,0,0,1,0,1,1,0,0,1,
+0,1,1,0,1,0,0,1,1,1,0,0,1,1,1,1,
+0,1,1,2,1,1,1,1,0,2,0,0,0,0,1,1,
+0,0,0,0,0,0,1,0,0,1,1,1,1,0,0,1,
+0,1,1,1,1,0,0,0,1,1,0,1,1,1,0,1,
+0,1,0,0,1,1,0,1,1,0,0,0,2,0,0,1,
+0,1,1,0,0,1,1,1,0,0,0,1,1,0,1,1,
+0,0,2,0,0,0,0,1,0,1,1,1,0,0,1,1,
+0,0,1,1,0,0,1,1,1,1,0,0,0,0,0,1,
+0,0,0,1,1,1,1,0,0,0,0,0,1,0,1,1,
+0,0,0,0,1,1,0,0,1,1,0,1,1,0,0,1,
+0,1,0,0,0,2,0,0,0,1,0,0,1,1,0,1,
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <layer id="5" name="BoundaryWalls" width="16" height="16">
+  <data encoding="csv">
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="34" gid="4" x="32" y="224" width="32" height="32"/>
+  <object id="107" gid="22" x="0" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_75e341b5-5f43-cd1d-0acf-c64eb1917fd5"/>
+    <property name="targetarea" value="city"/>
+    <property name="targetdir" type="int" value="3"/>
+    <property name="targetx" type="int" value="30"/>
+    <property name="targety" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="117" gid="8" x="64" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_b91be9ed-fb7e-dc85-c1b7-270d3eab7a35"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="153" gid="8" x="160" y="384" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_4728ed0b-0708-81a9-3f65-a682690ea9f2"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="118" gid="8" x="320" y="192" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_1ee1b50a-934d-f20e-f344-faf651d77ec6"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="119" gid="8" x="416" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_a73e6c3f-136c-37a7-e78d-14a354f5795b"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="139" gid="8" x="448" y="448" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_ec8c2011-4906-74b9-35db-eaaee765734f"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="140" gid="8" x="320" y="384" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_7165bca9-8eae-4f78-9963-1b095bfd9627"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="145" gid="8" x="96" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_67eb4735-2b81-d4eb-1540-e57e382e7fc1"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="148" gid="34" x="32" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_0132192f-d4cb-9120-2080-ae014122661d"/>
+   </properties>
+  </object>
+  <object id="151" gid="18" x="64" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_d6f0f119-e1c4-89e4-4b37-a26c61f11740"/>
+   </properties>
+  </object>
+  <object id="152" gid="17" x="256" y="352" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_c99bd6ae-9c63-99f5-a95f-5c1899601cc0"/>
+   </properties>
+  </object>
+  <object id="154" gid="34" x="96" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_d00f4ae7-385a-b9f2-6707-61ddf49a2a60"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

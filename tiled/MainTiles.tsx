@@ -43,31 +43,58 @@
  </tile>
  <tile id="7" type="Enemy">
   <properties>
+   <property name="attack" type="int" value="1"/>
+   <property name="defence" type="int" value="1"/>
+   <property name="experience" type="int" value="10"/>
+   <property name="gold" type="int" value="5"/>
+   <property name="health" type="int" value="100"/>
+   <property name="health_max" type="int" value="100"/>
    <property name="id" value=""/>
    <property name="loot" value=""/>
+   <property name="name" value="Fire ant"/>
+   <property name="sound_attack" value="ant-attack"/>
+   <property name="sound_die" value="ant-die"/>
+   <property name="sound_move" value="ant-move"/>
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="0"/>
-   <property name="visible" type="int" value="1"/>
    <property name="wanderer" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="8" type="Enemy">
   <properties>
+   <property name="attack" type="int" value="1"/>
+   <property name="defence" type="int" value="1"/>
+   <property name="experience" type="int" value="10"/>
+   <property name="gold" type="int" value="5"/>
+   <property name="health" type="int" value="100"/>
+   <property name="health_max" type="int" value="100"/>
    <property name="id" value=""/>
    <property name="loot" value=""/>
+   <property name="name" value="Fire ant"/>
+   <property name="sound_attack" value="ant-attack"/>
+   <property name="sound_die" value="ant-die"/>
+   <property name="sound_move" value="ant-move"/>
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="1"/>
-   <property name="visible" type="int" value="1"/>
    <property name="wanderer" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="9" type="Enemy">
   <properties>
+   <property name="attack" type="int" value="1"/>
+   <property name="defence" type="int" value="1"/>
+   <property name="experience" type="int" value="10"/>
+   <property name="gold" type="int" value="5"/>
+   <property name="health" type="int" value="100"/>
+   <property name="health_max" type="int" value="100"/>
    <property name="id" value=""/>
    <property name="loot" value=""/>
+   <property name="name" value="Fire ant"/>
+   <property name="sound_attack" value="ant-attack"/>
+   <property name="sound_die" value="ant-die"/>
+   <property name="sound_move" value="ant-move"/>
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="2"/>
-   <property name="visible" type="int" value="1"/>
    <property name="wanderer" type="int" value="0"/>
   </properties>
  </tile>

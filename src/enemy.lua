@@ -4,7 +4,8 @@ local EnemyState = {
 	INIT = 0,
 	WANDER = 1,
 	TRACKING = 2,
-	ATTACKING = 3
+	ATTACKING = 3,
+	DEAD = 4
 }
 
 function Enemy:initialize(enemy)
@@ -27,10 +28,13 @@ function Enemy:initialize(enemy)
 	self.pathFinder:setMode('ORTHOGONAL')
 	self.path = nil
 	
-	self.tickDelay = 1
+	self.tickDelay = 1.5
 	self.attackDelay = 2
+	self.decayDelay = 2
 	self.tickCounter = math.random()
 	self.attackCounter = math.random()
+	self.decayCounter = 0
+	self.highlightCounter = 0
 	
 	self.state = EnemyState.INIT
 	
@@ -46,29 +50,22 @@ end
 
 function Enemy:update(dt)
 	
+	if self.enemy.properties.state == 2 then
+		return
+	end
+
+	if self.state == EnemyState.DEAD then
+		self.decayCounter = self.decayCounter + dt
+		if self.decayCounter > self.decayDelay then
+			self.enemy.properties.state = 2
+		end
+	end
 
 	if self.state == EnemyState.ATTACKING then
 
 		if self.attackCounter > self.attackDelay then
-
 			self.attackCounter = 0
-
-			-- make sure enemy can't attack if player has just left
-			
-			if distanceFrom(party.x, party.y, self.enemy.x, self.enemy.y) <= 1 then
-				assets:playSound("ant-attack")
-				self:facePlayer()
-				self.enemy.properties.attacking = 1
-			end
-
-			-- see if player left and calculate new tracking path
-			
-			if self:calcPathToPlayerPosition() then
-				if self.pathlength > 1 then
-					self.enemy.properties.attacking = 0
-					self.state = EnemyState.TRACKING
-				end
-			end				
+			self:attack()
 		end
 		
 		if self.attackCounter > 0.5 then
@@ -88,14 +85,13 @@ function Enemy:update(dt)
 			if self:canSeePlayer() then
 				if self:calcPathToPlayerPosition() then
 					self.state = EnemyState.TRACKING
+					if self:walkToNextPathNode() then
+					end
 				end
 			else
 				self:wander()
 			end	
-		
-		end
-
-		if self.state == EnemyState.TRACKING then
+		elseif self.state == EnemyState.TRACKING then
 			if self:calcPathToPlayerPosition() then
 				if self:walkToNextPathNode() then
 				end
@@ -107,6 +103,16 @@ function Enemy:update(dt)
 	end
 
 	self.tickCounter = self.tickCounter + dt;
+
+	if self.enemy.highlight == 1 then
+	
+		self.highlightCounter = self.highlightCounter + dt * 1
+		
+		if self.highlightCounter > 0.25 then
+			self.highlightCounter = 0
+			self.enemy.highlight = 0
+		end
+	end
 
 end
 
@@ -153,8 +159,6 @@ function Enemy:walkToNextPathNode()
 	-- reached end of path
 
 	if self.pathNodeIndex > self.pathlength then
-		self.state = EnemyState.ATTACKING
-		self.attackCounter = 1.0 + (math.random()*2)
 		self.path = nil
 		return false
 	end
@@ -173,16 +177,22 @@ function Enemy:walkToNextPathNode()
 
 			for key,value in pairs(level.data.enemies) do
 				if level.data.enemies[key].x == nx and level.data.enemies[key].y == ny then
-					self.path = nil
-					return false
+					if level.data.enemies[key].properties.state == 1 then
+						self.path = nil
+						return false
+					end
 				end
 			end
 			
 			self.enemy.x = nx
 			self.enemy.y = ny
 			
+			globalvariables:add(self.enemy.properties.id, "x", self.enemy.x)
+			globalvariables:add(self.enemy.properties.id, "y", self.enemy.y)
+			globalvariables:add(self.enemy.properties.id, "direction", self.enemy.properties.direction)
+			
 			if distanceFrom(party.x, party.y, self.enemy.x, self.enemy.y) < 5 then
-				assets:playSound("ant-move")
+				assets:playSound(self.enemy.properties.sound_move)
 			end
 			
 			local dir = 0
@@ -193,6 +203,13 @@ function Enemy:walkToNextPathNode()
 			
 			self.enemy.properties.direction = dir
 			self.pathNodeIndex = self.pathNodeIndex + 1
+			
+			if self.pathNodeIndex > self.pathlength then
+				self.state = EnemyState.ATTACKING
+				self.attackCounter = 0.5 + math.random()
+				self.path = nil
+				return false
+			end			
 			
 			return true
 		
@@ -253,8 +270,12 @@ end
 
 function Enemy:isEnemyAt(x, y)
 
-	if level:getObject(level.data.enemies, x,y) then return true end	
-
+	local enemy = level:getObject(level.data.enemies, x,y)
+	
+	if enemy and enemy.properties.state == 1 then
+		return true
+	end
+	
 	return false
 
 end
@@ -287,7 +308,7 @@ function Enemy:wander()
 			
 			if self:canWalk(p.x,p.y) then
 				if distanceFrom(party.x, party.y, self.enemy.x, self.enemy.y) < 5 then
-					assets:playSound("ant-move")
+					assets:playSound(self.enemy.properties.sound_move)
 				end			
 				self.enemy.x = p.x
 				self.enemy.y = p.y
@@ -300,12 +321,69 @@ function Enemy:wander()
 
 end
 
+function Enemy:attack()
+
+	-- make sure enemy can't attack if player has just left
+	
+	if distanceFrom(party.x, party.y, self.enemy.x, self.enemy.y) <= 1 then
+		assets:playSound(self.enemy.properties.sound_attack)
+		self:facePlayer()
+		self.enemy.properties.attacking = 1
+		
+		-- there is always a small chance that there will be a miss
+		
+		if math.random() > 0.75 then
+			return
+		end		
+
+		local damage = 2 * math.pow(self.enemy.properties.attack, 2) / (self.enemy.properties.attack + party.stats.defence)
+
+		damage = randomizeDamage(damage)
+
+		print("Enemy:" .. damage)
+	
+		party.stats.health = party.stats.health - damage
+	
+		if party.stats.health <= 0 then
+			assets:playSound("player-death")
+			party:died()
+		else
+			assets:playSound("player-hit")
+		end
+	
+	end
+
+	-- see if player left and calculate new tracking path
+	
+	if self:calcPathToPlayerPosition() then
+		if self.pathlength > 1 then
+			self.enemy.properties.attacking = 0
+			self.state = EnemyState.TRACKING
+		end
+	end	
+			
+end
+
 function Enemy:facePlayer()
 
 	if party.x > self.enemy.x then self.enemy.properties.direction = 1 return end
 	if party.x < self.enemy.x then self.enemy.properties.direction = 3 return end
 	if party.y > self.enemy.y then self.enemy.properties.direction = 2 return end
 	if party.y < self.enemy.y then self.enemy.properties.direction = 0 return end
+
+end
+
+function Enemy:showHighlight()
+
+	self.highlightCounter = 0
+	self.enemy.highlight = 1
+
+end
+
+function Enemy:die()
+	
+	self.enemy.properties.state = 3
+	self.state = EnemyState.DEAD
 
 end
 

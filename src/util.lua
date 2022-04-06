@@ -1,3 +1,26 @@
+--[[-----------------------------------------------------------------------------------------------------------------------
+
+	randomizeDamage()
+	
+	randomizes the passed damage value 
+
+-----------------------------------------------------------------------------------------------------------------------]]--
+
+function randomizeDamage(damage)
+
+	local diff = damage * 0.25
+	local add = math.random(0, diff*2)-diff
+
+	damage = damage + add;
+
+	if damage < 0 then damage = 0 end
+	
+	return round(damage)
+
+end
+
+---------------------------------------------------------------------------------------------------------------------------
+
 function distanceFrom(x1,y1,x2,y2)
 
 	return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)

@@ -66,7 +66,7 @@ function Game:init()
 	
 	self.gameState = GameStates.LOADING_LEVEL
 
-	self:loadArea("forest-1")
+	self:loadArea("city")
 	self.gameState = GameStates.EXPLORING
 	self.subState = SubStates.IDLE
 
@@ -80,6 +80,7 @@ function Game:update(dt)
 			self.enemies[key]:update(dt)
 		end
 		
+		party:update(dt)
 		renderer:update(dt)
 		
 	end
@@ -171,6 +172,21 @@ function Game:handleInput(key)
 				return
 			end			
 
+			if key == 'm' then
+				renderer.showMinimap = not renderer.showMinimap
+				return
+			end	
+			
+			if key == '1' then
+				party:attack(1, self.enemies)
+				return
+			end				
+
+			if key == '2' then
+				party:attack(2, self.enemies)
+				return
+			end				
+			
 		end
 
 	end
@@ -353,7 +369,7 @@ function Game:handleTileCollide(x, y)
 	
 	local enemy = level:getObject(level.data.enemies, x,y)
 	
-	if enemy then
+	if enemy and enemy.properties.state == 1 then
 		return true
 	end
 	
@@ -401,8 +417,16 @@ function Game:handleTileCollide(x, y)
 	if prop then
 	
 		if prop.properties.name == "barricade" then
-			-- take damage by running into a barricade
+
 			assets:playSound("barricade-hurt")
+			
+			party.stats.health = party.stats.health - 10
+		
+			if party.stats.health <= 0 then
+				assets:playSound("player-death")
+				party:died()
+			end			
+			
 			return true
 		end
 	

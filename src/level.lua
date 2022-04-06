@@ -105,6 +105,23 @@ end
 
 function Level:applyGlobalVariables()
 
+	for key,value in pairs(self.data.enemies) do
+		local enemy = level.data.enemies[key]
+
+		local gvar = globalvariables:get(enemy.properties.id, "state")
+		if gvar then enemy.properties.state = tonumber(gvar) end		
+
+		gvar = globalvariables:get(enemy.properties.id, "x")
+		if gvar then enemy.x = tonumber(gvar) end		
+		
+		gvar = globalvariables:get(enemy.properties.id, "y")
+		if gvar then enemy.y = tonumber(gvar) end		
+		
+		gvar = globalvariables:get(enemy.properties.id, "direction")
+		if gvar then enemy.properties.direction = tonumber(gvar) end		
+		
+	end
+	
 	--[[
 
 	for y = 1, self.data.mapSize do
@@ -196,7 +213,9 @@ function Level:generatePathMap()
 			local walkable = 0
 
 			if self.data.walls[x] and self.data.walls[x][y] then
-				walkable = 1
+				if  self.data.walls[x][y].type == 1 then
+					walkable = 1
+				end
 			end
 
 			if self.data.boundarywalls[x] and self.data.boundarywalls[x][y] then
@@ -251,6 +270,30 @@ function Level:generatePathMap()
 	end
 
 	return map
+
+end
+
+function Level:getFacingEnemy()
+
+	local x, y
+
+	local adjancentSquare =  {
+		[0] = {x = 0, y = -1},
+		[1] = {x = 1, y = 0},
+		[2] = {x = 0, y = 1},
+		[3] = {x = -1, y = 0}
+	}
+
+	local x = party.x + adjancentSquare[party.direction].x
+	local y = party.y + adjancentSquare[party.direction].y
+
+	local enemy = self:getObject(self.data.enemies, x,y)
+
+	if enemy and enemy.properties.state == 1 then
+		return enemy
+	end
+	
+	return nil
 
 end
 
