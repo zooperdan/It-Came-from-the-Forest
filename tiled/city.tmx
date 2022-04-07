@@ -23,12 +23,12 @@
 0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,1,1,1,0,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,0,1,1,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,1,1,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,0,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,0,1,0,0,
@@ -133,7 +133,7 @@
     <property name="id" value="city_845f7ef2-9cd7-076b-4ec9-e86c823e1ccc"/>
    </properties>
   </object>
-  <object id="167" gid="21" x="480" y="544" width="32" height="32">
+  <object id="167" gid="21" x="480" y="576" width="32" height="32">
    <properties>
     <property name="id" value="city_49ca1ee3-bd57-8506-34b1-30f64c9a561e"/>
    </properties>
@@ -175,7 +175,7 @@
     <property name="targetarea" value="forest-2"/>
     <property name="targetdir" type="int" value="1"/>
     <property name="targetx" type="int" value="1"/>
-    <property name="targety" type="int" value="6"/>
+    <property name="targety" type="int" value="14"/>
    </properties>
   </object>
   <object id="158" gid="22" x="0" y="512" width="32" height="32">
@@ -245,7 +245,7 @@
     <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="134" gid="21" x="544" y="416" width="32" height="32">
+  <object id="134" gid="21" x="480" y="416" width="32" height="32">
    <properties>
     <property name="id" value="city_722e6944-efab-2a83-6fd5-cfe847c7824a"/>
    </properties>
@@ -332,20 +332,12 @@
     <property name="id" value="city_4eadbf5e-c047-c6dc-1c8f-c70aff473217"/>
    </properties>
   </object>
-  <object id="156" gid="7" x="736" y="416" width="32" height="32">
+  <object id="157" gid="7" x="736" y="480" width="32" height="32">
    <properties>
     <property name="atlasid" value="city-props"/>
-    <property name="direction" type="int" value="-1"/>
-    <property name="id" value="city_5fd82c5a-5f1a-9bc3-2c0e-b81f3e97a9a0"/>
-    <property name="name" value="wanted-poster-1"/>
-   </properties>
-  </object>
-  <object id="157" gid="7" x="512" y="544" width="32" height="32">
-   <properties>
-    <property name="atlasid" value="city-props"/>
-    <property name="direction" type="int" value="-1"/>
+    <property name="direction" type="int" value="3"/>
     <property name="id" value="city_826b2578-0f86-edb7-691b-5c8c89ad7d2a"/>
-    <property name="name" value="wanted-poster-2"/>
+    <property name="name" value="notice-board"/>
    </properties>
   </object>
  </objectgroup>

@@ -34,6 +34,10 @@ function love.keypressed(key)
 	
 end
 
+function love.mousepressed(x, y, button, istouch)
+	game:handleMousePressed(x, y, button, istouch)
+end
+
 function love.draw(dt)
 	
 	love.graphics.push()

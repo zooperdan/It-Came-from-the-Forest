@@ -14,12 +14,6 @@ function Renderer:init(caller)
 	self.dungeonWidth = 4
 	self.backgroundIndex = 1
 	self.skyIndex = 1
-	
-	self.fadeSpeed = 3.0
-	self.fadeCounter = 0
-	self.dofadeIn = true	
-	self.dofadeOut = false	
-
 	self.showMinimap = false
 	
 end
@@ -30,74 +24,47 @@ function Renderer:update(dt)
 	love.graphics.clear()
 	love.graphics.setColor(1,1,1,1)
 	love.graphics.setFont(assets.fonts["main"]);
+	love.graphics.setLineStyle("rough")
 	love.graphics.setShader(highlightshader)
 	
-	self:drawViewport()
-
-	-- Enemy in front of player?
-
-	local enemy = level:getFacingEnemy()
+	if gameState == GameStates.EXPLORING then
 	
-	if enemy and enemy.properties.state == 1 then
-		self:drawEnemyStats(enemy)
+		self:drawViewport()
+
+		-- Enemy in front of player?
+
+		local enemy = level:getFacingEnemy()
+		
+		if enemy and enemy.properties.state == 1 then
+			self:drawEnemyStats(enemy)
+		end
+
+		if self.showMinimap then
+			self:drawMinimap()
+		end
+
+		self:drawUI()
+	
 	end
 
-	if self.showMinimap then
-		self:drawMinimap()
-	end
-
-	self:drawUI()
-	self:drawPointer()
+	if gameState == GameStates.BUILDUP1 then love.graphics.draw(assets.images["buildup-screen-1"], 0, 0) end
+	if gameState == GameStates.BUILDUP2 then love.graphics.draw(assets.images["buildup-screen-2"], 0, 0) end
+	if gameState == GameStates.BUILDUP3 then love.graphics.draw(assets.images["buildup-screen-3"], 0, 0) end
+	if gameState == GameStates.BUILDUP4 then love.graphics.draw(assets.images["buildup-screen-4"], 0, 0) end
 	
-	--love.graphics.draw(assets.images["opening-image"], 0, 0)	
+	if gameState == GameStates.MAIN_MENU then
+		love.graphics.draw(assets.images["opening-image"], 0, 0)	
+	end
+	
+	if gameState == GameStates.CREDITS then
+		love.graphics.draw(assets.images["credits"], 0, 0)	
+	end	
+	
+	if gameState == GameStates.EXPLORING or gameState == GameStates.MAIN_MENU or gameState == GameStates.CREDITS then
+		self:drawPointer()	
+	end
 	
 	love.graphics.setCanvas()
-
-	if self.dofadeIn then
-		love.graphics.setColor(self.fadeCounter,self.fadeCounter,self.fadeCounter,1)
-		self.fadeCounter = self.fadeCounter + (dt * self.fadeSpeed)
-		if self.fadeCounter >= 1 then
-			love.graphics.setColor(1,1,1,1)
-			self.dofadeIn = false
-			self.fadeCounter = 0
-			self.caller:onAfterLevelExit()
-		end
-	end	
-	
-	if self.dofadeOut then
-		love.graphics.setColor(self.fadeCounter,self.fadeCounter,self.fadeCounter,1)
-		self.fadeCounter = self.fadeCounter - (dt * self.fadeSpeed)
-		if self.fadeCounter <= -0.1 then
-			love.graphics.setColor(0,0,0,1)
-			self.dofadeOut = false
-			self.fadeCounter = 0
-			self.caller:onBeforeLevelExit()
-		end
-	end	
-	
-end
-
-function Renderer:fadeIn()
-
-	if self.dofadeOut then
-		self.dofadeOut = false
-	else
-		self.fadeCounter = 0
-	end
-
-	self.dofadeIn = true
-
-end
-
-function Renderer:fadeOut()
-
-	if self.dofadeIn then
-		self.dofadeIn = false
-	else
-		self.fadeCounter = 1
-	end
-
-	self.dofadeOut = true
 
 end
 
@@ -239,8 +206,13 @@ function Renderer:drawPointer()
 
 	local x, y = love.mouse.getPosition()
 
-	x = x / (love.graphics.getWidth()/screen.width)
-	y = y / (love.graphics.getHeight()/screen.height)
+	if x > screen.width then
+		love.mouse.setPosition(screen.width,love.mouse.getY())
+	end
+	
+	if y > screen.height then
+		love.mouse.setPosition(love.mouse.getX(), screen.height)
+	end	
 	
 	love.graphics.draw(assets.images["pointer"], x, y)
 
@@ -251,17 +223,20 @@ function Renderer:drawMinimap()
 	self:drawText(10, 340, tostring(love.timer.getFPS()))
 
 	local cellsize = 6
-	local offsetx = (screen.width - 10) - level.data.mapSize * cellsize
-	local offsety = (screen.height - 10) - level.data.mapSize * cellsize
+	local offsetx = screen.width/2 - (level.data.mapSize * cellsize)/2
+	local offsety = 75--screen.height/2 - (level.data.mapSize * cellsize)/2
 
-	offsetx = screen.width/2 - (level.data.mapSize * cellsize)/2
-	offsety = screen.height/2 - (level.data.mapSize * cellsize)/2
+	local amx = screen.width/2 - assets.images["automapper-background"]:getWidth()/2
+	love.graphics.draw(assets.images["automapper-background"], amx, 40)
 	
 	for y = 1, level.data.mapSize do
 		for x = 1, level.data.mapSize do
 		
 			local dx = offsetx + (x * cellsize)
 			local dy = offsety + (y * cellsize)
+		
+			love.graphics.setColor(0,0,0,.5)
+			love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
 		
 			if level.data.walls[x] and level.data.walls[x][y] then
 				love.graphics.setColor(1,1,1,1)
@@ -322,6 +297,7 @@ end
 
 function Renderer:drawUI()
 
+	--[[
 	self:drawText(10, 10, direction_names[party.direction])
 	self:drawText(-10, 10, party.x .. "/" .. party.y, "right")
 
@@ -340,8 +316,11 @@ function Renderer:drawUI()
 		love.graphics.setColor(1,1,1,1)
 		love.graphics.rectangle("fill", 15, 40, 5, 5)
 	end
+	--]]
 	
 	love.graphics.setColor(1,1,1,1)
+
+	love.graphics.draw(assets.images["test"], 0,0)
 
 end
 

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "city.tmx",
+    "activeFile": "forest-2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -35,35 +35,35 @@
             }
         },
         "city.tmx": {
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 590.5,
-                "y": 496
+                "x": 542,
+                "y": 561.3333333333334
             }
         },
         "forest-1.tmx": {
             "scale": 1,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 362.5,
                 "y": 264
             }
         },
         "forest-2.tmx": {
-            "scale": 0.5591145833333333,
+            "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 539.2454587796926,
-                "y": 110.88961341406616
+                "x": 186.33333333333331,
+                "y": 589.3333333333333
             }
         },
         "forest-3.tmx": {
             "scale": 0.5591145833333333,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 769.9673963670238,
-                "y": 769.0731252911039
+                "x": 49.184909175593816,
+                "y": 1262.7107591988824
             }
         },
         "test.tmx": {
@@ -85,17 +85,19 @@
         "test.tmx",
         "MainTiles.tsx",
         "city.tmx",
-        "forest-2.tmx"
+        "forest-2.tmx",
+        "forest-1.tmx",
+        "forest-3.tmx"
     ],
     "project": "It Came from the Forest.tiled-project",
     "property.type": "int",
     "recentFiles": [
         "test.tmx",
         "MainTiles.tsx",
-        "forest-2.tmx",
         "city.tmx",
-        "forest-1.tmx",
         "forest-3.tmx",
+        "forest-1.tmx",
+        "forest-2.tmx",
         "area1.tmx",
         "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/MainTiles.tsx",
         "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/area1.tmx"

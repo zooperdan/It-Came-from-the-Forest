@@ -53,6 +53,7 @@
   <object id="34" gid="5" x="32" y="64" width="32" height="32"/>
   <object id="107" gid="22" x="480" y="160" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="1"/>
     <property name="id" value="forest-1_1540d0c8-3ea2-e40a-d6a3-b8b6601b6d21"/>
     <property name="targetarea" value="city"/>
     <property name="targetdir" type="int" value="1"/>

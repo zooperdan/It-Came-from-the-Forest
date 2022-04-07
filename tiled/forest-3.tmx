@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="151">
  <editorsettings>
-  <export target="../src/files/areas/forest-2.lua" format="custom"/>
+  <export target="../src/files/areas/forest-3.lua" format="custom"/>
  </editorsettings>
  <properties>
-  <property name="id" value="dark_forest_2"/>
+  <property name="id" value="forest-3"/>
   <property name="name" value="Dark forest"/>
   <property name="tileset" value="forest"/>
  </properties>
@@ -138,7 +138,7 @@
     <property name="text" value="Excuse me but could I perhaps interest you in some exotic wares from lands far away?"/>
    </properties>
   </object>
-  <object id="34" gid="4" x="32" y="1248" width="32" height="32"/>
+  <object id="34" gid="4" x="576" y="704" width="32" height="32"/>
   <object id="36" gid="15" x="736" y="1344" width="32" height="32">
    <properties>
     <property name="id" value="dark_forest_2_07b6b908-5ad8-91ea-3a67-8489904a8580"/>

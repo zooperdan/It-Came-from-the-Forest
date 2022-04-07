@@ -48,10 +48,9 @@
 	[15]={
 	},
 	[16]={
-		[13]={["type"]=1,},
 		[14]={["type"]=1,},
 		[15]={["type"]=1,},
-		[18]={["type"]=1,},
+		[17]={["type"]=1,},
 		[19]={["type"]=1,},
 	},
 	[17]={
@@ -569,6 +568,16 @@ wells={
 			type=2,
 		}
 	},
+	[2] = {
+		x=21,
+		y=16,
+		properties={
+			direction=0,
+			id="city_ce1c8989-8d0c-1d0a-f3f4-8c678b0e603f",
+			state=1,
+			type=2,
+		}
+	},
 },
 
 npcs={
@@ -765,7 +774,7 @@ doors={
 	},
 	[11] = {
 		x=16,
-		y=17,
+		y=18,
 		properties={
 			direction=3,
 			id="city_49ca1ee3-bd57-8506-34b1-30f64c9a561e",
@@ -850,7 +859,7 @@ doors={
 			targetarea="forest-2",
 			targetdir=1,
 			targetx=1,
-			targety=6,
+			targety=14,
 			type=2,
 		}
 	},
@@ -869,7 +878,7 @@ doors={
 		}
 	},
 	[20] = {
-		x=18,
+		x=16,
 		y=13,
 		properties={
 			direction=3,
@@ -968,24 +977,12 @@ staticprops={
 	},
 	[8] = {
 		x=24,
-		y=13,
+		y=15,
 		properties={
 			atlasid="city-props",
-			direction=-1,
-			id="city_5fd82c5a-5f1a-9bc3-2c0e-b81f3e97a9a0",
-			name="wanted-poster-1",
-			state=1,
-			visible=1,
-		}
-	},
-	[9] = {
-		x=17,
-		y=17,
-		properties={
-			atlasid="city-props",
-			direction=-1,
+			direction=3,
 			id="city_826b2578-0f86-edb7-691b-5c8c89ad7d2a",
-			name="wanted-poster-2",
+			name="notice-board",
 			state=1,
 			visible=1,
 		}

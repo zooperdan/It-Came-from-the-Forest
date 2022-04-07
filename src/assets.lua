@@ -59,20 +59,32 @@ function Assets:load()
 
 	-- images
 
+	self.images["buildup-screen-1"] = love.graphics.newImage("files/buildup-screen-1.png")
+	self.images["buildup-screen-2"] = love.graphics.newImage("files/buildup-screen-2.png")
+	self.images["buildup-screen-3"] = love.graphics.newImage("files/buildup-screen-3.png")
+	self.images["buildup-screen-4"] = love.graphics.newImage("files/buildup-screen-4.png")
 	self.images["opening-image"] = love.graphics.newImage("files/opening-image.png")
+	self.images["credits"] = love.graphics.newImage("files/credits.png")
+	self.images["automapper-background"] = love.graphics.newImage("files/automapper-background.png")
 	self.images["pointer"] = love.graphics.newImage("files/pointer.png")
 	self.images["sky"] = love.graphics.newImage("files/sky.png")
 
+	-- ui
+
 	self.images["enemy-hit-bar-1"] = love.graphics.newImage("files/ui/enemy-hit-bar-1.png")
 	self.images["enemy-hit-bar-2"] = love.graphics.newImage("files/ui/enemy-hit-bar-2.png")
+	self.images["test"] = love.graphics.newImage("files/ui/test.png")
 
 	-- music
 
 	self.music["forest"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
 	self.music["forest"]:setLooping(true)
-
-	--self.music["city"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
-	--self.music["city"]:setLooping(true)
+	self.music["city"] = love.audio.newSource("files/music/It_Came_from_the_Forest_village_harp.mp3", "stream")
+	self.music["city"]:setLooping(true)
+	self.music["mainmenu"] = love.audio.newSource("files/music/It_Came_from_the_Forest_introloop.mp3", "stream")
+	self.music["mainmenu"]:setLooping(true)
+	self.music["buildup"] = love.audio.newSource("files/music/It_Came_from_the_Forest_stringloop.mp3", "stream")
+	self.music["buildup"]:setLooping(false)
 
 	-- font
 
@@ -98,6 +110,16 @@ function Assets:stopMusic(id)
 	end
 
 	self.music[id]:stop()
+
+end
+
+function Assets:isPlaying(id)
+
+	if not self.music[id] then
+		return false
+	end
+
+	return self.music[id]:isPlaying()
 
 end
 

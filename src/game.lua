@@ -5,32 +5,9 @@ local Party = require "party"
 local Level = require "level"
 local Atlases = require "atlases"
 local Enemy = require "enemy"
+Timer = require "libs/timer"
 
 local GlobalVariables = require "globalvariables"
-local ItemTemplates = require "itemtemplates"
-
-local GameStates = {
-	INIT = 0,
-	EXPLORING = 1,
-	LOADING_LEVEL = 2,
-	COMBAT = 3,
-	RESTING = 4,
-	MAP = 5,
-	INVENTORY = 6,
-	CHEST = 7,
-	NPC = 8,
-	TREASURE = 9,
-	SPELLBOOK = 10,
-	FATAL_ERROR = 11
-}
-
-local SubStates = {
-	IDLE = 0,
-	INSPECT_DOOR = 1,
-	PUSH_BUTTON = 2,
-	SELECT_SPELLCASTER = 3,
-	SELECT_PLAYER_SPELL_TARGET = 4
-}
 
 assets = Assets:new()
 renderer = Renderer:new()
@@ -42,61 +19,143 @@ globalvariables = GlobalVariables:new()
 
 local Game = class('Game')
 
+--game = Game:new()
+
+fadeColor = {0,0,0}
+fadeMusicVolume = {v = settings.musicVolume}
+
 function Game:initialize()
 
 	math.randomseed(os.time())
 
-	self.gameState = GameStates.INIT
-	self.subState = SubStates.IDLE
+	gameState = GameStates.INIT
+	subState = SubStates.IDLE
 	self.footStepIndex = 1
 	love.graphics.setDefaultFilter( "nearest", "nearest", 0)
+	self.isFading = false
+	self.quickstart = false
 	
 end
 
 function Game:init()
 
+	love.mouse.setGrabbed(true)
 	love.mouse.setVisible(false)
 	
 	self.isFullscreen = love.window.fullscreen
-	self.canvas = love.graphics.newCanvas(SCREEN_WIDTH, SCREEN_HEIGHT)
+	self.canvas = love.graphics.newCanvas(screen.width, screen.height)
 
 	assets:load()
 	
 	renderer:init(self)
 	
-	self.gameState = GameStates.LOADING_LEVEL
+	if self.quickstart then
+		gameState = GameStates.LOADING_LEVEL
+		Game.isFading = false
+		assets:stopMusic("mainmenu")
+		Game:loadArea(startingArea)
+	else 
+		assets:playMusic("buildup")
+		
+		gameState = GameStates.BUILDUP1
+		subState = SubStates.IDLE
 
-	self:loadArea("city")
-	self.gameState = GameStates.EXPLORING
-	self.subState = SubStates.IDLE
-
+		Timer.script(function(wait)
+			Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
+			wait(4)
+			Timer.tween(2, fadeColor, {0,0,0}, 'in-out-quad', buildUpStep2)
+		end)
+	end
+	
 end
 
 function Game:update(dt)
 
-	if self.gameState ~= GameStates.INIT then
+
+	if gameState == GameStates.BUILDUP4 then
 	
-		for key,value in pairs(self.enemies) do
-			self.enemies[key]:update(dt)
+		if not assets:isPlaying("buildup") then
+			--self:jumpToMainmenu()
+		end
+	
+	end
+
+	if gameState == GameStates.EXPLORING and subState == SubStates.IDLE then
+		
+		if self.enemies then
+			for key,value in pairs(self.enemies) do
+				self.enemies[key]:update(dt)
+			end
 		end
 		
 		party:update(dt)
-		renderer:update(dt)
 		
 	end
 	
+	if gameState ~= GameStates.INIT then
+		renderer:update(dt)
+	end
+	
+	if gameState == GameStates.MAIN_MENU then
+		if assets.music["mainmenu"] then
+			assets.music["mainmenu"]:setVolume(fadeMusicVolume.v)
+		end
+	end
+	
+	if gameState == GameStates.LOADING_LEVEL then
+		if assets.music[level.data.tileset] then
+			assets.music[level.data.tileset]:setVolume(fadeMusicVolume.v)
+		end
+	end	
+	
+	love.graphics.setColor(fadeColor)
+	
+	Timer.update(dt)
+	
 end
+
+function Game:handleMousePressed(x, y, button, istouch)
+	
+	if gameState == GameStates.INIT then
+		return
+	end
+	
+	if button == 3 then
+		local state = not love.mouse.isGrabbed()   -- the opposite of whatever it currently is
+		love.mouse.setGrabbed(state)
+	end
+   
+	if gameState == GameStates.BUILDUP1 or gameState == GameStates.BUILDUP2 or gameState == GameStates.BUILDUP3 or gameState == GameStates.BUILDUP4 then
+
+		if button == 1 then
+			self:jumpToMainmenu()
+			return
+		end
+		
+	end
+	
+	if gameState == GameStates.MAIN_MENU and self.isFading == false then
+
+		if button == 1 then
+			self:startGame()
+			return
+		end
+		
+	end	
+	
+end
+
 
 function Game:handleInput(key)
 
 	local key = string.lower(key)
 
-	if self.gameState == GameStates.INIT then
+	if gameState == GameStates.INIT then
 		return
 	end
 
 	-- COMMON
-		
+
     if key == 'f1' then
         globalvariables:dump()
     end
@@ -113,22 +172,50 @@ function Game:handleInput(key)
 		end
     end
 
-	if self.gameState == GameStates.FATAL_ERROR then
+	if gameState == GameStates.FATAL_ERROR then
 
 		love.event.quit()
 
 		return
 	end
+	
+	if key == 'escape' then
+		love.event.quit()
+	end
 
+	if gameState == GameStates.BUILDUP1 or gameState == GameStates.BUILDUP2 or gameState == GameStates.BUILDUP3 or gameState == GameStates.BUILDUP4 then
+
+		if key == 'space' then
+			self:jumpToMainmenu()
+			return
+		end
+		
+	end
+	
+	if gameState == GameStates.MAIN_MENU and self.isFading == false then
+
+		if key == 'c' then
+			gameState = GameStates.CREDITS
+			return
+		end
+		
+	end
+			
+			
+	if gameState == GameStates.CREDITS then
+
+		if key == 'c' then
+			gameState = GameStates.MAIN_MENU
+			return
+		end
+		
+	end
+	
 	-- EXPLORING
 
-	if self.gameState == GameStates.EXPLORING then
+	if gameState == GameStates.EXPLORING then
 
-		if self.subState == SubStates.IDLE then
-
-			if key == 'escape' then
-				love.event.quit()
-			end
+		if subState == SubStates.IDLE then
 
 			if key == 'left' or key == 'kp7' or key == 'q' then
 				party.direction = party.direction - 1
@@ -173,7 +260,9 @@ function Game:handleInput(key)
 			end			
 
 			if key == 'm' then
-				renderer.showMinimap = not renderer.showMinimap
+				subState = SubStates.AUTOMAPPER
+				assets:playSound("automapper-open")
+				renderer.showMinimap = true
 				return
 			end	
 			
@@ -186,6 +275,17 @@ function Game:handleInput(key)
 				party:attack(2, self.enemies)
 				return
 			end				
+			
+		end
+
+		if subState == SubStates.AUTOMAPPER then
+		
+			if key == 'm' then
+				subState = SubStates.IDLE
+				assets:playSound("automapper-close")
+				renderer.showMinimap = false
+				return
+			end	
 			
 		end
 
@@ -357,10 +457,22 @@ function Game:handleTileCollide(x, y)
 		if door.properties.type == 1 then
 			assets:playSound("door-locked")
 		elseif door.properties.type == 2 then
+			self.isFading = true
+			gameState = GameStates.LOADING_LEVEL
+			fadeColor = {1,1,1}
 			assets:playSound("city-gate")
-			self.gameState = GameStates.LOADING_LEVEL
-			self.currentDoor = door
-			renderer:fadeOut()
+			Game.currentDoor = door
+			fadeMusicVolume.v = settings.musicVolume
+			Timer.script(function(wait)
+				Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+				end)
+				Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
+					Game.isFading = false
+					assets:stopMusic(level.data.tileset)
+					Game:loadArea(Game.currentDoor.properties.targetarea)
+				end)
+			end)
+			
 		end
 		return true
 	end
@@ -480,19 +592,7 @@ function Game:stepOnGround()
 		return
 	end
 	]]--
-	
-	-- Enemy
 
-	--[[
-	if level.data.encounters[party.x] and level.data.encounters[party.x][party.y] and level.data.encounters[party.x][party.y].state == 1 and level.data.encounters[party.x][party.y].visible == 0 then
-		local encounter = level.data.encounters[party.x][party.y]
-		party.oldX = party.x
-		party.oldY = party.y
-		screens.combatscreen:show(encounter, 1)
-		self.gameState = GameStates.COMBAT
-		return
-	end	
-	]]--
 	
 end
 
@@ -513,13 +613,13 @@ function Game:loadArea(id)
 			love.graphics.print("> Error loading atlases. Check console output.",10,40)
 			love.graphics.print("Press any key to quit.",10,70)
 			love.graphics.setCanvas()
-			self.gameState = GameStates.FATAL_ERROR
-			self.subState = SubStates.IDLE
+			gameState = GameStates.FATAL_ERROR
+			subState = SubStates.IDLE
 			return
 		end	
 	
 		level.loaded = true
-	
+
 		local map = level:generatePathMap()
 
 		self.enemies = {}
@@ -531,10 +631,15 @@ function Game:loadArea(id)
 			table.insert(self.enemies, enemy)
 		end
 
-		self:stepOnGround()
-		self.footStepIndex = 1
-		assets:playMusic(level.data.tileset)
+		gameState = GameStates.EXPLORING
+		subState = SubStates.IDLE
 
+		Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad', function()
+			Game:stepOnGround()
+			Game.footStepIndex = 1
+			assets:playMusic(level.data.tileset)
+		end)
+		
 	else
 		love.graphics.setCanvas(self.canvas)
 		love.graphics.clear()
@@ -548,31 +653,80 @@ function Game:loadArea(id)
 		love.graphics.print("> Error loading level: \""..id..".lua\"",10,40)
 		love.graphics.print("Press any key to quit.",10,70)
 		love.graphics.setCanvas()
-		self.gameState = GameStates.FATAL_ERROR
-		self.subState = SubStates.IDLE
+		gameState = GameStates.FATAL_ERROR
+		subState = SubStates.IDLE
 	end
 
 end
 
---[[-----------------------------------------------------------------------------------------------------------------------
+function Game:startGame()
 
-	Callback events
-	
------------------------------------------------------------------------------------------------------------------------]]--
+	fadeColor = {1,1,1}
+	self.isFading = true
+	Timer.script(function(wait)
+		Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+		end)
+		Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
+			gameState = GameStates.LOADING_LEVEL
+			Game.isFading = false
+			assets:stopMusic("mainmenu")
+			Game:loadArea(startingArea)
+		end)
+	end)
+			
+end
 
-function Game:onBeforeLevelExit()
+function Game:jumpToMainmenu()
 
-	assets:stopMusic(level.data.tileset)
-	self:loadArea(self.currentDoor.properties.targetarea)
 
-	renderer:fadeIn()
+	Timer.clear()
+
+	gameState = GameStates.MAIN_MENU
+
+	fadeColor = {1,1,1}
+
+	love.graphics.setColor(1,1,1,1)
+
+	assets:stopMusic("buildup")
+	assets:playMusic("mainmenu")
 
 end
 
-function Game:onAfterLevelExit()
 
-	self.gameState = GameStates.EXPLORING
-	self.subState = SubStates.IDLE
+function buildUpStep2()
+
+	gameState = GameStates.BUILDUP2
+
+	Timer.script(function(wait)
+		Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
+		wait(4)
+		Timer.tween(2, fadeColor, {0,0,0}, 'in-out-quad', buildUpStep3)
+	end)
+
+end
+
+function buildUpStep3()
+
+	gameState = GameStates.BUILDUP3
+
+	Timer.script(function(wait)
+		Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
+		wait(4)
+		Timer.tween(2, fadeColor, {0,0,0}, 'in-out-quad', buildUpStep4)
+	end)
+
+end
+
+function buildUpStep4()
+
+	gameState = GameStates.BUILDUP4
+
+	Timer.script(function(wait)
+		Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
+		wait(5.5)
+		Game.isFading = false
+		Game:jumpToMainmenu()
+	end)
 
 end
 
