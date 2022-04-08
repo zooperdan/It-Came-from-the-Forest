@@ -2,14 +2,16 @@ local Party = class('Party')
 
 function Party:initialize()
 
-	self.leftHandSlotIndex = 8
-	self.rightHandSlotIndex = 6
+	self.leftHandSlotIndex = 7
+	self.rightHandSlotIndex = 5
 
 	self.direction = 0
 	self.x = 1
 	self.y = 1
 	self.gold = 0
 	self.antsacs = 0
+	self.healing_potions = 0
+	self.mana_potions = 0
 	
 	self.basestats =  {
 		attack = 1,
@@ -27,30 +29,27 @@ function Party:initialize()
 		mana_max = 100,
 	}
 
-	self.cooldownDelays = {[1] = 2, [2] = 4}
-	self.cooldownCounters = {[1] = 0, [2] = 0}
+	self.cooldownDelays = {[1] = 2, [2] = 4, [3] = 8, [4] = 8}
+	self.cooldownCounters = {[1] = 0, [2] = 0, [3] = 0, [4] = 0}
 
 	self.inventory = {
-		{"sword-1", "sword-2", "dagger-1", "dagger-2", "axe-1", "axe-2", "", ""},
-		{"club", "mace", "spellbook-1", "", "", "", "", ""},
-		{"", "", "", "", "", "", "", ""},
-		{"", "", "", "", "", "", "", ""},
-		{"", "", "", "", "", "", "", ""}
+		{"sword-1", "sword-2", "dagger-1", "dagger-2", "axe-1", "axe-2", "armor-3", "armor-4"},
+		{"club", "mace", "spellbook-1", "spellbook-2", "spellbook-3", "sword-3", "sword-4", "sword-5"},
+		{"ring-1", "ring-2", "ring-3", "ring-4", "belt-1", "belt-2", "belt-3", "boots-1"},
+		{"boots-2", "boots-3", "cape-1", "cape-2", "cape-3", "gloves-1", "gloves-2", "gloves-3"},
+		{"helmet-1", "helmet-2", "helmet-3", "necklace-1", "necklace-2", "necklace-3", "armor-1", "armor-2"}
 	}
 	
 	self.equipmentslots =  {
-		{ id = "", type = "back", x = 7, y = 7 },
+		{ id = "", type = "back", x = 7, y = 46 },
 		{ id = "", type = "head", x = 46, y = 7 },
-		{ id = "", type = "neck", x = 85, y = 7 },
+		{ id = "", type = "neck", x = 7, y = 7 },
 		{ id = "", type = "torso", x = 46, y = 46 },
-		{ id = "", type = "arms", x = 85, y = 46 },
 		{ id = "", type = "offhand", x = 7, y = 89 },
 		{ id = "", type = "waist", x = 46, y = 89 },
-		{ id = "", type = "weapon", x = 85, y = 89 },
-		{ id = "", type = "legs", x = 46, y = 126 },
-		{ id = "", type = "hands", x = 7, y = 163 },
+		{ id = "sword-1", type = "weapon", x = 85, y = 89 },
+		{ id = "", type = "hands", x = 85, y = 46 },
 		{ id = "", type = "feet", x = 46, y = 163 },
-		{ id = "", type = "wrist", x = 85, y = 163 },
 		{ id = "", type = "finger", x = 7, y = 200 },
 		{ id = "", type = "finger", x = 46, y = 200 },
 		{ id = "", type = "finger", x = 85, y = 200 },
@@ -87,10 +86,6 @@ function Party:attackWithMelee(enemies)
 	if not leftHand then return end
 
 	self.cooldownCounters[handId] = self.cooldownDelays[handId]
-
-	for i = 1,#self.cooldownCounters do
-		print(self.cooldownCounters[i])
-	end
 	
 	local enemy = level:getFacingEnemy()
 	
@@ -220,6 +215,42 @@ function Party:getrightHand()
 	else
 		return nil
 	end
+	
+end
+
+function Party:usePotion(index)
+
+	if index == 1 then
+
+		if self.healing_potions <= 0 then return end
+		
+		if self.cooldownCounters[index+2] > 0 then
+			return
+		end
+
+		self.cooldownCounters[index+2] = self.cooldownDelays[index+2]
+		
+		self.healing_potions = self.healing_potions - 1
+		if self.healing_potions < 0 then self.healing_potions = 0 end
+		self.stats.health = self.stats.health_max
+		
+	else
+		
+		if self.mana_potions <= 0 then return end
+		
+		if self.cooldownCounters[index+2] > 0 then
+			return
+		end
+
+		self.cooldownCounters[index+2] = self.cooldownDelays[index+2]
+		
+		self.mana_potions = self.mana_potions - 1
+		if self.mana_potions < 0 then self.mana_potions = 0 end
+		self.stats.mana = self.stats.mana_max
+		
+	end
+	
+	assets:playSound("drink-potion")
 	
 end
 

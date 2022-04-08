@@ -14,7 +14,7 @@ function Renderer:init(caller)
 	self.dungeonWidth = 4
 	self.backgroundIndex = 1
 	self.skyIndex = 1
-	self.showMinimap = false
+	self.doShowAutomapper = false
 	self.doShowInventory = false
 	self.currentHoverItem = nil
 	self.doShowSpellList = false
@@ -56,8 +56,8 @@ function Renderer:update(dt)
 			self:drawEnemyStats(enemy)
 		end
 
-		if self.showMinimap then
-			self:drawMinimap()
+		if self.doShowAutomapper then
+			self:drawAutomapper()
 		end
 
 		if self.doShowInventory then
@@ -102,16 +102,26 @@ function Renderer:handleMousePressed(x, y, button)
 	
 	if button == 1 then
 
-		if self.doShowInventory then
-			self:clickOnInventory(x, y)
-			return
+		if subState == SubStates.INVENTORY then
+
+			if self.doShowInventory then
+				self:clickOnInventory(x, y)
+				return
+			end
+		
 		end
-	
+		
+		if subState == SubStates.AUTOMAPPER then
+			if intersect(x, y, 587, 321, 34, 34) then
+				self:showAutomapper(false)
+			end
+		end
+		
 		if self.doShowSpellList then
 			self:onSpellSelect(x, y)
 			return
 		end
-	
+		
 	end
 	
 end
@@ -121,12 +131,25 @@ function Renderer:handleInput(key)
 	if inventoryDragSource.item ~= nil then
 		return
 	end
-	
-	if key == 'i' then
-		self:showInventory(false)
-		return
-	end
 
+	if subState == SubStates.INVENTORY then
+	
+		if key == 'i' then
+			self:showInventory(false)
+			return
+		end
+
+	end
+	
+	if subState == SubStates.AUTOMAPPER then
+	
+		if key == 'm' then
+			self:showAutomapper(false)
+			return
+		end
+
+	end	
+	
 end
 
 function Renderer:flipGround()
@@ -289,8 +312,6 @@ function Renderer:drawPointer()
 	
 	local x, y = love.mouse.getPosition()
 	
-	self:drawText(20, 20, tostring(x) .. "/" .. tostring(y))
-	
 	if inventoryDragSource.item and assets.itemicons[inventoryDragSource.item.id] then
 		love.graphics.draw(assets.itemicons[inventoryDragSource.item.id], x-16, y-16)
 	else
@@ -315,7 +336,6 @@ function Renderer:drawInventory()
 
 	love.graphics.draw(assets.images["inventory-ui"],  settings.inventoryX, settings.inventoryY)
 
-
 	self.buttons["close"]:isOver(mx, my)
 	
 	love.graphics.draw(self.buttons["close"]:getImage(),  settings.inventoryX + 380, settings.inventoryY + 216)
@@ -336,9 +356,13 @@ function Renderer:drawInventory()
 		-- draw slot highlight
 		
 		if intersect(mx, my, x, y, slotsize, slotsize) then
-			love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
-			if party.equipmentslots[i].id ~= "" then
-				self.currentHoverItem = itemtemplates:get(party.equipmentslots[i].id)
+			if inventoryDragSource.item then
+				love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+			else
+				if party.equipmentslots[i].id ~= "" then
+					love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+					self.currentHoverItem = itemtemplates:get(party.equipmentslots[i].id)
+				end
 			end
 			hovercell = {index = i}
 		end
@@ -372,7 +396,6 @@ function Renderer:drawInventory()
 	if hovercell and not inventoryDragSource.item and party.equipmentslots[hovercell.index].id ~= "" then
 		showingItemStats = true
 		local item = itemtemplates:get(party.equipmentslots[hovercell.index].id)
-		--self:showItemHoverStats(item)
 	end
 	
 	-- inventory slots
@@ -388,9 +411,13 @@ function Renderer:drawInventory()
 			-- draw slot highlight
 			
 			if intersect(mx, my, x, y, slotsize, slotsize) then
-				love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
-				if party.inventory[row][col] ~= "" then
-					self.currentHoverItem = itemtemplates:get(party.inventory[row][col])
+				if inventoryDragSource.item then
+					love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+				else
+					if party.inventory[row][col] ~= "" then
+						love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+						self.currentHoverItem = itemtemplates:get(party.inventory[row][col])
+					end
 				end
 				hovercell = {row = row, col = col}
 			end
@@ -413,7 +440,6 @@ function Renderer:drawInventory()
 	if hovercell and not inventoryDragSource.item and party.inventory[hovercell.row][hovercell.col] ~= "" then
 		showingItemStats = true
 		local item = itemtemplates:get(party.inventory[hovercell.row][hovercell.col])
-		--self:showItemHoverStats(item)
 	end
 	
 end
@@ -427,6 +453,18 @@ function Renderer:clickOnInventory(mx, my)
 	end
 
 	local slotsize = 33
+
+	-- inventory button in main ui
+	
+	if not inventoryDragSource.item and intersect(mx, my, 19, 321, 34, 34) then
+		if not self:inventoryShowing() then
+			self:showInventory(true)
+			return
+		else
+			self:showInventory(false)
+			return
+		end
+	end		
 
 	-- equipment slots
 	
@@ -619,27 +657,23 @@ function Renderer:showItemHoverStats(item)
 	
 end
 
-function Renderer:drawMinimap()
+function Renderer:drawAutomapper()
 
 	self:drawText(10, 340, tostring(love.timer.getFPS()))
 
 	love.graphics.setColor(1,1,1,1)
 
 	local cellsize = 6
-	local offsetx = screen.width/2 - (level.data.mapSize * cellsize)/2
-	local offsety = 75--screen.height/2 - (level.data.mapSize * cellsize)/2
+	local offsetx = 222+2
+	local offsety = 39+2
 
-	local amx = screen.width/2 - assets.images["automapper-background"]:getWidth()/2
-	love.graphics.draw(assets.images["automapper-background"], amx, 40)
+	love.graphics.draw(assets.images["automapper-background"], 222, 39)
 	
 	for y = 1, level.data.mapSize do
 		for x = 1, level.data.mapSize do
 		
-			local dx = offsetx + (x * cellsize)
-			local dy = offsety + (y * cellsize)
-		
-			love.graphics.setColor(0,0,0,.5)
-			love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
+			local dx = offsetx + ((x-1) * cellsize)
+			local dy = offsety + ((y-1) * cellsize)
 		
 			if level.data.walls[x] and level.data.walls[x][y] then
 				love.graphics.setColor(1,1,1,1)
@@ -704,29 +738,93 @@ function Renderer:drawUI()
 	
 	love.graphics.setColor(1,1,1,1)
 
+	-- main ui
+
 	love.graphics.draw(assets.images["main-ui"], 0,0)
+	
+	-- compass
+	
+	love.graphics.draw(assets.images["compass"], assets.compass_quads[party.direction], 318, 7)
+
 	
 	-- left hand
 
 	local leftHand = party:getLeftHand()
 	
 	if leftHand then
-		love.graphics.draw(assets.itemicons[leftHand.id], 280,323)
+		love.graphics.draw(assets.itemicons[leftHand.id], 282,321)
+	else
+		love.graphics.draw(assets.images["lefthand-background"], 282,321)
 	end
 	
 	if party:hasCooldown(1) then
-		love.graphics.draw(assets.images["cooldown-overlay"], 278,321)
+		love.graphics.draw(assets.images["cooldown-overlay"], 283,322)
 	end
+	
+	-- right hand
 	
 	local rightHand = party:getrightHand()
 
 	if rightHand then
-		love.graphics.draw(assets.itemicons[rightHand.id], 328,323)
+		love.graphics.draw(assets.itemicons[rightHand.id], 329,321)
+	else
+		love.graphics.draw(assets.images["spellbook-background"], 329,321)
 	end
 
 	if party:hasCooldown(2) then
-		love.graphics.draw(assets.images["cooldown-overlay"], 326,321)
+		love.graphics.draw(assets.images["cooldown-overlay"], 330,322)
 	end
+
+	-- healing potions
+
+	if party.healing_potions > 0 then
+		love.graphics.draw(assets.itemicons["healing-potion"], 239,325)
+		local x,y = 262, 347
+		if party.healing_potions < 10 then
+			love.graphics.draw(assets.images["digits"], assets.digit_quads[party.healing_potions], x, y)
+		else
+			local str = tostring(party.healing_potions)
+			local x,y = 262 - (#str*6), 347
+			for i = 1, #str do
+				local c = tonumber(string.sub(str,i,i))
+				love.graphics.draw(assets.images["digits"], assets.digit_quads[c], x + (i*6), y)
+			end
+		end
+		
+		if party:hasCooldown(3) then
+			love.graphics.draw(assets.images["cooldown-overlay"], 240,326)
+		end
+		
+	end
+
+
+	-- mana potions
+
+	if party.mana_potions > 0 then
+		love.graphics.draw(assets.itemicons["mana-potion"], 372,325)
+		local x,y = 395, 347
+		if party.mana_potions < 10 then
+			love.graphics.draw(assets.images["digits"], assets.digit_quads[party.mana_potions], x, y)
+		else
+			local str = tostring(party.mana_potions)
+			local x,y = 395 - (#str*6), 347
+			for i = 1, #str do
+				local c = tonumber(string.sub(str,i,i))
+				love.graphics.draw(assets.images["digits"], assets.digit_quads[c], x + (i*6), y)
+			end
+		end
+		
+		if party:hasCooldown(4) then
+			love.graphics.draw(assets.images["cooldown-overlay"], 373,326)
+		end
+		
+	end
+
+	-- health and mana bars
+	
+	self:drawBar(164-2, 348-2, party.stats.health, party.stats.health_max, 62, 1)
+	self:drawBar(413-2, 348-2, party.stats.mana, party.stats.mana_max, 62, 2)
+	
 
 end
 
@@ -734,37 +832,45 @@ function Renderer:drawEnemyStats(enemy)
 
 	self:drawText(0, 10+50, enemy.properties.name, "center")
 	
-	local x = math.floor(screen.width/2 - assets.images["enemy-hit-bar-1"]:getWidth()/2)
+	local x = math.floor(screen.width/2 - assets.images["enemy-hit-bar-background"]:getWidth()/2)
 	local y = 30+50
 	
-	love.graphics.draw(assets.images["enemy-hit-bar-1"], x, y)
+	love.graphics.draw(assets.images["enemy-hit-bar-background"], x, y)
 
 	if enemy.properties.health > 0 then
-
-		local maxbarsize = 143
-
-		local f = enemy.properties.health/enemy.properties.health_max
-		local barsize = maxbarsize * f
-		local quad = nil
-
-		local offs = 3
-
-		-- bar body
-		quad = love.graphics.newQuad(1, 0, 1, 5, assets.images["enemy-hit-bar-2"]:getWidth(), assets.images["enemy-hit-bar-2"]:getHeight())
-		love.graphics.draw(assets.images["enemy-hit-bar-2"], quad, x + offs, y + offs, 0, barsize, 1)
-
-		-- left edge
-		
-		quad = love.graphics.newQuad(0, 0, 1, 5, assets.images["enemy-hit-bar-2"]:getWidth(), assets.images["enemy-hit-bar-2"]:getHeight())
-		love.graphics.draw(assets.images["enemy-hit-bar-2"], quad, x + offs, y + offs)
-
-		-- right edge
-		
-		quad = love.graphics.newQuad(2, 2, 1, 5, assets.images["enemy-hit-bar-2"]:getWidth(), assets.images["enemy-hit-bar-2"]:getHeight())
-		love.graphics.draw(assets.images["enemy-hit-bar-2"], quad, (x + offs) + (barsize-1), y + offs)
-
+		self:drawBar(x, y, enemy.properties.health, enemy.properties.health_max, 143, 1)
 	end
 
+end
+
+function Renderer:drawBar(x, y, maxval, minval, maxbarsize, bartype)
+
+	local f = maxval/minval
+	local barsize = maxbarsize * f
+	local quad = nil
+
+	local offs = 3
+
+	local img = assets.images["bar-type-1"]
+
+	if bartype == 2 then
+		img = assets.images["bar-type-2"]
+	end
+
+	-- bar body
+	quad = love.graphics.newQuad(1, 0, 1, 5, img:getWidth(), img:getHeight())
+	love.graphics.draw(img, quad, x + offs, y + offs, 0, barsize, 1)
+
+	-- left edge
+	
+	quad = love.graphics.newQuad(0, 0, 1, 5, img:getWidth(), img:getHeight())
+	love.graphics.draw(img, quad, x + offs, y + offs)
+
+	-- right edge
+	
+	quad = love.graphics.newQuad(2, 2, 1, 5, img:getWidth(), img:getHeight())
+	love.graphics.draw(img, quad, (x + offs) + (barsize-1), y + offs)
+	
 end
 
 function Renderer:drawObject(atlasId, layerId, x, z)
@@ -977,9 +1083,29 @@ function Renderer:showInventory(value)
 	
 end
 
-function Renderer:showing()
+function Renderer:showAutomapper(value)
+
+	assets:playSound("window-open")
+
+	self.doShowAutomapper = value
+
+	if not value then
+		subState = SubStates.IDLE
+	else
+		subState = SubStates.AUTOMAPPER
+	end
+					
+end
+
+function Renderer:inventoryShowing()
 
 	return self.doShowInventory
+
+end
+
+function Renderer:automapperShowing()
+
+	return self.doShowAutomapper
 
 end
 

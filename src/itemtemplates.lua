@@ -4,369 +4,70 @@ function ItemTemplates:initialize()
 
 	self.templates = {}
 
-	local template = {
-		itemtype = "melee",
-		id = "sword-1",
-		name = "Short sword",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 2
-		}
-	}
+	-- weapons
 
-	self.templates[template.id] = template
-	
-	local template = {
-		itemtype = "melee",
-		id = "sword-2",
-		name = "Golden short sword",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 3
-		}
-	}
+	self:addTemplate("sword-1", "Sword", "weapon", { ["atk"] = 2 })
+	self:addTemplate("sword-2", "Golden sword", "weapon", { ["atk"] = 4 })
+	self:addTemplate("sword-3", "Sword", "weapon", { ["atk"] = 2 })
+	self:addTemplate("sword-4", "Sword", "weapon", { ["atk"] = 2 })
+	self:addTemplate("sword-5", "Diamond sword", "weapon", { ["atk"] = 20 })
+	self:addTemplate("dagger-1", "Dagger", "weapon", { ["atk"] = 2 })
+	self:addTemplate("dagger-2", "Dagger", "weapon", { ["atk"] = 2 })
+	self:addTemplate("axe-1", "Axe", "weapon", { ["atk"] = 2 })
+	self:addTemplate("axe-2", "Battle axe", "weapon", { ["atk"] = 4 })
+	self:addTemplate("club", "Club", "weapon", { ["atk"] = 4 })
+	self:addTemplate("mace", "Mace", "weapon", { ["atk"] = 4 })
+	self:addTemplate("spellbook-1", "Ancient tome I", "offhand", {})
+	self:addTemplate("spellbook-2", "Ancient tome II", "offhand", {})
+	self:addTemplate("spellbook-3", "Ancient tome III", "offhand", {})
 
-	self.templates[template.id] = template	
-	
-	local template = {
-		itemtype = "melee",
-		id = "dagger-1",
-		name = "Small dagger",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 2
-		}
-	}
 
-	self.templates[template.id] = template		
-	
-	local template = {
-		itemtype = "melee",
-		id = "dagger-2",
-		name = "Venomous dagger",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 5
-		}
-	}
+	self:addTemplate("ring-1", "Ring", "finger", { ["atk"] = 1 })
+	self:addTemplate("ring-2", "Ring", "finger", { ["atk"] = 1 })
+	self:addTemplate("ring-3", "Ring", "finger", { ["def"] = 1 })
+	self:addTemplate("ring-4", "Ring", "finger", { ["def"] = 1 })
 
-	self.templates[template.id] = template		
-	
-	local template = {
-		itemtype = "melee",
-		id = "axe-1",
-		name = "Axe",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 2
-		}
-	}
+	self:addTemplate("belt-1", "Belt", "waist", { ["def"] = 1 })
+	self:addTemplate("belt-2", "Belt", "waist", { ["def"] = 2 })
+	self:addTemplate("belt-3", "Belt", "waist", { ["def"] = 3, ["atk"] = 1 })
 
-	self.templates[template.id] = template
+	self:addTemplate("boots-1", "Boots", "feet", { ["def"] = 1 })
+	self:addTemplate("boots-2", "Boots", "feet", { ["def"] = 2 })
+	self:addTemplate("boots-3", "Boots", "feet", { ["def"] = 3 })
 
-	local template = {
-		itemtype = "melee",
-		id = "axe-2",
-		name = "Battle axe of Bhok",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 4,
-			["def"] = 4
-		}
-	}
+	self:addTemplate("cape-1", "Cape", "back", { ["def"] = 1 })
+	self:addTemplate("cape-2", "Cape", "back", { ["def"] = 2 })
+	self:addTemplate("cape-3", "Cape", "back", { ["def"] = 3 })
 
-	self.templates[template.id] = template		
-	
-	local template = {
-		itemtype = "melee",
-		id = "club",
-		name = "Club",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 2
-		}
-	}
+	self:addTemplate("gloves-1", "Gloves", "hands", { ["def"] = 1 })
+	self:addTemplate("gloves-2", "Gloves", "hands", { ["def"] = 2 })
+	self:addTemplate("gloves-3", "Gloves", "hands", { ["def"] = 3 })
 
-	self.templates[template.id] = template		
-	
-	local template = {
-		itemtype = "melee",
-		id = "mace",
-		name = "Mace",
-		slot = "weapon",
-		modifiers = {
-			["atk"] = 2
-		}
-	}
+	self:addTemplate("helmet-1", "Helmet", "head", { ["def"] = 1 })
+	self:addTemplate("helmet-2", "Helmet", "head", { ["def"] = 2 })
+	self:addTemplate("helmet-3", "Helmet", "head", { ["def"] = 3 })
 
-	self.templates[template.id] = template		
-	
-	local template = {
-		itemtype = "spellbook",
-		id = "spellbook-1",
-		name = "Ancient tome",
-		slot = "offhand",
-		modifiers = {
-			["atk"] = 2
-		}
-	}
+	self:addTemplate("necklace-1", "Necklace", "neck", { ["def"] = 1, ["atk"] = 1 })
+	self:addTemplate("necklace-2", "Necklace", "neck", { ["def"] = 2, ["atk"] = 2 })
+	self:addTemplate("necklace-3", "Necklace", "neck", { ["def"] = 3, ["atk"] = 3 })
 
-	self.templates[template.id] = template			
-	
-	--[[
-	
-	local template = {
-		itemtype = "melee",
-		id = "staff",
-		name = "Staff",
-		slot = "weapon",
-		range = 2,
-		value = 30,
-		modifiers = {
-			["atk"] = 4
-		}
-	}
-	
-	self.templates[template.id] = template
-	
-	local template = {
-		itemtype = "melee",
-		id = "long_sword",
-		name = "Long sword",
-		slot = "weapon",
-		value = 30,
-		modifiers = {
-			["atk"] = 4
-		}
-	}
-	
-	self.templates[template.id] = template
-	
-	local template = {
-		itemtype = "ranged",
-		id = "short_bow",
-		name = "Short bow",
-		slot = "weapon",
-		value = 30,
-		modifiers = {
-			["atk"] = 4
-		}
-	}
-	
-	self.templates[template.id] = template
-	
-	local template = {
-		itemtype = "ranged",
-		id = "sling",
-		name = "Sling",
-		slot = "weapon",
-		value = 12,
-		modifiers = {
-			["atk"] = 2
-		}
-	}
-	
-	self.templates[template.id] = template	
-	
-	local template = {
-		itemtype = "melee",
-		id = "rusty_dagger",
-		name = "Rusty dagger",
-		slot = "weapon",
-		value = 5,
-		modifiers = {
-			["atk"] = 2
-		}
-	}
-	
-	self.templates[template.id] = template
-	
-	local template = {
-		itemtype = "melee",
-		id = "emerald_sword_of_thyx",
-		name = "Emerald sword of Thyx",
-		unidentifiedname = "Sword",
-		slot = "weapon",
-		value = 200,
-		description = "This is a sword of legends and a truly remarkable piece of craftmanship with an emerald encrusted hilt.",
-		flags = UNIDENTIFIED,
-		modifiers = {
-			["atk"] = 10
-		}
-	}
-	
-	self.templates[template.id] = template
-	
-	local template = {
-		itemtype = "armor",
-		id = "small_wooden_buckler",
-		name = "Small wooden buckler",
-		slot = "offhand",
-		value = 10,
-		modifiers = {
-			["def"] = 1
-		}
-	}
-	
-	self.templates[template.id] = template
+	self:addTemplate("armor-1", "Armor", "torso", { ["def"] = 2 })
+	self:addTemplate("armor-2", "Armor", "torso", { ["def"] = 4 })
+	self:addTemplate("armor-3", "Armor", "torso", { ["def"] = 6 })
+	self:addTemplate("armor-4", "Armor", "torso", { ["def"] = 8 })
 
-	local template = {
-		itemtype = "armor",
-		id = "leather_boots",
-		name = "Leather boots",
-		slot = "feet",
-		value = 10,
-		modifiers = {
-			["def"] = 1
-		}		
-	}
-	
-	self.templates[template.id] = template
-
-	local template = {
-		itemtype = "armor",
-		id = "metal_helmet",
-		name = "Metal helmet",
-		slot = "head",
-		value = 10,
-		modifiers = {
-			["def"] = 1
-		}		
-	}
-	
-	self.templates[template.id] = template
-
-	local template = {
-		itemtype = "armor",
-		id = "girdle_of_giants",
-		name = "Girdle of giants",
-		slot = "waist",
-		value = 10,
-		modifiers = {
-			["str"] = 1
-		}		
-	}
-	
-	self.templates[template.id] = template
-	
-	local template = {
-		itemtype = "food",
-		id = "stale_bread",
-		name = "Stale bread",
-		stackable = 1,
-		slot = "",
-		value = 5,
-		description = "It's a stale loaf of bread with specks of mold.",
-	}
-	
-	self.templates[template.id] = template	
-	
-	local template = {
-		itemtype = "food",
-		id = "red_apple",
-		name = "Red apple",
-		stackable = 1,
-		slot = "",
-		value = 5,
-		description = "It's a red and juicy apple.",
-	}
-	
-	self.templates[template.id] = template		
-	
-	local template = {
-		itemtype = "jewelry",
-		id = "ring_of_strength",
-		name = "Ring of strength",
-		slot = "finger",
-		value = 50,
-		modifiers = {
-			["str"] = 1
-		}		
-	}
-	
-	self.templates[template.id] = template		
-
-	local template = {
-		itemtype = "jewelry",
-		id = "ring_of_the_bear",
-		name = "Ring of the bear",
-		slot = "finger",
-		value = 50,
-		modifiers = {
-			["vit"] = 1
-		}		
-	}
-	
-	self.templates[template.id] = template	
-	
-	local template = {
-		itemtype = "health_potion",
-		id = "potion_of_minor_heal",
-		name = "Potion of minor healing",
-		stackable = 1,
-		value = 25,
-		modifiers = {
-			["hps"] = 25
-		}
-	}
-	
-	self.templates[template.id] = template	
-
-	local template = {
-		itemtype = "health_potion",
-		id = "potion_of_major_heal",
-		name = "Potion of major healing",
-		stackable = 1,
-		value = 50,
-		modifiers = {
-			["hps"] = 50
-		}
-	}
-	
-	self.templates[template.id] = template	
-	
-	local template = {
-		itemtype = "magic_potion",
-		id = "potion_of_minor_magic",
-		name = "Potion of minor magic",
-		stackable = 1,
-		value = 25,
-		modifiers = {
-			["mps"] = 25
-		}
-	}
-	
-	self.templates[template.id] = template	
-
-	local template = {
-		itemtype = "magic_potion",
-		id = "potion_of_major_magic",
-		name = "Potion of major magic",
-		stackable = 1,
-		value = 50,
-		modifiers = {
-			["mps"] = 50
-		}
-	}
-		
-	self.templates[template.id] = template		
-	
-	local template = {
-		itemtype = "rune",
-		id = "rune_of_godly_strength",
-		name = "Rune of godly strength",
-		unidentifiedname = "Rune",
-		flags = UNIDENTIFIED,
-		value = 150,
-		modifiers = {
-			["str"] = 5
-		}
-	}
-		
-	self.templates[template.id] = template		
-	]]--
 end
 
+function ItemTemplates:addTemplate(id, name, slot, modifiers)
+
+	self.templates[id] = {
+		id = id,
+		name = name,
+		slot = slot,
+		modifiers = modifiers
+	}
+	
+end	
 
 function ItemTemplates:isConsumable(template)
 

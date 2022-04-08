@@ -128,15 +128,42 @@ function Game:handleMousePressed(x, y, button, istouch)
 		end	
 	
 		if gameState == GameStates.EXPLORING then
+			
 			if subState == SubStates.IDLE then
+				
 				if intersect(x, y, 278, 321, 34, 34) then
 					party:attackWithMelee(self.enemies)
 				end
+				
 				if intersect(x, y, 326, 321, 34, 34) then
 					subState = SubStates.SELECT_SPELL
 					renderer:showSpellList()
 				end
+				
+				if intersect(x, y, 239, 325, 30, 30) then
+					party:usePotion(1)
+				end
+				
+				if intersect(x, y, 372, 325, 30, 30) then
+					party:usePotion(2)
+				end
+
+				if intersect(x, y, 19, 321, 34, 34) then
+					if not renderer:inventoryShowing() then
+						renderer:showInventory(true)
+						return
+					end
+				end
+				
+				if intersect(x, y, 587, 321, 34, 34) then
+					if not renderer:automapperShowing() then
+						renderer:showAutomapper(true)
+						return
+					end				
+				end
+				
 			end
+			
 		end
 	
 	end
@@ -253,35 +280,22 @@ function Game:handleInput(key)
 			end			
 
 			if key == 'i' then
-				if not renderer:showing() then
+				if not renderer:inventoryShowing() then
 					renderer:showInventory(true)
 					return
 				end
 			end	
 			
 			if key == 'm' then
-				subState = SubStates.AUTOMAPPER
-				assets:playSound("automapper-open")
-				renderer.showMinimap = true
-				return
+				if not renderer:automapperShowing() then
+					renderer:showAutomapper(true)
+					return
+				end				
 			end	
 			
 		end
 
-		if subState == SubStates.INVENTORY then
-			renderer:handleInput(key)
-		end		
-
-		if subState == SubStates.AUTOMAPPER then
-		
-			if key == 'm' then
-				subState = SubStates.IDLE
-				assets:playSound("automapper-close")
-				renderer.showMinimap = false
-				return
-			end	
-			
-		end
+		renderer:handleInput(key)
 		
 	end
 	
