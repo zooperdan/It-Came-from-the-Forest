@@ -13,6 +13,7 @@ function Assets:initialize()
 		},
 		misc = {}
 	}
+	self.itemicons = {}
 	
 end
 
@@ -71,9 +72,14 @@ function Assets:load()
 
 	-- ui
 
+	self.images["button-close-1"] = love.graphics.newImage("files/ui/button-close-1.png")
+	self.images["button-close-2"] = love.graphics.newImage("files/ui/button-close-2.png")
 	self.images["enemy-hit-bar-1"] = love.graphics.newImage("files/ui/enemy-hit-bar-1.png")
 	self.images["enemy-hit-bar-2"] = love.graphics.newImage("files/ui/enemy-hit-bar-2.png")
-	self.images["test"] = love.graphics.newImage("files/ui/test.png")
+	self.images["main-ui"] = love.graphics.newImage("files/ui/main-ui.png")
+	self.images["inventory-ui"] = love.graphics.newImage("files/ui/inventory-ui.png")
+	self.images["inventory-slot-highlight"] = love.graphics.newImage("files/ui/inventory-slot-highlight.png")
+	self.images["cooldown-overlay"] = love.graphics.newImage("files/ui/cooldown-overlay.png")
 
 	-- music
 
@@ -86,9 +92,20 @@ function Assets:load()
 	self.music["buildup"] = love.audio.newSource("files/music/It_Came_from_the_Forest_stringloop.mp3", "stream")
 	self.music["buildup"]:setLooping(false)
 
+	-- load all item icons in the files/itemicons/ directory
+
+	self.itemicons = {}
+
+	local files = love.filesystem.getDirectoryItems("files/itemicons/")
+	
+	for k, file in ipairs(files) do
+		local shortname = file:gsub("%.png", "")
+		self.itemicons[shortname] = love.graphics.newImage("files/itemicons/"..file)
+	end
+	
 	-- font
 
-	self.fonts["main"] = love.graphics.newFont("files/fonts/Berry Rotunda.ttf", 16, "none", love.graphics.getDPIScale())
+	self.fonts["main"] = love.graphics.newFont("files/fonts/windows_command_prompt.ttf", 16 , "none", love.graphics.getDPIScale())
 	
 end
 

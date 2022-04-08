@@ -15,6 +15,23 @@ function Renderer:init(caller)
 	self.backgroundIndex = 1
 	self.skyIndex = 1
 	self.showMinimap = false
+	self.doShowInventory = false
+	self.currentHoverItem = nil
+	self.doShowSpellList = false
+	
+	self.buttons = {}
+	
+	local button = Button:new()
+	button.id = "close"
+	button.x = settings.inventoryX+380
+	button.y = settings.inventoryY+216
+	button.width = 15
+	button.height = 16
+	button.normal = "button-close-1"
+	button.over = "button-close-2"
+	button.trigger = self.onCloseButtonClick
+	
+	self.buttons[button.id] = button
 	
 end
 
@@ -43,6 +60,15 @@ function Renderer:update(dt)
 			self:drawMinimap()
 		end
 
+		if self.doShowInventory then
+			self:drawInventory()
+			self:showPlayerStats()
+		end
+		
+		if self.doShowSpellList then
+			self:drawSpellList()
+		end
+		
 		self:drawUI()
 	
 	end
@@ -64,7 +90,42 @@ function Renderer:update(dt)
 		self:drawPointer()	
 	end
 	
+	if self.currentHoverItem then
+		self:showItemHoverStats(self.currentHoverItem)
+	end
+	
 	love.graphics.setCanvas()
+
+end
+
+function Renderer:handleMousePressed(x, y, button)
+	
+	if button == 1 then
+
+		if self.doShowInventory then
+			self:clickOnInventory(x, y)
+			return
+		end
+	
+		if self.doShowSpellList then
+			self:onSpellSelect(x, y)
+			return
+		end
+	
+	end
+	
+end
+
+function Renderer:handleInput(key)
+
+	if inventoryDragSource.item ~= nil then
+		return
+	end
+	
+	if key == 'i' then
+		self:showInventory(false)
+		return
+	end
 
 end
 
@@ -196,9 +257,21 @@ function Renderer:drawText(x, y, text, align)
 	align = align and align or "left"
 
 	love.graphics.setColor(0,0,0,1)
-	love.graphics.printf(text, x+2, y+2, 640, align)
+	love.graphics.printf(text, x+1, y+1, 640, align)
 	love.graphics.setColor(1,1,1,1)
 	love.graphics.printf(text, x, y, 640, align)
+	
+end
+
+function Renderer:drawWrappedText(x, y, text, wrapAt, color)
+
+	align = align and align or "left"
+
+	love.graphics.setColor(0,0,0,1)
+	love.graphics.printf(text, x+1, y+1, wrapAt, "left")
+	love.graphics.setColor(color)
+	love.graphics.printf(text, x, y, wrapAt, "left")
+	love.graphics.setColor(1,1,1,1)
 	
 end
 
@@ -214,13 +287,343 @@ function Renderer:drawPointer()
 		love.mouse.setPosition(love.mouse.getX(), screen.height)
 	end	
 	
-	love.graphics.draw(assets.images["pointer"], x, y)
+	local x, y = love.mouse.getPosition()
+	
+	self:drawText(20, 20, tostring(x) .. "/" .. tostring(y))
+	
+	if inventoryDragSource.item and assets.itemicons[inventoryDragSource.item.id] then
+		love.graphics.draw(assets.itemicons[inventoryDragSource.item.id], x-16, y-16)
+	else
+		love.graphics.draw(assets.images["pointer"], x, y)
+	end
+	
+end
 
+function Renderer:drawSpellList()
+
+	love.graphics.setColor(1,1,1,1)
+
+	self:drawText(20, 200, "SELECT SPELL")
+
+end
+
+function Renderer:drawInventory()
+
+	local mx, my = love.mouse.getPosition()
+
+	love.graphics.setColor(1,1,1,1)
+
+	love.graphics.draw(assets.images["inventory-ui"],  settings.inventoryX, settings.inventoryY)
+
+
+	self.buttons["close"]:isOver(mx, my)
+	
+	love.graphics.draw(self.buttons["close"]:getImage(),  settings.inventoryX + 380, settings.inventoryY + 216)
+
+	local slotsize = 33
+	local hovercell = nil
+	local showingItemStats = false
+
+	self.currentHoverItem = nil
+
+	-- equipment slots
+	
+	for i = 1, #party.equipmentslots do
+	
+		local x = settings.inventoryX + party.equipmentslots[i].x
+		local y = settings.inventoryY + party.equipmentslots[i].y
+		
+		-- draw slot highlight
+		
+		if intersect(mx, my, x, y, slotsize, slotsize) then
+			love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+			if party.equipmentslots[i].id ~= "" then
+				self.currentHoverItem = itemtemplates:get(party.equipmentslots[i].id)
+			end
+			hovercell = {index = i}
+		end
+		
+		-- draw slot highlight for matching slot type
+		
+		if inventoryDragSource.item then
+		
+			local item = itemtemplates:get(inventoryDragSource.item.id)
+			
+			if party.equipmentslots[i].type == item.slot then
+				love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+			end
+		
+		end
+		
+		-- draw item icons
+		
+		if party.equipmentslots[i].id ~= "" then
+		
+			local item = itemtemplates:get(party.equipmentslots[i].id)
+
+			if item and assets.itemicons[item.id] then
+				love.graphics.draw(assets.itemicons[item.id], x+1, y+1)
+			end
+			
+		end
+		
+	end	
+
+	if hovercell and not inventoryDragSource.item and party.equipmentslots[hovercell.index].id ~= "" then
+		showingItemStats = true
+		local item = itemtemplates:get(party.equipmentslots[hovercell.index].id)
+		--self:showItemHoverStats(item)
+	end
+	
+	-- inventory slots
+
+	hovercell = nil
+
+	for row = 1, 5 do
+		for col = 1, 8 do
+		
+			local x = settings.inventorySlotsStartX + (col-1) * slotsize
+			local y = settings.inventorySlotsStartY + (row-1) * slotsize
+			
+			-- draw slot highlight
+			
+			if intersect(mx, my, x, y, slotsize, slotsize) then
+				love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+				if party.inventory[row][col] ~= "" then
+					self.currentHoverItem = itemtemplates:get(party.inventory[row][col])
+				end
+				hovercell = {row = row, col = col}
+			end
+			
+			-- draw item icons
+			
+			if party.inventory[row][col] ~= "" then
+			
+				local item = itemtemplates:get(party.inventory[row][col])
+	
+				if item and assets.itemicons[item.id] then
+					love.graphics.draw(assets.itemicons[item.id], x+1, y+1)
+				end
+				
+			end
+			
+		end
+	end
+	
+	if hovercell and not inventoryDragSource.item and party.inventory[hovercell.row][hovercell.col] ~= "" then
+		showingItemStats = true
+		local item = itemtemplates:get(party.inventory[hovercell.row][hovercell.col])
+		--self:showItemHoverStats(item)
+	end
+	
+end
+
+function Renderer:clickOnInventory(mx, my)
+
+	if not inventoryDragSource.item then
+		if self.buttons["close"]:isOver(mx, my) then
+			self.buttons["close"].trigger()
+		end
+	end
+
+	local slotsize = 33
+
+	-- equipment slots
+	
+	for i = 1, #party.equipmentslots do
+	
+		local x = settings.inventoryX + party.equipmentslots[i].x
+		local y = settings.inventoryY + party.equipmentslots[i].y
+		
+		if intersect(mx, my, x, y, slotsize, slotsize) then
+	
+			if inventoryDragSource.item then
+	
+				if party.equipmentslots[i].type == inventoryDragSource.item.slot then
+	
+					if party.equipmentslots[i].id == "" then
+		
+						party.equipmentslots[i].id = inventoryDragSource.item.id
+			
+						inventoryDragSource = {}
+
+					else
+					
+						local item = itemtemplates:get(party.equipmentslots[i].id)
+						
+						party.equipmentslots[i].id = inventoryDragSource.item.id
+
+						inventoryDragSource = {
+							source = "equipment",
+							item = item,
+							src_row = row,
+							src_col = col,
+						}
+
+					end
+
+				end
+				
+			else
+			
+				if party.equipmentslots[i].id ~= "" then
+
+					local item = itemtemplates:get(party.equipmentslots[i].id)
+					
+					inventoryDragSource = {
+						source = "equipment",
+						item = item,
+						src_row = row,
+						src_col = col,
+					}
+					
+					party.equipmentslots[i].id = ""
+					
+				else 
+					inventoryDragSource = {}
+				end				
+			
+			end
+	
+		end
+		
+	end
+
+	-- inventory slots
+
+	if intersect(mx, my, settings.inventorySlotsStartX, settings.inventorySlotsStartY, 295, 184) then
+
+		local col = math.floor((mx - settings.inventorySlotsStartX) / slotsize)+1
+		local row = math.floor((my - settings.inventorySlotsStartY) / slotsize)+1
+		
+		col = math.clamp(col, 1, 8)
+		row = math.clamp(row, 1, 5)
+
+		if inventoryDragSource.item then
+		
+			if party.inventory[row][col] == "" then
+
+				party.inventory[row][col] = inventoryDragSource.item.id
+			
+				inventoryDragSource = {}
+
+			else
+
+				local item = itemtemplates:get(party.inventory[row][col])
+				
+				party.inventory[row][col] = inventoryDragSource.item.id
+
+				inventoryDragSource = {
+					source = "inventory",
+					item = item,
+					src_row = row,
+					src_col = col,
+				}				
+
+			end
+		
+		else
+
+			if party.inventory[row][col] ~= "" then
+
+				local item = itemtemplates:get(party.inventory[row][col])
+				
+				inventoryDragSource = {
+					source = "inventory",
+					item = item,
+					src_row = row,
+					src_col = col,
+				}
+				
+				party.inventory[row][col] = ""
+				
+			else 
+				inventoryDragSource = {}
+			end
+			
+		end
+	
+	end
+	
+	party:updateStats()
+	
+end
+
+function Renderer:onSpellSelect(mx, my)
+
+	-- TO-DO: add list of spells that can be clicked on
+
+	if my < 10 then
+		self.doShowSpellList = false
+		subState = SubStates.IDLE
+	end
+	
+end
+
+function Renderer:showPlayerStats()
+	
+	self:drawText(251, 228,    "HEALTH")
+	self:drawText(251, 228+14,    "MANA")
+	self:drawText(251, 228+28, "ATK")
+	self:drawText(251, 228+42, "DEF")
+	
+	self:drawText(364, 228, "GOLD")
+	self:drawText(364, 228+14, "ANT SACS")
+
+	self:drawText(316, 228,    ": " .. party.stats.health)
+	self:drawText(316, 228+14,    ": " .. party.stats.mana)
+	self:drawText(316, 228+28, ": " .. party.stats.attack)
+	self:drawText(316, 228+42, ": " .. party.stats.defence)
+
+	self:drawText(364+65, 228, ": " .. party.gold)
+	self:drawText(364+65, 228+14, ": " .. party.antsacs)
+	
+end
+
+function Renderer:showItemHoverStats(item)
+		
+	if item and assets.itemicons[item.id] then
+
+		local mx, my = love.mouse.getPosition()
+
+		local str = ""
+		for key,value in pairs(item.modifiers) do
+			local mod = item.modifiers[key]
+			str = str .. key:upper() .. ": " .. value .. "   "
+		end
+
+		local statslen = assets.fonts["main"]:getWidth(str.trim(str))+15
+		local namelen = assets.fonts["main"]:getWidth(item.name.trim(item.name))+15
+
+		local l = namelen
+
+		if namelen < statslen then
+			l = statslen
+		end
+
+		if mx + l + 15 > screen.width then
+			mx = screen.width - (l + 15)
+		end
+		
+		love.graphics.setColor(0,0,0,0.75)
+		love.graphics.rectangle("fill",mx+10,my-40, l, 40)
+		love.graphics.setColor(1,1,1,1)
+		
+		self:drawWrappedText(mx+15, my-35, item.name, 263, {255/255,240/255,137/255,1})
+		
+		if str ~= "" then
+			self:drawWrappedText(mx+15, my-20, str, 263, {1,1,1,1})
+		end
+		
+	end
+	
 end
 
 function Renderer:drawMinimap()
 
 	self:drawText(10, 340, tostring(love.timer.getFPS()))
+
+	love.graphics.setColor(1,1,1,1)
 
 	local cellsize = 6
 	local offsetx = screen.width/2 - (level.data.mapSize * cellsize)/2
@@ -297,30 +700,33 @@ end
 
 function Renderer:drawUI()
 
-	--[[
-	self:drawText(10, 10, direction_names[party.direction])
-	self:drawText(-10, 10, party.x .. "/" .. party.y, "right")
-
-	if party:hasCooldown(1) then
-		love.graphics.setColor(1,0,0,1)
-		love.graphics.rectangle("fill", 5, 40, 5, 5)
-	else
-		love.graphics.setColor(1,1,1,1)
-		love.graphics.rectangle("fill", 5, 40, 5, 5)
-	end
-
-	if party:hasCooldown(2) then
-		love.graphics.setColor(1,0,0,1)
-		love.graphics.rectangle("fill", 15, 40, 5, 5)
-	else
-		love.graphics.setColor(1,1,1,1)
-		love.graphics.rectangle("fill", 15, 40, 5, 5)
-	end
-	--]]
+	--self:drawText(10, 10, direction_names[party.direction])
 	
 	love.graphics.setColor(1,1,1,1)
 
-	love.graphics.draw(assets.images["test"], 0,0)
+	love.graphics.draw(assets.images["main-ui"], 0,0)
+	
+	-- left hand
+
+	local leftHand = party:getLeftHand()
+	
+	if leftHand then
+		love.graphics.draw(assets.itemicons[leftHand.id], 280,323)
+	end
+	
+	if party:hasCooldown(1) then
+		love.graphics.draw(assets.images["cooldown-overlay"], 278,321)
+	end
+	
+	local rightHand = party:getrightHand()
+
+	if rightHand then
+		love.graphics.draw(assets.itemicons[rightHand.id], 328,323)
+	end
+
+	if party:hasCooldown(2) then
+		love.graphics.draw(assets.images["cooldown-overlay"], 326,321)
+	end
 
 end
 
@@ -463,7 +869,7 @@ function Renderer:drawSquare(x, z)
 			local enemy = level.data.enemies[key]
 			if enemy.x == p.x and enemy.y == p.y then
 				if enemy.highlight and enemy.highlight == 1 then
-					highlightshader:send("WhiteFactor", 1)
+					highlightshader:send("WhiteFactor", 0.5)
 				end
 				if enemy.properties.state == 1 then
 					if enemy.properties.attacking == 1 then
@@ -544,6 +950,48 @@ function Renderer:drawViewport()
 		self:drawSquare(0, z)
 	
 	end
+
+end
+
+function Renderer:isDraggingItem()
+
+	return inventoryDragSource.item ~= nil
+	
+end
+
+function Renderer:showInventory(value)
+
+	assets:playSound("window-open")
+
+	self.currentHoverItem = nuil
+
+	inventoryDragSource = {}
+
+	self.doShowInventory = value
+
+	if not value then
+		subState = SubStates.IDLE
+	else
+		subState = SubStates.INVENTORY
+	end
+	
+end
+
+function Renderer:showing()
+
+	return self.doShowInventory
+
+end
+
+function Renderer:onCloseButtonClick()
+
+	renderer:showInventory(false)
+
+end
+
+function Renderer:showSpellList()
+
+	self.doShowSpellList = true
 
 end
 

@@ -5,9 +5,12 @@ local Party = require "party"
 local Level = require "level"
 local Atlases = require "atlases"
 local Enemy = require "enemy"
+
 Timer = require "libs/timer"
+Button = require "button"
 
 local GlobalVariables = require "globalvariables"
+local ItemTemplates = require "itemtemplates"
 
 assets = Assets:new()
 renderer = Renderer:new()
@@ -19,10 +22,7 @@ globalvariables = GlobalVariables:new()
 
 local Game = class('Game')
 
---game = Game:new()
-
-fadeColor = {0,0,0}
-fadeMusicVolume = {v = settings.musicVolume}
+itemtemplates = ItemTemplates:new()
 
 function Game:initialize()
 
@@ -33,7 +33,7 @@ function Game:initialize()
 	self.footStepIndex = 1
 	love.graphics.setDefaultFilter( "nearest", "nearest", 0)
 	self.isFading = false
-	self.quickstart = false
+	self.quickstart = true
 	
 end
 
@@ -58,7 +58,6 @@ function Game:init()
 		assets:playMusic("buildup")
 		
 		gameState = GameStates.BUILDUP1
-		subState = SubStates.IDLE
 
 		Timer.script(function(wait)
 			Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
@@ -72,23 +71,19 @@ end
 function Game:update(dt)
 
 
-	if gameState == GameStates.BUILDUP4 then
-	
-		if not assets:isPlaying("buildup") then
-			--self:jumpToMainmenu()
-		end
-	
-	end
-
-	if gameState == GameStates.EXPLORING and subState == SubStates.IDLE then
+	if gameState == GameStates.EXPLORING then
 		
-		if self.enemies then
-			for key,value in pairs(self.enemies) do
-				self.enemies[key]:update(dt)
+		if subState == SubStates.IDLE then
+		
+			if self.enemies then
+				for key,value in pairs(self.enemies) do
+					self.enemies[key]:update(dt)
+				end
 			end
+			
+			party:update(dt)
+
 		end
-		
-		party:update(dt)
 		
 	end
 	
@@ -116,8 +111,34 @@ end
 
 function Game:handleMousePressed(x, y, button, istouch)
 	
-	if gameState == GameStates.INIT then
+	if gameState == GameStates.INIT or gameState == GameStates.LOADING_LEVEL then
 		return
+	end
+	
+	if button == 1 then
+	
+		if gameState == GameStates.BUILDUP1 or gameState == GameStates.BUILDUP2 or gameState == GameStates.BUILDUP3 or gameState == GameStates.BUILDUP4 then
+			self:jumpToMainmenu()
+			return
+		end	
+	
+		if gameState == GameStates.MAIN_MENU and self.isFading == false then
+			self:startGame()
+			return
+		end	
+	
+		if gameState == GameStates.EXPLORING then
+			if subState == SubStates.IDLE then
+				if intersect(x, y, 278, 321, 34, 34) then
+					party:attackWithMelee(self.enemies)
+				end
+				if intersect(x, y, 326, 321, 34, 34) then
+					subState = SubStates.SELECT_SPELL
+					renderer:showSpellList()
+				end
+			end
+		end
+	
 	end
 	
 	if button == 3 then
@@ -125,34 +146,18 @@ function Game:handleMousePressed(x, y, button, istouch)
 		love.mouse.setGrabbed(state)
 	end
    
-	if gameState == GameStates.BUILDUP1 or gameState == GameStates.BUILDUP2 or gameState == GameStates.BUILDUP3 or gameState == GameStates.BUILDUP4 then
-
-		if button == 1 then
-			self:jumpToMainmenu()
-			return
-		end
-		
-	end
-	
-	if gameState == GameStates.MAIN_MENU and self.isFading == false then
-
-		if button == 1 then
-			self:startGame()
-			return
-		end
-		
-	end	
+	renderer:handleMousePressed(x, y, button)
 	
 end
 
 
 function Game:handleInput(key)
 
-	local key = string.lower(key)
-
-	if gameState == GameStates.INIT then
+	if gameState == GameStates.INIT or gameState == GameStates.LOADING_LEVEL then
 		return
 	end
+
+	local key = string.lower(key)
 
 	-- COMMON
 
@@ -182,15 +187,6 @@ function Game:handleInput(key)
 	if key == 'escape' then
 		love.event.quit()
 	end
-
-	if gameState == GameStates.BUILDUP1 or gameState == GameStates.BUILDUP2 or gameState == GameStates.BUILDUP3 or gameState == GameStates.BUILDUP4 then
-
-		if key == 'space' then
-			self:jumpToMainmenu()
-			return
-		end
-		
-	end
 	
 	if gameState == GameStates.MAIN_MENU and self.isFading == false then
 
@@ -201,7 +197,6 @@ function Game:handleInput(key)
 		
 	end
 			
-			
 	if gameState == GameStates.CREDITS then
 
 		if key == 'c' then
@@ -211,8 +206,6 @@ function Game:handleInput(key)
 		
 	end
 	
-	-- EXPLORING
-
 	if gameState == GameStates.EXPLORING then
 
 		if subState == SubStates.IDLE then
@@ -259,6 +252,13 @@ function Game:handleInput(key)
 				return
 			end			
 
+			if key == 'i' then
+				if not renderer:showing() then
+					renderer:showInventory(true)
+					return
+				end
+			end	
+			
 			if key == 'm' then
 				subState = SubStates.AUTOMAPPER
 				assets:playSound("automapper-open")
@@ -266,17 +266,11 @@ function Game:handleInput(key)
 				return
 			end	
 			
-			if key == '1' then
-				party:attack(1, self.enemies)
-				return
-			end				
-
-			if key == '2' then
-				party:attack(2, self.enemies)
-				return
-			end				
-			
 		end
+
+		if subState == SubStates.INVENTORY then
+			renderer:handleInput(key)
+		end		
 
 		if subState == SubStates.AUTOMAPPER then
 		
@@ -288,7 +282,7 @@ function Game:handleInput(key)
 			end	
 			
 		end
-
+		
 	end
 	
 end
