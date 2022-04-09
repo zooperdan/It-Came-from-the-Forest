@@ -110,8 +110,10 @@
    <property name="imageid" value=""/>
    <property name="loot" value=""/>
    <property name="name" value=""/>
+   <property name="portrait" value=""/>
    <property name="questdelivertext" value=""/>
    <property name="questdonetext" value=""/>
+   <property name="sound" value=""/>
    <property name="state" type="int" value="1"/>
    <property name="text" value=""/>
    <property name="vars" value=""/>
@@ -160,6 +162,8 @@
  </tile>
  <tile id="19" type="Well">
   <properties>
+   <property name="counter" type="int" value="0"/>
+   <property name="counter_max" type="int" value="100"/>
    <property name="direction" type="int" value="3"/>
    <property name="id" value=""/>
    <property name="state" type="int" value="1"/>
@@ -173,18 +177,28 @@
    <property name="keyid" value=""/>
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="1"/>
+   <property name="vendor" value=""/>
   </properties>
  </tile>
  <tile id="21" type="Door">
   <properties>
    <property name="direction" type="int" value="3"/>
    <property name="id" value=""/>
+   <property name="keyid" value=""/>
    <property name="state" type="int" value="1"/>
    <property name="targetarea" value=""/>
    <property name="targetdir" type="int" value="0"/>
    <property name="targetx" type="int" value="0"/>
    <property name="targety" type="int" value="0"/>
    <property name="type" type="int" value="2"/>
+  </properties>
+ </tile>
+ <tile id="22" type="Button">
+  <properties>
+   <property name="id" value=""/>
+   <property name="state" type="int" value="1"/>
+   <property name="type" type="int" value="1"/>
+   <property name="vars" value=""/>
   </properties>
  </tile>
  <tile id="23" type="Sign"/>

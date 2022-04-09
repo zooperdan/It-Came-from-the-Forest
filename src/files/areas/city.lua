@@ -38,6 +38,7 @@
 	},
 	[12]={
 		[21]={["type"]=1,},
+		[22]={["type"]=1,},
 	},
 	[13]={
 		[21]={["type"]=1,},
@@ -48,13 +49,16 @@
 	[15]={
 	},
 	[16]={
+		[13]={["type"]=1,},
 		[14]={["type"]=1,},
 		[15]={["type"]=1,},
 		[17]={["type"]=1,},
+		[18]={["type"]=1,},
 		[19]={["type"]=1,},
 	},
 	[17]={
 		[13]={["type"]=1,},
+		[14]={["type"]=1,},
 		[15]={["type"]=1,},
 		[17]={["type"]=1,},
 		[18]={["type"]=1,},
@@ -63,6 +67,7 @@
 	},
 	[18]={
 		[17]={["type"]=1,},
+		[18]={["type"]=1,},
 		[19]={["type"]=1,},
 	},
 	[19]={
@@ -73,6 +78,7 @@
 	},
 	[20]={
 		[11]={["type"]=1,},
+		[12]={["type"]=1,},
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
@@ -80,7 +86,9 @@
 	[21]={
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
+		[20]={["type"]=1,},
 		[21]={["type"]=1,},
+		[22]={["type"]=1,},
 	},
 	[22]={
 		[20]={["type"]=1,},
@@ -90,8 +98,10 @@
 	},
 	[23]={
 		[11]={["type"]=1,},
+		[12]={["type"]=1,},
 		[13]={["type"]=1,},
 		[19]={["type"]=1,},
+		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[24]={["type"]=1,},
 	},
@@ -114,6 +124,7 @@
 	},
 	[26]={
 		[20]={["type"]=1,},
+		[21]={["type"]=1,},
 		[22]={["type"]=1,},
 		[26]={["type"]=1,},
 		[27]={["type"]=1,},
@@ -122,6 +133,7 @@
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[13]={["type"]=1,},
+		[14]={["type"]=1,},
 		[15]={["type"]=1,},
 		[17]={["type"]=1,},
 		[18]={["type"]=1,},
@@ -131,20 +143,25 @@
 		[24]={["type"]=1,},
 		[25]={["type"]=1,},
 		[26]={["type"]=1,},
+		[27]={["type"]=1,},
 	},
 	[28]={
 		[11]={["type"]=1,},
+		[12]={["type"]=1,},
 		[13]={["type"]=1,},
 		[14]={["type"]=1,},
 		[15]={["type"]=1,},
 		[17]={["type"]=1,},
+		[18]={["type"]=1,},
 		[24]={["type"]=1,},
+		[25]={["type"]=1,},
 		[26]={["type"]=1,},
 		[27]={["type"]=1,},
 	},
 	[29]={
 		[13]={["type"]=1,},
 		[14]={["type"]=1,},
+		[15]={["type"]=1,},
 		[17]={["type"]=1,},
 		[18]={["type"]=1,},
 		[19]={["type"]=1,},
@@ -153,8 +170,6 @@
 	[30]={
 		[13]={["type"]=1,},
 		[14]={["type"]=1,},
-		[15]={["type"]=1,},
-		[17]={["type"]=1,},
 		[18]={["type"]=1,},
 		[19]={["type"]=1,},
 		[21]={["type"]=1,},
@@ -171,6 +186,7 @@
 	[1]={
 		[14]={["type"]=3,},
 		[15]={["type"]=3,},
+		[16]={["type"]=3,},
 		[17]={["type"]=3,},
 		[18]={["type"]=3,},
 	},
@@ -391,6 +407,7 @@
 		[13]={["type"]=3,},
 		[14]={["type"]=3,},
 		[15]={["type"]=3,},
+		[16]={["type"]=3,},
 		[17]={["type"]=3,},
 		[18]={["type"]=3,},
 		[19]={["type"]=3,},
@@ -409,56 +426,19 @@ enemyblockers={
 			id="city_4eadbf5e-c047-c6dc-1c8f-c70aff473217",
 		}
 	},
+	[2] = {
+		x=2,
+		y=16,
+		properties={
+			id="city_92b1270e-92d5-55c2-28bf-0c360fded85e",
+		}
+	},
 },
 
 enemies={
 	[1] = {
-		x=26,
-		y=16,
-		properties={
-			attack=1,
-			defence=1,
-			experience=10,
-			gold=5,
-			health=100,
-			health_max=100,
-			id="city_cd2aeb68-c53a-0d66-7165-5d2d2df2d257",
-			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
-			state=1,
-			type=0,
-			wanderer=1,
-		}
-	},
-	[2] = {
-		x=30,
-		y=16,
-		properties={
-			attack=1,
-			defence=1,
-			experience=10,
-			gold=5,
-			health=100,
-			health_max=100,
-			id="city_08dee7c2-6bc8-050e-50aa-f7ff24e7690c",
-			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
-			state=1,
-			type=0,
-			wanderer=1,
-		}
-	},
-	[3] = {
-		x=26,
-		y=19,
+		x=13,
+		y=10,
 		properties={
 			attack=1,
 			defence=1,
@@ -478,9 +458,9 @@ enemies={
 			wanderer=1,
 		}
 	},
-	[4] = {
-		x=29,
-		y=28,
+	[2] = {
+		x=10,
+		y=7,
 		properties={
 			attack=1,
 			defence=1,
@@ -500,9 +480,9 @@ enemies={
 			wanderer=1,
 		}
 	},
-	[5] = {
-		x=31,
-		y=23,
+	[3] = {
+		x=10,
+		y=13,
 		properties={
 			attack=1,
 			defence=1,
@@ -537,12 +517,12 @@ chests={
 		}
 	},
 	[2] = {
-		x=5,
-		y=13,
+		x=22,
+		y=19,
 		properties={
 			answer="",
 			id="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5",
-			keyid="",
+			keyid="key-1",
 			riddle="",
 			state=1,
 		}
@@ -561,12 +541,40 @@ chests={
 },
 
 spinners={},
-portals={},
+portals={
+	[1] = {
+		x=8,
+		y=19,
+		properties={
+			direction=2,
+			id="city_946d3b12-824b-aaee-515c-4787282781ea",
+			state=1,
+			targetdir=3,
+			targetx=3,
+			targety=10,
+		}
+	},
+	[2] = {
+		x=5,
+		y=11,
+		properties={
+			direction=3,
+			id="city_0385dd1a-d17c-e085-1253-7f4b06d5349c",
+			state=1,
+			targetdir=2,
+			targetx=7,
+			targety=19,
+		}
+	},
+},
+
 wells={
 	[1] = {
 		x=21,
 		y=16,
 		properties={
+			counter=0,
+			counter_max=100,
 			direction=0,
 			id="city_ce1c8989-8d0c-1d0a-f3f4-8c678b0e603f",
 			state=1,
@@ -577,6 +585,8 @@ wells={
 		x=21,
 		y=16,
 		properties={
+			counter=0,
+			counter_max=100,
 			direction=0,
 			id="city_ce1c8989-8d0c-1d0a-f3f4-8c678b0e603f",
 			state=1,
@@ -587,8 +597,8 @@ wells={
 
 npcs={
 	[1] = {
-		x=23,
-		y=17,
+		x=15,
+		y=12,
 		properties={
 			criterias="",
 			experience=0,
@@ -597,8 +607,10 @@ npcs={
 			imageid="npc-guard",
 			loot="",
 			name="",
+			portrait="guard",
 			questdelivertext="",
 			questdonetext="",
+			sound="",
 			state=1,
 			text="",
 			vars="",
@@ -615,16 +627,39 @@ npcs={
 			id="city_4c920ff2-f574-e5b3-3fa5-18cfc312b088",
 			imageid="npc-guard",
 			loot="",
-			name="",
+			name="City guard",
+			portrait="guard",
 			questdelivertext="",
 			questdonetext="",
+			sound="npc-1",
 			state=1,
-			text="",
+			text="You'll do best to behave while visiting our fine city!",
 			vars="",
 			visible=1,
 		}
 	},
 	[3] = {
+		x=31,
+		y=15,
+		properties={
+			criterias="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5:state:2",
+			experience=0,
+			gold=0,
+			id="city_eb1bdfcf-a8cb-b5cc-63ce-701b38890881",
+			imageid="npc-guard",
+			loot="",
+			name="City guard",
+			portrait="guard",
+			questdelivertext="Alright then. I guess we can open the gate for you now.",
+			questdonetext="Be careful out in the forest.\n\nI've seen many brave adventurers pass through that gate never to return.\n\nKeep your head down, move slowly and be always vigilant.\n\n",
+			sound="npc-1",
+			state=1,
+			text="This gate is closed. King's orders!",
+			vars="city_6974755c-a6c3-b9b0-6499-e0919dff6219:state:1",
+			visible=1,
+		}
+	},
+	[4] = {
 		x=26,
 		y=25,
 		properties={
@@ -635,15 +670,17 @@ npcs={
 			imageid="npc-guard",
 			loot="",
 			name="",
+			portrait="",
 			questdelivertext="",
 			questdonetext="",
+			sound="",
 			state=1,
 			text="",
 			vars="",
 			visible=1,
 		}
 	},
-	[4] = {
+	[5] = {
 		x=3,
 		y=17,
 		properties={
@@ -653,11 +690,13 @@ npcs={
 			id="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015",
 			imageid="npc-guard",
 			loot="",
-			name="",
+			name="City guard",
+			portrait="guard",
 			questdelivertext="",
 			questdonetext="",
+			sound="npc-1",
 			state=1,
-			text="",
+			text="Don't be trying no funny business, ya hear?",
 			vars="",
 			visible=1,
 		}
@@ -676,6 +715,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[2] = {
@@ -687,6 +727,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[3] = {
@@ -698,6 +739,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[4] = {
@@ -709,6 +751,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[5] = {
@@ -720,6 +763,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[6] = {
@@ -731,6 +775,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[7] = {
@@ -742,6 +787,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[8] = {
@@ -753,6 +799,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[9] = {
@@ -764,6 +811,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[10] = {
@@ -775,6 +823,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[11] = {
@@ -786,6 +835,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[12] = {
@@ -797,6 +847,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[13] = {
@@ -808,6 +859,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="antsacs",
 		}
 	},
 	[14] = {
@@ -819,6 +871,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[15] = {
@@ -830,6 +883,7 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[16] = {
@@ -841,17 +895,19 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[17] = {
-		x=29,
-		y=15,
+		x=24,
+		y=11,
 		properties={
 			direction=3,
 			id="city_53a9e304-b3ec-871b-b6dd-0caf0fba9c8b",
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 	[18] = {
@@ -860,7 +916,8 @@ doors={
 		properties={
 			direction=-1,
 			id="city_6974755c-a6c3-b9b0-6499-e0919dff6219",
-			state=1,
+			keyid="",
+			state=3,
 			targetarea="forest-2",
 			targetdir=1,
 			targetx=1,
@@ -874,7 +931,8 @@ doors={
 		properties={
 			direction=-1,
 			id="city_dae20e19-6cdc-9db1-91f9-5fe2302de736",
-			state=1,
+			keyid="",
+			state=2,
 			targetarea="forest-1",
 			targetdir=3,
 			targetx=14,
@@ -891,62 +949,15 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
+			vendor="",
 		}
 	},
 },
 
 staticprops={
 	[1] = {
-		x=24,
-		y=22,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_2958aee6-27c4-92c4-c0c1-79101ef05c02",
-			name="barricade",
-			state=1,
-			visible=1,
-		}
-	},
-	[2] = {
-		x=23,
-		y=22,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_126c76b7-46bc-eae8-0fa0-696e76bb82ee",
-			name="barricade",
-			state=1,
-			visible=1,
-		}
-	},
-	[3] = {
-		x=26,
-		y=15,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_7b3bda74-49d4-7bbd-0e6e-227051ee6a17",
-			name="barricade",
-			state=1,
-			visible=1,
-		}
-	},
-	[4] = {
-		x=27,
-		y=23,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_23bfef76-7c13-9370-d878-441423d6757b",
-			name="barricade",
-			state=1,
-			visible=1,
-		}
-	},
-	[5] = {
-		x=24,
-		y=18,
+		x=16,
+		y=11,
 		properties={
 			atlasid="city-props",
 			direction=2,
@@ -956,45 +967,22 @@ staticprops={
 			visible=1,
 		}
 	},
-	[6] = {
-		x=25,
-		y=26,
+},
+
+buttons={
+	[1] = {
+		x=8,
+		y=14,
 		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_8bcdbee7-5540-7b92-7a63-f71c86b4fe21",
-			name="barricade",
+			id="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6",
 			state=1,
-			visible=1,
-		}
-	},
-	[7] = {
-		x=23,
-		y=18,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_36da232e-e40a-ab01-47a4-13a79c895b36",
-			name="barricade",
-			state=1,
-			visible=1,
-		}
-	},
-	[8] = {
-		x=24,
-		y=15,
-		properties={
-			atlasid="city-props",
-			direction=3,
-			id="city_826b2578-0f86-edb7-691b-5c8c89ad7d2a",
-			name="notice-board",
-			state=1,
-			visible=1,
+			type=1,
+			vars="city_6974755c-a6c3-b9b0-6499-e0919dff6219:state:1",
 		}
 	},
 },
 
-["partyX"]=2,
+["partyX"]=19,
 ["partyY"]=16,
 ["partyDirection"]=1,
 }

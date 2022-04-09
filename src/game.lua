@@ -32,8 +32,6 @@ function Game:initialize()
 	subState = SubStates.IDLE
 	self.footStepIndex = 1
 	love.graphics.setDefaultFilter( "nearest", "nearest", 0)
-	self.isFading = false
-	self.quickstart = true
 	
 end
 
@@ -49,11 +47,10 @@ function Game:init()
 	
 	renderer:init(self)
 	
-	if self.quickstart then
+	if settings.quickstart then
 		gameState = GameStates.LOADING_LEVEL
-		Game.isFading = false
 		assets:stopMusic("mainmenu")
-		Game:loadArea(startingArea)
+		Game:loadArea(settings.startingArea)
 	else 
 		assets:playMusic("buildup")
 		
@@ -122,14 +119,13 @@ function Game:handleMousePressed(x, y, button, istouch)
 			return
 		end	
 	
-		if gameState == GameStates.MAIN_MENU and self.isFading == false then
-			--self:startGame()
-			--return
-		end	
-	
 		if gameState == GameStates.EXPLORING then
 			
 			if subState == SubStates.IDLE then
+				
+				if self:checkIfClickedOnFacingObject(x, y) then
+					return
+				end
 				
 				if intersect(x, y, 278, 321, 34, 34) then
 					party:attackWithMelee(self.enemies)
@@ -174,7 +170,7 @@ function Game:handleMousePressed(x, y, button, istouch)
 	end
    
 	renderer:handleMousePressed(x, y, button)
-	
+   
 end
 
 
@@ -311,6 +307,8 @@ function Game:moveForward()
 
 	self:playFootstepSound()
 
+	self:tick()
+
 end
 
 function Game:moveBackward()
@@ -341,6 +339,8 @@ function Game:moveBackward()
 	self:stepOnGround()
 
 	self:playFootstepSound()
+
+	self:tick()
 
 end
 
@@ -373,6 +373,8 @@ function Game:strafeLeft()
 
 	self:playFootstepSound()
 
+	self:tick()
+
 end
 
 function Game:strafeRight()
@@ -404,6 +406,8 @@ function Game:strafeRight()
 
 	self:playFootstepSound()
 
+	self:tick()
+
 end
 
 function Game:handleTileCollide(x, y)
@@ -427,79 +431,6 @@ function Game:handleTileCollide(x, y)
 		return true
 	end
 	
-	-- door
-	
-	local door = level:getObject(level.data.doors, x,y)
-	
-	if door then
-		if door.properties.type == 1 then
-			assets:playSound("door-locked")
-		elseif door.properties.type == 2 then
-			self.isFading = true
-			gameState = GameStates.LOADING_LEVEL
-			fadeColor = {1,1,1}
-			assets:playSound("city-gate")
-			Game.currentDoor = door
-			fadeMusicVolume.v = settings.musicVolume
-			Timer.script(function(wait)
-				Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
-				end)
-				Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
-					Game.isFading = false
-					assets:stopMusic(level.data.tileset)
-					Game:loadArea(Game.currentDoor.properties.targetarea)
-				end)
-			end)
-			
-		end
-		return true
-	end
-	
-	-- enemies
-	
-	local enemy = level:getObject(level.data.enemies, x,y)
-	
-	if enemy and enemy.properties.state == 1 then
-		return true
-	end
-	
-	-- portal
-	
-	local portal = level:getObject(level.data.portals, x,y)
-	
-	if portal then
-		-- walk through the portal
-		return true
-	end
-	
-	-- npc
-	
-	local npc = level:getObject(level.data.npcs, x,y)
-	
-	if npc then
-		-- trigger the npc
-		return true
-	end
-	
-	-- chest
-	
-	local chest = level:getObject(level.data.chests, x,y)
-	
-	if chest then
-		-- open the chest
-		return true
-	end
-	
-	-- well
-	
-	local well = level:getObject(level.data.wells, x,y)
-	
-	if well then
-		-- drink from the well
-		assets:playSound("drink-fountain")
-		return true
-	end	
-	
 	-- static prop
 	
 	local prop = level:getObject(level.data.staticprops, x,y)
@@ -520,6 +451,42 @@ function Game:handleTileCollide(x, y)
 			return true
 		end
 	
+		return true
+	end		
+	
+	-- enemies
+	
+	local enemy = level:getObject(level.data.enemies, x,y)
+	
+	if enemy and enemy.properties.state == 1 then
+		return true
+	end
+	
+	-- portal
+	
+	if level:getObject(level.data.portals, x,y) then
+		return true
+	end
+	
+	-- npc
+	
+	local npc = level:getObject(level.data.npcs, x,y)
+	
+	if npc and npc.properties.visible == 1 then
+		return true
+	end
+	
+	-- chest
+	
+	if level:getObject(level.data.chests, x,y) then
+		return true
+	end
+	
+	-- well
+	
+	local well = level:getObject(level.data.wells, x,y)
+	
+	if level:getObject(level.data.wells, x,y) then
 		return true
 	end		
 	
@@ -602,8 +569,28 @@ function Game:loadArea(id)
 			table.insert(self.enemies, enemy)
 		end
 
+		-- update objects that have a cooldown
+		
+		for key,value in pairs(level.data.wells) do
+			
+			local well = level.data.wells[key]
+
+			well.properties.counter = well.properties.counter - party.ticksElapsed
+			
+			if well.properties.counter < 0 then
+				well.properties.counter = 0
+			end
+
+		end	
+	
+		party.ticksElapsed = 0
+
+		-- update state
+
 		gameState = GameStates.EXPLORING
 		subState = SubStates.IDLE
+
+		-- fade in
 
 		Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad', function()
 			Game:stepOnGround()
@@ -632,19 +619,190 @@ end
 
 function Game:startGame()
 
+	subState = SubStates.LOADING_LEVEL
 	fadeColor = {1,1,1}
-	self.isFading = true
 	Timer.script(function(wait)
 		Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
 		end)
 		Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
 			gameState = GameStates.LOADING_LEVEL
-			Game.isFading = false
 			assets:stopMusic("mainmenu")
-			Game:loadArea(startingArea)
+			Game:loadArea(settings.startingArea)
 		end)
 	end)
 			
+end
+
+function Game:checkIfClickedOnFacingObject(x, y)
+
+	-- npc
+
+	local door = level:getFacingObject(level.data.doors, x, y)
+	
+	if door and intersectBox(x, y, world_hitboxes["door"]) then
+		if door.properties.type == 1 then
+			
+			if door.properties.vendor ~= "" then
+			
+				renderer:showVendor(door.properties.vendor)
+
+			else
+				assets:playSound("door-locked", false)
+				renderer:showPopup("There doesn't seem to be anyone home, or they're just too scared to open the door.", false)
+			end
+
+		elseif door.properties.type == 2 then
+			if door.properties.state == 1 then
+				if door.properties.keyid and door.properties.keyid ~= "" then
+					if party:consumeItem(door.properties.keyid) then
+						renderer:showPopup("You use a key to unlock the door.")
+						door.properties.keyid = ""
+						globalvariables:add(door.properties.id, "keyid", door.properties.keyid)
+						assets:playSound("chest-open")
+						return true
+					else
+						renderer:showPopup("You don't have the key that unlocks this door.")
+					end
+				else
+					gameState = GameStates.LOADING_LEVEL
+					fadeColor = {1,1,1}
+					assets:playSound("city-gate")
+					Game.currentDoor = door
+					fadeMusicVolume.v = settings.musicVolume
+					Timer.script(function(wait)
+						Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+						end)
+						Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
+							assets:stopMusic(level.data.tileset)
+							Game:loadArea(Game.currentDoor.properties.targetarea)
+						end)
+					end)				
+				end
+			else
+				renderer:showPopup("The door is blocked by some unknown mechanism.")
+			end
+		end
+		return true
+	end
+
+	-- npc
+	
+	local npc = level:getFacingObject(level.data.npcs, x, y)
+
+	if npc and intersectBox(x, y, world_hitboxes["npc"]) then
+		if npc.properties.state == 2 then
+			npc.properties.state = 3
+			globalvariables:add(npc.properties.id, "state", npc.properties.state)
+		else
+			if checkCriterias(npc.properties.criterias) then
+				npc.properties.state = 2
+				globalvariables:add(npc.properties.id, "state", npc.properties.state)
+				level:applyVars(npc.properties.vars)
+			end		
+		end
+		renderer:showNPC(npc)
+		return true
+	end
+
+	-- portal
+	
+	local portal = level:getFacingObject(level.data.portals, x, y)
+	
+	if portal and intersectBox(x, y, world_hitboxes["portal"]) then
+		if portal.properties.state == 1 then
+			party.y = portal.properties.targety+1
+			party.x = portal.properties.targetx+1
+			party.direction = portal.properties.targetdir
+			renderer:flipGround()
+			self:stepOnGround()
+			self:playFootstepSound()
+			self:tick()
+		else
+			renderer:showPopup("The portal seems to be inactive.")
+		end
+		return true
+	end
+	
+	-- chest
+	
+	local chest = level:getFacingObject(level.data.chests, x,y)
+	
+	if chest and intersectBox(x, y, world_hitboxes["chest"]) then
+		-- open the chest
+		if chest.properties.state == 1 then
+			if chest.properties.keyid and chest.properties.keyid ~= "" then
+				if party:consumeItem(chest.properties.keyid) then
+					chest.properties.keyid = ""
+					globalvariables:add(chest.properties.id, "keyid", chest.properties.keyid)
+					assets:playSound("unlock")
+					renderer:showPopup("You use a key to unlock the chest.", false)
+					return true
+				else
+					renderer:showPopup("You don't have the key that unlocks this chest.")
+				end
+			else
+				chest.properties.state = 2
+				globalvariables:add(chest.properties.id, "state", chest.properties.state)
+				assets:playSound("chest-open")
+			end
+		
+		else
+			chest.properties.state = 1
+			globalvariables:add(chest.properties.id, "state", chest.properties.state)
+			assets:playSound("chest-close")
+		end
+		return true
+	end
+	
+	-- well
+	
+	local well = level:getFacingObject(level.data.wells, x,y)
+	
+	if well and intersectBox(x, y, world_hitboxes["well"]) then
+		-- drink from the well
+		if well.properties.counter > 0 then
+			renderer:showPopup("Drinking from the well has no effect. Maybe try again later?")
+		else
+			if party.stats.health < party.stats.health_max then
+				party.stats.health = party.stats.health_max
+				assets:playSound("drink-fountain")
+				well.properties.counter = well.properties.counter_max
+				globalvariables:add(well.properties.id, "counter", well.properties.counter)
+			else
+				renderer:showPopup("You already have maximum health.")
+			end
+		end
+		return true
+	end	
+	
+	-- static prop
+	
+	local prop = level:getFacingObject(level.data.staticprops, x,y)
+	
+	if prop and intersectBox(x, y, world_hitboxes["prop"]) then
+	
+		if prop.properties.name == "notice-board" then
+			renderer:showPopup("Such handsome guys!")
+			return true
+		end
+	
+	end		
+	
+	-- button
+	
+	local button = level:getFacingObject(level.data.buttons, x,y)
+	
+	if button and intersectBox(x, y, world_hitboxes["button"]) then
+		if button.properties.state == 1 then
+			button.properties.state = 2
+			globalvariables:add(button.properties.id, "state", button.properties.state)
+			level:applyVars(button.properties.vars)
+		end
+		return true
+	end		
+	
+	return false
+	
 end
 
 function Game:jumpToMainmenu()
@@ -660,6 +818,26 @@ function Game:jumpToMainmenu()
 
 	assets:stopMusic("buildup")
 	assets:playMusic("mainmenu")
+
+end
+
+function Game:tick()
+
+	-- count down on all the wells in this area
+	
+	for key,value in pairs(level.data.wells) do
+		
+		local well = level.data.wells[key]
+
+		well.properties.counter = well.properties.counter - 1
+		
+		if well.properties.counter < 0 then
+			well.properties.counter = 0
+		end
+
+	end	
+
+	party.ticksElapsed = party.ticksElapsed + 1
 
 end
 
@@ -695,7 +873,6 @@ function buildUpStep4()
 	Timer.script(function(wait)
 		Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
 		wait(5.5)
-		Game.isFading = false
 		Game:jumpToMainmenu()
 	end)
 

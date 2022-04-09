@@ -58,46 +58,17 @@ function Assets:load()
 		self.sfx.misc[shortname] = love.audio.newSource("files/sfx/misc/"..file, "static")
 	end
 
-	-- images
+	-- load all ui images in the files/ui/ directory
 
-	self.images["buildup-screen-1"] = love.graphics.newImage("files/buildup-screen-1.png")
-	self.images["buildup-screen-2"] = love.graphics.newImage("files/buildup-screen-2.png")
-	self.images["buildup-screen-3"] = love.graphics.newImage("files/buildup-screen-3.png")
-	self.images["buildup-screen-4"] = love.graphics.newImage("files/buildup-screen-4.png")
-	self.images["mainmenu-background"] = love.graphics.newImage("files/ui/mainmenu-background.png")
-	self.images["credits-background"] = love.graphics.newImage("files/ui/credits-background.png")
-	self.images["automapper-background"] = love.graphics.newImage("files/ui/automapper-background.png")
-	self.images["popup-background"] = love.graphics.newImage("files/ui/popup-background.png")
-	self.images["pointer"] = love.graphics.newImage("files/pointer.png")
-	self.images["sky"] = love.graphics.newImage("files/sky.png")
+	self.images = {}
 
-	-- ui
-
-	self.images["button-close-1"] = love.graphics.newImage("files/ui/button-close-1.png")
-	self.images["button-close-2"] = love.graphics.newImage("files/ui/button-close-2.png")
-	self.images["enemy-hit-bar-background"] = love.graphics.newImage("files/ui/enemy-hit-bar-background.png")
-	self.images["bar-type-1"] = love.graphics.newImage("files/ui/bar-type-1.png")
-	self.images["bar-type-2"] = love.graphics.newImage("files/ui/bar-type-2.png")
-	self.images["main-ui"] = love.graphics.newImage("files/ui/main-ui.png")
-	self.images["inventory-ui"] = love.graphics.newImage("files/ui/inventory-ui.png")
-	self.images["inventory-slot-highlight"] = love.graphics.newImage("files/ui/inventory-slot-highlight.png")
-	self.images["cooldown-overlay"] = love.graphics.newImage("files/ui/cooldown-overlay.png")
-	self.images["digits"] = love.graphics.newImage("files/ui/digits.png")
-	self.images["spellbook-background"] = love.graphics.newImage("files/ui/spellbook-background.png")
-	self.images["lefthand-background"] = love.graphics.newImage("files/ui/lefthand-background.png")
-	self.images["compass"] = love.graphics.newImage("files/ui/compass.png")
-
-	-- music
-
-	self.music["forest"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
-	self.music["forest"]:setLooping(true)
-	self.music["city"] = love.audio.newSource("files/music/It_Came_from_the_Forest_village_harp.mp3", "stream")
-	self.music["city"]:setLooping(true)
-	self.music["mainmenu"] = love.audio.newSource("files/music/It_Came_from_the_Forest_introloop.mp3", "stream")
-	self.music["mainmenu"]:setLooping(true)
-	self.music["buildup"] = love.audio.newSource("files/music/It_Came_from_the_Forest_stringloop.mp3", "stream")
-	self.music["buildup"]:setLooping(false)
-
+	local files = love.filesystem.getDirectoryItems("files/ui/")
+	
+	for k, file in ipairs(files) do
+		local shortname = file:gsub("%.png", "")
+		self.images[shortname] = love.graphics.newImage("files/ui/"..file)
+	end
+	
 	-- load all item icons in the files/itemicons/ directory
 
 	self.itemicons = {}
@@ -113,6 +84,17 @@ function Assets:load()
 
 	self.fonts["main"] = love.graphics.newFont("files/fonts/windows_command_prompt.ttf", 16 , "none", love.graphics.getDPIScale())
 	self.fonts["mainmenu"] = love.graphics.newFont("files/fonts/alagard.ttf", 16 , "none", love.graphics.getDPIScale())
+	
+	-- music
+
+	self.music["forest"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
+	self.music["forest"]:setLooping(true)
+	self.music["city"] = love.audio.newSource("files/music/It_Came_from_the_Forest_village_harp.mp3", "stream")
+	self.music["city"]:setLooping(true)
+	self.music["mainmenu"] = love.audio.newSource("files/music/It_Came_from_the_Forest_introloop.mp3", "stream")
+	self.music["mainmenu"]:setLooping(true)
+	self.music["buildup"] = love.audio.newSource("files/music/It_Came_from_the_Forest_stringloop.mp3", "stream")
+	self.music["buildup"]:setLooping(false)
 	
 	-- generate quads for compass
 	

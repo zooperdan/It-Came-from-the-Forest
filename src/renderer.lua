@@ -14,6 +14,7 @@ function Renderer:init(caller)
 	self.dungeonWidth = 4
 	self.backgroundIndex = 1
 	self.skyIndex = 1
+	self.currentNPC = nil
 	self.doShowAutomapper = false
 	self.doShowInventory = false
 	self.currentHoverItem = nil
@@ -82,6 +83,7 @@ function Renderer:update(dt)
 	
 	end
 
+
 	if gameState == GameStates.BUILDUP1 then love.graphics.draw(assets.images["buildup-screen-1"], 0, 0) end
 	if gameState == GameStates.BUILDUP2 then love.graphics.draw(assets.images["buildup-screen-2"], 0, 0) end
 	if gameState == GameStates.BUILDUP3 then love.graphics.draw(assets.images["buildup-screen-3"], 0, 0) end
@@ -106,6 +108,16 @@ function Renderer:update(dt)
 	if subState == SubStates.POPUP then
 		self:drawPopup()
 	end
+
+	if subState == SubStates.NPC then
+		if self.currentNPC then
+			self:drawNPC()
+		end
+	end
+	
+	if subState == SubStates.VENDOR_ANTSACS then
+		self:drawAntsacsVendor()
+	end	
 	
 	if gameState == GameStates.EXPLORING or gameState == GameStates.MAIN_MENU or gameState == GameStates.CREDITS then
 		self:drawPointer()	
@@ -116,7 +128,7 @@ function Renderer:update(dt)
 	end
 	
 	local mx, my = love.mouse.getPosition()
-	self:drawText(10,10, mx .. "/" .. my, {1,1,1,1})
+	--self:drawText(10, 10, mx .. "/" .. my, {1,1,1,1}, "left")
 	
 	love.graphics.setCanvas()
 
@@ -135,8 +147,16 @@ function Renderer:handleMousePressed(x, y, button)
 		
 		end
 		
-		if subState == SubStates.POPUP then
+		if subState == SubStates.POPUP or subState == SubStates.NPC then
 			subState = SubStates.IDLE
+		end
+		
+		if subState == SubStates.VENDOR_ANTSACS then
+			subState = SubStates.IDLE
+			if party.antsacs > 0 then
+				party.gold = party.gold + party.antsacs * settings.prices.antsacs
+				party.antsacs = 0
+			end
 		end
 		
 		if subState == SubStates.AUTOMAPPER then
@@ -145,7 +165,7 @@ function Renderer:handleMousePressed(x, y, button)
 			end
 		end
 		
-		if gameState == GameStates.MAIN_MENU then
+		if gameState == GameStates.MAIN_MENU and subState == SubStates.IDLE then
 			for i = 1, #self.menuitems do
 				if intersect(x, y, self.menuitems[i].x, self.menuitems[i].y, 100, 20) then
 					self.menuitems[i].trigger()
@@ -370,13 +390,46 @@ end
 
 function Renderer:drawPopup()
 
-	love.graphics.draw(assets.images["popup-background"], 194, 100)	
+	if #self.popupText < 120 then
+		self:drawSmallPopup(self.popupText)
+	else
+		self:drawLargePopup(self.popupText)
+	end
+
+end
+
+function Renderer:drawSmallPopup(text)
+
+	love.graphics.draw(assets.images["popup-background-small"], 194, 100)	
 
 	love.graphics.setFont(assets.fonts["mainmenu"]);
 
-	width, wrappedtext = assets.fonts["mainmenu"]:getWrap(self.popupText, 232)
+	width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 232)
 
 	local offsety = 143
+
+	if #wrappedtext > 1 then
+		offsety = offsety - math.floor((#wrappedtext*16)/2)
+	else
+		offsety = offsety - 8
+	end
+
+	for i = 1, #wrappedtext do
+		self:drawText(0,offsety + (i-1)*16, wrappedtext[i], {1,1,1,1}, "center")
+	end
+
+	love.graphics.setFont(assets.fonts["main"]);
+
+end
+function Renderer:drawLargePopup(text)
+
+	love.graphics.draw(assets.images["popup-background-large"], 160, 50)	
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 300)
+
+	local offsety = 150
 
 	if #wrappedtext > 1 then
 		offsety = offsety - math.floor((#wrappedtext*16)/2)
@@ -401,9 +454,8 @@ function Renderer:drawCredits()
 	self:drawText(152,24, "Code & Art*", {1,1,1,1})
 	self:drawText(414,24, "Music", {1,1,1,1})
 
-
-	self:drawText(143,174, "Dan Thoresen", {1,1,1,1})
-	self:drawText(388,174, "Travis Sullivan", {1,1,1,1})
+	self:drawText(98,174, "Dan Thoresen (zooperdan)", {1,1,1,1})
+	self:drawText(355,174, "Travis Sullivan (travsul)", {1,1,1,1})
 
 	self:drawText(140,224, "zooperdan", {1,1,1,1})
 	self:drawText(140,256, "zooperdan.itch.io", {1,1,1,1})
@@ -434,6 +486,83 @@ end
 function Renderer:drawSpellList()
 
 	self:drawText(20, 200, "SELECT SPELL", {1,1,1,1})
+
+end
+
+function Renderer:drawNPC()
+
+	local text
+	local offsety
+	local imageid
+	local portraitid = "npc-portrait-guard"
+
+	if self.currentNPC.properties.state == 1 then
+		text = self.currentNPC.properties.text
+	elseif self.currentNPC.properties.state == 2 then
+		text = self.currentNPC.properties.questdelivertext
+	elseif self.currentNPC.properties.state == 3 then
+		text = self.currentNPC.properties.questdonetext
+	end
+	
+	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
+
+	if #wrappedtext <= 3 then
+		offsety = 100
+		imageid = "npc-background-small"
+	else
+		offsety = 65
+		imageid = "npc-background-large"
+	end
+
+	love.graphics.draw(assets.images[imageid], 160, offsety)	
+	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+	self:drawText(244,offsety + 8, self.currentNPC.properties.name, {1,1,1,1}, "left")
+
+	for i = 1, #wrappedtext do
+		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+	end
+
+	love.graphics.setFont(assets.fonts["main"]);
+
+end
+
+function Renderer:drawAntsacsVendor() 
+
+	local text = ""
+	local name = "Gurik Masiv"
+	local offsety
+	local imageid
+	local portraitid = "npc-portrait-antsacsvendor"
+
+	if party.antsacs == 0 then
+		text = "Hey, listen! If you ever manage to kill one of those god awful beasts, could you please bring me their ant sac? It's vile I know, but it's a sought after ingredient among potion makers.\n\nI will give you some coins for the trouble."
+	else
+		local str = party.antsacs == 1 and "this ant sac!" or "these ant sacs!"
+		text = "Excellent!\n\nThank you for bringing me " .. str .. "\n\nAs promised, here are some coins."
+	end
+
+	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
+
+	if #wrappedtext <= 3 then
+		offsety = 100
+		imageid = "npc-background-small"
+	else
+		offsety = 65
+		imageid = "npc-background-large"
+	end
+
+	love.graphics.draw(assets.images[imageid], 160, offsety)	
+	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+	self:drawText(244,offsety + 8, name, {1,1,1,1}, "left")
+
+	for i = 1, #wrappedtext do
+		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+	end
+
+	love.graphics.setFont(assets.fonts["main"]);
+	
 
 end
 
@@ -733,21 +862,23 @@ end
 
 function Renderer:showPlayerStats()
 	
-	self:drawText(251, 228,    "HEALTH", {1,1,1,1})
-	self:drawText(251, 228+14,    "MANA", {1,1,1,1})
+	love.graphics.draw(assets.itemicons["coins"], settings.inventoryX+8, settings.inventoryY+164)
+	love.graphics.draw(assets.itemicons["antsac"], settings.inventoryX+86, settings.inventoryY+164)
+
+	self:drawDigits(party.gold, 150, 236)
+	self:drawDigits(party.antsacs, 228, 236)
+
+	self:drawText(251, 228, "HEALTH", {1,1,1,1})
+	self:drawText(251, 228+14, "MANA", {1,1,1,1})
+
 	self:drawText(251, 228+28, "ATK", {1,1,1,1})
 	self:drawText(251, 228+42, "DEF", {1,1,1,1})
 	
-	self:drawText(364, 228, "GOLD", {1,1,1,1})
-	self:drawText(364, 228+14, "ANT SACS", {1,1,1,1})
 
 	self:drawText(316, 228,    ": " .. party.stats.health, {1,1,1,1})
 	self:drawText(316, 228+14,    ": " .. party.stats.mana, {1,1,1,1})
 	self:drawText(316, 228+28, ": " .. party.stats.attack, {1,1,1,1})
 	self:drawText(316, 228+42, ": " .. party.stats.defence, {1,1,1,1})
-
-	self:drawText(364+65, 228, ": " .. party.gold, {1,1,1,1})
-	self:drawText(364+65, 228+14, ": " .. party.antsacs, {1,1,1,1})
 	
 end
 
@@ -914,12 +1045,7 @@ function Renderer:drawUI()
 		if party.healing_potions < 10 then
 			love.graphics.draw(assets.images["digits"], assets.digit_quads[party.healing_potions], x, y)
 		else
-			local str = tostring(party.healing_potions)
-			local x,y = 262 - (#str*6), 347
-			for i = 1, #str do
-				local c = tonumber(string.sub(str,i,i))
-				love.graphics.draw(assets.images["digits"], assets.digit_quads[c], x + (i*6), y)
-			end
+			self:drawDigits(party.healing_potions, 262, 347)
 		end
 		
 		if party:hasCooldown(3) then
@@ -927,7 +1053,6 @@ function Renderer:drawUI()
 		end
 		
 	end
-
 
 	-- mana potions
 
@@ -970,6 +1095,17 @@ function Renderer:drawEnemyStats(enemy)
 
 	if enemy.properties.health > 0 then
 		self:drawBar(x, y, enemy.properties.health, enemy.properties.health_max, 143, 1)
+	end
+
+end
+
+function Renderer:drawDigits(value, x, y)
+
+	local str = tostring(value)
+	local x,y = x - (#str*6), y
+	for i = 1, #str do
+		local c = tonumber(string.sub(str,i,i))
+		love.graphics.draw(assets.images["digits"], assets.digit_quads[c], x + (i*6), y)
 	end
 
 end
@@ -1024,6 +1160,65 @@ function Renderer:drawObject(atlasId, layerId, x, z)
 
 	end
 	
+end
+
+function Renderer:drawDecal(atlasId, layerId, x, z)
+
+	local bothsides = atlases.jsondata[atlasId].layer[layerId] and atlases.jsondata[atlasId].layer[layerId].mode == 2
+	
+	local xx = bothsides and x - (x * 2) or 0
+	
+	-- front
+	
+	if x > 0 then
+	
+		local tile = self:getTile(atlasId, layerId, "decal-front", x, z);
+		
+		if tile then
+			local quad = love.graphics.newQuad(tile.coords.x, tile.coords.y, tile.coords.w, tile.coords.h, atlases.images[atlasId]:getWidth(), atlases.images[atlasId]:getHeight())
+			love.graphics.draw(atlases.images[atlasId], quad, screen.width - tile.screen.x, tile.screen.y, math.pi, 1, -1)
+		end
+
+	end
+	
+	if x <= 0 then
+	
+		local tile = self:getTile(atlasId, layerId, "decal-front", x - (x * 2), z);
+		
+		if tile then
+			local quad = love.graphics.newQuad(tile.coords.x, tile.coords.y, tile.coords.w, tile.coords.h, atlases.images[atlasId]:getWidth(), atlases.images[atlasId]:getHeight())
+			love.graphics.draw(atlases.images[atlasId], quad, tile.screen.x , tile.screen.y)
+		end
+
+	end
+	
+	-- side
+	
+	if x >= 0 then
+	
+		local tile = self:getTile(atlasId, layerId, "decal-side", x, z);
+		
+		if tile then
+			local quad = love.graphics.newQuad(tile.coords.x, tile.coords.y, tile.coords.w, tile.coords.h, atlases.images[atlasId]:getWidth(), atlases.images[atlasId]:getHeight())
+			local tx = tile.screen.x + (x * tile.coords.w)
+			love.graphics.draw(atlases.images[atlasId], quad, screen.width - tile.screen.x, tile.screen.y, math.pi, 1, -1)
+		end	
+
+	end	
+	
+	-- side
+
+	if x <= 0 then
+	
+		local tile = self:getTile(atlasId, layerId, "decal-side", x - (x * 2), z);
+		
+		if tile then
+			local quad = love.graphics.newQuad(tile.coords.x, tile.coords.y, tile.coords.w, tile.coords.h, atlases.images[atlasId]:getWidth(), atlases.images[atlasId]:getHeight())
+			love.graphics.draw(atlases.images[atlasId], quad, tile.screen.x , tile.screen.y)
+		end		
+
+	end
+		
 end
 
 function Renderer:drawGround()
@@ -1131,7 +1326,8 @@ function Renderer:drawSquare(x, z)
 		for key,value in pairs(level.data.chests) do
 			local chest = level.data.chests[key]
 			if chest.x == p.x and chest.y == p.y then
-				self:drawObject("common-props", "crate", x, z)			
+				local imageid = chest.properties.state == 1 and "chest-closed" or "chest-open"
+				self:drawObject("common-props", imageid, x, z)			
 			end
 		end
 
@@ -1159,7 +1355,18 @@ function Renderer:drawSquare(x, z)
 			if portal.x == p.x and portal.y == p.y then
 				self:drawObject(level.data.tileset .. "-props", self:getObjectDirectionID("portal", portal.properties.direction), x, z)			
 			end
-		end		
+		end	
+
+		for key,value in pairs(level.data.buttons) do
+			local button = level.data.buttons[key]
+			if button.x == p.x and button.y == p.y then
+				if button.properties.state == 1 then
+					self:drawDecal(level.data.tileset .. "-props", "secret-button-1", x, z)			
+				else
+					self:drawDecal(level.data.tileset .. "-props", "secret-button-2", x, z)			
+				end
+			end
+		end	
 		
 	end
 
@@ -1275,9 +1482,12 @@ function Renderer:onQuitButtonClick()
 end
 
 
-function Renderer:showPopup(text)
+function Renderer:showPopup(text, sound)
+	
+	if sound or sound == nil then
+		assets:playSound("popup")
+	end
 
-	assets:playSound("popup")
 	self.popupText = text
 	subState = SubStates.POPUP
 	
@@ -1288,5 +1498,27 @@ function Renderer:showSpellList()
 	self.doShowSpellList = true
 
 end
+
+function Renderer:showNPC(npc)
+
+	assets:playSound(npc.properties.sound)
+	self.currentNPC = npc
+	subState = SubStates.NPC
+
+end
+
+function Renderer:showVendor(id)
+
+	if id == "antsacs" then
+		if party.antsacs > 0 then
+			assets:playSound("gold-coins")
+		else
+			assets:playSound("vendor-"..id)
+		end
+		subState = SubStates.VENDOR_ANTSACS
+	end
+
+end
+
 
 return Renderer

@@ -1816,6 +1816,8 @@ wells={
 		x=21,
 		y=46,
 		properties={
+			counter=0,
+			counter_max=100,
 			direction=0,
 			id="dark_forest_2_9af63911-6d3b-19a7-5512-545c97ed92cf",
 			state=1,
@@ -1836,8 +1838,10 @@ npcs={
 			imageid="npc-01",
 			loot="",
 			name="Rozak the Swift",
+			portrait="",
 			questdelivertext="You killed all of them!? You are truly an awesome warrior. Songs will be made in your name!",
 			questdonetext="Amazing job killing all those monsters but perhaps it's time to move on?",
+			sound="",
 			state=1,
 			text="Defeat all the monsters and come talk to me again.",
 			vars="",
@@ -1855,8 +1859,10 @@ npcs={
 			imageid="npc-02",
 			loot="",
 			name="Egar Languli",
+			portrait="",
 			questdelivertext="Excuse me but could I perhaps interest you in some exotic wares from lands far away?",
 			questdonetext="Amazing job killing all those monsters but perhaps it's time to move on?",
+			sound="",
 			state=1,
 			text="Excuse me but could I perhaps interest you in some exotic wares from lands far away?",
 			vars="",
@@ -1874,6 +1880,7 @@ doors={
 		properties={
 			direction=3,
 			id="dark_forest_2_a4235516-a647-6826-f7d2-b9d285780bb5",
+			keyid="",
 			state=1,
 			targetarea="city",
 			targetdir=3,
@@ -1907,6 +1914,20 @@ staticprops={
 			name="tower",
 			state=1,
 			visible=1,
+		}
+	},
+},
+
+buttons={
+	[1] = {
+		x=30,
+		y=42,
+		properties={
+			id="dark_forest_2_ec8f4aa5-f564-c9ae-b2d3-1e4c94b7e207",
+			state=1,
+			text="The dungeon graphics are all placeholders.",
+			type=1,
+			vars="",
 		}
 	},
 },

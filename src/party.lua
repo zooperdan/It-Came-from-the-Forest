@@ -13,6 +13,8 @@ function Party:initialize()
 	self.healing_potions = 0
 	self.mana_potions = 0
 	
+	self.ticksElapsed = 0
+	
 	self.basestats =  {
 		attack = 1,
 		defence = 1,
@@ -23,7 +25,7 @@ function Party:initialize()
 	self.stats =  {
 		attack = 1,
 		defence = 1,
-		health = 100,
+		health = 10,
 		health_max = 100,
 		mana = 100,
 		mana_max = 100,
@@ -33,11 +35,11 @@ function Party:initialize()
 	self.cooldownCounters = {[1] = 0, [2] = 0, [3] = 0, [4] = 0}
 
 	self.inventory = {
-		{"sword-1", "sword-2", "dagger-1", "dagger-2", "axe-1", "axe-2", "armor-3", "armor-4"},
-		{"club", "mace", "spellbook-1", "spellbook-2", "spellbook-3", "sword-3", "sword-4", "sword-5"},
-		{"ring-1", "ring-2", "ring-3", "ring-4", "belt-1", "belt-2", "belt-3", "boots-1"},
-		{"boots-2", "boots-3", "cape-1", "cape-2", "cape-3", "gloves-1", "gloves-2", "gloves-3"},
-		{"helmet-1", "helmet-2", "helmet-3", "necklace-1", "necklace-2", "necklace-3", "armor-1", "armor-2"}
+		{"key-1", "key-2", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
 	}
 	
 	self.equipmentslots =  {
@@ -181,6 +183,21 @@ function Party:updateStats()
 	self.stats.mana_max = self.basestats.mana_max + mpmax_mod
 	
 
+end
+
+function Party:consumeItem(id)
+
+	for row = 1, 5 do
+		for col = 1, 8 do
+			if party.inventory[row][col] == id then
+				party.inventory[row][col] = ""
+				return true
+			end
+		end
+	end
+	
+	return false
+	
 end
 
 function Party:addItem(id)

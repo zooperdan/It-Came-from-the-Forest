@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="170">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="177">
  <editorsettings>
   <export target="../src/files/areas/city.lua" format="custom"/>
  </editorsettings>
@@ -22,22 +22,22 @@
 0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,0,1,1,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,0,1,1,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,0,0,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,1,1,1,0,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,1,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,0,1,1,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,0,1,0,0,
-0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1,1,1,0,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,1,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,1,1,1,1,0,0,1,1,0,0,1,0,0,
+0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -62,7 +62,7 @@
 0,0,33,0,0,33,33,0,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,33,33,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,0,0,33,0,0,0,33,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,0,0,33,0,0,0,33,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,33,33,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 0,0,0,0,0,0,33,0,33,33,33,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
@@ -82,7 +82,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="4" x="32" y="512" width="32" height="32"/>
+  <object id="34" gid="4" x="576" y="512" width="32" height="32"/>
   <object id="116" gid="21" x="640" y="704" width="32" height="32">
    <properties>
     <property name="id" value="city_a3d1d2c1-d307-c238-a7ad-5fe997ab90ec"/>
@@ -146,6 +146,7 @@
   <object id="121" gid="21" x="608" y="384" width="32" height="32">
    <properties>
     <property name="id" value="city_7e200033-8f0e-4e39-0f8c-b0986db56a55"/>
+    <property name="vendor" value="antsacs"/>
    </properties>
   </object>
   <object id="122" gid="21" x="704" y="384" width="32" height="32">
@@ -163,7 +164,7 @@
     <property name="id" value="city_2271f555-cccb-d49d-fe9e-5c1c7613866c"/>
    </properties>
   </object>
-  <object id="125" gid="21" x="896" y="480" width="32" height="32">
+  <object id="125" gid="21" x="736" y="352" width="32" height="32">
    <properties>
     <property name="id" value="city_53a9e304-b3ec-871b-b6dd-0caf0fba9c8b"/>
    </properties>
@@ -172,6 +173,7 @@
    <properties>
     <property name="direction" type="int" value="-1"/>
     <property name="id" value="city_6974755c-a6c3-b9b0-6499-e0919dff6219"/>
+    <property name="state" type="int" value="3"/>
     <property name="targetarea" value="forest-2"/>
     <property name="targetdir" type="int" value="1"/>
     <property name="targetx" type="int" value="1"/>
@@ -182,6 +184,8 @@
    <properties>
     <property name="direction" type="int" value="-1"/>
     <property name="id" value="city_dae20e19-6cdc-9db1-91f9-5fe2302de736"/>
+    <property name="keyid" value=""/>
+    <property name="state" type="int" value="2"/>
     <property name="targetarea" value="forest-1"/>
     <property name="targetdir" type="int" value="3"/>
     <property name="targetx" type="int" value="14"/>
@@ -193,9 +197,11 @@
     <property name="id" value="city_247e9c47-bf63-19fb-1081-75a9a4893f45"/>
    </properties>
   </object>
-  <object id="148" gid="17" x="128" y="416" width="32" height="32">
+  <object id="148" gid="17" x="672" y="608" width="32" height="32">
    <properties>
     <property name="id" value="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5"/>
+    <property name="keyid" value="key-1"/>
+    <property name="state" type="int" value="1"/>
    </properties>
   </object>
   <object id="128" gid="20" x="640" y="512" width="32" height="32">
@@ -215,31 +221,19 @@
     <property name="id" value="city_991d8a7c-a6d6-04b8-8091-c67ff9a44ae8"/>
    </properties>
   </object>
-  <object id="130" gid="8" x="800" y="512" width="32" height="32">
-   <properties>
-    <property name="id" value="city_cd2aeb68-c53a-0d66-7165-5d2d2df2d257"/>
-    <property name="wanderer" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="131" gid="8" x="928" y="512" width="32" height="32">
-   <properties>
-    <property name="id" value="city_08dee7c2-6bc8-050e-50aa-f7ff24e7690c"/>
-    <property name="wanderer" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="132" gid="8" x="800" y="608" width="32" height="32">
+  <object id="132" gid="8" x="384" y="320" width="32" height="32">
    <properties>
     <property name="id" value="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="133" gid="8" x="896" y="896" width="32" height="32">
+  <object id="133" gid="8" x="288" y="224" width="32" height="32">
    <properties>
     <property name="id" value="city_81bdecd2-c200-017e-9d02-6065c4fc4fc6"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="151" gid="8" x="960" y="736" width="32" height="32">
+  <object id="151" gid="8" x="288" y="416" width="32" height="32">
    <properties>
     <property name="id" value="city_4f1cda06-b79d-2a35-f00e-6f81afe3a022"/>
     <property name="wanderer" type="int" value="1"/>
@@ -250,61 +244,42 @@
     <property name="id" value="city_722e6944-efab-2a83-6fd5-cfe847c7824a"/>
    </properties>
   </object>
-  <object id="140" gid="7" x="736" y="704" width="32" height="32">
-   <properties>
-    <property name="atlasid" value="city-props"/>
-    <property name="direction" type="int" value="2"/>
-    <property name="id" value="city_2958aee6-27c4-92c4-c0c1-79101ef05c02"/>
-    <property name="name" value="barricade"/>
-   </properties>
-  </object>
-  <object id="152" gid="7" x="704" y="704" width="32" height="32">
-   <properties>
-    <property name="atlasid" value="city-props"/>
-    <property name="direction" type="int" value="2"/>
-    <property name="id" value="city_126c76b7-46bc-eae8-0fa0-696e76bb82ee"/>
-    <property name="name" value="barricade"/>
-   </properties>
-  </object>
-  <object id="141" gid="7" x="800" y="480" width="32" height="32">
-   <properties>
-    <property name="atlasid" value="city-props"/>
-    <property name="id" value="city_7b3bda74-49d4-7bbd-0e6e-227051ee6a17"/>
-    <property name="name" value="barricade"/>
-   </properties>
-  </object>
-  <object id="142" gid="7" x="832" y="736" width="32" height="32">
-   <properties>
-    <property name="atlasid" value="city-props"/>
-    <property name="direction" type="int" value="1"/>
-    <property name="id" value="city_23bfef76-7c13-9370-d878-441423d6757b"/>
-    <property name="name" value="barricade"/>
-   </properties>
-  </object>
-  <object id="146" gid="7" x="736" y="576" width="32" height="32">
+  <object id="146" gid="7" x="480" y="352" width="32" height="32">
    <properties>
     <property name="atlasid" value="city-props"/>
     <property name="id" value="city_1be3bf61-229d-2005-9e43-5838ca6378af"/>
     <property name="name" value="barricade"/>
    </properties>
   </object>
-  <object id="143" gid="7" x="768" y="832" width="32" height="32">
-   <properties>
-    <property name="atlasid" value="city-props"/>
-    <property name="id" value="city_8bcdbee7-5540-7b92-7a63-f71c86b4fe21"/>
-    <property name="name" value="barricade"/>
-   </properties>
-  </object>
-  <object id="144" gid="14" x="704" y="544" width="32" height="32">
+  <object id="144" gid="14" x="448" y="384" width="32" height="32">
    <properties>
     <property name="id" value="city_ae1aaf01-e3a9-c68f-0971-74fd26b6ef7e"/>
     <property name="imageid" value="npc-guard"/>
+    <property name="portrait" value="guard"/>
    </properties>
   </object>
   <object id="161" gid="14" x="64" y="480" width="32" height="32">
    <properties>
     <property name="id" value="city_4c920ff2-f574-e5b3-3fa5-18cfc312b088"/>
     <property name="imageid" value="npc-guard"/>
+    <property name="name" value="City guard"/>
+    <property name="portrait" value="guard"/>
+    <property name="sound" value="npc-1"/>
+    <property name="text" value="You'll do best to behave while visiting our fine city!"/>
+   </properties>
+  </object>
+  <object id="174" gid="14" x="960" y="480" width="32" height="32">
+   <properties>
+    <property name="criterias" value="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5:state:2"/>
+    <property name="id" value="city_eb1bdfcf-a8cb-b5cc-63ce-701b38890881"/>
+    <property name="imageid" value="npc-guard"/>
+    <property name="name" value="City guard"/>
+    <property name="portrait" value="guard"/>
+    <property name="questdelivertext" value="Alright then. I guess we can open the gate for you now."/>
+    <property name="questdonetext" value="Be careful out in the forest.\n\nI've seen many brave adventurers pass through that gate never to return.\n\nKeep your head down, move slowly and be always vigilant.\n\n"/>
+    <property name="sound" value="npc-1"/>
+    <property name="text" value="This gate is closed. King's orders!"/>
+    <property name="vars" value="city_6974755c-a6c3-b9b0-6499-e0919dff6219:state:1"/>
    </properties>
   </object>
   <object id="166" gid="14" x="800" y="800" width="32" height="32">
@@ -317,14 +292,10 @@
    <properties>
     <property name="id" value="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015"/>
     <property name="imageid" value="npc-guard"/>
-   </properties>
-  </object>
-  <object id="145" gid="7" x="704" y="576" width="32" height="32">
-   <properties>
-    <property name="atlasid" value="city-props"/>
-    <property name="direction" type="int" value="1"/>
-    <property name="id" value="city_36da232e-e40a-ab01-47a4-13a79c895b36"/>
-    <property name="name" value="barricade"/>
+    <property name="name" value="City guard"/>
+    <property name="portrait" value="guard"/>
+    <property name="sound" value="npc-1"/>
+    <property name="text" value="Don't be trying no funny business, ya hear?"/>
    </properties>
   </object>
   <object id="153" gid="34" x="960" y="512" width="32" height="32">
@@ -332,12 +303,33 @@
     <property name="id" value="city_4eadbf5e-c047-c6dc-1c8f-c70aff473217"/>
    </properties>
   </object>
-  <object id="157" gid="7" x="736" y="480" width="32" height="32">
+  <object id="172" gid="34" x="32" y="512" width="32" height="32">
    <properties>
-    <property name="atlasid" value="city-props"/>
+    <property name="id" value="city_92b1270e-92d5-55c2-28bf-0c360fded85e"/>
+   </properties>
+  </object>
+  <object id="170" gid="18" x="224" y="608" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="2"/>
+    <property name="id" value="city_946d3b12-824b-aaee-515c-4787282781ea"/>
+    <property name="targetdir" type="int" value="3"/>
+    <property name="targetx" type="int" value="3"/>
+    <property name="targety" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="171" gid="18" x="128" y="352" width="32" height="32">
+   <properties>
     <property name="direction" type="int" value="3"/>
-    <property name="id" value="city_826b2578-0f86-edb7-691b-5c8c89ad7d2a"/>
-    <property name="name" value="notice-board"/>
+    <property name="id" value="city_0385dd1a-d17c-e085-1253-7f4b06d5349c"/>
+    <property name="targetdir" type="int" value="2"/>
+    <property name="targetx" type="int" value="7"/>
+    <property name="targety" type="int" value="19"/>
+   </properties>
+  </object>
+  <object id="175" gid="23" x="224" y="448" width="32" height="32">
+   <properties>
+    <property name="id" value="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6"/>
+    <property name="vars" value="city_6974755c-a6c3-b9b0-6499-e0919dff6219:state:1"/>
    </properties>
   </object>
  </objectgroup>

@@ -82,7 +82,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="4" x="32" y="480" width="32" height="32"/>
+  <object id="34" gid="4" x="96" y="576" width="32" height="32"/>
   <object id="107" gid="22" x="0" y="480" width="32" height="32">
    <properties>
     <property name="id" value="dark_forest_1_75e341b5-5f43-cd1d-0acf-c64eb1917fd5"/>
@@ -141,6 +141,7 @@
   </object>
   <object id="151" gid="18" x="64" y="544" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="1"/>
     <property name="id" value="dark_forest_1_d6f0f119-e1c4-89e4-4b37-a26c61f11740"/>
    </properties>
   </object>

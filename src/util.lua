@@ -14,6 +14,12 @@ function intersect(sx, sy, x, y, w, h)
 
 end
 
+function intersectBox(sx, sy, box)
+
+	return (sx >= box.x and sx <= box.x+box.w and sy >= box.y and sy < box.y+box.h)
+
+end
+
 --[[-----------------------------------------------------------------------------------------------------------------------
 
 	randomizeDamage()

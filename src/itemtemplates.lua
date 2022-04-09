@@ -56,6 +56,11 @@ function ItemTemplates:initialize()
 	self:addTemplate("armor-3", "Armor", "torso", { ["def"] = 6 })
 	self:addTemplate("armor-4", "Armor", "torso", { ["def"] = 8 })
 
+	self:addTemplate("key-1", "Chest key", "key", {})
+	self:addTemplate("key-2", "Emerald key", "key", {})
+	self:addTemplate("key-3", "Steel key", "key", {})
+	self:addTemplate("key-4", "Ruby key", "key", {})
+
 end
 
 function ItemTemplates:addTemplate(id, name, slot, modifiers)

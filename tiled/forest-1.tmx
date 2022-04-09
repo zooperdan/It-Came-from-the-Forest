@@ -100,7 +100,7 @@
   <object id="162" gid="16" x="32" y="128" width="32" height="32">
    <properties>
     <property name="id" value="forest-1_29ac6ee2-ae84-ad9c-c594-2b5c51f511c4"/>
-    <property name="text" value="You have just entered the outskirts of Ariken, the largest town in this region."/>
+    <property name="text" value="You have just entered the outskirts of Ariken, the largest city in this region."/>
    </properties>
   </object>
   <object id="163" gid="16" x="64" y="160" width="32" height="32">

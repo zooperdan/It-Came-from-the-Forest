@@ -374,7 +374,7 @@ triggers={
 		properties={
 			id="forest-1_29ac6ee2-ae84-ad9c-c594-2b5c51f511c4",
 			state=1,
-			text="You have just entered the outskirts of Ariken, the largest town in this region.",
+			text="You have just entered the outskirts of Ariken, the largest city in this region.",
 			vars="",
 		}
 	},
@@ -398,6 +398,7 @@ doors={
 		properties={
 			direction=1,
 			id="forest-1_1540d0c8-3ea2-e40a-d6a3-b8b6601b6d21",
+			keyid="",
 			state=1,
 			targetarea="city",
 			targetdir=1,
@@ -409,6 +410,7 @@ doors={
 },
 
 staticprops={},
+buttons={},
 ["partyX"]=2,
 ["partyY"]=2,
 ["partyDirection"]=2,

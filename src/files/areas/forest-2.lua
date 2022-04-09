@@ -480,7 +480,7 @@ portals={
 		x=3,
 		y=17,
 		properties={
-			direction=3,
+			direction=1,
 			id="dark_forest_1_d6f0f119-e1c4-89e4-4b37-a26c61f11740",
 			state=1,
 			targetdir=0,
@@ -501,6 +501,7 @@ doors={
 		properties={
 			direction=3,
 			id="dark_forest_1_75e341b5-5f43-cd1d-0acf-c64eb1917fd5",
+			keyid="",
 			state=1,
 			targetarea="city",
 			targetdir=3,
@@ -512,7 +513,8 @@ doors={
 },
 
 staticprops={},
-["partyX"]=2,
-["partyY"]=15,
+buttons={},
+["partyX"]=4,
+["partyY"]=18,
 ["partyDirection"]=1,
 }

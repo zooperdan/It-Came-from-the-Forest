@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "forest-1.tmx",
+    "activeFile": "city.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -38,8 +38,8 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 542,
-                "y": 561.3333333333334
+                "x": 570.6666666666665,
+                "y": 461.33333333333337
             }
         },
         "forest-1.tmx": {
@@ -51,26 +51,26 @@
             }
         },
         "forest-2.tmx": {
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 186.33333333333331,
-                "y": 586.6666666666666
+                "x": 339,
+                "y": 595
             }
         },
         "forest-3.tmx": {
             "scale": 0.5591145833333333,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 49.184909175593816,
-                "y": 1262.7107591988824
+                "x": 767.2845831392641,
+                "y": 767.2845831392642
             }
         },
         "test.tmx": {
             "scale": 0.838671875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 256.35770843036795,
+                "x": 255.76152771308801,
                 "y": 255.76152771308807
             }
         }
@@ -94,10 +94,10 @@
     "recentFiles": [
         "test.tmx",
         "MainTiles.tsx",
-        "city.tmx",
-        "forest-2.tmx",
         "forest-3.tmx",
         "forest-1.tmx",
+        "forest-2.tmx",
+        "city.tmx",
         "area1.tmx",
         "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/MainTiles.tsx",
         "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/area1.tmx"

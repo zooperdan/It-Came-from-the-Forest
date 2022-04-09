@@ -106,6 +106,7 @@ end
 function Level:applyGlobalVariables()
 
 	for key,value in pairs(self.data.enemies) do
+		
 		local enemy = level.data.enemies[key]
 
 		local gvar = globalvariables:get(enemy.properties.id, "state")
@@ -122,70 +123,97 @@ function Level:applyGlobalVariables()
 		
 	end
 	
-	--[[
+	for key,value in pairs(self.data.triggers) do
+		
+		local trigger = level.data.triggers[key]
 
-	for y = 1, self.data.mapSize do
-		for x = 1, self.data.mapSize do
-			-- Doors
-			if self.data.doors[x] and self.data.doors[x][y] then
-				local gvar = globalvariables:get(self.data.doors[x][y].id, "state")
-				if gvar then
-					self.data.doors[x][y].state = tonumber(gvar)
-				end
-			end
-			-- Encounters
-			if self.data.encounters[x] and self.data.encounters[x][y] then
-				local gvar = globalvariables:get(self.data.encounters[x][y].id, "state")
-				if gvar then
-					self.data.encounters[x][y].state = tonumber(gvar)
-				end
-			end		
-			-- Triggers
-			if self.data.triggers[x] and self.data.triggers[x][y] then
-				local gvar = globalvariables:get(self.data.triggers[x][y].id, "state")
-				if gvar then
-					self.data.triggers[x][y].state = tonumber(gvar)
-				end
-			end	
-			-- Spinners
-			if self.data.spinners[x] and self.data.spinners[x][y] then
-				local gvar = globalvariables:get(self.data.spinners[x][y].id, "state")
-				if gvar then
-					self.data.spinners[x][y].state = tonumber(gvar)
-				end
-			end	
-			-- Buttons
-			if self.data.buttons[x] and self.data.buttons[x][y] then
-				local gvar = globalvariables:get(self.data.buttons[x][y].id, "state")
-				if gvar then
-					self.data.buttons[x][y].state = tonumber(gvar)
-				end
-			end		
-			-- Portals
-			if self.data.portals[x] and self.data.portals[x][y] then
-				local gvar = globalvariables:get(self.data.portals[x][y].id, "state")
-				if gvar then
-					self.data.portals[x][y].state = tonumber(gvar)
-				end
-			end		
-			-- NPCS
-			if self.data.npcs[x] and self.data.npcs[x][y] then
-				local gvar = globalvariables:get(self.data.npcs[x][y].id, "state")
-				if gvar then
-					self.data.npcs[x][y].state = tonumber(gvar)
-				end
-			end				
-			-- Chests
-			if self.data.chests[x] and self.data.chests[x][y] then
-				local gvar = globalvariables:get(self.data.chests[x][y].id, "state")
-				if gvar then
-					self.data.chests[x][y].state = tonumber(gvar)
-				end
-			end				
-		end
+		local gvar = globalvariables:get(trigger.properties.id, "state")
+		if gvar then trigger.properties.state = tonumber(gvar) end		
+
 	end	
 	
-	]]--
+	for key,value in pairs(self.data.staticprops) do
+		
+		local prop = level.data.staticprops[key]
+
+		local gvar = globalvariables:get(prop.properties.id, "state")
+		if gvar then prop.properties.state = tonumber(gvar) end		
+
+		local gvar = globalvariables:get(prop.properties.id, "visible")
+		if gvar then prop.properties.visible = tonumber(gvar) end		
+
+	end		
+	
+	for key,value in pairs(self.data.portals) do
+		
+		local portal = level.data.portals[key]
+
+		local gvar = globalvariables:get(portal.properties.id, "state")
+		if gvar then portal.properties.state = tonumber(gvar) end		
+
+	end	
+	
+	for key,value in pairs(self.data.npcs) do
+		
+		local npc = level.data.npcs[key]
+
+		local gvar = globalvariables:get(npc.properties.id, "state")
+		if gvar then npc.properties.state = tonumber(gvar) end		
+		
+		local gvar = globalvariables:get(npc.properties.id, "visible")
+		if gvar then npc.properties.visible = tonumber(gvar) end		
+
+	end	
+	
+	for key,value in pairs(self.data.wells) do
+		
+		local well = level.data.wells[key]
+
+		local gvar = globalvariables:get(well.properties.id, "state")
+		if gvar then well.properties.state = tonumber(gvar) end		
+		
+		local gvar = globalvariables:get(well.properties.id, "counter")
+		if gvar then
+			well.properties.counter = tonumber(gvar)
+		else
+			well.properties.counter = 0
+		end
+
+	end		
+	
+	for key,value in pairs(self.data.doors) do
+		
+		local door = level.data.doors[key]
+
+		local gvar = globalvariables:get(door.properties.id, "state")
+		if gvar then door.properties.state = tonumber(gvar) end		
+		
+		local gvar = globalvariables:get(door.properties.id, "keyid")
+		if gvar then door.properties.keyid = tostring(gvar) end		
+
+	end	
+	
+	for key,value in pairs(self.data.chests) do
+		
+		local chest = level.data.chests[key]
+
+		local gvar = globalvariables:get(chest.properties.id, "state")
+		if gvar then chest.properties.state = tonumber(gvar) end		
+		
+		local gvar = globalvariables:get(chest.properties.id, "keyid")
+		if gvar then chest.properties.keyid = tostring(gvar) end		
+
+	end	
+	
+	for key,value in pairs(self.data.buttons) do
+		
+		local button = level.data.buttons[key]
+
+		local gvar = globalvariables:get(button.properties.id, "state")
+		if gvar then button.properties.button = tonumber(gvar) end		
+
+	end		
+	
 end
 
 function Level:getObject(t, x, y)
@@ -293,6 +321,30 @@ function Level:getFacingEnemy()
 		return enemy
 	end
 	
+	return nil
+
+end
+
+function Level:getFacingObject(t, x, y)
+
+	local adjancentSquare =  {
+		[0] = {x = 0, y = -1},
+		[1] = {x = 1, y = 0},
+		[2] = {x = 0, y = 1},
+		[3] = {x = -1, y = 0}
+	}
+
+	local x = party.x + adjancentSquare[party.direction].x
+	local y = party.y + adjancentSquare[party.direction].y
+
+	if t then
+		for key,value in pairs(t) do
+			if t[key].x == x and t[key].y == y then
+				return t[key]
+			end
+		end
+	end
+
 	return nil
 
 end
