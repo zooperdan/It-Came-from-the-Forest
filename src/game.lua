@@ -123,8 +123,8 @@ function Game:handleMousePressed(x, y, button, istouch)
 		end	
 	
 		if gameState == GameStates.MAIN_MENU and self.isFading == false then
-			self:startGame()
-			return
+			--self:startGame()
+			--return
 		end	
 	
 		if gameState == GameStates.EXPLORING then
@@ -188,16 +188,6 @@ function Game:handleInput(key)
 
 	-- COMMON
 
-    if key == 'f1' then
-        globalvariables:dump()
-    end
-	
-	if key == "f2" then
-		globalvariables:clear()
-		messages:clear()
-		self:loadArea("area1")
-	end
-	
     if key == 'return' then
 		if love.keyboard.isDown("lalt") then
 			love.window.setFullscreen(not love.window.getFullscreen())
@@ -205,32 +195,12 @@ function Game:handleInput(key)
     end
 
 	if gameState == GameStates.FATAL_ERROR then
-
 		love.event.quit()
-
 		return
 	end
 	
 	if key == 'escape' then
 		love.event.quit()
-	end
-	
-	if gameState == GameStates.MAIN_MENU and self.isFading == false then
-
-		if key == 'c' then
-			gameState = GameStates.CREDITS
-			return
-		end
-		
-	end
-			
-	if gameState == GameStates.CREDITS then
-
-		if key == 'c' then
-			gameState = GameStates.MAIN_MENU
-			return
-		end
-		
 	end
 	
 	if gameState == GameStates.EXPLORING then
@@ -581,26 +551,19 @@ function Game:stepOnGround()
 		return
 	end
 	
-	--[[
-	if level.data.triggers[party.x] and level.data.triggers[party.x][party.y] and level.data.triggers[party.x][party.y].state == 1 then
-		
-		local trigger = level.data.triggers[party.x][party.y]
-		
-		trigger.state = 2
-		globalvariables:add(trigger.id, "state", 2)
+	-- Trigger
+	
+	local trigger = level:getObject(level.data.triggers, party.x, party.y)
 
-		if trigger.text ~= "" then
-			messages:add(trigger.text)
-		end
-		
+	if trigger and trigger.properties.state == 1 then
+		renderer:showPopup(trigger.properties.text)
+		trigger.properties.state = 2
+		globalvariables:add(trigger.properties.id, "state", trigger.properties.state)
 		if trigger.vars ~= "" then
-			messages:add(trigger.vars)
+			--messages:add(trigger.vars)
 		end		
-		
 		return
-	end
-	]]--
-
+	end	
 	
 end
 

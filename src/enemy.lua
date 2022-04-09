@@ -282,21 +282,31 @@ end
 
 function Enemy:wander()
 
+	-- 25% chance to scream
+
+	if math.random() < 0.05 then
+		if distanceFrom(party.x, party.y, self.enemy.x, self.enemy.y) < 5 then
+			assets:playSound(self.enemy.properties.sound_scream)
+		end			
+	
+		return
+	end
+	
 	-- 25% chance to turn around
 
-	if math.random() < 0.25 then
+	if math.random() < 0.15 then
 		self.enemy.properties.direction = math.floor(math.random()*4)
 		return
 	end
 
-	-- 25% chance to move if the enemy is a wanderer
-
 	if self.enemy.properties.wanderer == 1 then
+
+		local p = self:directionVectorOffsets()
+
+		-- 75% chance to move if the enemy is a wanderer
 
 		if math.random() < 0.75 then
 		
-			local p = self:directionVectorOffsets()
-			
 			-- first check if there is an enemy in that direction. if there is then try to move in opposite direction
 			
 			if self:isEnemyAt(p.x,p.y) then
@@ -313,6 +323,11 @@ function Enemy:wander()
 				self.enemy.x = p.x
 				self.enemy.y = p.y
 				return
+			else
+				if math.random() < 0.75 then
+					self.enemy.properties.direction = math.floor(math.random()*4)
+					return
+				end			
 			end
 			
 		end

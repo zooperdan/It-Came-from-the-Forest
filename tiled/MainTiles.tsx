@@ -55,6 +55,7 @@
    <property name="sound_attack" value="ant-attack"/>
    <property name="sound_die" value="ant-die"/>
    <property name="sound_move" value="ant-move"/>
+   <property name="sound_scream" value="ant-scream"/>
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="0"/>
    <property name="wanderer" type="int" value="0"/>
@@ -74,6 +75,7 @@
    <property name="sound_attack" value="ant-attack"/>
    <property name="sound_die" value="ant-die"/>
    <property name="sound_move" value="ant-move"/>
+   <property name="sound_scream" value="ant-scream"/>
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="1"/>
    <property name="wanderer" type="int" value="0"/>
@@ -93,6 +95,7 @@
    <property name="sound_attack" value="ant-attack"/>
    <property name="sound_die" value="ant-die"/>
    <property name="sound_move" value="ant-move"/>
+   <property name="sound_scream" value="ant-scream"/>
    <property name="state" type="int" value="1"/>
    <property name="type" type="int" value="2"/>
    <property name="wanderer" type="int" value="0"/>

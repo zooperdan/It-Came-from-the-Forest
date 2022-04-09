@@ -1,5 +1,5 @@
 settings = {
-	musicVolume = 1,
+	musicVolume = 0,
 	sfxVolume = 1,
 	inventoryX = 119,
 	inventoryY = 50,
@@ -7,7 +7,7 @@ settings = {
 	inventorySlotsStartY = 57,
 }
 
-startingArea = "forest-2"
+startingArea = "forest-1"
 fadeColor = {0,0,0}
 fadeMusicVolume = {v = settings.musicVolume}
 inventoryDragSource = {}
@@ -23,13 +23,16 @@ GameStates = {
 	BUILDUP3 = 7,
 	BUILDUP4 = 8,
 	CREDITS = 9,
+	ABOUT = 10,
+	SETTINGS = 11
 }
 
 SubStates = {
 	IDLE = 0,
 	AUTOMAPPER = 1,
 	INVENTORY = 2,
-	SELECT_SPELL = 3
+	SELECT_SPELL = 3,
+	POPUP = 4
 }
 
 gameState = GameStates.LOADING_LEVEL

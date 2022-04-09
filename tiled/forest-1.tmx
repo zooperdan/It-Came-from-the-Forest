@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="156">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="164">
  <editorsettings>
   <export target="../src/files/areas/forest-1.lua" format="custom"/>
  </editorsettings>
@@ -12,20 +12,20 @@
  <layer id="1" name="Walls" width="16" height="16">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
-1,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,
+1,0,1,0,0,1,1,1,1,0,0,1,0,0,0,0,
+1,0,1,0,0,0,1,0,0,0,0,1,1,1,0,0,
+1,0,1,1,1,1,1,2,1,1,1,1,1,1,1,0,
+1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,
+1,1,1,0,1,0,1,0,1,1,1,1,0,0,1,0,
+1,1,0,0,1,0,1,0,0,0,1,1,0,1,1,0,
+1,1,0,1,1,1,1,1,1,0,0,1,0,1,0,0,
 1,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,
-1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,0,
-1,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,
-1,0,0,0,1,1,1,0,1,1,1,0,0,0,1,0,
-1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,0,
-1,1,0,1,1,0,1,1,1,0,0,1,0,1,0,0,
-1,0,0,1,0,0,1,0,0,0,1,1,0,1,0,0,
-1,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,
-1,0,1,0,1,1,0,0,1,0,1,1,1,0,0,0,
-1,0,1,0,0,1,0,1,1,0,0,1,1,0,1,0,
-1,0,0,1,0,1,0,0,1,1,0,0,0,0,0,0,
-1,1,0,0,0,1,1,0,0,1,0,1,1,0,1,0,
-1,1,0,1,0,0,1,1,0,0,0,0,1,0,0,0,
+1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,0,
+1,0,0,1,0,1,0,0,1,1,1,1,1,0,0,0,
+1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,
+1,1,1,0,0,1,0,0,1,1,1,1,0,0,0,0,
+1,1,1,2,1,1,0,0,0,1,0,1,1,0,1,0,
+1,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
 </data>
  </layer>
@@ -59,6 +59,54 @@
     <property name="targetdir" type="int" value="1"/>
     <property name="targetx" type="int" value="1"/>
     <property name="targety" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="156" gid="8" x="96" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_b0acb001-c32e-ff19-17e6-d5727fd0b95c"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="157" gid="8" x="32" y="352" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_aa100d1d-e058-f27d-c8bf-9767ed26e402"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="158" gid="8" x="160" y="192" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_c4d01a8b-7663-63f9-c2fb-bdea6547aa62"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="159" gid="8" x="320" y="384" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_676bca8a-a1c2-b540-2603-2b43e26873b2"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="160" gid="8" x="320" y="160" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_65668087-0b56-151f-7c0c-aca27a11af4e"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="161" gid="8" x="416" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_fe9f3103-ccf4-5656-d129-8ad8753eb6cd"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="162" gid="16" x="32" y="128" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_29ac6ee2-ae84-ad9c-c594-2b5c51f511c4"/>
+    <property name="text" value="You have just entered the outskirts of Ariken, the largest town in this region."/>
+   </properties>
+  </object>
+  <object id="163" gid="16" x="64" y="160" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_64322d51-ec07-ef84-c231-a540e141a375"/>
+    <property name="text" value="This is a single line"/>
    </properties>
   </object>
  </objectgroup>

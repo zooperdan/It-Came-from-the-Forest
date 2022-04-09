@@ -19,6 +19,8 @@ function Renderer:init(caller)
 	self.currentHoverItem = nil
 	self.doShowSpellList = false
 	
+	self.popupText = ""
+	
 	self.buttons = {}
 	
 	local button = Button:new()
@@ -33,6 +35,13 @@ function Renderer:init(caller)
 	
 	self.buttons[button.id] = button
 	
+	self.menuitems = {
+		{ x = 512, y = 110, caption = "Start game", trigger = self.onStartButtonClick},
+		{ x = 512, y = 110 + 30, caption = "Settings", trigger = self.onSettingsButtonClick},
+		{ x = 512, y = 110 + 60, caption = "Credits", trigger = self.onCreditsButtonClick},
+		{ x = 512, y = 110 + 90, caption = "About", trigger = self.onAboutButtonClick},
+		{ x = 512, y = 110 + 120, caption = "Quit", trigger = self.onQuitButtonClick}
+	}	
 end
 
 function Renderer:update(dt)
@@ -68,7 +77,7 @@ function Renderer:update(dt)
 		if self.doShowSpellList then
 			self:drawSpellList()
 		end
-		
+
 		self:drawUI()
 	
 	end
@@ -79,12 +88,24 @@ function Renderer:update(dt)
 	if gameState == GameStates.BUILDUP4 then love.graphics.draw(assets.images["buildup-screen-4"], 0, 0) end
 	
 	if gameState == GameStates.MAIN_MENU then
-		love.graphics.draw(assets.images["opening-image"], 0, 0)	
+		self:drawMainmenu()
 	end
 	
 	if gameState == GameStates.CREDITS then
-		love.graphics.draw(assets.images["credits"], 0, 0)	
+		self:drawCredits()
 	end	
+	
+	if gameState == GameStates.ABOUT then
+		self:drawAbout()
+	end		
+
+	if gameState == GameStates.SETTINGS then
+		self:drawSettings()
+	end		
+	
+	if subState == SubStates.POPUP then
+		self:drawPopup()
+	end
 	
 	if gameState == GameStates.EXPLORING or gameState == GameStates.MAIN_MENU or gameState == GameStates.CREDITS then
 		self:drawPointer()	
@@ -93,6 +114,9 @@ function Renderer:update(dt)
 	if self.currentHoverItem then
 		self:showItemHoverStats(self.currentHoverItem)
 	end
+	
+	local mx, my = love.mouse.getPosition()
+	self:drawText(10,10, mx .. "/" .. my, {1,1,1,1})
 	
 	love.graphics.setCanvas()
 
@@ -111,10 +135,33 @@ function Renderer:handleMousePressed(x, y, button)
 		
 		end
 		
+		if subState == SubStates.POPUP then
+			subState = SubStates.IDLE
+		end
+		
 		if subState == SubStates.AUTOMAPPER then
 			if intersect(x, y, 587, 321, 34, 34) then
 				self:showAutomapper(false)
 			end
+		end
+		
+		if gameState == GameStates.MAIN_MENU then
+			for i = 1, #self.menuitems do
+				if intersect(x, y, self.menuitems[i].x, self.menuitems[i].y, 100, 20) then
+					self.menuitems[i].trigger()
+				end
+			end		
+			return
+		end
+		
+		if gameState == GameStates.CREDITS or gameState == GameStates.ABOUT then
+			gameState = GameStates.MAIN_MENU
+			return
+		end
+
+		if gameState == GameStates.SETTINGS then
+			gameState = GameStates.MAIN_MENU
+			return
 		end
 		
 		if self.doShowSpellList then
@@ -275,25 +322,26 @@ function Renderer:getTile(atlasId, layerId, tileType, x, z)
 	
 end
 
-function Renderer:drawText(x, y, text, align)
+function Renderer:drawText(x, y, text, color, align)
 
 	align = align and align or "left"
 
 	love.graphics.setColor(0,0,0,1)
 	love.graphics.printf(text, x+1, y+1, 640, align)
-	love.graphics.setColor(1,1,1,1)
+	love.graphics.setColor(color)
 	love.graphics.printf(text, x, y, 640, align)
+	love.graphics.setColor(1,1,1,1)
 	
 end
 
-function Renderer:drawWrappedText(x, y, text, wrapAt, color)
+function Renderer:drawWrappedText(x, y, text, wrapAt, color, align)
 
 	align = align and align or "left"
 
 	love.graphics.setColor(0,0,0,1)
-	love.graphics.printf(text, x+1, y+1, wrapAt, "left")
+	love.graphics.printf(text, x+1, y+1, wrapAt, align)
 	love.graphics.setColor(color)
-	love.graphics.printf(text, x, y, wrapAt, "left")
+	love.graphics.printf(text, x, y, wrapAt, align)
 	love.graphics.setColor(1,1,1,1)
 	
 end
@@ -320,11 +368,72 @@ function Renderer:drawPointer()
 	
 end
 
+function Renderer:drawPopup()
+
+	love.graphics.draw(assets.images["popup-background"], 194, 100)	
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	width, wrappedtext = assets.fonts["mainmenu"]:getWrap(self.popupText, 232)
+
+	local offsety = 143
+
+	if #wrappedtext > 1 then
+		offsety = offsety - math.floor((#wrappedtext*16)/2)
+	else
+		offsety = offsety - 8
+	end
+
+	for i = 1, #wrappedtext do
+		self:drawText(0,offsety + (i-1)*16, wrappedtext[i], {1,1,1,1}, "center")
+	end
+
+	love.graphics.setFont(assets.fonts["main"]);
+
+end
+
+function Renderer:drawCredits()
+
+	love.graphics.draw(assets.images["credits-background"], 0, 0)	
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	self:drawText(152,24, "Code & Art*", {1,1,1,1})
+	self:drawText(414,24, "Music", {1,1,1,1})
+
+
+	self:drawText(143,174, "Dan Thoresen", {1,1,1,1})
+	self:drawText(388,174, "Travis Sullivan", {1,1,1,1})
+
+	self:drawText(140,224, "zooperdan", {1,1,1,1})
+	self:drawText(140,256, "zooperdan.itch.io", {1,1,1,1})
+	self:drawText(140,288, "dungeoncrawlers.org", {1,1,1,1})
+
+	self:drawText(378,224, "SullyMusic", {1,1,1,1})
+	self:drawText(378,256, "travisoraziosullivan", {1,1,1,1})
+	self:drawText(378,288, "travissullivan.com/composer/", {1,1,1,1})
+
+	self:drawText(0,340, "* Refer to attribution.txt for more information", {1,1,1,.25}, "center")
+
+	love.graphics.setFont(assets.fonts["main"]);
+
+end
+
+function Renderer:drawAbout()
+
+	self:drawText(0, 40, "- ABOUT -", {1,1,1,1}, "center")
+
+end
+
+function Renderer:drawSettings()
+
+	self:drawText(0, 40, "- SETTINGS -", {1,1,1,1}, "center")
+
+end
+
 function Renderer:drawSpellList()
 
-	love.graphics.setColor(1,1,1,1)
-
-	self:drawText(20, 200, "SELECT SPELL")
+	self:drawText(20, 200, "SELECT SPELL", {1,1,1,1})
 
 end
 
@@ -587,6 +696,30 @@ function Renderer:clickOnInventory(mx, my)
 	
 end
 
+function Renderer:drawMainmenu()
+
+	local mx, my = love.mouse.getPosition()
+
+	love.graphics.draw(assets.images["mainmenu-background"], 0, 0)	
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	for i = 1, #self.menuitems do
+	
+		if intersect(mx, my, self.menuitems[i].x, self.menuitems[i].y, 100, 20) then
+			self:drawText(self.menuitems[i].x, self.menuitems[i].y, self.menuitems[i].caption, {1,1,1,1})
+		else
+			self:drawText(self.menuitems[i].x, self.menuitems[i].y, self.menuitems[i].caption, {1.0,.85,.75,1})
+		end
+	
+	end
+
+	love.graphics.setFont(assets.fonts["main"]);
+
+	love.graphics.setColor(1,1,1,1)
+
+end
+
 function Renderer:onSpellSelect(mx, my)
 
 	-- TO-DO: add list of spells that can be clicked on
@@ -600,21 +733,21 @@ end
 
 function Renderer:showPlayerStats()
 	
-	self:drawText(251, 228,    "HEALTH")
-	self:drawText(251, 228+14,    "MANA")
-	self:drawText(251, 228+28, "ATK")
-	self:drawText(251, 228+42, "DEF")
+	self:drawText(251, 228,    "HEALTH", {1,1,1,1})
+	self:drawText(251, 228+14,    "MANA", {1,1,1,1})
+	self:drawText(251, 228+28, "ATK", {1,1,1,1})
+	self:drawText(251, 228+42, "DEF", {1,1,1,1})
 	
-	self:drawText(364, 228, "GOLD")
-	self:drawText(364, 228+14, "ANT SACS")
+	self:drawText(364, 228, "GOLD", {1,1,1,1})
+	self:drawText(364, 228+14, "ANT SACS", {1,1,1,1})
 
-	self:drawText(316, 228,    ": " .. party.stats.health)
-	self:drawText(316, 228+14,    ": " .. party.stats.mana)
-	self:drawText(316, 228+28, ": " .. party.stats.attack)
-	self:drawText(316, 228+42, ": " .. party.stats.defence)
+	self:drawText(316, 228,    ": " .. party.stats.health, {1,1,1,1})
+	self:drawText(316, 228+14,    ": " .. party.stats.mana, {1,1,1,1})
+	self:drawText(316, 228+28, ": " .. party.stats.attack, {1,1,1,1})
+	self:drawText(316, 228+42, ": " .. party.stats.defence, {1,1,1,1})
 
-	self:drawText(364+65, 228, ": " .. party.gold)
-	self:drawText(364+65, 228+14, ": " .. party.antsacs)
+	self:drawText(364+65, 228, ": " .. party.gold, {1,1,1,1})
+	self:drawText(364+65, 228+14, ": " .. party.antsacs, {1,1,1,1})
 	
 end
 
@@ -647,10 +780,10 @@ function Renderer:showItemHoverStats(item)
 		love.graphics.rectangle("fill",mx+10,my-40, l, 40)
 		love.graphics.setColor(1,1,1,1)
 		
-		self:drawWrappedText(mx+15, my-35, item.name, 263, {255/255,240/255,137/255,1})
+		self:drawText(mx+15, my-35, item.name, {255/255,240/255,137/255,1})
 		
 		if str ~= "" then
-			self:drawWrappedText(mx+15, my-20, str, 263, {1,1,1,1})
+			self:drawText(mx+15, my-20, str, {1,1,1,1})
 		end
 		
 	end
@@ -659,7 +792,7 @@ end
 
 function Renderer:drawAutomapper()
 
-	self:drawText(10, 340, tostring(love.timer.getFPS()))
+	self:drawText(10, 340, tostring(love.timer.getFPS()), {1,1,1,1})
 
 	love.graphics.setColor(1,1,1,1)
 
@@ -734,8 +867,6 @@ end
 
 function Renderer:drawUI()
 
-	--self:drawText(10, 10, direction_names[party.direction])
-	
 	love.graphics.setColor(1,1,1,1)
 
 	-- main ui
@@ -830,7 +961,7 @@ end
 
 function Renderer:drawEnemyStats(enemy)
 
-	self:drawText(0, 10+50, enemy.properties.name, "center")
+	self:drawText(0, 10+50, enemy.properties.name, {1,1,1,1}, "center")
 	
 	local x = math.floor(screen.width/2 - assets.images["enemy-hit-bar-background"]:getWidth()/2)
 	local y = 30+50
@@ -1113,6 +1244,43 @@ function Renderer:onCloseButtonClick()
 
 	renderer:showInventory(false)
 
+end
+
+function Renderer:onStartButtonClick()
+	Game:startGame()
+end
+
+function Renderer:onSettingsButtonClick()
+
+	gameState = GameStates.SETTINGS
+
+end
+
+function Renderer:onCreditsButtonClick()
+
+	gameState = GameStates.CREDITS
+
+end
+
+function Renderer:onAboutButtonClick()
+
+	gameState = GameStates.ABOUT
+
+end
+
+function Renderer:onQuitButtonClick()
+
+	love.event.quit()
+
+end
+
+
+function Renderer:showPopup(text)
+
+	assets:playSound("popup")
+	self.popupText = text
+	subState = SubStates.POPUP
+	
 end
 
 function Renderer:showSpellList()

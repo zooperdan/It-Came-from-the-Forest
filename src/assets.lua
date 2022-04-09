@@ -64,9 +64,10 @@ function Assets:load()
 	self.images["buildup-screen-2"] = love.graphics.newImage("files/buildup-screen-2.png")
 	self.images["buildup-screen-3"] = love.graphics.newImage("files/buildup-screen-3.png")
 	self.images["buildup-screen-4"] = love.graphics.newImage("files/buildup-screen-4.png")
-	self.images["opening-image"] = love.graphics.newImage("files/opening-image.png")
-	self.images["credits"] = love.graphics.newImage("files/credits.png")
+	self.images["mainmenu-background"] = love.graphics.newImage("files/ui/mainmenu-background.png")
+	self.images["credits-background"] = love.graphics.newImage("files/ui/credits-background.png")
 	self.images["automapper-background"] = love.graphics.newImage("files/ui/automapper-background.png")
+	self.images["popup-background"] = love.graphics.newImage("files/ui/popup-background.png")
 	self.images["pointer"] = love.graphics.newImage("files/pointer.png")
 	self.images["sky"] = love.graphics.newImage("files/sky.png")
 
@@ -111,6 +112,7 @@ function Assets:load()
 	-- font
 
 	self.fonts["main"] = love.graphics.newFont("files/fonts/windows_command_prompt.ttf", 16 , "none", love.graphics.getDPIScale())
+	self.fonts["mainmenu"] = love.graphics.newFont("files/fonts/alagard.ttf", 16 , "none", love.graphics.getDPIScale())
 	
 	-- generate quads for compass
 	
