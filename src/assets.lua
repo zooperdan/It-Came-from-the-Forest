@@ -71,13 +71,11 @@ function Assets:load()
 	
 	-- load all item icons in the files/itemicons/ directory
 
-	self.itemicons = {}
-
 	local files = love.filesystem.getDirectoryItems("files/itemicons/")
 	
 	for k, file in ipairs(files) do
 		local shortname = file:gsub("%.png", "")
-		self.itemicons[shortname] = love.graphics.newImage("files/itemicons/"..file)
+		self.images[shortname] = love.graphics.newImage("files/itemicons/"..file)
 	end
 	
 	-- font
@@ -87,13 +85,13 @@ function Assets:load()
 	
 	-- music
 
-	self.music["forest"] = love.audio.newSource("files/music/It_Came_from_the_Forest.mp3", "stream")
+	self.music["forest"] = love.audio.newSource("files/music/forest.mp3", "stream")
 	self.music["forest"]:setLooping(true)
-	self.music["city"] = love.audio.newSource("files/music/It_Came_from_the_Forest_village_harp.mp3", "stream")
+	self.music["city"] = love.audio.newSource("files/music/city.mp3", "stream")
 	self.music["city"]:setLooping(true)
-	self.music["mainmenu"] = love.audio.newSource("files/music/It_Came_from_the_Forest_introloop.mp3", "stream")
+	self.music["mainmenu"] = love.audio.newSource("files/music/mainmenu.mp3", "stream")
 	self.music["mainmenu"]:setLooping(true)
-	self.music["buildup"] = love.audio.newSource("files/music/It_Came_from_the_Forest_stringloop.mp3", "stream")
+	self.music["buildup"] = love.audio.newSource("files/music/intro.mp3", "stream")
 	self.music["buildup"]:setLooping(false)
 	
 	-- generate quads for compass

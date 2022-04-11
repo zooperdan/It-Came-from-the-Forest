@@ -8,12 +8,15 @@ function Party:initialize()
 	self.direction = 0
 	self.x = 1
 	self.y = 1
-	self.gold = 0
+	self.gold = 1000
 	self.antsacs = 0
-	self.healing_potions = 0
-	self.mana_potions = 0
+	self.healing_potions = 1
+	self.mana_potions = 1
 	
 	self.ticksElapsed = 0
+
+	self.spells = {}
+	--self.spells = {"lesser-heal", "full-heal", "firebolt", "fireball", "town-portal"}
 	
 	self.basestats =  {
 		attack = 1,
@@ -47,9 +50,9 @@ function Party:initialize()
 		{ id = "", type = "head", x = 46, y = 7 },
 		{ id = "", type = "neck", x = 7, y = 7 },
 		{ id = "", type = "torso", x = 46, y = 46 },
-		{ id = "", type = "offhand", x = 7, y = 89 },
+		{ id = "spellbook-1", type = "offhand", x = 7, y = 89 },
 		{ id = "", type = "waist", x = 46, y = 89 },
-		{ id = "sword-1", type = "weapon", x = 85, y = 89 },
+		{ id = "sword-5", type = "weapon", x = 85, y = 89 },
 		{ id = "", type = "hands", x = 85, y = 46 },
 		{ id = "", type = "feet", x = 46, y = 163 },
 		{ id = "", type = "finger", x = 7, y = 200 },
@@ -72,7 +75,9 @@ function Party:update(dt)
 
 end
 
-function Party:attackWithMelee(enemies)
+function Party:attackWithMelee()
+
+	local enemies = Game.enemies
 
 	local handId = 1
 
@@ -139,6 +144,56 @@ function Party:attackWithMelee(enemies)
 	
 end
 
+function Party:attackWithSpell(spell)
+
+	local enemies = Game.enemies
+
+	local handId = 2
+
+	local enemy = level:getFacingEnemy()
+	
+	if enemy then
+	
+		local damage = 2 * math.pow(spell.modifiers.atk, 2) / (spell.modifiers.atk + enemy.properties.defence)
+
+		damage = randomizeDamage(damage)
+
+		assets:playSound(spell.id)
+		
+		print("Player spell:" .. damage)
+
+		enemy.properties.health = enemy.properties.health - damage
+		
+		for i = 1, #enemies do
+			if enemies[i].enemy == enemy then
+				enemies[i]:showHighlight()
+			end
+		end
+			
+		if enemy.properties.health <= 0 then
+			assets:playSound(enemy.properties.sound_die)
+			globalvariables:add(enemy.properties.id, "state", 2)
+			enemy.properties.state = 2
+			
+			for i = 1, #enemies do
+				if enemies[i].enemy == enemy then
+					enemies[i]:die()
+				end
+			end
+		end	
+	
+	else
+	
+		-- no enemy, just display spell animation and play sound
+	
+		assets:playSound(spell.id)
+	
+	end
+	
+	self.cooldownCounters[handId] = self.cooldownDelays[handId]
+	
+end
+
 function Party:hasCooldown(handId)
 
 	return self.cooldownCounters[handId] > 0
@@ -200,6 +255,19 @@ function Party:consumeItem(id)
 	
 end
 
+function Party:addGold(amount)
+
+	self.gold = self.gold + amount
+
+end
+
+function Party:addAntsacs(amount)
+
+	self.antsacs = self.antsacs + amount
+
+end
+
+
 function Party:addItem(id)
 
 	for row = 1, 5 do
@@ -212,6 +280,22 @@ function Party:addItem(id)
 	end
 
 	print("Inventory is full. Unable to add '" .. id .."'")
+
+end
+
+function Party:addSpell(id)
+
+	table.insert(self.spells, id)
+
+end
+
+function Party:addItems(items)
+
+	local itemslist = explode(items, ":")
+	
+	for i = 1, #itemslist do
+		self:addItem(itemslist[i])
+	end
 
 end
 
@@ -235,6 +319,59 @@ function Party:getrightHand()
 	
 end
 
+function Party:castSpell(id)
+
+	-- check if still cooling down
+
+	if self.cooldownCounters[2] > 0 then
+		return
+	end
+
+	local spell = spelltemplates:get(id)
+		
+	if self.stats.mana >= spell.manacost then
+
+		if spell.target == "player" then
+		
+			if spell.id == "lesser-heal" then
+				if party.stats.health >= party.stats.health_max then
+					renderer:showPopup("You are already at maximum health.")
+					return false
+				else
+					party.stats.health = party.stats.health + math.floor(party.stats.health_max * 0.25)
+					if party.stats.health > party.stats.health_max then party.stats.health = party.stats.health_max end
+					assets:playSound(spell.id)
+					self.cooldownCounters[2] = self.cooldownDelays[2]
+				end
+			elseif spell.id == "full-heal" then
+				if party.stats.health >= party.stats.health_max then
+					renderer:showPopup("You are already at maximum health.")
+					return false
+				else
+					party.stats.health = party.stats.health_max
+					assets:playSound(spell.id)
+					self.cooldownCounters[2] = self.cooldownDelays[2]
+				end
+			elseif spell.id == "town-portal" then
+				Game:invokeTownPortal()
+			end
+		
+		else
+			self:attackWithSpell(spell)
+		end
+	
+		self.stats.mana = self.stats.mana - spell.manacost
+		
+		return true
+	else
+		renderer:showPopup("Not enough mana.")
+		return false
+	end
+
+	return false
+
+end
+
 function Party:usePotion(index)
 
 	if index == 1 then
@@ -245,11 +382,15 @@ function Party:usePotion(index)
 			return
 		end
 
-		self.cooldownCounters[index+2] = self.cooldownDelays[index+2]
-		
-		self.healing_potions = self.healing_potions - 1
-		if self.healing_potions < 0 then self.healing_potions = 0 end
-		self.stats.health = self.stats.health_max
+		if party.stats.health >= party.stats.health_max then
+			renderer:showPopup("You are already at maximum health.")
+			return
+		else
+			self.cooldownCounters[index+2] = self.cooldownDelays[index+2]
+			self.healing_potions = self.healing_potions - 1
+			if self.healing_potions < 0 then self.healing_potions = 0 end
+			self.stats.health = self.stats.health_max
+		end
 		
 	else
 		
@@ -259,11 +400,15 @@ function Party:usePotion(index)
 			return
 		end
 
-		self.cooldownCounters[index+2] = self.cooldownDelays[index+2]
-		
-		self.mana_potions = self.mana_potions - 1
-		if self.mana_potions < 0 then self.mana_potions = 0 end
-		self.stats.mana = self.stats.mana_max
+		if party.stats.mana >= party.stats.mana_max then
+			renderer:showPopup("You are already have maximum mana.")
+			return
+		else
+			self.cooldownCounters[index+2] = self.cooldownDelays[index+2]
+			self.mana_potions = self.mana_potions - 1
+			if self.mana_potions < 0 then self.mana_potions = 0 end
+			self.stats.mana = self.stats.mana_max
+		end
 		
 	end
 	

@@ -139,12 +139,6 @@
     <property name="id" value="dark_forest_1_0132192f-d4cb-9120-2080-ae014122661d"/>
    </properties>
   </object>
-  <object id="151" gid="18" x="64" y="544" width="32" height="32">
-   <properties>
-    <property name="direction" type="int" value="1"/>
-    <property name="id" value="dark_forest_1_d6f0f119-e1c4-89e4-4b37-a26c61f11740"/>
-   </properties>
-  </object>
   <object id="152" gid="17" x="256" y="608" width="32" height="32">
    <properties>
     <property name="id" value="dark_forest_1_c99bd6ae-9c63-99f5-a95f-5c1899601cc0"/>

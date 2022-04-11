@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="177">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="189">
  <editorsettings>
   <export target="../src/files/areas/city.lua" format="custom"/>
  </editorsettings>
@@ -22,16 +22,16 @@
 0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,0,1,1,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,0,0,1,1,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,1,1,1,0,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,0,1,1,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,1,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,0,1,1,1,1,1,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,1,1,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,1,1,1,1,0,0,1,1,0,0,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,0,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,0,1,1,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,
 0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,
@@ -82,7 +82,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="4" x="576" y="512" width="32" height="32"/>
+  <object id="34" gid="6" x="576" y="608" width="32" height="32"/>
   <object id="116" gid="21" x="640" y="704" width="32" height="32">
    <properties>
     <property name="id" value="city_a3d1d2c1-d307-c238-a7ad-5fe997ab90ec"/>
@@ -91,6 +91,7 @@
   <object id="147" gid="21" x="352" y="704" width="32" height="32">
    <properties>
     <property name="id" value="city_1e71a8b7-0440-dc46-a062-19baaf608332"/>
+    <property name="vendor" value=""/>
    </properties>
   </object>
   <object id="159" gid="21" x="288" y="288" width="32" height="32">
@@ -126,11 +127,13 @@
   <object id="120" gid="21" x="640" y="640" width="32" height="32">
    <properties>
     <property name="id" value="city_c5ab9d85-57cf-1d44-b7a6-12a4830c2ecd"/>
+    <property name="vendor" value="magicshop"/>
    </properties>
   </object>
-  <object id="160" gid="21" x="544" y="576" width="32" height="32">
+  <object id="160" gid="21" x="544" y="608" width="32" height="32">
    <properties>
     <property name="id" value="city_845f7ef2-9cd7-076b-4ec9-e86c823e1ccc"/>
+    <property name="vendor" value="alchemist"/>
    </properties>
   </object>
   <object id="167" gid="21" x="480" y="576" width="32" height="32">
@@ -149,7 +152,7 @@
     <property name="vendor" value="antsacs"/>
    </properties>
   </object>
-  <object id="122" gid="21" x="704" y="384" width="32" height="32">
+  <object id="122" gid="21" x="864" y="480" width="32" height="32">
    <properties>
     <property name="id" value="city_941a0d5b-9995-67d8-083e-ceba2c511880"/>
    </properties>
@@ -194,13 +197,15 @@
   </object>
   <object id="127" gid="17" x="960" y="608" width="32" height="32">
    <properties>
-    <property name="id" value="city_247e9c47-bf63-19fb-1081-75a9a4893f45"/>
+    <property name="id" value="city_89eefd9a-f595-2b34-5b8d-4869b337c877"/>
    </properties>
   </object>
-  <object id="148" gid="17" x="672" y="608" width="32" height="32">
+  <object id="148" gid="17" x="128" y="416" width="32" height="32">
    <properties>
-    <property name="id" value="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5"/>
+    <property name="gold" type="int" value="10"/>
+    <property name="id" value="city_76ef7cfb-af43-78a7-e869-fec96294a4a6"/>
     <property name="keyid" value="key-1"/>
+    <property name="loot" value="dagger-1:ring-1"/>
     <property name="state" type="int" value="1"/>
    </properties>
   </object>
@@ -218,10 +223,10 @@
   </object>
   <object id="129" gid="17" x="960" y="416" width="32" height="32">
    <properties>
-    <property name="id" value="city_991d8a7c-a6d6-04b8-8091-c67ff9a44ae8"/>
+    <property name="id" value="city_2eed5c40-1174-d1a2-23c3-c8eca1df2615"/>
    </properties>
   </object>
-  <object id="132" gid="8" x="384" y="320" width="32" height="32">
+  <object id="132" gid="8" x="352" y="320" width="32" height="32">
    <properties>
     <property name="id" value="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c"/>
     <property name="wanderer" type="int" value="1"/>
@@ -255,7 +260,6 @@
    <properties>
     <property name="id" value="city_ae1aaf01-e3a9-c68f-0971-74fd26b6ef7e"/>
     <property name="imageid" value="npc-guard"/>
-    <property name="portrait" value="guard"/>
    </properties>
   </object>
   <object id="161" gid="14" x="64" y="480" width="32" height="32">
@@ -263,18 +267,18 @@
     <property name="id" value="city_4c920ff2-f574-e5b3-3fa5-18cfc312b088"/>
     <property name="imageid" value="npc-guard"/>
     <property name="name" value="City guard"/>
-    <property name="portrait" value="guard"/>
     <property name="sound" value="npc-1"/>
     <property name="text" value="You'll do best to behave while visiting our fine city!"/>
    </properties>
   </object>
   <object id="174" gid="14" x="960" y="480" width="32" height="32">
    <properties>
-    <property name="criterias" value="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5:state:2"/>
+    <property name="criterias" value="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c:state:2"/>
+    <property name="gold" type="int" value="20"/>
     <property name="id" value="city_eb1bdfcf-a8cb-b5cc-63ce-701b38890881"/>
     <property name="imageid" value="npc-guard"/>
+    <property name="loot" value="ring-3:sword-2"/>
     <property name="name" value="City guard"/>
-    <property name="portrait" value="guard"/>
     <property name="questdelivertext" value="Alright then. I guess we can open the gate for you now."/>
     <property name="questdonetext" value="Be careful out in the forest.\n\nI've seen many brave adventurers pass through that gate never to return.\n\nKeep your head down, move slowly and be always vigilant.\n\n"/>
     <property name="sound" value="npc-1"/>
@@ -286,6 +290,9 @@
    <properties>
     <property name="id" value="city_9357509c-af97-48ad-0d8c-2862298367bc"/>
     <property name="imageid" value="npc-guard"/>
+    <property name="name" value="City guard"/>
+    <property name="sound" value="npc-1"/>
+    <property name="text" value="Move along. Nothing to see here."/>
    </properties>
   </object>
   <object id="162" gid="14" x="64" y="544" width="32" height="32">
@@ -293,7 +300,6 @@
     <property name="id" value="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015"/>
     <property name="imageid" value="npc-guard"/>
     <property name="name" value="City guard"/>
-    <property name="portrait" value="guard"/>
     <property name="sound" value="npc-1"/>
     <property name="text" value="Don't be trying no funny business, ya hear?"/>
    </properties>
@@ -306,6 +312,11 @@
   <object id="172" gid="34" x="32" y="512" width="32" height="32">
    <properties>
     <property name="id" value="city_92b1270e-92d5-55c2-28bf-0c360fded85e"/>
+   </properties>
+  </object>
+  <object id="177" gid="34" x="224" y="640" width="32" height="32">
+   <properties>
+    <property name="id" value="city_4aa68b25-8d58-f1da-a619-95ae837fc81a"/>
    </properties>
   </object>
   <object id="170" gid="18" x="224" y="608" width="32" height="32">
@@ -326,10 +337,88 @@
     <property name="targety" type="int" value="19"/>
    </properties>
   </object>
-  <object id="175" gid="23" x="224" y="448" width="32" height="32">
+  <object id="175" gid="23" x="992" y="544" width="32" height="32">
    <properties>
     <property name="id" value="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6"/>
-    <property name="vars" value="city_6974755c-a6c3-b9b0-6499-e0919dff6219:state:1"/>
+    <property name="vars" value=""/>
+   </properties>
+  </object>
+  <object id="178" gid="7" x="736" y="512" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="3"/>
+    <property name="id" value="city_09dd4b24-943a-f316-3b55-a925d8d2e428"/>
+    <property name="name" value="city-foodstall"/>
+   </properties>
+  </object>
+  <object id="179" gid="7" x="640" y="416" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="id" value="city_48251eec-2857-d6d1-fdbb-d59de27aa03d"/>
+    <property name="name" value="city-foodstall"/>
+   </properties>
+  </object>
+  <object id="186" gid="7" x="576" y="448" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="id" value="city_f955d3fe-aab5-e04a-d0ba-7272a7828712"/>
+    <property name="name" value="city-foodstall"/>
+   </properties>
+  </object>
+  <object id="180" gid="7" x="576" y="640" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="0"/>
+    <property name="id" value="city_e86a9053-7752-8aab-53e2-fc223805df59"/>
+    <property name="name" value="city-foodstall"/>
+   </properties>
+  </object>
+  <object id="181" gid="14" x="736" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="city_69a8e3a6-8467-3768-9ef9-f970a07fb2ab"/>
+    <property name="imageid" value="npc-girl"/>
+    <property name="name" value="Adalie"/>
+    <property name="text" value="Hello stranger."/>
+   </properties>
+  </object>
+  <object id="182" gid="14" x="576" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="city_baa096d2-b0a6-03d7-d277-6319c0b7af8a"/>
+    <property name="imageid" value="npc-peasant-1"/>
+    <property name="name" value="Yahnah Bemmo"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+  <object id="184" gid="14" x="672" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="city_77cd3bbe-64da-259e-af22-c8bc8934b44f"/>
+    <property name="imageid" value="npc-peasant-3"/>
+    <property name="name" value="Brendudd Eagleroot"/>
+    <property name="text" value="Hello stranger."/>
+   </properties>
+  </object>
+  <object id="183" gid="14" x="576" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="city_98523b8c-f3e7-5efb-0cb1-d12c17b56b30"/>
+    <property name="imageid" value="npc-peasant-2"/>
+    <property name="name" value="Jak Yelovan"/>
+    <property name="text" value="Hello stranger."/>
+   </properties>
+  </object>
+  <object id="187" gid="14" x="416" y="544" width="32" height="32">
+   <properties>
+    <property name="id" value="city_d9c5f027-86d9-2cdb-1855-7be82c955c86"/>
+    <property name="imageid" value="npc-hunter"/>
+    <property name="name" value="Nefa Bindred"/>
+    <property name="text" value="Hello stranger."/>
+   </properties>
+  </object>
+  <object id="185" gid="14" x="672" y="416" width="32" height="32">
+   <properties>
+    <property name="id" value="city_56d94b33-10ca-385f-e361-e3e63b2e4eac"/>
+    <property name="imageid" value="npc-peasant-4"/>
+    <property name="name" value="Arorre Grandforge"/>
+    <property name="text" value="Hello stranger."/>
    </properties>
   </object>
  </objectgroup>

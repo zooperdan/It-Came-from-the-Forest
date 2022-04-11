@@ -9,7 +9,7 @@ function Level:initialize()
 	
 end
 
-function Level:load(id, door)
+function Level:load(id, location)
 
 	local numerrors = 0
 
@@ -26,10 +26,10 @@ function Level:load(id, door)
 	
 		self.data = lume.deserialize(leveldata)
 
-		if door then
-			party.x = door.properties.targetx+1
-			party.y = door.properties.targety+1
-			party.direction = door.properties.targetdir
+		if location then
+			party.x = location.x+1
+			party.y = location.y+1
+			party.direction = location.direction
 		else
 			party.x = self.data.partyX
 			party.y = self.data.partyY
@@ -162,6 +162,12 @@ function Level:applyGlobalVariables()
 		
 		local gvar = globalvariables:get(npc.properties.id, "visible")
 		if gvar then npc.properties.visible = tonumber(gvar) end		
+		
+		local gvar = globalvariables:get(npc.properties.id, "gold")
+		if gvar then npc.properties.gold = tonumber(gvar) end		
+
+		local gvar = globalvariables:get(npc.properties.id, "loot")
+		if gvar then npc.properties.loot = tostring(gvar) end		
 
 	end	
 	
@@ -202,6 +208,12 @@ function Level:applyGlobalVariables()
 		
 		local gvar = globalvariables:get(chest.properties.id, "keyid")
 		if gvar then chest.properties.keyid = tostring(gvar) end		
+
+		local gvar = globalvariables:get(chest.properties.id, "gold")
+		if gvar then chest.properties.gold = tonumber(gvar) end		
+
+		local gvar = globalvariables:get(chest.properties.id, "loot")
+		if gvar then chest.properties.loot = tostring(gvar) end		
 
 	end	
 	

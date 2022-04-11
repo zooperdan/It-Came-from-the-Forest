@@ -43,9 +43,9 @@
  </tile>
  <tile id="7" type="Enemy">
   <properties>
+   <property name="antsacs" type="int" value="0"/>
    <property name="attack" type="int" value="1"/>
    <property name="defence" type="int" value="1"/>
-   <property name="experience" type="int" value="10"/>
    <property name="gold" type="int" value="5"/>
    <property name="health" type="int" value="100"/>
    <property name="health_max" type="int" value="100"/>
@@ -104,13 +104,11 @@
  <tile id="13" type="NPC">
   <properties>
    <property name="criterias" value=""/>
-   <property name="experience" type="int" value="0"/>
    <property name="gold" type="int" value="0"/>
    <property name="id" value=""/>
    <property name="imageid" value=""/>
    <property name="loot" value=""/>
    <property name="name" value=""/>
-   <property name="portrait" value=""/>
    <property name="questdelivertext" value=""/>
    <property name="questdonetext" value=""/>
    <property name="sound" value=""/>
@@ -137,8 +135,10 @@
  <tile id="16" type="Chest">
   <properties>
    <property name="answer" value=""/>
+   <property name="gold" type="int" value="0"/>
    <property name="id" value=""/>
    <property name="keyid" value=""/>
+   <property name="loot" value=""/>
    <property name="riddle" value=""/>
    <property name="state" type="int" value="1"/>
   </properties>

@@ -4,78 +4,26 @@ function SpellTemplates:initialize()
 
 	self.templates = {}
 
-	local template = {
-		name = "Minor heal",
-		id = "minor_heal",
-		target_type = "party",
-		group = "healing",
-		num_targets = 1,
-		mps_cost = 5,
-		modifiers = {
-			["hps"] = 25
-		}
-	}
-	
-	self.templates[template.id] = template
-	
-	local template = {
-		name = "Major heal",
-		id = "major_heal",
-		target_type = "party",
-		group = "healing",
-		num_targets = 1,
-		mps_cost = 20,
-		modifiers = {
-			["hps"] = 50
-		}
-	}
-	
-	self.templates[template.id] = template	
-	
-	local template = {
-		name = "Minor party heal",
-		id = "minor_party_heal",
-		target_type = "party",
-		group = "healing",
-		affect_all = true,
-		num_targets = 4,
-		mps_cost = 5,
-		modifiers = {
-			["hps"] = 25
-		}
-	}
-	
-	self.templates[template.id] = template		
-	
-	local template = {
-		name = "Magic missile",
-		id = "magic_missile",
-		group = "damage",
-		target_type = "enemy",
-		num_targets = 1,
-		mps_cost = 5,
-		modifiers = {
-			["atk"] = 6
-		}
-	}
-	
-	self.templates[template.id] = template	
+	self:addTemplate("lesser-heal", "Lesser heal", "player", "spelleffect-heal", 5, { ["health"] = 25 })
+	self:addTemplate("full-heal", "Full heal", "player", "spelleffect-heal", 25, { ["health"] = 100 })
+	self:addTemplate("firebolt", "Firebolt", "enemy", "spelleffect-fireball", 5, { ["atk"] = 10 })
+	self:addTemplate("fireball", "Fireball", "enemy", "spelleffect-fireball", 25, { ["atk"] = 25 })
+	self:addTemplate("town-portal", "Town portal", "player", "spelleffect-townportal", 25, {})
 
-	local template = {
-		name = "Fireball",
-		id = "fireball",
-		group = "damage",
-		target_type = "enemy",
-		affect_all = true,
-		mps_cost = 15,
-		modifiers = {
-			["atk"] = 10
-		}
+end
+
+function SpellTemplates:addTemplate(id, name, target, imageid, manacost, modifiers)
+
+	self.templates[id] = {
+		id = id,
+		name = name,
+		target = target,
+		imageid = imageid,
+		manacost = manacost,
+		modifiers = modifiers
 	}
 	
-	self.templates[template.id] = template	
-	
-end
+end	
 
 function SpellTemplates:get(id)
 

@@ -1,7 +1,8 @@
 settings = {
 	quickstart = true,
+	debug = true,
 	startingArea = "city",
-	musicVolume = 0,
+	musicVolume = 1,
 	sfxVolume = 1,
 	inventoryX = 119,
 	inventoryY = 50,
@@ -10,6 +11,7 @@ settings = {
 	prices = {
 		antsacs = 20,
 	},
+	frameColor = {105/255,102/255,130/255,1}
 }
 
 isFading = false
@@ -29,7 +31,8 @@ GameStates = {
 	BUILDUP4 = 8,
 	CREDITS = 9,
 	ABOUT = 10,
-	SETTINGS = 11
+	SETTINGS = 11,
+	QUITTING = 12
 }
 
 SubStates = {
@@ -39,13 +42,16 @@ SubStates = {
 	SELECT_SPELL = 3,
 	POPUP = 4,
 	NPC = 5,
-	VENDOR_ANTSACS = 6
+	FOUND_LOOT = 6,
+	VENDOR_ANTSACS = 7,
+	SYSTEM_MENU = 8,
+	VENDOR = 9
 }
 
 gameState = GameStates.LOADING_LEVEL
 
 world_hitboxes = {}
-world_hitboxes["door"] = {x = 225, y = 10, w = 230, h = 325}
+world_hitboxes["door"] = {x = 225, y = 10, w = 230, h = 295}
 world_hitboxes["npc"] = {x = 264, y = 72, w = 115, h = 215}
 world_hitboxes["portal"] = {x = 233, y = 58, w = 180, h = 244}
 world_hitboxes["chest"] = {x = 248, y = 199, w = 146, h = 99}
@@ -63,3 +69,4 @@ vec4 effect(vec4 vcolor, Image tex, vec2 texcoord, vec2 pixcoord)
     return outputcolor;
 }
 ]]
+

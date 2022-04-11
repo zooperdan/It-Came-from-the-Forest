@@ -17,10 +17,6 @@ function ItemTemplates:initialize()
 	self:addTemplate("axe-2", "Battle axe", "weapon", { ["atk"] = 4 })
 	self:addTemplate("club", "Club", "weapon", { ["atk"] = 4 })
 	self:addTemplate("mace", "Mace", "weapon", { ["atk"] = 4 })
-	self:addTemplate("spellbook-1", "Ancient tome I", "offhand", {})
-	self:addTemplate("spellbook-2", "Ancient tome II", "offhand", {})
-	self:addTemplate("spellbook-3", "Ancient tome III", "offhand", {})
-
 
 	self:addTemplate("ring-1", "Ring", "finger", { ["atk"] = 1 })
 	self:addTemplate("ring-2", "Ring", "finger", { ["atk"] = 1 })
@@ -61,6 +57,13 @@ function ItemTemplates:initialize()
 	self:addTemplate("key-3", "Steel key", "key", {})
 	self:addTemplate("key-4", "Ruby key", "key", {})
 
+	self:addTemplate("healing-potion", "Healing potion", "potion", {})
+	self:addTemplate("mana-potion", "Mana potion", "potion", {})
+
+	self:addTemplate("spellbook-1", "Ancient tome I", "offhand", {})
+	self:addTemplate("spellbook-2", "Ancient tome II", "offhand", {})
+	self:addTemplate("spellbook-3", "Ancient tome III", "offhand", {})
+
 end
 
 function ItemTemplates:addTemplate(id, name, slot, modifiers)
@@ -73,17 +76,6 @@ function ItemTemplates:addTemplate(id, name, slot, modifiers)
 	}
 	
 end	
-
-function ItemTemplates:isConsumable(template)
-
-	if template.itemtype == "health_potion" then return true end
-	if template.itemtype == "magic_potion" then return true end
-	if template.itemtype == "rune" then return true end
-
-	return false
-
-end
-
 
 function ItemTemplates:get(id)
 

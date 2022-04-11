@@ -66,9 +66,12 @@
 		[21]={["type"]=1,},
 	},
 	[18]={
+		[13]={["type"]=1,},
 		[17]={["type"]=1,},
 		[18]={["type"]=1,},
 		[19]={["type"]=1,},
+		[20]={["type"]=1,},
+		[21]={["type"]=1,},
 	},
 	[19]={
 		[11]={["type"]=1,},
@@ -91,6 +94,7 @@
 		[22]={["type"]=1,},
 	},
 	[22]={
+		[12]={["type"]=1,},
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
@@ -119,6 +123,7 @@
 		[16]={["type"]=1,},
 		[17]={["type"]=1,},
 		[18]={["type"]=1,},
+		[19]={["type"]=1,},
 		[20]={["type"]=1,},
 		[22]={["type"]=1,},
 	},
@@ -433,16 +438,23 @@ enemyblockers={
 			id="city_92b1270e-92d5-55c2-28bf-0c360fded85e",
 		}
 	},
+	[3] = {
+		x=8,
+		y=20,
+		properties={
+			id="city_4aa68b25-8d58-f1da-a619-95ae837fc81a",
+		}
+	},
 },
 
 enemies={
 	[1] = {
-		x=13,
+		x=12,
 		y=10,
 		properties={
+			antsacs=0,
 			attack=1,
 			defence=1,
-			experience=10,
 			gold=5,
 			health=100,
 			health_max=100,
@@ -462,9 +474,9 @@ enemies={
 		x=10,
 		y=7,
 		properties={
+			antsacs=0,
 			attack=1,
 			defence=1,
-			experience=10,
 			gold=5,
 			health=100,
 			health_max=100,
@@ -484,9 +496,9 @@ enemies={
 		x=10,
 		y=13,
 		properties={
+			antsacs=0,
 			attack=1,
 			defence=1,
-			experience=10,
 			gold=5,
 			health=100,
 			health_max=100,
@@ -510,19 +522,23 @@ chests={
 		y=19,
 		properties={
 			answer="",
-			id="city_247e9c47-bf63-19fb-1081-75a9a4893f45",
+			gold=0,
+			id="city_89eefd9a-f595-2b34-5b8d-4869b337c877",
 			keyid="",
+			loot="",
 			riddle="",
 			state=1,
 		}
 	},
 	[2] = {
-		x=22,
-		y=19,
+		x=5,
+		y=13,
 		properties={
 			answer="",
-			id="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5",
+			gold=10,
+			id="city_76ef7cfb-af43-78a7-e869-fec96294a4a6",
 			keyid="key-1",
+			loot="dagger-1:ring-1",
 			riddle="",
 			state=1,
 		}
@@ -532,8 +548,10 @@ chests={
 		y=13,
 		properties={
 			answer="",
-			id="city_991d8a7c-a6d6-04b8-8091-c67ff9a44ae8",
+			gold=0,
+			id="city_2eed5c40-1174-d1a2-23c3-c8eca1df2615",
 			keyid="",
+			loot="",
 			riddle="",
 			state=1,
 		}
@@ -601,13 +619,11 @@ npcs={
 		y=12,
 		properties={
 			criterias="",
-			experience=0,
 			gold=0,
 			id="city_ae1aaf01-e3a9-c68f-0971-74fd26b6ef7e",
 			imageid="npc-guard",
 			loot="",
 			name="",
-			portrait="guard",
 			questdelivertext="",
 			questdonetext="",
 			sound="",
@@ -622,13 +638,11 @@ npcs={
 		y=15,
 		properties={
 			criterias="",
-			experience=0,
 			gold=0,
 			id="city_4c920ff2-f574-e5b3-3fa5-18cfc312b088",
 			imageid="npc-guard",
 			loot="",
 			name="City guard",
-			portrait="guard",
 			questdelivertext="",
 			questdonetext="",
 			sound="npc-1",
@@ -642,14 +656,12 @@ npcs={
 		x=31,
 		y=15,
 		properties={
-			criterias="city_fa8d8bff-2d62-6ead-5c8f-48f2195a68c5:state:2",
-			experience=0,
-			gold=0,
+			criterias="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c:state:2",
+			gold=20,
 			id="city_eb1bdfcf-a8cb-b5cc-63ce-701b38890881",
 			imageid="npc-guard",
-			loot="",
+			loot="ring-3:sword-2",
 			name="City guard",
-			portrait="guard",
 			questdelivertext="Alright then. I guess we can open the gate for you now.",
 			questdonetext="Be careful out in the forest.\n\nI've seen many brave adventurers pass through that gate never to return.\n\nKeep your head down, move slowly and be always vigilant.\n\n",
 			sound="npc-1",
@@ -664,18 +676,16 @@ npcs={
 		y=25,
 		properties={
 			criterias="",
-			experience=0,
 			gold=0,
 			id="city_9357509c-af97-48ad-0d8c-2862298367bc",
 			imageid="npc-guard",
 			loot="",
-			name="",
-			portrait="",
+			name="City guard",
 			questdelivertext="",
 			questdonetext="",
-			sound="",
+			sound="npc-1",
 			state=1,
-			text="",
+			text="Move along. Nothing to see here.",
 			vars="",
 			visible=1,
 		}
@@ -685,18 +695,130 @@ npcs={
 		y=17,
 		properties={
 			criterias="",
-			experience=0,
 			gold=0,
 			id="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015",
 			imageid="npc-guard",
 			loot="",
 			name="City guard",
-			portrait="guard",
 			questdelivertext="",
 			questdonetext="",
 			sound="npc-1",
 			state=1,
 			text="Don't be trying no funny business, ya hear?",
+			vars="",
+			visible=1,
+		}
+	},
+	[6] = {
+		x=24,
+		y=15,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_69a8e3a6-8467-3768-9ef9-f970a07fb2ab",
+			imageid="npc-girl",
+			loot="",
+			name="Adalie",
+			questdelivertext="",
+			questdonetext="",
+			sound="",
+			state=1,
+			text="Hello stranger.",
+			vars="",
+			visible=1,
+		}
+	},
+	[7] = {
+		x=19,
+		y=15,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_baa096d2-b0a6-03d7-d277-6319c0b7af8a",
+			imageid="npc-peasant-1",
+			loot="",
+			name="Yahnah Bemmo",
+			questdelivertext="",
+			questdonetext="",
+			sound="",
+			state=1,
+			text="",
+			vars="",
+			visible=1,
+		}
+	},
+	[8] = {
+		x=22,
+		y=19,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_77cd3bbe-64da-259e-af22-c8bc8934b44f",
+			imageid="npc-peasant-3",
+			loot="",
+			name="Brendudd Eagleroot",
+			questdelivertext="",
+			questdonetext="",
+			sound="",
+			state=1,
+			text="Hello stranger.",
+			vars="",
+			visible=1,
+		}
+	},
+	[9] = {
+		x=19,
+		y=18,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_98523b8c-f3e7-5efb-0cb1-d12c17b56b30",
+			imageid="npc-peasant-2",
+			loot="",
+			name="Jak Yelovan",
+			questdelivertext="",
+			questdonetext="",
+			sound="",
+			state=1,
+			text="Hello stranger.",
+			vars="",
+			visible=1,
+		}
+	},
+	[10] = {
+		x=14,
+		y=17,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_d9c5f027-86d9-2cdb-1855-7be82c955c86",
+			imageid="npc-hunter",
+			loot="",
+			name="Nefa Bindred",
+			questdelivertext="",
+			questdonetext="",
+			sound="",
+			state=1,
+			text="Hello stranger.",
+			vars="",
+			visible=1,
+		}
+	},
+	[11] = {
+		x=22,
+		y=13,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_56d94b33-10ca-385f-e361-e3e63b2e4eac",
+			imageid="npc-peasant-4",
+			loot="",
+			name="Arorre Grandforge",
+			questdelivertext="",
+			questdonetext="",
+			sound="",
+			state=1,
+			text="Hello stranger.",
 			vars="",
 			visible=1,
 		}
@@ -811,19 +933,19 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
-			vendor="",
+			vendor="magicshop",
 		}
 	},
 	[10] = {
 		x=18,
-		y=18,
+		y=19,
 		properties={
 			direction=3,
 			id="city_845f7ef2-9cd7-076b-4ec9-e86c823e1ccc",
 			keyid="",
 			state=1,
 			type=1,
-			vendor="",
+			vendor="alchemist",
 		}
 	},
 	[11] = {
@@ -863,8 +985,8 @@ doors={
 		}
 	},
 	[14] = {
-		x=23,
-		y=12,
+		x=28,
+		y=15,
 		properties={
 			direction=3,
 			id="city_941a0d5b-9995-67d8-083e-ceba2c511880",
@@ -967,22 +1089,70 @@ staticprops={
 			visible=1,
 		}
 	},
+	[2] = {
+		x=24,
+		y=16,
+		properties={
+			atlasid="city-props",
+			direction=3,
+			id="city_09dd4b24-943a-f316-3b55-a925d8d2e428",
+			name="city-foodstall",
+			state=1,
+			visible=1,
+		}
+	},
+	[3] = {
+		x=21,
+		y=13,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_48251eec-2857-d6d1-fdbb-d59de27aa03d",
+			name="city-foodstall",
+			state=1,
+			visible=1,
+		}
+	},
+	[4] = {
+		x=19,
+		y=14,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_f955d3fe-aab5-e04a-d0ba-7272a7828712",
+			name="city-foodstall",
+			state=1,
+			visible=1,
+		}
+	},
+	[5] = {
+		x=19,
+		y=20,
+		properties={
+			atlasid="city-props",
+			direction=0,
+			id="city_e86a9053-7752-8aab-53e2-fc223805df59",
+			name="city-foodstall",
+			state=1,
+			visible=1,
+		}
+	},
 },
 
 buttons={
 	[1] = {
-		x=8,
-		y=14,
+		x=32,
+		y=17,
 		properties={
 			id="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6",
 			state=1,
 			type=1,
-			vars="city_6974755c-a6c3-b9b0-6499-e0919dff6219:state:1",
+			vars="",
 		}
 	},
 },
 
 ["partyX"]=19,
-["partyY"]=16,
-["partyDirection"]=1,
+["partyY"]=19,
+["partyDirection"]=3,
 }

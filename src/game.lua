@@ -5,12 +5,15 @@ local Party = require "party"
 local Level = require "level"
 local Atlases = require "atlases"
 local Enemy = require "enemy"
+local Vendors = require "vendors"
 
 Timer = require "libs/timer"
 Button = require "button"
 
+
 local GlobalVariables = require "globalvariables"
 local ItemTemplates = require "itemtemplates"
+local SpellTemplates = require "spelltemplates"
 
 assets = Assets:new()
 renderer = Renderer:new()
@@ -19,10 +22,12 @@ atlases = Atlases:new()
 party = Party:new()
 messages = Messages:new()
 globalvariables = GlobalVariables:new()
+vendors = Vendors:new()
 
 local Game = class('Game')
 
 itemtemplates = ItemTemplates:new()
+spelltemplates = SpellTemplates:new()
 
 function Game:initialize()
 
@@ -35,6 +40,12 @@ function Game:initialize()
 	
 end
 
+function wait(delay)
+  delay = delay or 1
+  local time_to = os.time() + delay
+  while os.time() < time_to do end
+end
+
 function Game:init()
 
 	love.mouse.setGrabbed(true)
@@ -42,10 +53,13 @@ function Game:init()
 	
 	self.isFullscreen = love.window.fullscreen
 	self.canvas = love.graphics.newCanvas(screen.width, screen.height)
+	self.teleportTarget = nil
 
 	assets:load()
 	
 	renderer:init(self)
+	
+	party:updateStats()
 	
 	if settings.quickstart then
 		gameState = GameStates.LOADING_LEVEL
@@ -128,20 +142,28 @@ function Game:handleMousePressed(x, y, button, istouch)
 				end
 				
 				if intersect(x, y, 278, 321, 34, 34) then
-					party:attackWithMelee(self.enemies)
+					party:attackWithMelee()
 				end
 				
 				if intersect(x, y, 326, 321, 34, 34) then
-					subState = SubStates.SELECT_SPELL
-					renderer:showSpellList()
+					if party:getrightHand() and not party:hasCooldown(2) then
+						if #party.spells == 0 then
+							renderer:showPopup("You don't have any spells.")
+						else
+							renderer:showSpellList()
+						end
+					end
+					return
 				end
 				
 				if intersect(x, y, 239, 325, 30, 30) then
 					party:usePotion(1)
+					return
 				end
 				
 				if intersect(x, y, 372, 325, 30, 30) then
 					party:usePotion(2)
+					return
 				end
 
 				if intersect(x, y, 19, 321, 34, 34) then
@@ -151,11 +173,18 @@ function Game:handleMousePressed(x, y, button, istouch)
 					end
 				end
 				
-				if intersect(x, y, 587, 321, 34, 34) then
+				if intersect(x, y, 541, 321, 34, 34) then
 					if not renderer:automapperShowing() then
 						renderer:showAutomapper(true)
 						return
 					end				
+				end
+				
+				if intersect(x, y, 587, 321, 34, 34) then
+					if not renderer:systemMenuShowing() then
+						renderer:showSystemMenu(true)
+						return
+					end
 				end
 				
 			end
@@ -196,6 +225,7 @@ function Game:handleInput(key)
 	end
 	
 	if key == 'escape' then
+		gameState = GameStates.QUITTING
 		love.event.quit()
 	end
 	
@@ -248,6 +278,13 @@ function Game:handleInput(key)
 			if key == 'i' then
 				if not renderer:inventoryShowing() then
 					renderer:showInventory(true)
+					return
+				end
+			end	
+			
+			if key == 'escape' then
+				if not renderer:systemMenuShowing() then
+					renderer:showSystemMenu(true)
 					return
 				end
 			end	
@@ -536,7 +573,17 @@ end
 
 function Game:loadArea(id)
 
-	if level:load(id, self.currentDoor) then
+	local target = nil
+
+	if self.currentDoor then
+		target.x = self.currentDoor.properties.targetx
+		target.y = self.currentDoor.properties.targety
+		target.direction = self.currentDoor.properties.targetdir
+	elseif self.teleportTarget then
+		target = self.teleportTarget
+	end
+
+	if level:load(id, target) then
 
 		if not atlases:load(level.data.tileset) then
 			love.graphics.setCanvas(self.canvas)
@@ -698,6 +745,16 @@ function Game:checkIfClickedOnFacingObject(x, y)
 				npc.properties.state = 2
 				globalvariables:add(npc.properties.id, "state", npc.properties.state)
 				level:applyVars(npc.properties.vars)
+				
+				if npc.properties.gold > 0 or npc.properties.loot ~= "" then
+					party:addGold(npc.properties.gold)
+					party:addItems(npc.properties.loot)
+					npc.properties.gold = 0
+					npc.properties.loot = ""
+					globalvariables:add(npc.properties.id, "gold", npc.properties.gold)
+					globalvariables:add(npc.properties.id, "loot", npc.properties.loot)
+				end
+				
 			end		
 		end
 		renderer:showNPC(npc)
@@ -710,6 +767,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	
 	if portal and intersectBox(x, y, world_hitboxes["portal"]) then
 		if portal.properties.state == 1 then
+			assets:playSound("portal")
 			party.y = portal.properties.targety+1
 			party.x = portal.properties.targetx+1
 			party.direction = portal.properties.targetdir
@@ -728,7 +786,6 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	local chest = level:getFacingObject(level.data.chests, x,y)
 	
 	if chest and intersectBox(x, y, world_hitboxes["chest"]) then
-		-- open the chest
 		if chest.properties.state == 1 then
 			if chest.properties.keyid and chest.properties.keyid ~= "" then
 				if party:consumeItem(chest.properties.keyid) then
@@ -742,6 +799,15 @@ function Game:checkIfClickedOnFacingObject(x, y)
 				end
 			else
 				chest.properties.state = 2
+				if chest.properties.gold > 0 or chest.properties.loot ~= "" then
+					renderer:showFoundLoot(chest.properties.gold, explode(chest.properties.loot, ":"))
+					party:addGold(chest.properties.gold)
+					party:addItems(chest.properties.loot)
+					chest.properties.gold = 0
+					chest.properties.loot = ""
+					globalvariables:add(chest.properties.id, "gold", chest.properties.gold)
+					globalvariables:add(chest.properties.id, "loot", chest.properties.loot)
+				end
 				globalvariables:add(chest.properties.id, "state", chest.properties.state)
 				assets:playSound("chest-open")
 			end
@@ -759,17 +825,17 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	local well = level:getFacingObject(level.data.wells, x,y)
 	
 	if well and intersectBox(x, y, world_hitboxes["well"]) then
-		-- drink from the well
 		if well.properties.counter > 0 then
 			renderer:showPopup("Drinking from the well has no effect. Maybe try again later?")
 		else
-			if party.stats.health < party.stats.health_max then
+			if party.stats.health < party.stats.health_max or party.stats.mana < party.stats.mana_max then
 				party.stats.health = party.stats.health_max
+				party.stats.mana = party.stats.mana_max
 				assets:playSound("drink-fountain")
 				well.properties.counter = well.properties.counter_max
 				globalvariables:add(well.properties.id, "counter", well.properties.counter)
 			else
-				renderer:showPopup("You already have maximum health.")
+				renderer:showPopup("You already feel fully refreshed.")
 			end
 		end
 		return true
@@ -795,6 +861,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	if button and intersectBox(x, y, world_hitboxes["button"]) then
 		if button.properties.state == 1 then
 			button.properties.state = 2
+			assets:playSound("button")
 			globalvariables:add(button.properties.id, "state", button.properties.state)
 			level:applyVars(button.properties.vars)
 		end
@@ -818,6 +885,35 @@ function Game:jumpToMainmenu()
 
 	assets:stopMusic("buildup")
 	assets:playMusic("mainmenu")
+
+end
+
+function Game:canContinue()
+
+	return false
+	
+end
+
+function Game:invokeTownPortal()
+
+	self.teleportTarget =  {
+		x = 19,
+		y = 15,
+		direction = 1
+	}
+
+	gameState = GameStates.LOADING_LEVEL
+	fadeColor = {1,1,1}
+	assets:playSound("portal")
+	fadeMusicVolume.v = settings.musicVolume
+	Timer.script(function(wait)
+		Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+		end)
+		Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
+			assets:stopMusic(level.data.tileset)
+			Game:loadArea("city")
+		end)
+	end)	
 
 end
 

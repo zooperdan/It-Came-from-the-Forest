@@ -8,6 +8,7 @@ end
 
 function Renderer:init(caller)
 	
+	
 	self.caller = caller
 	self.canvas = caller.canvas
 	self.dungeonDepth = 6
@@ -15,34 +16,73 @@ function Renderer:init(caller)
 	self.backgroundIndex = 1
 	self.skyIndex = 1
 	self.currentNPC = nil
+	self.currentVendor = nil
+	self.doShowSystemMenu = false
 	self.doShowAutomapper = false
 	self.doShowInventory = false
 	self.currentHoverItem = nil
-	self.doShowSpellList = false
+	self.currentHoverSpell = nil
+	self.showSpellEffect = false
 	
 	self.popupText = ""
 	
 	self.buttons = {}
 	
 	local button = Button:new()
-	button.id = "close"
-	button.x = settings.inventoryX+380
-	button.y = settings.inventoryY+216
-	button.width = 15
-	button.height = 16
+	button.id = "close-inventory"
+	button.x = settings.inventoryX+363
+	button.y = settings.inventoryY+200
+	button.width = 32
+	button.height = 32
 	button.normal = "button-close-1"
 	button.over = "button-close-2"
 	button.trigger = self.onCloseButtonClick
-	
+
 	self.buttons[button.id] = button
 	
+	local button = Button:new()
+	button.id = "close-vendor"
+	button.x = 441
+	button.y = 226
+	button.width = 32
+	button.height = 32
+	button.normal = "button-close-1"
+	button.over = "button-close-2"
+	button.trigger = self.onCloseVendorButtonClick
+
+	self.buttons[button.id] = button
+
+	self.menuitemsOffsetX = 512
+	self.menuitemsOffsetY = 120
 	self.menuitems = {
-		{ x = 512, y = 110, caption = "Start game", trigger = self.onStartButtonClick},
-		{ x = 512, y = 110 + 30, caption = "Settings", trigger = self.onSettingsButtonClick},
-		{ x = 512, y = 110 + 60, caption = "Credits", trigger = self.onCreditsButtonClick},
-		{ x = 512, y = 110 + 90, caption = "About", trigger = self.onAboutButtonClick},
-		{ x = 512, y = 110 + 120, caption = "Quit", trigger = self.onQuitButtonClick}
+		{ caption = "New game", trigger = self.onStartButtonClick},
+		{ caption = "Continue", trigger = self.onContinueButtonClick},
+		{ caption = "Credits", trigger = self.onCreditsButtonClick},
+		{ caption = "About", trigger = self.onAboutButtonClick},
+		{ caption = "Quit", trigger = self.onQuitButtonClick}
 	}	
+
+	self.systemmenuOffsetY = 65
+	self.systemmenuitemsOffsetY = 130
+	self.systemmenuitems = {
+		{ caption = "Exit to main menu", trigger = function() self:onBackToMenuButtonClick() end},
+		{ caption = "Quit to desktop", trigger = self.onQuitButtonClick},
+	}	
+	
+end
+
+function Renderer:drawImage(x, y, id, center)
+
+	if assets.images[id] then
+
+		if center and center == true then
+			x = math.floor(screen.width/2 - assets.images[id]:getWidth()/2)
+		end
+
+		love.graphics.draw(assets.images[id], x, y)	
+
+	end
+
 end
 
 function Renderer:update(dt)
@@ -75,7 +115,7 @@ function Renderer:update(dt)
 			self:showPlayerStats()
 		end
 		
-		if self.doShowSpellList then
+		if subState == SubStates.SELECT_SPELL then
 			self:drawSpellList()
 		end
 
@@ -83,11 +123,21 @@ function Renderer:update(dt)
 	
 	end
 
-
-	if gameState == GameStates.BUILDUP1 then love.graphics.draw(assets.images["buildup-screen-1"], 0, 0) end
-	if gameState == GameStates.BUILDUP2 then love.graphics.draw(assets.images["buildup-screen-2"], 0, 0) end
-	if gameState == GameStates.BUILDUP3 then love.graphics.draw(assets.images["buildup-screen-3"], 0, 0) end
-	if gameState == GameStates.BUILDUP4 then love.graphics.draw(assets.images["buildup-screen-4"], 0, 0) end
+	if gameState == GameStates.BUILDUP1 then
+		love.graphics.draw(assets.images["zoopersoft-games"], 0, 0)
+	end
+	
+	if gameState == GameStates.BUILDUP2 then
+		self:drawWrappedText(0,170, "AN UNSPEAKABLE EVIL HAS FALLEN UPON US", screen.width, {1,1,1,1}, "center")
+	end
+	
+	if gameState == GameStates.BUILDUP3 then
+		self:drawWrappedText(0,170, "IT IS NOT KNOWN WHO OR WHAT IS BEHIND IT", screen.width, {1,1,1,1}, "center")
+	end
+	
+	if gameState == GameStates.BUILDUP4 then
+		self:drawWrappedText(0,170, "ALL WE KNOW IS...", screen.width, {1,1,1,1}, "center")
+	end
 	
 	if gameState == GameStates.MAIN_MENU then
 		self:drawMainmenu()
@@ -105,6 +155,10 @@ function Renderer:update(dt)
 		self:drawSettings()
 	end		
 	
+	if subState == SubStates.VENDOR then
+		self:drawVendor()
+	end
+	
 	if subState == SubStates.POPUP then
 		self:drawPopup()
 	end
@@ -115,9 +169,22 @@ function Renderer:update(dt)
 		end
 	end
 	
+	
+	if subState == SubStates.FOUND_LOOT then
+		self:drawFoundLoot()
+	end
+	
 	if subState == SubStates.VENDOR_ANTSACS then
 		self:drawAntsacsVendor()
 	end	
+
+	if self.doShowSystemMenu then
+		self:drawSystemMenu()
+	end
+	
+	if self.showSpellEffect then
+		self:drawImage(320, 170, self.currentSpell.imageid, true)
+	end
 	
 	if gameState == GameStates.EXPLORING or gameState == GameStates.MAIN_MENU or gameState == GameStates.CREDITS then
 		self:drawPointer()	
@@ -127,8 +194,17 @@ function Renderer:update(dt)
 		self:showItemHoverStats(self.currentHoverItem)
 	end
 	
-	local mx, my = love.mouse.getPosition()
-	--self:drawText(10, 10, mx .. "/" .. my, {1,1,1,1}, "left")
+	if self.currentHoverSpell then
+		self:showSpellHoverStats(self.currentHoverSpell)
+	end	
+
+
+	if settings.debug then
+		local mx, my = love.mouse.getPosition()
+		self:drawText(20, 20, mx .. "/" .. my, {1,1,1,1}, "left")
+		
+		self:drawText(20, 40, tostring(love.timer.getFPS()), {1,1,1,1})
+	end
 	
 	love.graphics.setCanvas()
 
@@ -139,15 +215,23 @@ function Renderer:handleMousePressed(x, y, button)
 	if button == 1 then
 
 		if subState == SubStates.INVENTORY then
-
 			if self.doShowInventory then
 				self:clickOnInventory(x, y)
 				return
 			end
-		
 		end
 		
-		if subState == SubStates.POPUP or subState == SubStates.NPC then
+		if subState == SubStates.VENDOR then
+			self:clickOnVendor(x, y)
+			return
+		end		
+		
+		if subState == SubStates.SELECT_SPELL then
+			self:clickOnSpellList(x, y)
+			return
+		end
+		
+		if subState == SubStates.POPUP or subState == SubStates.NPC or subState == SubStates.FOUND_LOOT then
 			subState = SubStates.IDLE
 		end
 		
@@ -160,18 +244,44 @@ function Renderer:handleMousePressed(x, y, button)
 		end
 		
 		if subState == SubStates.AUTOMAPPER then
-			if intersect(x, y, 587, 321, 34, 34) then
+			if intersect(x, y, 541, 321, 34, 34) then
 				self:showAutomapper(false)
 			end
 		end
 		
-		if gameState == GameStates.MAIN_MENU and subState == SubStates.IDLE then
-			for i = 1, #self.menuitems do
-				if intersect(x, y, self.menuitems[i].x, self.menuitems[i].y, 100, 20) then
-					self.menuitems[i].trigger()
+		if subState == SubStates.SYSTEM_MENU then
+		
+			if intersect(x, y, 587, 321, 34, 34) then
+				self:showSystemMenu(false)
+			end	
+			for i = 1, #self.systemmenuitems do
+				if intersect(x, y, 247, self.systemmenuOffsetY + self.systemmenuitemsOffsetY + ((i-1)*25), 150, 20) then
+					self.systemmenuitems[i].trigger()
 				end
+			end	
+			return
+		end
+		
+		if gameState == GameStates.MAIN_MENU and subState == SubStates.IDLE then
+		
+			local canContinue = Game:canContinue()
+			local adjustY = canContinue and -15 or 0
+			local index = 0
+			
+			for i = 1, #self.menuitems do
+			
+				if not canContinue and i == 2 then
+					-- skip this menuitem
+				else
+					if intersect(x, y, self.menuitemsOffsetX, self.menuitemsOffsetY + adjustY + (index*30), 100, 20) then
+						self.menuitems[i].trigger()
+					end
+					index = index + 1
+				end
+			
 			end		
 			return
+				
 		end
 		
 		if gameState == GameStates.CREDITS or gameState == GameStates.ABOUT then
@@ -181,11 +291,6 @@ function Renderer:handleMousePressed(x, y, button)
 
 		if gameState == GameStates.SETTINGS then
 			gameState = GameStates.MAIN_MENU
-			return
-		end
-		
-		if self.doShowSpellList then
-			self:onSpellSelect(x, y)
 			return
 		end
 		
@@ -216,6 +321,15 @@ function Renderer:handleInput(key)
 		end
 
 	end	
+	
+	if subState == SubStates.SYSTEM_MENU then
+	
+		if key == 'escape' then
+			self:showSystemMenu(false)
+			return
+		end
+
+	end		
 	
 end
 
@@ -354,6 +468,20 @@ function Renderer:drawText(x, y, text, color, align)
 	
 end
 
+function Renderer:drawCenteredText(x, y, text, color)
+
+
+	local strlen = assets.fonts["main"]:getWidth(text)
+
+	local offsetx = math.floor(strlen/2)
+
+	love.graphics.setColor(0,0,0,1)
+	love.graphics.printf(text, (x+1)-offsetx, y+1, strlen*2, "left")
+	love.graphics.setColor(color)
+	love.graphics.printf(text, x-offsetx, y, strlen*2, "left")
+	love.graphics.setColor(1,1,1,1)
+	
+end
 function Renderer:drawWrappedText(x, y, text, wrapAt, color, align)
 
 	align = align and align or "left"
@@ -370,22 +498,56 @@ function Renderer:drawPointer()
 
 	local x, y = love.mouse.getPosition()
 
-	if x > screen.width then
-		love.mouse.setPosition(screen.width,love.mouse.getY())
-	end
+	if love.mouse.isGrabbed() then
+
+		if x > screen.width then
+			love.mouse.setPosition(screen.width,love.mouse.getY())
+		end
+		
+		if y > screen.height then
+			love.mouse.setPosition(love.mouse.getX(), screen.height)
+		end	
 	
-	if y > screen.height then
-		love.mouse.setPosition(love.mouse.getX(), screen.height)
-	end	
+	end
 	
 	local x, y = love.mouse.getPosition()
 	
-	if inventoryDragSource.item and assets.itemicons[inventoryDragSource.item.id] then
-		love.graphics.draw(assets.itemicons[inventoryDragSource.item.id], x-16, y-16)
+	if inventoryDragSource.item and assets.images[inventoryDragSource.item.id] then
+		love.graphics.draw(assets.images[inventoryDragSource.item.id], x-16, y-16)
 	else
 		love.graphics.draw(assets.images["pointer"], x, y)
 	end
 	
+end
+
+function Renderer:drawFoundLoot()
+
+	love.graphics.draw(assets.images["popup-background-small"], 194, 100)	
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	self:drawText(0,110, "You find", {1,1,1,1}, "center")
+
+	local loot = {}
+	
+	if self.foundloot.gold > 0 then
+		table.insert(loot, "coins")
+	end
+
+	for i = 1, #self.foundloot.items do
+		table.insert(loot, self.foundloot.items[i])
+	end
+
+	local offsetx = math.floor(320 - (#loot * 40)/2) + 4
+
+	for i = 1, #loot do
+		love.graphics.draw(assets.images[loot[i]], offsetx + (i-1)*40, 136)	
+	end
+
+	if self.foundloot.gold > 0 then
+		self:drawDigits(self.foundloot.gold, offsetx+23, 136+22)
+	end
+
 end
 
 function Renderer:drawPopup()
@@ -485,7 +647,58 @@ end
 
 function Renderer:drawSpellList()
 
-	self:drawText(20, 200, "SELECT SPELL", {1,1,1,1})
+	local mx, my = love.mouse.getPosition()
+
+	local offsetx = 328
+	local offsety = 284
+
+	self.currentHoverSpell = nil
+
+	for i = 1, #party.spells do
+	
+		local spell = spelltemplates:get(party.spells[i])
+		local y = offsety - (i-1)*34
+		self:drawImage(offsetx, y, spell.id, false) 
+		if intersect(mx, my, offsetx, y, 32, 32) then
+			self.currentHoverSpell = spell
+			love.graphics.draw(assets.images["inventory-slot-highlight"], offsetx-1, y-1)
+		end
+	
+	end
+
+end
+
+function Renderer:clickOnSpellList(x, y)
+
+	if y > 316 then
+		return
+	end	
+
+	local offsetx = 328
+	local offsety = 284
+
+	for i = 1, #party.spells do
+		local yy = offsety - (i-1)*34
+		if intersect(x, y, offsetx, yy, 32, 32) then
+			if party:castSpell(party.spells[i]) then
+				subState = SubStates.IDLE
+				local spell = spelltemplates:get(party.spells[i])
+				self.currentSpell = spell
+				self.showSpellEffect = true
+				Timer.script(function(wait)
+					wait(0.1)
+					renderer.showSpellEffect = false
+				end)				
+			end
+			self.currentHoverSpell = nil
+			return true
+		end
+	end
+
+	self.currentHoverSpell = nil
+	subState = SubStates.IDLE
+
+	return false
 
 end
 
@@ -494,7 +707,7 @@ function Renderer:drawNPC()
 	local text
 	local offsety
 	local imageid
-	local portraitid = "npc-portrait-guard"
+	local portraitid = self.currentNPC.properties.imageid
 
 	if self.currentNPC.properties.state == 1 then
 		text = self.currentNPC.properties.text
@@ -527,16 +740,99 @@ function Renderer:drawNPC()
 
 end
 
+function Renderer:drawVendor() 
+
+	local mx, my = love.mouse.getPosition()
+	
+	local text = self.currentVendor.text
+	local name = self.currentVendor.name
+	local offsetx = 244
+	local offsety = 65
+	local portraitid = self.currentVendor.imageid
+
+	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
+
+	self.buttons["close-vendor"]:isOver(mx, my)
+
+	love.graphics.draw(assets.images["npc-background-large"], 160, offsety)	
+	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+	self:drawText(244,offsety + 8, name, {1,1,1,1}, "left")
+
+	for i = 1, #wrappedtext do
+		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+	end
+
+	-- draw items in stock
+	
+	self.currentHoverItem = nil
+	
+	for i = 1, #self.currentVendor.stock do
+		local item
+		if self.currentVendor.id == "alchemist" then
+			item = itemtemplates:get(self.currentVendor.stock[i])
+		elseif self.currentVendor.id == "magicshop" then
+			item = spelltemplates:get(self.currentVendor.stock[i])
+		end
+		local x = offsetx + (i-1)*34
+		local y = 188
+		love.graphics.draw(assets.images[item.id], x, y)	
+		if intersect(mx, my, x, y, 32, 32) then
+			self.currentHoverItem = item
+			love.graphics.draw(assets.images["inventory-slot-highlight"], x-1, y-1)
+		end
+		self:drawCenteredText(x+16, y+34, self.currentVendor.prices[i], {1,1,1,1})		
+	end
+
+	love.graphics.draw(self.buttons["close-vendor"]:getImage(),  self.buttons["close-vendor"].x, self.buttons["close-vendor"].y)
+
+	love.graphics.draw(assets.images["coins"], 167, 228)
+	self:drawDigits(party.gold, 190,250)
+	love.graphics.setFont(assets.fonts["main"]);
+
+end
+
+function Renderer:clickOnVendor(x, y)
+
+	if self.buttons["close-vendor"]:isOver(x, y) then
+		self.buttons["close-vendor"].trigger()
+		return
+	end		
+
+	local offsetx = 244
+
+	for i = 1, #self.currentVendor.stock do
+		local xx = offsetx + (i-1)*34
+		local yy = 188
+		if intersect(x, y, xx, yy, 32, 32) then
+			
+			if party.gold >= self.currentVendor.prices[i] then
+				party.gold = party.gold - self.currentVendor.prices[i]
+				
+				if self.currentVendor.stock[i] == "healing-potion" then
+					party.healing_potions = party.healing_potions + 1
+				elseif self.currentVendor.stock[i] == "mana-potion" then
+					party.mana_potions = party.mana_potions + 1
+				else
+					party:addSpell(self.currentVendor.stock[i])
+				end
+				
+			end
+		end
+	end	
+
+end
+
 function Renderer:drawAntsacsVendor() 
 
 	local text = ""
 	local name = "Gurik Masiv"
 	local offsety
 	local imageid
-	local portraitid = "npc-portrait-antsacsvendor"
+	local portraitid = "npc-sorcerer-1"
 
 	if party.antsacs == 0 then
-		text = "Hey, listen! If you ever manage to kill one of those god awful beasts, could you please bring me their ant sac? It's vile I know, but it's a sought after ingredient among potion makers.\n\nI will give you some coins for the trouble."
+		text = "Hey, listen! If you ever manage to kill one of those giant ants in the forest, could you please bring me their ant sac? It's vile I know, but it's a sought after ingredient among potion makers.\n\nI will give you some coins for the trouble."
 	else
 		local str = party.antsacs == 1 and "this ant sac!" or "these ant sacs!"
 		text = "Excellent!\n\nThank you for bringing me " .. str .. "\n\nAs promised, here are some coins."
@@ -562,7 +858,6 @@ function Renderer:drawAntsacsVendor()
 	end
 
 	love.graphics.setFont(assets.fonts["main"]);
-	
 
 end
 
@@ -574,15 +869,31 @@ function Renderer:drawInventory()
 
 	love.graphics.draw(assets.images["inventory-ui"],  settings.inventoryX, settings.inventoryY)
 
-	self.buttons["close"]:isOver(mx, my)
+	if not inventoryDragSource.item then
+		self.buttons["close-inventory"]:isOver(mx, my)
+	end
 	
-	love.graphics.draw(self.buttons["close"]:getImage(),  settings.inventoryX + 380, settings.inventoryY + 216)
+	love.graphics.draw(self.buttons["close-inventory"]:getImage(),  self.buttons["close-inventory"].x, self.buttons["close-inventory"].y)
 
 	local slotsize = 33
 	local hovercell = nil
 	local showingItemStats = false
 
 	self.currentHoverItem = nil
+
+	-- trash icon
+
+	local x = settings.inventoryX + 325
+	local y = settings.inventoryY + 200
+	
+	if intersect(mx, my, x, y, slotsize, slotsize) then
+		if inventoryDragSource.item then
+			local item = itemtemplates:get(inventoryDragSource.item.id)
+			if item.slot ~= "key" then
+				love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
+			end
+		end
+	end	
 
 	-- equipment slots
 	
@@ -623,8 +934,8 @@ function Renderer:drawInventory()
 		
 			local item = itemtemplates:get(party.equipmentslots[i].id)
 
-			if item and assets.itemicons[item.id] then
-				love.graphics.draw(assets.itemicons[item.id], x+1, y+1)
+			if item and assets.images[item.id] then
+				love.graphics.draw(assets.images[item.id], x+1, y+1)
 			end
 			
 		end
@@ -666,8 +977,8 @@ function Renderer:drawInventory()
 			
 				local item = itemtemplates:get(party.inventory[row][col])
 	
-				if item and assets.itemicons[item.id] then
-					love.graphics.draw(assets.itemicons[item.id], x+1, y+1)
+				if item and assets.images[item.id] then
+					love.graphics.draw(assets.images[item.id], x+1, y+1)
 				end
 				
 			end
@@ -685,8 +996,8 @@ end
 function Renderer:clickOnInventory(mx, my)
 
 	if not inventoryDragSource.item then
-		if self.buttons["close"]:isOver(mx, my) then
-			self.buttons["close"].trigger()
+		if self.buttons["close-inventory"]:isOver(mx, my) then
+			self.buttons["close-inventory"].trigger()
 		end
 	end
 
@@ -704,6 +1015,21 @@ function Renderer:clickOnInventory(mx, my)
 		end
 	end		
 
+	-- trash icon
+
+	local x = settings.inventoryX + 325
+	local y = settings.inventoryY + 200
+	
+	if intersect(mx, my, x, y, slotsize, slotsize) then
+		if inventoryDragSource.item then
+			local item = itemtemplates:get(inventoryDragSource.item.id)
+			if item.slot ~= "key" then
+				inventoryDragSource = {}
+				assets:playSound("trash")
+			end
+		end
+	end
+	
 	-- equipment slots
 	
 	for i = 1, #party.equipmentslots do
@@ -723,6 +1049,8 @@ function Renderer:clickOnInventory(mx, my)
 			
 						inventoryDragSource = {}
 
+						assets:playSound("click-2")
+
 					else
 					
 						local item = itemtemplates:get(party.equipmentslots[i].id)
@@ -735,6 +1063,8 @@ function Renderer:clickOnInventory(mx, my)
 							src_row = row,
 							src_col = col,
 						}
+
+						assets:playSound("click-2")
 
 					end
 
@@ -754,9 +1084,10 @@ function Renderer:clickOnInventory(mx, my)
 					}
 					
 					party.equipmentslots[i].id = ""
-					
+					assets:playSound("click-2")
 				else 
 					inventoryDragSource = {}
+					assets:playSound("click-2")
 				end				
 			
 			end
@@ -782,6 +1113,7 @@ function Renderer:clickOnInventory(mx, my)
 				party.inventory[row][col] = inventoryDragSource.item.id
 			
 				inventoryDragSource = {}
+				assets:playSound("click-2")
 
 			else
 
@@ -795,6 +1127,7 @@ function Renderer:clickOnInventory(mx, my)
 					src_row = row,
 					src_col = col,
 				}				
+				assets:playSound("click-2")
 
 			end
 		
@@ -812,6 +1145,7 @@ function Renderer:clickOnInventory(mx, my)
 				}
 				
 				party.inventory[row][col] = ""
+				assets:playSound("click-2")
 				
 			else 
 				inventoryDragSource = {}
@@ -825,6 +1159,54 @@ function Renderer:clickOnInventory(mx, my)
 	
 end
 
+function Renderer:box(x, y, w, h, color, filled)
+	
+	r, g, b, a = love.graphics.getColor()
+	 
+	local oldColor = {r, g, b, a} 
+
+	local f = filled and filled == true and "fill" or "line"
+
+	love.graphics.setColor(color)
+	love.graphics.rectangle(f, x, y, w, h)
+
+	love.graphics.setColor(oldColor)
+
+end
+
+function Renderer:drawSystemMenu()
+
+	local mx, my = love.mouse.getPosition()
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	local offsety =  self.systemmenuOffsetY
+
+	self:box(230,offsety,182,185,{0,0,0,1},true)
+	self:box(230,offsety,182,185,settings.frameColor,false)
+
+	local index = 0
+	
+	for i = 1, #self.systemmenuitems do
+	
+		local x = 247
+		local y = self.systemmenuitemsOffsetY + offsety + (index*25)
+	
+		if intersect(mx, my, x, y, 145, 20) then
+			self:drawText(0, y, self.systemmenuitems[i].caption, {1,1,1,1}, "center")
+		else
+			self:drawText(0, y, self.systemmenuitems[i].caption, {1.0,.85,.75,1}, "center")
+		end
+		index = index + 1
+	
+	end	
+
+	self:drawText(0, offsety + 15, "System menu", {1,1,1,1}, "center")
+
+	love.graphics.setFont(assets.fonts["main"]);
+
+end
+
 function Renderer:drawMainmenu()
 
 	local mx, my = love.mouse.getPosition()
@@ -833,12 +1215,25 @@ function Renderer:drawMainmenu()
 
 	love.graphics.setFont(assets.fonts["mainmenu"]);
 
+	local index = 0
+	local canContinue = Game:canContinue()
+	local adjustY = canContinue and -15 or 0
+	
 	for i = 1, #self.menuitems do
 	
-		if intersect(mx, my, self.menuitems[i].x, self.menuitems[i].y, 100, 20) then
-			self:drawText(self.menuitems[i].x, self.menuitems[i].y, self.menuitems[i].caption, {1,1,1,1})
+		if not canContinue and i == 2 then
+			-- skip this menuitem
 		else
-			self:drawText(self.menuitems[i].x, self.menuitems[i].y, self.menuitems[i].caption, {1.0,.85,.75,1})
+
+			local x = self.menuitemsOffsetX
+			local y = self.menuitemsOffsetY + adjustY + (index*30)
+		
+			if not self.doShowSystemMenu and intersect(mx, my, x, y, 100, 20) then
+				self:drawText(x, y, self.menuitems[i].caption, {1,1,1,1})
+			else
+				self:drawText(x, y, self.menuitems[i].caption, {1.0,.85,.75,1})
+			end
+			index = index + 1
 		end
 	
 	end
@@ -849,21 +1244,10 @@ function Renderer:drawMainmenu()
 
 end
 
-function Renderer:onSpellSelect(mx, my)
-
-	-- TO-DO: add list of spells that can be clicked on
-
-	if my < 10 then
-		self.doShowSpellList = false
-		subState = SubStates.IDLE
-	end
-	
-end
-
 function Renderer:showPlayerStats()
 	
-	love.graphics.draw(assets.itemicons["coins"], settings.inventoryX+8, settings.inventoryY+164)
-	love.graphics.draw(assets.itemicons["antsac"], settings.inventoryX+86, settings.inventoryY+164)
+	love.graphics.draw(assets.images["coins"], settings.inventoryX+8, settings.inventoryY+164)
+	love.graphics.draw(assets.images["antsac"], settings.inventoryX+86, settings.inventoryY+164)
 
 	self:drawDigits(party.gold, 150, 236)
 	self:drawDigits(party.antsacs, 228, 236)
@@ -874,28 +1258,42 @@ function Renderer:showPlayerStats()
 	self:drawText(251, 228+28, "ATK", {1,1,1,1})
 	self:drawText(251, 228+42, "DEF", {1,1,1,1})
 	
+	self:drawText(298, 228, ":", {1,1,1,1})
+	self:drawText(298, 228+14, ":", {1,1,1,1})
+	self:drawText(298, 228+28, ":", {1,1,1,1})
+	self:drawText(298, 228+42, ":", {1,1,1,1})
 
-	self:drawText(316, 228,    ": " .. party.stats.health, {1,1,1,1})
-	self:drawText(316, 228+14,    ": " .. party.stats.mana, {1,1,1,1})
-	self:drawText(316, 228+28, ": " .. party.stats.attack, {1,1,1,1})
-	self:drawText(316, 228+42, ": " .. party.stats.defence, {1,1,1,1})
+	local r = 248/255
+	local g = 197/255
+	local b = 58/255
+
+	self:drawText(304, 228, party.stats.health, {r,g,b,1})
+	self:drawText(304, 228+14, party.stats.mana, {r,g,b,1})
+	self:drawText(304, 228+28, party.stats.attack, {r,g,b,1})
+	self:drawText(304, 228+42, party.stats.defence, {r,g,b,1})
 	
 end
 
 function Renderer:showItemHoverStats(item)
 		
-	if item and assets.itemicons[item.id] then
+	if item and assets.images[item.id] then
 
 		local mx, my = love.mouse.getPosition()
 
 		local str = ""
 		for key,value in pairs(item.modifiers) do
 			local mod = item.modifiers[key]
-			str = str .. key:upper() .. ": " .. value .. "   "
+			if key == "health" or key == "mana" then
+				str = str .. key:upper() .. ": " .. value .. "%  "
+			else
+				str = str .. key:upper() .. ": " .. value .. "   "
+			end
 		end
 
-		local statslen = assets.fonts["main"]:getWidth(str.trim(str))+15
-		local namelen = assets.fonts["main"]:getWidth(item.name.trim(item.name))+15
+		local boxheight = str ~= "" and 40 or 25
+
+		local statslen = assets.fonts["main"]:getWidth(str.trim(str))+10
+		local namelen = assets.fonts["main"]:getWidth(item.name.trim(item.name))+10
 
 		local l = namelen
 
@@ -908,7 +1306,58 @@ function Renderer:showItemHoverStats(item)
 		end
 		
 		love.graphics.setColor(0,0,0,0.75)
-		love.graphics.rectangle("fill",mx+10,my-40, l, 40)
+		love.graphics.rectangle("fill",mx+10,my-40, l, boxheight)
+		love.graphics.setColor(1,1,1,.5)
+		love.graphics.rectangle("line",mx+10,my-40, l, boxheight)
+		love.graphics.setColor(1,1,1,1)
+		
+		self:drawText(mx+15, my-35, item.name, {255/255,240/255,137/255,1})
+		
+		if str ~= "" then
+			self:drawText(mx+15, my-20, str, {1,1,1,1})
+		end
+		
+	end
+	
+end
+
+function Renderer:showSpellHoverStats(item)
+		
+	if item and assets.images[item.id] then
+
+		local mx, my = love.mouse.getPosition()
+
+		local str = ""
+		for key,value in pairs(item.modifiers) do
+			local mod = item.modifiers[key]
+			if key == "health" or key == "mana" then
+				str = str .. key:upper() .. ": " .. value .. "%  "
+			else
+				str = str .. key:upper() .. ": " .. value .. "   "
+			end
+		end
+
+		str = str .. "MANA COST: " .. item.manacost
+
+		local boxheight = str ~= "" and 40 or 25
+
+		local statslen = assets.fonts["main"]:getWidth(str.trim(str))+10
+		local namelen = assets.fonts["main"]:getWidth(item.name.trim(item.name))+10
+
+		local l = namelen
+
+		if namelen < statslen then
+			l = statslen
+		end
+
+		if mx + l + 15 > screen.width then
+			mx = screen.width - (l + 15)
+		end
+		
+		love.graphics.setColor(0,0,0,0.75)
+		love.graphics.rectangle("fill",mx+10,my-40, l, boxheight)
+		love.graphics.setColor(1,1,1,.5)
+		love.graphics.rectangle("line",mx+10,my-40, l, boxheight)
 		love.graphics.setColor(1,1,1,1)
 		
 		self:drawText(mx+15, my-35, item.name, {255/255,240/255,137/255,1})
@@ -922,8 +1371,6 @@ function Renderer:showItemHoverStats(item)
 end
 
 function Renderer:drawAutomapper()
-
-	self:drawText(10, 340, tostring(love.timer.getFPS()), {1,1,1,1})
 
 	love.graphics.setColor(1,1,1,1)
 
@@ -1014,7 +1461,7 @@ function Renderer:drawUI()
 	local leftHand = party:getLeftHand()
 	
 	if leftHand then
-		love.graphics.draw(assets.itemicons[leftHand.id], 282,321)
+		love.graphics.draw(assets.images[leftHand.id], 282,321)
 	else
 		love.graphics.draw(assets.images["lefthand-background"], 282,321)
 	end
@@ -1028,7 +1475,7 @@ function Renderer:drawUI()
 	local rightHand = party:getrightHand()
 
 	if rightHand then
-		love.graphics.draw(assets.itemicons[rightHand.id], 329,321)
+		love.graphics.draw(assets.images[rightHand.id], 329,321)
 	else
 		love.graphics.draw(assets.images["spellbook-background"], 329,321)
 	end
@@ -1040,7 +1487,7 @@ function Renderer:drawUI()
 	-- healing potions
 
 	if party.healing_potions > 0 then
-		love.graphics.draw(assets.itemicons["healing-potion"], 239,325)
+		love.graphics.draw(assets.images["healing-potion"], 239,325)
 		local x,y = 262, 347
 		if party.healing_potions < 10 then
 			love.graphics.draw(assets.images["digits"], assets.digit_quads[party.healing_potions], x, y)
@@ -1057,7 +1504,7 @@ function Renderer:drawUI()
 	-- mana potions
 
 	if party.mana_potions > 0 then
-		love.graphics.draw(assets.itemicons["mana-potion"], 372,325)
+		love.graphics.draw(assets.images["mana-potion"], 372,325)
 		local x,y = 395, 347
 		if party.mana_potions < 10 then
 			love.graphics.draw(assets.images["digits"], assets.digit_quads[party.mana_potions], x, y)
@@ -1435,9 +1882,31 @@ function Renderer:showAutomapper(value)
 					
 end
 
+function Renderer:showSystemMenu(value)
+
+	assets:playSound("window-open")
+
+	self.currentHoverItem = nuil
+
+	self.doShowSystemMenu = value
+
+	if not value then
+		subState = SubStates.IDLE
+	else
+		subState = SubStates.SYSTEM_MENU
+	end
+	
+end
+
 function Renderer:inventoryShowing()
 
 	return self.doShowInventory
+
+end
+
+function Renderer:systemMenuShowing()
+
+	return self.doShowSystemMenu
 
 end
 
@@ -1457,9 +1926,14 @@ function Renderer:onStartButtonClick()
 	Game:startGame()
 end
 
+function Renderer:onContinueButtonClick()
+
+end
+
 function Renderer:onSettingsButtonClick()
 
-	gameState = GameStates.SETTINGS
+--	gameState = GameStates.SETTINGS
+	self:showSystemMenu(true)
 
 end
 
@@ -1481,6 +1955,24 @@ function Renderer:onQuitButtonClick()
 
 end
 
+function Renderer:onBackToMenuButtonClick()
+
+	self:showSystemMenu(false)
+
+	assets:stopMusic(level.data.tileset)
+	assets.music["mainmenu"]:setVolume(settings.musicVolume)
+	assets:playMusic("mainmenu")
+	
+	gameState = GameStates.MAIN_MENU
+	subState = SubStates.IDLE
+
+end
+
+function Renderer:onCloseVendorButtonClick()
+
+	subState = SubStates.IDLE
+
+end
 
 function Renderer:showPopup(text, sound)
 	
@@ -1495,7 +1987,7 @@ end
 
 function Renderer:showSpellList()
 
-	self.doShowSpellList = true
+	subState = SubStates.SELECT_SPELL
 
 end
 
@@ -1516,9 +2008,19 @@ function Renderer:showVendor(id)
 			assets:playSound("vendor-"..id)
 		end
 		subState = SubStates.VENDOR_ANTSACS
+	else
+		self.currentVendor = vendors.vendor[id]
+		subState = SubStates.VENDOR
 	end
 
 end
 
+function Renderer:showFoundLoot(gold, items)
+
+	self.foundloot = {gold = gold, items = items}
+	
+	subState = SubStates.FOUND_LOOT
+
+end
 
 return Renderer

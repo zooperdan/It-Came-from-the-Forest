@@ -89,7 +89,7 @@ function getByType(id, name, layer) {
 		var data = new Array();
 		
 		for (var i = 0; i < layer.objectCount; ++i) {
-			
+
 			var props = layer.objects[i].resolvedProperties();
 			
 			if (layer.objects[i].tile.type == id) {
