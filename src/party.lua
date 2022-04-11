@@ -2,8 +2,8 @@ local Party = class('Party')
 
 function Party:initialize()
 
-	self.leftHandSlotIndex = 7
-	self.rightHandSlotIndex = 5
+	self.leftHandSlotIndex = 8
+	self.rightHandSlotIndex = 6
 
 	self.direction = 0
 	self.x = 1
@@ -15,15 +15,38 @@ function Party:initialize()
 	
 	self.ticksElapsed = 0
 
-	self.spells = {}
-	--self.spells = {"lesser-heal", "full-heal", "firebolt", "fireball", "town-portal"}
-	
+	self.cooldownDelays = {[1] = 2, [2] = 4, [3] = 8, [4] = 8}
+	self.cooldownCounters = {[1] = 0, [2] = 0, [3] = 0, [4] = 0}
+
 	self.basestats =  {
-		attack = 1,
+		attack = 20,
 		defence = 1,
 		health_max = 100,
 		mana_max = 100,
 	}
+
+	self.equipmentslots =  {
+		{ type = "neck", x = 7, y = 7 },
+		{ type = "head", x = 46, y = 7 },
+		{ type = "back", x = 7, y = 45 },
+		{ type = "torso", x = 46, y = 45 },
+		{ type = "hands", x = 85, y = 45 },
+		{ type = "offhand", x = 7, y = 83 },
+		{ type = "waist", x = 46, y = 83 },
+		{ type = "weapon", x = 85, y = 83 },
+		{ type = "compass", x = 7, y = 122 },
+		{ type = "map", x = 85, y = 122 },
+		{ type = "feet", x = 46, y = 161 },
+		{ type = "finger", x = 7, y = 200 },
+		{ type = "finger", x = 46, y = 200 },
+		{ type = "finger", x = 85, y = 200 },
+		
+	}
+	
+	-- saved properties
+
+	self.spells = {}
+	self.mappedsquares = {}
 	
 	self.stats =  {
 		attack = 1,
@@ -34,32 +57,31 @@ function Party:initialize()
 		mana_max = 100,
 	}
 
-	self.cooldownDelays = {[1] = 2, [2] = 4, [3] = 8, [4] = 8}
-	self.cooldownCounters = {[1] = 0, [2] = 0, [3] = 0, [4] = 0}
-
 	self.inventory = {
-		{"key-1", "key-2", "", "", "", "", "", ""},
+		{"key-1", "key-2", "compass", "map", "", "", "", ""},
 		{"", "", "", "", "", "", "", ""},
 		{"", "", "", "", "", "", "", ""},
 		{"", "", "", "", "", "", "", ""},
 		{"", "", "", "", "", "", "", ""},
 	}
 	
-	self.equipmentslots =  {
-		{ id = "", type = "back", x = 7, y = 46 },
-		{ id = "", type = "head", x = 46, y = 7 },
-		{ id = "", type = "neck", x = 7, y = 7 },
-		{ id = "", type = "torso", x = 46, y = 46 },
-		{ id = "spellbook-1", type = "offhand", x = 7, y = 89 },
-		{ id = "", type = "waist", x = 46, y = 89 },
-		{ id = "sword-5", type = "weapon", x = 85, y = 89 },
-		{ id = "", type = "hands", x = 85, y = 46 },
-		{ id = "", type = "feet", x = 46, y = 163 },
-		{ id = "", type = "finger", x = 7, y = 200 },
-		{ id = "", type = "finger", x = 46, y = 200 },
-		{ id = "", type = "finger", x = 85, y = 200 },
+	self.equipped =  {
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = "sword-5"},
+		{ id = ""},
+		{ id = "map"},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
 	}
-
+	
 end
 
 function Party:update(dt)
@@ -75,7 +97,7 @@ function Party:update(dt)
 
 end
 
-function Party:attackWithMelee()
+function Party:attackWithMelee(enemy)
 
 	local enemies = Game.enemies
 
@@ -84,7 +106,7 @@ function Party:attackWithMelee()
 	-- check if still cooling down
 
 	if self.cooldownCounters[handId] > 0 then
-		return
+		return false
 	end
 
 	-- make sure there is a weapon wielded
@@ -94,13 +116,11 @@ function Party:attackWithMelee()
 
 	self.cooldownCounters[handId] = self.cooldownDelays[handId]
 	
-	local enemy = level:getFacingEnemy()
-	
 	if not enemy then
 		if handId == 1 then
 			assets:playSound("player-miss")
 		end
-		return
+		return false
 	end
 
 	local damage
@@ -109,7 +129,7 @@ function Party:attackWithMelee()
 		
 	if math.random() > 0.75 then
 		assets:playSound("player-miss")
-		return
+		return false
 	end
 	
 	assets:playSound("player-attack")
@@ -118,8 +138,6 @@ function Party:attackWithMelee()
 	
 	damage = randomizeDamage(damage)
 	
-
-
 	print("Player:" .. damage)
 
 	enemy.properties.health = enemy.properties.health - damage
@@ -138,9 +156,12 @@ function Party:attackWithMelee()
 		for i = 1, #enemies do
 			if enemies[i].enemy == enemy then
 				enemies[i]:die()
+				return true
 			end
 		end
 	end
+	
+	return false
 	
 end
 
@@ -215,11 +236,11 @@ function Party:updateStats()
 	local hpmax_mod = 0
 	local mpmax_mod = 0
 	
-	for i = 1, #self.equipmentslots do
+	for i = 1, #self.equipped do
 		
-		if self.equipmentslots[i].id ~= "" then
+		if self.equipped[i].id ~= "" then
 			
-			local item = itemtemplates:get(self.equipmentslots[i].id)
+			local item = itemtemplates:get(self.equipped[i].id)
 			
 			if item.modifiers.atk then atk_mod = atk_mod + item.modifiers.atk end
 			if item.modifiers.def then def_mod =def_mod + item.modifiers.def end
@@ -301,8 +322,8 @@ end
 
 function Party:getLeftHand()
 
-	if self.equipmentslots[self.leftHandSlotIndex].id ~= "" then
-		return itemtemplates:get(self.equipmentslots[self.leftHandSlotIndex].id)
+	if self.equipped[self.leftHandSlotIndex].id ~= "" then
+		return itemtemplates:get(self.equipped[self.leftHandSlotIndex].id)
 	else
 		return nil
 	end
@@ -311,8 +332,8 @@ end
 
 function Party:getrightHand()
 
-	if self.equipmentslots[self.rightHandSlotIndex].id ~= "" then
-		return itemtemplates:get(self.equipmentslots[self.rightHandSlotIndex].id)
+	if self.equipped[self.rightHandSlotIndex].id ~= "" then
+		return itemtemplates:get(self.equipped[self.rightHandSlotIndex].id)
 	else
 		return nil
 	end
@@ -414,6 +435,140 @@ function Party:usePotion(index)
 	
 	assets:playSound("drink-potion")
 	
+end
+
+function Party:hasCompass()
+
+	return self.equipped[9].id ~= ""
+
+end
+
+function Party:hasMap()
+
+	return self.equipped[10].id ~= ""
+
+end
+
+function Party:seenSquare(x, y)
+
+	if self.mappedsquares and self.mappedsquares[level.data.id] and self.mappedsquares[level.data.id][x] and self.mappedsquares[level.data.id][x][y] then
+		return self.mappedsquares[level.data.id][x][y] == 1
+	end
+
+	return false
+
+end
+
+function Party:squareIsSeen(x, y)
+
+
+	if not self.mappedsquares then
+		self.mappedsquares = {}
+	end
+	
+	if not self.mappedsquares[level.data.id] then
+		self.mappedsquares[level.data.id] = {}
+	end	
+	
+	for row = -1, 1 do
+		for col = -1, 1 do
+		
+			if not self.mappedsquares[level.data.id][x + col] then
+				self.mappedsquares[level.data.id][x + col] = {}
+			end
+			
+			self.mappedsquares[level.data.id][x + col][y + row] = 1	
+		
+		end
+	end
+
+end
+
+function Party:isSavegameAtSlot(index)
+
+	return love.filesystem.getInfo("saves/slot" .. index .. ".dat")
+
+end
+
+function Party:loadGameFromSlot(index)
+
+	file, err = io.open("saves/slot"..index..".dat", "rb")
+	
+	if not err and file then
+		
+		local content = file:read("*all")
+		
+		file:close()
+		
+		local savedata = lume.deserialize(content)
+
+		globalvariables.list = table.shallow_copy(savedata.vars)
+		self.gold = savedata.gold
+		self.antsacs = savedata.antsacs
+		self.healing_potions = savedata.healing_potions
+		self.mana_potions = savedata.mana_potions
+		
+		self.spells = table.shallow_copy(savedata.spells)
+		self.mappedsquares = table.shallow_copy(savedata.mapped)
+		self.inventory = table.shallow_copy(savedata.inventory)
+		self.equipped = table.shallow_copy(savedata.equipped)
+		self.stats = table.shallow_copy(savedata.stats)
+
+		gameState = GameStates.LOADING_LEVEL
+		fadeColor = {1,1,1}
+		fadeMusicVolume.v = settings.musicVolume
+		
+		Game.teleportTarget =  {
+			x = savedata.x-1,
+			y = savedata.y-1,
+			direction = savedata.direction
+		}		
+		
+		Timer.script(function(wait)
+			Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+			end)
+			Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
+				assets:stopMusic(level.data.tileset)
+				Game:loadArea(savedata.levelid)
+			end)
+		end)
+		
+		return true
+
+	end
+
+end
+
+function Party:saveGameAtSlot(index)
+
+	local savedata = {
+		vars = globalvariables.list,
+		mapped = self.mappedsquares,
+		spells = self.spells,
+		inventory = self.inventory,
+		equipped = self.equipped,
+		stats = self.stats,
+		direction =	self.direction,
+		x =	self.x,
+		y = self.y,
+		gold = self.gold,
+		antsacs = self.antsacs,
+		healing_potions = self.healing_potions,
+		mana_potions = self.mana_potions,
+		levelid = level.data.id
+	}
+	
+	local serialized = lume.serialize(savedata)
+	
+	file, err = io.open("saves/slot"..index..".dat", "wb")
+	
+	if not err and file then
+		file:write(serialized)
+		file:close()
+	end
+	
+	return true
+
 end
 
 return Party

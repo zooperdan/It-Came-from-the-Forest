@@ -56,7 +56,7 @@ end
 
 function GlobalVariables:dump()
 
-	print(inspect(self.list))
+	return lume.serialize(self.list)
 
 end
 

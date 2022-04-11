@@ -32,7 +32,16 @@ function love.keypressed(key)
 
 	game:handleInput(key)
 	
+	settings.debug = love.keyboard.isDown("rctrl")
+	
 end
+
+function love.keyreleased(key)
+
+	settings.debug = love.keyboard.isDown("rctrl")
+	
+end
+
 
 function love.mousepressed(x, y, button, istouch)
 	game:handleMousePressed(x, y, button, istouch)

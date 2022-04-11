@@ -262,7 +262,14 @@ function Enemy:canWalk(x,y)
 	if level:getObject(level.data.npcs, x,y) then return false end
 	if level:getObject(level.data.chests, x,y) then	return false end
 	if level:getObject(level.data.wells, x,y) then return false	end	
-	if level:getObject(level.data.staticprops, x,y) then return false end		
+	
+	local prop = level:getObject(level.data.staticprops, x,y)
+	if prop then
+		if prop.properties.name == "city-garden" then
+			return true
+		end
+		return false
+	end
 	
 	return true
 

@@ -99,7 +99,7 @@ function Assets:load()
 	self.compass_quads = {}
 	
 	for i = 0, 3 do
-		local quad = love.graphics.newQuad(i*5, 0, 5, 5, self.images["compass"]:getWidth(), self.images["compass"]:getHeight())
+		local quad = love.graphics.newQuad(i*70, 0, 70, 18, self.images["compass-letters"]:getWidth(), self.images["compass-letters"]:getHeight())
 		self.compass_quads[i] = quad
 	end
 	
@@ -110,6 +110,15 @@ function Assets:load()
 	for i = 0, 9 do
 		local quad = love.graphics.newQuad(i*5, 0, 5, 6, self.images["digits"]:getWidth(), self.images["digits"]:getHeight())
 		self.digit_quads[i] = quad
+	end
+	
+	-- generate quads for automapper
+	
+	self.automapper_quads = {}
+	
+	for i = 0, 29 do
+		local quad = love.graphics.newQuad(i*6, 0, 6, 6, self.images["automapper-sprites"]:getWidth(), self.images["automapper-sprites"]:getHeight())
+		self.automapper_quads[i] = quad
 	end
 	
 end

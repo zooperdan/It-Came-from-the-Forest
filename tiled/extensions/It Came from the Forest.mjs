@@ -279,6 +279,7 @@ var customMapFormat = {
 		var buffer = '{\n';
 
 		buffer += `["name"]="${map.property("name")}",\n`;
+		buffer += `["id"]="${map.property("id")}",\n`;
 		buffer += `["tileset"]="${map.property("tileset")}",\n`;
 		buffer += `["mapSize"]=${map.width},\n`;
 
@@ -416,6 +417,7 @@ var customMapFormat = {
 				buffer += getByType("Well", "wells", layer);
 				buffer += getByType("NPC", "npcs", layer);
 				buffer += getByType("Trigger", "triggers", layer);
+				buffer += getByType("Teleporter", "teleporters", layer);
 				buffer += getByType("Sign", "signs", layer);
 				buffer += getByType("Door", "doors", layer);
 				buffer += getByType("StaticProp", "staticprops", layer);

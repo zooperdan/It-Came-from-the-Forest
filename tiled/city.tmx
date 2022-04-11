@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="189">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="305">
  <editorsettings>
   <export target="../src/files/areas/city.lua" format="custom"/>
  </editorsettings>
@@ -12,162 +12,195 @@
  <layer id="1" name="Walls" width="32" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,0,0,0,0,1,1,1,0,
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,0,0,
+0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,
+0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,0,1,1,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,1,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,0,1,1,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,
+0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,
+0,0,0,0,0,0,0,1,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,1,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,0,1,0,1,1,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,0,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,0,1,1,1,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,
-0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,
+0,1,0,0,0,1,0,0,2,1,1,1,1,0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,
+0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,1,1,1,1,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,1,1,0,0,0,0,0,0,0,2,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,0,0,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer id="5" name="BoundaryWalls" width="32" height="32">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,33,33,33,33,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,33,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,33,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,33,33,0,0,0,0,0,0,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,
-0,0,33,33,33,33,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,33,0,0,33,0,0,0,0,0,0,33,33,33,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,33,0,33,33,33,33,33,0,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,33,0,0,33,33,0,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,33,33,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,33,0,0,0,33,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,
+33,0,0,0,0,33,33,33,0,0,33,33,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,0,0,0,33,0,33,0,0,0,0,33,33,0,0,0,0,0,0,33,33,33,33,33,33,33,0,0,0,33,
+33,0,0,0,0,0,33,33,33,33,33,33,0,0,33,0,33,0,0,0,0,33,0,0,0,0,0,33,33,0,0,33,
+33,0,0,0,0,33,33,33,33,0,0,33,33,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,33,0,0,33,
+33,0,0,0,0,33,0,0,0,0,0,0,33,0,33,0,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,33,
+33,0,0,0,0,33,0,0,0,0,0,0,33,33,0,0,0,0,33,0,0,0,0,0,0,0,0,0,33,0,0,33,
+33,0,0,0,33,33,0,0,0,0,0,0,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,33,33,33,33,
+33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,0,0,33,0,0,0,0,0,0,33,33,33,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,0,33,33,33,33,33,0,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,0,0,33,33,0,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,0,0,33,0,0,0,33,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,33,33,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,0,0,0,0,33,0,33,33,33,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,0,0,0,0,33,0,0,33,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,0,0,0,0,33,33,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,0,0,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,0,0,0,0,33,0,0,0,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-0,0,0,0,0,0,33,0,0,33,33,33,33,33,33,0,33,33,33,33,0,0,0,0,0,0,0,0,0,33,33,33,
-0,0,0,0,0,0,33,33,33,33,33,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,33,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,33,33,33,33,0,0,0,0,0,33,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,33,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,33,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,33,33,33,33,33,33,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+33,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,33,33,0,0,33,33,33,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,33,0,0,33,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,33,0,33,33,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,0,0,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,33,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,33,33,0,0,33,0,0,0,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,33,33,33,33,0,0,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,33,33,33,
+33,0,0,0,0,0,33,33,33,33,33,33,0,0,0,0,33,0,0,33,0,0,0,0,0,0,0,0,0,33,0,33,
+33,0,0,0,0,0,33,0,0,0,0,33,0,0,33,0,0,0,0,33,33,33,33,33,0,0,0,0,0,33,0,33,
+33,0,0,0,0,0,33,0,0,0,33,33,0,33,33,33,33,0,0,0,33,0,0,33,0,0,0,0,0,33,0,33,
+33,0,0,33,33,0,0,0,0,0,0,33,0,0,33,0,33,0,33,0,0,0,0,33,0,0,0,0,0,33,0,33,
+33,0,0,33,0,0,0,0,0,0,0,33,33,0,33,0,33,33,0,0,0,0,0,33,33,0,0,33,33,33,0,33,
+33,0,0,33,0,0,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,0,0,33,33,33,33,33,33,33,33,0,0,33,33,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="6" x="576" y="608" width="32" height="32"/>
-  <object id="116" gid="21" x="640" y="704" width="32" height="32">
+  <object id="116" gid="39" x="640" y="704" width="32" height="32">
    <properties>
     <property name="id" value="city_a3d1d2c1-d307-c238-a7ad-5fe997ab90ec"/>
    </properties>
   </object>
-  <object id="147" gid="21" x="352" y="704" width="32" height="32">
+  <object id="147" gid="39" x="352" y="704" width="32" height="32">
    <properties>
     <property name="id" value="city_1e71a8b7-0440-dc46-a062-19baaf608332"/>
     <property name="vendor" value=""/>
    </properties>
   </object>
-  <object id="159" gid="21" x="288" y="288" width="32" height="32">
+  <object id="239" gid="37" x="128" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="city_289a3d9f-839a-0c69-3af1-85a592a81503"/>
+    <property name="vendor" value=""/>
+   </properties>
+  </object>
+  <object id="240" gid="38" x="32" y="704" width="32" height="32">
+   <properties>
+    <property name="id" value="city_2d51e6c0-68dd-ed35-2a5c-882dc4ccf3ce"/>
+    <property name="vendor" value=""/>
+   </properties>
+  </object>
+  <object id="159" gid="39" x="288" y="288" width="32" height="32">
    <properties>
     <property name="id" value="city_8f011a04-1083-984b-d81e-0bc9bc9b581b"/>
    </properties>
   </object>
-  <object id="117" gid="21" x="800" y="672" width="32" height="32">
+  <object id="117" gid="40" x="800" y="672" width="32" height="32">
    <properties>
     <property name="id" value="city_7a17c9c6-516c-4ebf-7f85-53f83e66581c"/>
+    <property name="vendor" value="alchemist"/>
    </properties>
   </object>
-  <object id="149" gid="21" x="864" y="800" width="32" height="32">
+  <object id="149" gid="38" x="864" y="800" width="32" height="32">
    <properties>
     <property name="id" value="city_69ac9e27-f28d-40f9-b540-2b73744e6d06"/>
    </properties>
   </object>
-  <object id="150" gid="21" x="832" y="864" width="32" height="32">
+  <object id="150" gid="39" x="832" y="864" width="32" height="32">
    <properties>
     <property name="id" value="city_573db56c-5df2-48b1-d7ca-db76bcd84f95"/>
    </properties>
   </object>
-  <object id="118" gid="21" x="864" y="576" width="32" height="32">
+  <object id="118" gid="39" x="864" y="576" width="32" height="32">
    <properties>
     <property name="id" value="city_95aac015-63ef-1b7a-6651-45570ea4ed5a"/>
    </properties>
   </object>
-  <object id="119" gid="21" x="704" y="640" width="32" height="32">
+  <object id="119" gid="38" x="704" y="640" width="32" height="32">
    <properties>
     <property name="id" value="city_04287095-cf2c-b596-fc6d-d44069c018aa"/>
    </properties>
   </object>
-  <object id="120" gid="21" x="640" y="640" width="32" height="32">
+  <object id="120" gid="37" x="640" y="640" width="32" height="32">
    <properties>
     <property name="id" value="city_c5ab9d85-57cf-1d44-b7a6-12a4830c2ecd"/>
-    <property name="vendor" value="magicshop"/>
+    <property name="vendor" value=""/>
    </properties>
   </object>
-  <object id="160" gid="21" x="544" y="608" width="32" height="32">
+  <object id="160" gid="38" x="544" y="608" width="32" height="32">
    <properties>
     <property name="id" value="city_845f7ef2-9cd7-076b-4ec9-e86c823e1ccc"/>
-    <property name="vendor" value="alchemist"/>
+    <property name="vendor" value=""/>
    </properties>
   </object>
-  <object id="167" gid="21" x="480" y="576" width="32" height="32">
+  <object id="167" gid="40" x="480" y="576" width="32" height="32">
    <properties>
     <property name="id" value="city_49ca1ee3-bd57-8506-34b1-30f64c9a561e"/>
+    <property name="vendor" value="antsacs"/>
    </properties>
   </object>
-  <object id="168" gid="21" x="512" y="448" width="32" height="32">
+  <object id="168" gid="38" x="512" y="448" width="32" height="32">
    <properties>
     <property name="id" value="city_105e9430-cd7c-25ff-0356-aa6812d58c99"/>
    </properties>
   </object>
-  <object id="121" gid="21" x="608" y="384" width="32" height="32">
+  <object id="121" gid="39" x="608" y="384" width="32" height="32">
    <properties>
     <property name="id" value="city_7e200033-8f0e-4e39-0f8c-b0986db56a55"/>
-    <property name="vendor" value="antsacs"/>
+    <property name="vendor" value="tavern"/>
    </properties>
   </object>
-  <object id="122" gid="21" x="864" y="480" width="32" height="32">
+  <object id="122" gid="39" x="864" y="480" width="32" height="32">
    <properties>
     <property name="id" value="city_941a0d5b-9995-67d8-083e-ceba2c511880"/>
    </properties>
   </object>
-  <object id="123" gid="21" x="864" y="384" width="32" height="32">
+  <object id="189" gid="39" x="864" y="192" width="32" height="32">
+   <properties>
+    <property name="id" value="city_b556a149-7628-5ded-40a8-4c47c35d2997"/>
+   </properties>
+  </object>
+  <object id="190" gid="39" x="736" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="city_69312891-2261-6a93-118d-072568ff954d"/>
+   </properties>
+  </object>
+  <object id="191" gid="38" x="384" y="672" width="32" height="32">
+   <properties>
+    <property name="id" value="city_802b90c1-b9a0-e529-9f96-7252c950d355"/>
+   </properties>
+  </object>
+  <object id="192" gid="39" x="192" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="city_aeb3b073-f8c5-7c36-b821-6723ff7a33ce"/>
+   </properties>
+  </object>
+  <object id="123" gid="38" x="864" y="384" width="32" height="32">
    <properties>
     <property name="id" value="city_3707e5de-caf0-75d6-f137-addd4a252ca7"/>
    </properties>
   </object>
-  <object id="124" gid="21" x="832" y="448" width="32" height="32">
+  <object id="124" gid="40" x="832" y="448" width="32" height="32">
    <properties>
     <property name="id" value="city_2271f555-cccb-d49d-fe9e-5c1c7613866c"/>
    </properties>
   </object>
-  <object id="125" gid="21" x="736" y="352" width="32" height="32">
+  <object id="125" gid="37" x="736" y="352" width="32" height="32">
    <properties>
     <property name="id" value="city_53a9e304-b3ec-871b-b6dd-0caf0fba9c8b"/>
    </properties>
@@ -195,6 +228,18 @@
     <property name="targety" type="int" value="4"/>
    </properties>
   </object>
+  <object id="243" gid="22" x="480" y="736" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="-1"/>
+    <property name="id" value="city_545bd749-21f9-0456-ef1f-4998f549f89b"/>
+    <property name="keyid" value=""/>
+    <property name="state" type="int" value="2"/>
+    <property name="targetarea" value="garden"/>
+    <property name="targetdir" type="int" value="2"/>
+    <property name="targetx" type="int" value="15"/>
+    <property name="targety" type="int" value="1"/>
+   </properties>
+  </object>
   <object id="127" gid="17" x="960" y="608" width="32" height="32">
    <properties>
     <property name="id" value="city_89eefd9a-f595-2b34-5b8d-4869b337c877"/>
@@ -207,18 +252,6 @@
     <property name="keyid" value="key-1"/>
     <property name="loot" value="dagger-1:ring-1"/>
     <property name="state" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="128" gid="20" x="640" y="512" width="32" height="32">
-   <properties>
-    <property name="direction" type="int" value="0"/>
-    <property name="id" value="city_ce1c8989-8d0c-1d0a-f3f4-8c678b0e603f"/>
-   </properties>
-  </object>
-  <object id="169" gid="20" x="640" y="512" width="32" height="32">
-   <properties>
-    <property name="direction" type="int" value="0"/>
-    <property name="id" value="city_ce1c8989-8d0c-1d0a-f3f4-8c678b0e603f"/>
    </properties>
   </object>
   <object id="129" gid="17" x="960" y="416" width="32" height="32">
@@ -240,11 +273,13 @@
   </object>
   <object id="151" gid="8" x="288" y="416" width="32" height="32">
    <properties>
+    <property name="gold" type="int" value="0"/>
     <property name="id" value="city_4f1cda06-b79d-2a35-f00e-6f81afe3a022"/>
+    <property name="loot" value=""/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="134" gid="21" x="480" y="416" width="32" height="32">
+  <object id="134" gid="37" x="480" y="416" width="32" height="32">
    <properties>
     <property name="id" value="city_722e6944-efab-2a83-6fd5-cfe847c7824a"/>
    </properties>
@@ -297,9 +332,13 @@
   </object>
   <object id="162" gid="14" x="64" y="544" width="32" height="32">
    <properties>
+    <property name="criterias" value=""/>
+    <property name="gold" type="int" value="5"/>
     <property name="id" value="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015"/>
     <property name="imageid" value="npc-guard"/>
     <property name="name" value="City guard"/>
+    <property name="questdelivertext" value="Balle"/>
+    <property name="questdonetext" value="Mongis"/>
     <property name="sound" value="npc-1"/>
     <property name="text" value="Don't be trying no funny business, ya hear?"/>
    </properties>
@@ -307,11 +346,6 @@
   <object id="153" gid="34" x="960" y="512" width="32" height="32">
    <properties>
     <property name="id" value="city_4eadbf5e-c047-c6dc-1c8f-c70aff473217"/>
-   </properties>
-  </object>
-  <object id="172" gid="34" x="32" y="512" width="32" height="32">
-   <properties>
-    <property name="id" value="city_92b1270e-92d5-55c2-28bf-0c360fded85e"/>
    </properties>
   </object>
   <object id="177" gid="34" x="224" y="640" width="32" height="32">
@@ -337,10 +371,10 @@
     <property name="targety" type="int" value="19"/>
    </properties>
   </object>
-  <object id="175" gid="23" x="992" y="544" width="32" height="32">
+  <object id="175" gid="23" x="320" y="576" width="32" height="32">
    <properties>
     <property name="id" value="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6"/>
-    <property name="vars" value=""/>
+    <property name="vars" value="city_545bd749-21f9-0456-ef1f-4998f549f89b:state:1"/>
    </properties>
   </object>
   <object id="178" gid="7" x="736" y="512" width="32" height="32">
@@ -348,6 +382,22 @@
     <property name="atlasid" value="city-props"/>
     <property name="direction" type="int" value="3"/>
     <property name="id" value="city_09dd4b24-943a-f316-3b55-a925d8d2e428"/>
+    <property name="name" value="city-foodstall"/>
+   </properties>
+  </object>
+  <object id="244" gid="7" x="640" y="512" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="3"/>
+    <property name="id" value="city_c2cc51fb-bb00-3ab0-383f-3629a8aa3b31"/>
+    <property name="name" value="city-foodstall"/>
+   </properties>
+  </object>
+  <object id="245" gid="7" x="672" y="512" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_f4fa3f51-bddc-e91d-c7e8-816125e2f088"/>
     <property name="name" value="city-foodstall"/>
    </properties>
   </object>
@@ -365,6 +415,15 @@
     <property name="name" value="city-foodstall"/>
    </properties>
   </object>
+  <object id="304" gid="7" x="672" y="608" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="city-props"/>
+    <property name="direction" type="int" value="0"/>
+    <property name="id" value="city_f955d3fe-aab5-e04a-d0ba-7272a7828712"/>
+    <property name="name" value="notice-board"/>
+    <property name="text" value="Such handsome guys! I wonder what crimes they have committed."/>
+   </properties>
+  </object>
   <object id="180" gid="7" x="576" y="640" width="32" height="32">
    <properties>
     <property name="atlasid" value="city-props"/>
@@ -378,6 +437,7 @@
     <property name="id" value="city_69a8e3a6-8467-3768-9ef9-f970a07fb2ab"/>
     <property name="imageid" value="npc-girl"/>
     <property name="name" value="Adalie"/>
+    <property name="sound" value="girl-greetings"/>
     <property name="text" value="Hello stranger."/>
    </properties>
   </object>
@@ -386,14 +446,16 @@
     <property name="id" value="city_baa096d2-b0a6-03d7-d277-6319c0b7af8a"/>
     <property name="imageid" value="npc-peasant-1"/>
     <property name="name" value="Yahnah Bemmo"/>
+    <property name="sound" value="female-greetings"/>
     <property name="text" value=""/>
    </properties>
   </object>
-  <object id="184" gid="14" x="672" y="608" width="32" height="32">
+  <object id="184" gid="14" x="832" y="160" width="32" height="32">
    <properties>
     <property name="id" value="city_77cd3bbe-64da-259e-af22-c8bc8934b44f"/>
     <property name="imageid" value="npc-peasant-3"/>
     <property name="name" value="Brendudd Eagleroot"/>
+    <property name="sound" value="male-greetings"/>
     <property name="text" value="Hello stranger."/>
    </properties>
   </object>
@@ -402,14 +464,16 @@
     <property name="id" value="city_98523b8c-f3e7-5efb-0cb1-d12c17b56b30"/>
     <property name="imageid" value="npc-peasant-2"/>
     <property name="name" value="Jak Yelovan"/>
+    <property name="sound" value="male-greetings"/>
     <property name="text" value="Hello stranger."/>
    </properties>
   </object>
-  <object id="187" gid="14" x="416" y="544" width="32" height="32">
+  <object id="187" gid="14" x="288" y="544" width="32" height="32">
    <properties>
     <property name="id" value="city_d9c5f027-86d9-2cdb-1855-7be82c955c86"/>
     <property name="imageid" value="npc-hunter"/>
     <property name="name" value="Nefa Bindred"/>
+    <property name="sound" value="female-greetings-2"/>
     <property name="text" value="Hello stranger."/>
    </properties>
   </object>
@@ -418,7 +482,464 @@
     <property name="id" value="city_56d94b33-10ca-385f-e361-e3e63b2e4eac"/>
     <property name="imageid" value="npc-peasant-4"/>
     <property name="name" value="Arorre Grandforge"/>
-    <property name="text" value="Hello stranger."/>
+    <property name="sound" value="female-greetings"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+  <object id="210" gid="35" x="128" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="city_a690c94e-ef8b-6b66-3407-508fcf48703a"/>
+   </properties>
+  </object>
+  <object id="211" gid="35" x="96" y="480" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_07e4e74e-ca73-331b-aeb4-40886b8f5fe6"/>
+   </properties>
+  </object>
+  <object id="212" gid="35" x="96" y="544" width="32" height="32">
+   <properties>
+    <property name="id" value="city_539ed64e-6c1c-6c31-186d-473e253687d7"/>
+   </properties>
+  </object>
+  <object id="213" gid="35" x="160" y="576" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_ec37dc7f-956c-f8ef-893e-0e8e2bd1a885"/>
+   </properties>
+  </object>
+  <object id="214" gid="35" x="800" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="city_65fe118e-f341-89b3-800f-6b0a945bca9a"/>
+   </properties>
+  </object>
+  <object id="215" gid="35" x="384" y="640" width="32" height="32">
+   <properties>
+    <property name="id" value="city_ebe35a44-fb0c-7673-da46-dfcf2f07f8a7"/>
+   </properties>
+  </object>
+  <object id="216" gid="35" x="448" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="city_7824d3f2-84c6-5a9e-a644-ccd8fdc872c6"/>
+   </properties>
+  </object>
+  <object id="217" gid="35" x="256" y="768" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="3"/>
+    <property name="id" value="city_c64aa989-15ea-5068-c7bf-bb4ea846ffea"/>
+   </properties>
+  </object>
+  <object id="218" gid="35" x="544" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="city_1535a165-67b0-07cc-9fab-245ec0f4d9a6"/>
+   </properties>
+  </object>
+  <object id="219" gid="35" x="704" y="704" width="32" height="32">
+   <properties>
+    <property name="id" value="city_02157f7a-124e-d605-ff66-bc113aab9238"/>
+   </properties>
+  </object>
+  <object id="220" gid="35" x="704" y="160" width="32" height="32">
+   <properties>
+    <property name="id" value="city_14624ff0-96d9-aa54-0b95-b5e54008a21f"/>
+   </properties>
+  </object>
+  <object id="221" gid="35" x="736" y="160" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_c42e729f-a8bc-1285-94f0-9b4bf1864e25"/>
+   </properties>
+  </object>
+  <object id="222" gid="35" x="608" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="3"/>
+    <property name="id" value="city_2a8a85ce-7983-c4ca-4073-cccb76f26ba8"/>
+   </properties>
+  </object>
+  <object id="223" gid="35" x="608" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="city_62409c9c-62a4-e460-d199-c199bd809db5"/>
+   </properties>
+  </object>
+  <object id="224" gid="35" x="640" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_b4189c32-67a0-046a-fd08-66d704c0be31"/>
+   </properties>
+  </object>
+  <object id="225" gid="35" x="928" y="320" width="32" height="32">
+   <properties>
+    <property name="id" value="city_553e8400-0790-e3ca-b0db-4236103fe596"/>
+   </properties>
+  </object>
+  <object id="226" gid="35" x="928" y="384" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_f2ada858-f3b3-564c-1c50-1bed0773b39c"/>
+   </properties>
+  </object>
+  <object id="227" gid="35" x="224" y="320" width="32" height="32">
+   <properties>
+    <property name="id" value="city_6257de81-02a3-f948-f550-49566dfe1ba5"/>
+   </properties>
+  </object>
+  <object id="228" gid="35" x="224" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="city_bf76f9bb-28a2-d824-b75f-9b2bb2e8f693"/>
+   </properties>
+  </object>
+  <object id="229" gid="35" x="224" y="768" width="32" height="32">
+   <properties>
+    <property name="id" value="city_1f7e2dec-47b7-fc9a-26d4-22794f992c40"/>
+   </properties>
+  </object>
+  <object id="230" gid="35" x="224" y="736" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_e51936e6-f621-be95-de1a-22e147fbded5"/>
+   </properties>
+  </object>
+  <object id="231" gid="35" x="160" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="city_ae44dded-91d0-ecfe-3c31-f7889aa8cc1e"/>
+   </properties>
+  </object>
+  <object id="232" gid="35" x="288" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="city_850c777d-9b53-4589-5114-e73fdb5e113d"/>
+   </properties>
+  </object>
+  <object id="233" gid="35" x="352" y="512" width="32" height="32">
+   <properties>
+    <property name="id" value="city_31785ea0-70a3-6535-6887-849dd65cfc00"/>
+   </properties>
+  </object>
+  <object id="234" gid="35" x="448" y="448" width="32" height="32">
+   <properties>
+    <property name="id" value="city_7e3b90a0-78ac-cddd-fdc4-7783389922f1"/>
+   </properties>
+  </object>
+  <object id="235" gid="35" x="448" y="544" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_ed530617-f10d-aa7d-6403-5e8fe997c84c"/>
+   </properties>
+  </object>
+  <object id="236" gid="35" x="416" y="544" width="32" height="32">
+   <properties>
+    <property name="id" value="city_5db20ea0-b847-64df-fad2-c2a75acfec3b"/>
+   </properties>
+  </object>
+  <object id="237" gid="35" x="64" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="city_3ae7a33c-848a-cf0c-f4b1-68cd39ae39e1"/>
+   </properties>
+  </object>
+  <object id="238" gid="35" x="32" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="city_3cf2d339-928e-e466-96c1-06758955b209"/>
+   </properties>
+  </object>
+  <object id="242" gid="3" x="608" y="416" width="32" height="32"/>
+  <object id="246" gid="36" x="640" y="544" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="2"/>
+    <property name="id" value="city_eac6d6a3-fb63-1677-6c72-f7391b712bde"/>
+   </properties>
+  </object>
+  <object id="247" gid="36" x="768" y="384" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_7c6c8ffa-527d-1f2a-f492-e066de2b61e5"/>
+   </properties>
+  </object>
+  <object id="248" gid="36" x="32" y="640" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="3"/>
+    <property name="id" value="city_9a335e09-d1a5-f454-e16b-cb3399b45077"/>
+   </properties>
+  </object>
+  <object id="249" gid="36" x="192" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="city_a3804602-1ef9-f68b-b771-1500b24937f4"/>
+   </properties>
+  </object>
+  <object id="250" gid="36" x="512" y="640" width="32" height="32">
+   <properties>
+    <property name="id" value="city_6b3dcbf2-abbc-4ad4-5ba6-2573e415a22f"/>
+   </properties>
+  </object>
+  <object id="251" gid="35" x="64" y="384" width="32" height="32">
+   <properties>
+    <property name="id" value="city_ac58c56f-fb2d-1d3e-50ca-19be268200bc"/>
+   </properties>
+  </object>
+  <object id="252" gid="21" x="320" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="city_a7145d26-349b-5d58-1ab5-d18984536985"/>
+    <property name="targetdir" type="int" value="3"/>
+    <property name="targetx" type="int" value="7"/>
+    <property name="targety" type="int" value="28"/>
+   </properties>
+  </object>
+  <object id="254" gid="35" x="128" y="928" width="32" height="32">
+   <properties>
+    <property name="id" value="city_5c4edaac-9ff8-1bfb-4e80-7d5215a2d8e2"/>
+   </properties>
+  </object>
+  <object id="255" gid="35" x="128" y="960" width="32" height="32">
+   <properties>
+    <property name="id" value="city_a859c39a-f113-e332-7a05-9c26b32fae40"/>
+   </properties>
+  </object>
+  <object id="256" gid="35" x="160" y="960" width="32" height="32">
+   <properties>
+    <property name="id" value="city_9f8c32d5-eff0-f0db-c1fc-6d578c213c94"/>
+   </properties>
+  </object>
+  <object id="257" gid="18" x="320" y="928" width="32" height="32">
+   <properties>
+    <property name="id" value="city_c5a4c159-7fed-8ac3-2417-c2322ed3ff02"/>
+    <property name="state" type="int" value="1"/>
+    <property name="targetdir" type="int" value="3"/>
+    <property name="targetx" type="int" value="10"/>
+    <property name="targety" type="int" value="22"/>
+    <property name="visible" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="258" gid="23" x="128" y="896" width="32" height="32">
+   <properties>
+    <property name="id" value="city_309c6a3c-04a0-4b52-3925-579ee9bb1f14"/>
+    <property name="vars" value="city_c5a4c159-7fed-8ac3-2417-c2322ed3ff02:visible:1|city_a7145d26-349b-5d58-1ab5-d18984536985:state:2"/>
+   </properties>
+  </object>
+  <object id="259" gid="17" x="224" y="832" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="20"/>
+    <property name="id" value="city_af59cab0-b785-22ca-08ba-bf6d79cef3ea"/>
+   </properties>
+  </object>
+  <object id="260" gid="36" x="224" y="864" width="32" height="32">
+   <properties>
+    <property name="id" value="city_ffb3a54f-7bed-addc-61ca-b0767de28909"/>
+   </properties>
+  </object>
+  <object id="261" gid="36" x="320" y="832" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="gold" type="int" value="3"/>
+    <property name="id" value="city_3800bdb0-b278-ff65-7f4f-7ad0621c8c23"/>
+   </properties>
+  </object>
+  <object id="262" gid="8" x="576" y="864" width="32" height="32">
+   <properties>
+    <property name="id" value="city_848887b9-ee60-ff44-73aa-127f0b06b496"/>
+   </properties>
+  </object>
+  <object id="263" gid="8" x="448" y="800" width="32" height="32">
+   <properties>
+    <property name="id" value="city_54ddce09-412a-c55b-1fa8-67c41d5f5c11"/>
+   </properties>
+  </object>
+  <object id="264" gid="8" x="384" y="960" width="32" height="32">
+   <properties>
+    <property name="id" value="city_448f35a8-9a3e-bd75-0ea5-4393b4bc0c10"/>
+   </properties>
+  </object>
+  <object id="265" gid="8" x="512" y="960" width="32" height="32">
+   <properties>
+    <property name="id" value="city_3ad22142-80c1-1a61-b506-73ad433f5b7d"/>
+   </properties>
+  </object>
+  <object id="266" gid="34" x="640" y="928" width="32" height="32">
+   <properties>
+    <property name="id" value="city_d6df5ff6-5c01-36e0-7a58-ba6cf983e691"/>
+   </properties>
+  </object>
+  <object id="267" gid="17" x="544" y="960" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="100"/>
+    <property name="id" value="city_87062c30-0f3f-7450-58eb-aea5bb6569e1"/>
+   </properties>
+  </object>
+  <object id="268" gid="36" x="672" y="864" width="32" height="32">
+   <properties>
+    <property name="id" value="city_9959c766-7070-3a93-16fd-46ce1a76e871"/>
+   </properties>
+  </object>
+  <object id="269" gid="36" x="480" y="992" width="32" height="32">
+   <properties>
+    <property name="id" value="city_2466720e-f49d-bd39-221f-9915abc279fc"/>
+   </properties>
+  </object>
+  <object id="270" gid="36" x="384" y="800" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="city_550a53cf-5048-3ceb-8a3a-3198bfffbfc7"/>
+   </properties>
+  </object>
+  <object id="271" gid="36" x="480" y="992" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="3"/>
+    <property name="id" value="city_dd0215b3-2d09-eb21-f026-a17a50efc1bd"/>
+   </properties>
+  </object>
+  <object id="272" gid="36" x="576" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="city_13eed849-c6d2-68b9-11c3-16d804870d50"/>
+   </properties>
+  </object>
+  <object id="273" gid="35" x="544" y="800" width="32" height="32">
+   <properties>
+    <property name="id" value="city_6457da0e-a9c6-2ff8-0f4d-750c32002877"/>
+   </properties>
+  </object>
+  <object id="274" gid="35" x="576" y="800" width="32" height="32">
+   <properties>
+    <property name="id" value="city_f64db0c8-65ec-af2d-587b-680cc3a7a574"/>
+   </properties>
+  </object>
+  <object id="275" gid="35" x="352" y="992" width="32" height="32">
+   <properties>
+    <property name="id" value="city_a9cbdb81-1994-308d-83d7-f7bf686e42f4"/>
+   </properties>
+  </object>
+  <object id="276" gid="35" x="480" y="896" width="32" height="32">
+   <properties>
+    <property name="id" value="city_23a4e7bd-60b7-74e7-fd2c-effcc44042af"/>
+   </properties>
+  </object>
+  <object id="277" gid="39" x="960" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="city_64aee96b-e0bc-08eb-f732-374a80ea5184"/>
+   </properties>
+  </object>
+  <object id="278" gid="39" x="672" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="city_954d6659-36e4-19d9-613f-6b85610f976d"/>
+   </properties>
+  </object>
+  <object id="279" gid="40" x="960" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="city_aecf17b4-501f-8b4e-4271-fa68485b3ade"/>
+   </properties>
+  </object>
+  <object id="280" gid="37" x="832" y="192" width="32" height="32">
+   <properties>
+    <property name="id" value="city_badd2978-a080-1817-0ffa-8b6af8382c6e"/>
+    <property name="vendor" value="magicshop"/>
+   </properties>
+  </object>
+  <object id="281" gid="37" x="608" y="128" width="32" height="32">
+   <properties>
+    <property name="id" value="city_6da2b848-dbd3-861f-3f7f-88812793bbd1"/>
+   </properties>
+  </object>
+  <object id="282" gid="37" x="800" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="city_b274d576-f135-7ce5-6f6f-248d811330ea"/>
+   </properties>
+  </object>
+  <object id="284" gid="38" x="64" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="city_e11b8e1d-1dd7-3e7f-649b-167fdd31194e"/>
+   </properties>
+  </object>
+  <object id="285" gid="17" x="32" y="192" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="15"/>
+    <property name="id" value="city_0f41b66e-18e7-fbd6-868d-10f457baecca"/>
+   </properties>
+  </object>
+  <object id="286" gid="35" x="512" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="city_3e0f56e7-0432-6601-a08d-aab2614fcd55"/>
+   </properties>
+  </object>
+  <object id="287" gid="35" x="416" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="city_792fb00b-9b95-581d-5384-c9d60d8dca62"/>
+   </properties>
+  </object>
+  <object id="288" gid="35" x="224" y="128" width="32" height="32">
+   <properties>
+    <property name="id" value="city_c7ff4010-4aa5-bd7c-6f07-2147d8cb7fc1"/>
+   </properties>
+  </object>
+  <object id="289" gid="35" x="32" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="city_ccef29b2-4f15-b3fc-e9fe-6ed8c03c85d5"/>
+   </properties>
+  </object>
+  <object id="290" gid="35" x="32" y="256" width="32" height="32">
+   <properties>
+    <property name="id" value="city_5d5416d7-20ac-0807-df7a-2c6c6d001c49"/>
+   </properties>
+  </object>
+  <object id="291" gid="35" x="32" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="city_2a528651-525d-72a6-70ac-c5fd26b0b0bf"/>
+   </properties>
+  </object>
+  <object id="292" gid="35" x="64" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="city_34a189de-c3cb-f366-3d3e-5e26384aee74"/>
+   </properties>
+  </object>
+  <object id="293" gid="35" x="96" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="city_f4448107-f40b-b8a4-b8d2-323221d54166"/>
+   </properties>
+  </object>
+  <object id="294" gid="35" x="96" y="256" width="32" height="32">
+   <properties>
+    <property name="id" value="city_517eb827-ade5-c688-a545-ea902ce554a5"/>
+   </properties>
+  </object>
+  <object id="295" gid="35" x="128" y="256" width="32" height="32">
+   <properties>
+    <property name="id" value="city_e52c3365-260d-877f-c8f3-7c27e43bd87a"/>
+   </properties>
+  </object>
+  <object id="296" gid="23" x="0" y="256" width="32" height="32">
+   <properties>
+    <property name="id" value="city_387e3644-1066-6fd9-237d-c7fda0f1582b"/>
+   </properties>
+  </object>
+  <object id="297" gid="35" x="800" y="960" width="32" height="32">
+   <properties>
+    <property name="id" value="city_296af119-228e-8cf1-00f7-4ef999486ffd"/>
+   </properties>
+  </object>
+  <object id="298" gid="36" x="800" y="928" width="32" height="32">
+   <properties>
+    <property name="id" value="city_43700bca-4ab2-9485-baa7-21bf3679e031"/>
+   </properties>
+  </object>
+  <object id="299" gid="36" x="960" y="800" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="50"/>
+    <property name="id" value="city_46681f12-2dac-62f4-950c-6c1e3968ffb8"/>
+   </properties>
+  </object>
+  <object id="300" gid="35" x="896" y="832" width="32" height="32">
+   <properties>
+    <property name="id" value="city_97b14e3e-f50f-d847-76ed-de9efda5042d"/>
+   </properties>
+  </object>
+  <object id="301" gid="35" x="864" y="896" width="32" height="32">
+   <properties>
+    <property name="id" value="city_39d1ba8d-e538-7c10-4cd1-af3d12d130b1"/>
+   </properties>
+  </object>
+  <object id="302" gid="35" x="896" y="896" width="32" height="32">
+   <properties>
+    <property name="id" value="city_391aa99b-3e78-3aa7-1617-1be7aa1f5499"/>
+   </properties>
+  </object>
+  <object id="303" gid="35" x="896" y="864" width="32" height="32">
+   <properties>
+    <property name="id" value="city_135f80fe-254c-95c0-fec9-ff16fda7f1ba"/>
    </properties>
   </object>
  </objectgroup>

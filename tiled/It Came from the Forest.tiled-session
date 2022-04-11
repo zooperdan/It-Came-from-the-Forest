@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "city.tmx",
+    "activeFile": "garden.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -22,7 +22,7 @@
             }
         },
         "MainTiles.tsx": {
-            "dynamicWrapping": false,
+            "dynamicWrapping": true,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -38,32 +38,40 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 516,
-                "y": 488
+                "x": 701.9999999999999,
+                "y": 412
             }
         },
         "forest-1.tmx": {
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 526,
-                "y": 414
+                "x": 586,
+                "y": 482.6666666666666
             }
         },
         "forest-2.tmx": {
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 393,
-                "y": 444
+                "x": 511.5,
+                "y": 511
             }
         },
         "forest-3.tmx": {
             "scale": 0.5591145833333333,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1250.190964136004,
-                "y": 1048.085700978109
+                "x": 902.3195156031674,
+                "y": 924.6762925011645
+            }
+        },
+        "garden.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 603.6666666666666,
+                "y": 78
             }
         },
         "test.tmx": {
@@ -82,18 +90,20 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 16,
     "openFiles": [
-        "city.tmx",
         "MainTiles.tsx",
-        "forest-2.tmx"
+        "city.tmx",
+        "forest-1.tmx",
+        "garden.tmx"
     ],
     "project": "It Came from the Forest.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "forest-2.tmx",
         "MainTiles.tsx",
         "city.tmx",
-        "forest-3.tmx",
         "forest-1.tmx",
+        "garden.tmx",
+        "forest-2.tmx",
+        "forest-3.tmx",
         "test.tmx",
         "area1.tmx",
         "C:/Users/danth/source/repos/Lair-of-Lizards-love2d/resources/tiled/MainTiles.tsx",

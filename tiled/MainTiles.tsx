@@ -38,6 +38,7 @@
    <property name="id" value=""/>
    <property name="name" value=""/>
    <property name="state" type="int" value="1"/>
+   <property name="text" value=""/>
    <property name="visible" type="int" value="1"/>
   </properties>
  </tile>
@@ -46,7 +47,7 @@
    <property name="antsacs" type="int" value="0"/>
    <property name="attack" type="int" value="1"/>
    <property name="defence" type="int" value="1"/>
-   <property name="gold" type="int" value="5"/>
+   <property name="gold" type="int" value="0"/>
    <property name="health" type="int" value="100"/>
    <property name="health_max" type="int" value="100"/>
    <property name="id" value=""/>
@@ -66,7 +67,7 @@
    <property name="attack" type="int" value="1"/>
    <property name="defence" type="int" value="1"/>
    <property name="experience" type="int" value="10"/>
-   <property name="gold" type="int" value="5"/>
+   <property name="gold" type="int" value="0"/>
    <property name="health" type="int" value="100"/>
    <property name="health_max" type="int" value="100"/>
    <property name="id" value=""/>
@@ -86,7 +87,7 @@
    <property name="attack" type="int" value="1"/>
    <property name="defence" type="int" value="1"/>
    <property name="experience" type="int" value="10"/>
-   <property name="gold" type="int" value="5"/>
+   <property name="gold" type="int" value="0"/>
    <property name="health" type="int" value="100"/>
    <property name="health_max" type="int" value="100"/>
    <property name="id" value=""/>
@@ -151,6 +152,7 @@
    <property name="targetdir" type="int" value="0"/>
    <property name="targetx" type="int" value="0"/>
    <property name="targety" type="int" value="0"/>
+   <property name="visible" type="int" value="1"/>
   </properties>
  </tile>
  <tile id="18" type="Sign">
@@ -170,14 +172,13 @@
    <property name="type" type="int" value="2"/>
   </properties>
  </tile>
- <tile id="20" type="Door">
+ <tile id="20" type="Teleporter">
   <properties>
-   <property name="direction" type="int" value="3"/>
    <property name="id" value=""/>
-   <property name="keyid" value=""/>
    <property name="state" type="int" value="1"/>
-   <property name="type" type="int" value="1"/>
-   <property name="vendor" value=""/>
+   <property name="targetdir" type="int" value="0"/>
+   <property name="targetx" type="int" value="0"/>
+   <property name="targety" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="21" type="Door">
@@ -210,6 +211,67 @@
  <tile id="33" type="EnemyBlocker">
   <properties>
    <property name="id" value=""/>
+  </properties>
+ </tile>
+ <tile id="34" type="StaticProp">
+  <properties>
+   <property name="atlasid" value="city-props"/>
+   <property name="direction" type="int" value="2"/>
+   <property name="id" value=""/>
+   <property name="name" value="city-garden"/>
+   <property name="state" type="int" value="1"/>
+   <property name="visible" type="int" value="1"/>
+  </properties>
+ </tile>
+ <tile id="35" type="StaticProp">
+  <properties>
+   <property name="atlasid" value="common-props"/>
+   <property name="direction" type="int" value="2"/>
+   <property name="gold" type="int" value="0"/>
+   <property name="id" value=""/>
+   <property name="name" value="barrels"/>
+   <property name="state" type="int" value="1"/>
+   <property name="visible" type="int" value="1"/>
+  </properties>
+ </tile>
+ <tile id="36" type="Door">
+  <properties>
+   <property name="direction" type="int" value="0"/>
+   <property name="id" value=""/>
+   <property name="keyid" value=""/>
+   <property name="state" type="int" value="1"/>
+   <property name="type" type="int" value="1"/>
+   <property name="vendor" value=""/>
+  </properties>
+ </tile>
+ <tile id="37" type="Door">
+  <properties>
+   <property name="direction" type="int" value="1"/>
+   <property name="id" value=""/>
+   <property name="keyid" value=""/>
+   <property name="state" type="int" value="1"/>
+   <property name="type" type="int" value="1"/>
+   <property name="vendor" value=""/>
+  </properties>
+ </tile>
+ <tile id="38" type="Door">
+  <properties>
+   <property name="direction" type="int" value="2"/>
+   <property name="id" value=""/>
+   <property name="keyid" value=""/>
+   <property name="state" type="int" value="1"/>
+   <property name="type" type="int" value="1"/>
+   <property name="vendor" value=""/>
+  </properties>
+ </tile>
+ <tile id="39" type="Door">
+  <properties>
+   <property name="direction" type="int" value="3"/>
+   <property name="id" value=""/>
+   <property name="keyid" value=""/>
+   <property name="state" type="int" value="1"/>
+   <property name="type" type="int" value="1"/>
+   <property name="vendor" value=""/>
   </properties>
  </tile>
 </tileset>

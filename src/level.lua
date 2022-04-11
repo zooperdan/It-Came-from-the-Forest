@@ -47,6 +47,14 @@ function Level:load(id, location)
 			enemy.properties.direction = math.floor(math.random()*4)
 		end
 		
+		-- randomize npc text for those that don't have any
+		
+		for key,value in pairs(self.data.npcs) do
+			local npc = level.data.npcs[key]
+			local text = strings.npc_texts[math.floor(math.random()*#strings.npc_texts)+1]
+			npc.properties.text = text
+		end		
+
 		self:applyGlobalVariables()
 
 	else
@@ -132,6 +140,15 @@ function Level:applyGlobalVariables()
 
 	end	
 	
+	for key,value in pairs(self.data.teleporters) do
+		
+		local teleporter = level.data.teleporters[key]
+
+		local gvar = globalvariables:get(teleporter.properties.id, "state")
+		if gvar then teleporter.properties.state = tonumber(gvar) end		
+
+	end	
+	
 	for key,value in pairs(self.data.staticprops) do
 		
 		local prop = level.data.staticprops[key]
@@ -142,6 +159,9 @@ function Level:applyGlobalVariables()
 		local gvar = globalvariables:get(prop.properties.id, "visible")
 		if gvar then prop.properties.visible = tonumber(gvar) end		
 
+		local gvar = globalvariables:get(prop.properties.id, "gold")
+		if gvar then prop.properties.gold = tonumber(gvar) end		
+
 	end		
 	
 	for key,value in pairs(self.data.portals) do
@@ -150,6 +170,9 @@ function Level:applyGlobalVariables()
 
 		local gvar = globalvariables:get(portal.properties.id, "state")
 		if gvar then portal.properties.state = tonumber(gvar) end		
+
+		local gvar = globalvariables:get(portal.properties.id, "visible")
+		if gvar then portal.properties.visible = tonumber(gvar) end		
 
 	end	
 	
@@ -222,7 +245,7 @@ function Level:applyGlobalVariables()
 		local button = level.data.buttons[key]
 
 		local gvar = globalvariables:get(button.properties.id, "state")
-		if gvar then button.properties.button = tonumber(gvar) end		
+		if gvar then button.properties.state = tonumber(gvar) end		
 
 	end		
 	
@@ -265,10 +288,21 @@ function Level:generatePathMap()
 			for key,value in pairs(self.data.staticprops) do
 				local prop = self.data.staticprops[key]
 				if prop.x == x and prop.y == y then
-					walkable = 1
+					if prop.properties.name == "city-garden" then
+						walkable = 0
+					else
+						walkable = 1
+					end
 				end
 			end		
 
+			for key,value in pairs(self.data.enemyblockers) do
+				local enemyblocker = self.data.enemyblockers[key]
+				if enemyblocker.x == x and enemyblocker.y == y then
+					walkable = 1
+				end
+			end	
+			
 			for key,value in pairs(self.data.npcs) do
 				local npc = self.data.npcs[key]
 				if npc.x == x and npc.y == y then

@@ -2,7 +2,7 @@ settings = {
 	quickstart = true,
 	debug = true,
 	startingArea = "city",
-	musicVolume = 1,
+	musicVolume = 0.0,
 	sfxVolume = 1,
 	inventoryX = 119,
 	inventoryY = 50,
@@ -18,6 +18,8 @@ isFading = false
 fadeColor = {0,0,0}
 fadeMusicVolume = {v = settings.musicVolume}
 inventoryDragSource = {}
+
+loadingSavedFile = false
 
 GameStates = {
 	INIT = 0,
@@ -45,7 +47,8 @@ SubStates = {
 	FOUND_LOOT = 6,
 	VENDOR_ANTSACS = 7,
 	SYSTEM_MENU = 8,
-	VENDOR = 9
+	VENDOR = 9,
+	TAVERN = 10
 }
 
 gameState = GameStates.LOADING_LEVEL
@@ -69,4 +72,17 @@ vec4 effect(vec4 vcolor, Image tex, vec2 texcoord, vec2 pixcoord)
     return outputcolor;
 }
 ]]
+
+strings = {
+	npc_texts = {
+		"Have you ever seen such a beautiful night sky?",
+		"Shh. Don't disturb me!\n\nI'm trying to listen for monsters nearby. Have you seen any?",
+		"Hello stranger.",
+		"Oh, you startled me.\n\nYou should know better than to sneak up on someone like that!",
+		"I am not interested in whatever you are selling.\n\nYou best be on your way.",
+		"Well, well. Aren't you a brave little warrior,\n\nAre you the one who is going to save us from evil? Ha!",
+		"Hrmm, well.. Nevermind!",
+	}
+}
+
 

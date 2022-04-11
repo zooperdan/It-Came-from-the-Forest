@@ -64,6 +64,9 @@ function ItemTemplates:initialize()
 	self:addTemplate("spellbook-2", "Ancient tome II", "offhand", {})
 	self:addTemplate("spellbook-3", "Ancient tome III", "offhand", {})
 
+	self:addTemplate("compass", "Compass", "compass", {})
+	self:addTemplate("map", "Map", "map", {})
+
 end
 
 function ItemTemplates:addTemplate(id, name, slot, modifiers)

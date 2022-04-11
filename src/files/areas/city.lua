@@ -1,52 +1,84 @@
 {
 ["name"]="City",
+["id"]="city",
 ["tileset"]="city",
 ["mapSize"]=32,
 ["walls"]={
 	[1]={
 	},
 	[2]={
+		[7]={["type"]=1,},
+		[22]={["type"]=1,},
 	},
 	[3]={
+		[5]={["type"]=1,},
+		[6]={["type"]=1,},
+		[7]={["type"]=1,},
+		[8]={["type"]=1,},
 	},
 	[4]={
+		[3]={["type"]=1,},
+		[5]={["type"]=1,},
+		[6]={["type"]=1,},
 	},
 	[5]={
+		[23]={["type"]=1,},
 	},
 	[6]={
+		[15]={["type"]=1,},
+		[22]={["type"]=1,},
+		[23]={["type"]=1,},
+		[28]={["type"]=1,},
 	},
 	[7]={
+		[15]={["type"]=1,},
+		[28]={["type"]=1,},
 	},
 	[8]={
-		[9]={["type"]=1,},
-		[10]={["type"]=1,},
+		[15]={["type"]=1,},
+		[16]={["type"]=1,},
+		[28]={["type"]=1,},
 	},
 	[9]={
 		[8]={["type"]=1,},
 		[9]={["type"]=1,},
 		[10]={["type"]=1,},
+		[22]={["type"]=2,},
+		[28]={["type"]=1,},
 	},
 	[10]={
 		[8]={["type"]=1,},
 		[9]={["type"]=1,},
+		[16]={["type"]=1,},
+		[21]={["type"]=1,},
+		[22]={["type"]=1,},
+		[28]={["type"]=2,},
 	},
 	[11]={
 		[8]={["type"]=1,},
 		[9]={["type"]=1,},
 		[10]={["type"]=1,},
 		[22]={["type"]=1,},
+		[28]={["type"]=1,},
 	},
 	[12]={
+		[17]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
 	},
 	[13]={
+		[16]={["type"]=1,},
+		[17]={["type"]=1,},
+		[18]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
 	},
 	[14]={
+		[14]={["type"]=1,},
+		[16]={["type"]=1,},
 	},
 	[15]={
+		[21]={["type"]=1,},
 	},
 	[16]={
 		[13]={["type"]=1,},
@@ -66,6 +98,8 @@
 		[21]={["type"]=1,},
 	},
 	[18]={
+		[2]={["type"]=1,},
+		[3]={["type"]=1,},
 		[13]={["type"]=1,},
 		[17]={["type"]=1,},
 		[18]={["type"]=1,},
@@ -74,33 +108,51 @@
 		[21]={["type"]=1,},
 	},
 	[19]={
+		[2]={["type"]=1,},
+		[4]={["type"]=1,},
+		[5]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[13]={["type"]=1,},
 		[21]={["type"]=1,},
+		[29]={["type"]=1,},
+		[30]={["type"]=1,},
+		[31]={["type"]=1,},
 	},
 	[20]={
+		[4]={["type"]=1,},
+		[5]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
+		[29]={["type"]=1,},
+		[30]={["type"]=1,},
 	},
 	[21]={
+		[2]={["type"]=1,},
+		[4]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
+		[29]={["type"]=2,},
 	},
 	[22]={
+		[2]={["type"]=1,},
 		[12]={["type"]=1,},
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
 		[24]={["type"]=1,},
+		[29]={["type"]=1,},
+		[30]={["type"]=1,},
 	},
 	[23]={
+		[2]={["type"]=1,},
+		[9]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[13]={["type"]=1,},
@@ -108,15 +160,23 @@
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[24]={["type"]=1,},
+		[29]={["type"]=1,},
+		[30]={["type"]=1,},
 	},
 	[24]={
+		[8]={["type"]=1,},
+		[9]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[13]={["type"]=1,},
 		[17]={["type"]=1,},
 		[24]={["type"]=1,},
+		[30]={["type"]=1,},
 	},
 	[25]={
+		[3]={["type"]=1,},
+		[8]={["type"]=1,},
+		[9]={["type"]=1,},
 		[11]={["type"]=1,},
 		[13]={["type"]=1,},
 		[15]={["type"]=1,},
@@ -128,6 +188,8 @@
 		[22]={["type"]=1,},
 	},
 	[26]={
+		[3]={["type"]=1,},
+		[6]={["type"]=1,},
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
@@ -135,6 +197,9 @@
 		[27]={["type"]=1,},
 	},
 	[27]={
+		[3]={["type"]=1,},
+		[6]={["type"]=1,},
+		[7]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[13]={["type"]=1,},
@@ -151,6 +216,7 @@
 		[27]={["type"]=1,},
 	},
 	[28]={
+		[6]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
 		[13]={["type"]=1,},
@@ -162,8 +228,12 @@
 		[25]={["type"]=1,},
 		[26]={["type"]=1,},
 		[27]={["type"]=1,},
+		[30]={["type"]=1,},
+		[31]={["type"]=2,},
 	},
 	[29]={
+		[2]={["type"]=1,},
+		[4]={["type"]=1,},
 		[13]={["type"]=1,},
 		[14]={["type"]=1,},
 		[15]={["type"]=1,},
@@ -171,57 +241,114 @@
 		[18]={["type"]=1,},
 		[19]={["type"]=1,},
 		[22]={["type"]=1,},
+		[30]={["type"]=1,},
 	},
 	[30]={
+		[2]={["type"]=1,},
+		[4]={["type"]=1,},
 		[13]={["type"]=1,},
 		[14]={["type"]=1,},
 		[18]={["type"]=1,},
 		[19]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
+		[30]={["type"]=1,},
 	},
 	[31]={
+		[2]={["type"]=1,},
+		[6]={["type"]=1,},
+		[7]={["type"]=1,},
+		[8]={["type"]=1,},
 		[14]={["type"]=1,},
 		[18]={["type"]=1,},
+		[29]={["type"]=2,},
 	},
 	[32]={
 	},
 },
 ["boundarywalls"]={
 	[1]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
+		[3]={["type"]=3,},
+		[4]={["type"]=3,},
+		[5]={["type"]=3,},
+		[6]={["type"]=3,},
+		[7]={["type"]=3,},
+		[8]={["type"]=3,},
+		[9]={["type"]=3,},
+		[10]={["type"]=3,},
+		[11]={["type"]=3,},
+		[12]={["type"]=3,},
+		[13]={["type"]=3,},
 		[14]={["type"]=3,},
 		[15]={["type"]=3,},
 		[16]={["type"]=3,},
 		[17]={["type"]=3,},
 		[18]={["type"]=3,},
+		[19]={["type"]=3,},
+		[20]={["type"]=3,},
+		[21]={["type"]=3,},
+		[22]={["type"]=3,},
+		[23]={["type"]=3,},
+		[24]={["type"]=3,},
+		[25]={["type"]=3,},
+		[26]={["type"]=3,},
+		[27]={["type"]=3,},
+		[28]={["type"]=3,},
+		[29]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[2]={
+		[1]={["type"]=3,},
+		[3]={["type"]=3,},
+		[10]={["type"]=3,},
 		[14]={["type"]=3,},
 		[18]={["type"]=3,},
+		[21]={["type"]=3,},
+		[23]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[3]={
+		[1]={["type"]=3,},
 		[10]={["type"]=3,},
-		[11]={["type"]=3,},
-		[12]={["type"]=3,},
-		[13]={["type"]=3,},
 		[14]={["type"]=3,},
 		[18]={["type"]=3,},
+		[23]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[4]={
+		[1]={["type"]=3,},
 		[10]={["type"]=3,},
 		[14]={["type"]=3,},
-		[15]={["type"]=3,},
-		[17]={["type"]=3,},
 		[18]={["type"]=3,},
+		[19]={["type"]=3,},
+		[20]={["type"]=3,},
+		[22]={["type"]=3,},
+		[23]={["type"]=3,},
+		[24]={["type"]=3,},
+		[28]={["type"]=3,},
+		[29]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[5]={
+		[1]={["type"]=3,},
 		[9]={["type"]=3,},
 		[10]={["type"]=3,},
 		[12]={["type"]=3,},
 		[14]={["type"]=3,},
-		[18]={["type"]=3,},
+		[24]={["type"]=3,},
+		[28]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[6]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
 		[6]={["type"]=3,},
 		[7]={["type"]=3,},
 		[8]={["type"]=3,},
@@ -231,9 +358,16 @@
 		[12]={["type"]=3,},
 		[13]={["type"]=3,},
 		[14]={["type"]=3,},
-		[18]={["type"]=3,},
+		[20]={["type"]=3,},
+		[24]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[7]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
+		[4]={["type"]=3,},
+		[5]={["type"]=3,},
 		[6]={["type"]=3,},
 		[12]={["type"]=3,},
 		[13]={["type"]=3,},
@@ -246,19 +380,30 @@
 		[23]={["type"]=3,},
 		[24]={["type"]=3,},
 		[25]={["type"]=3,},
+		[26]={["type"]=3,},
+		[27]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[8]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
+		[5]={["type"]=3,},
 		[6]={["type"]=3,},
 		[12]={["type"]=3,},
 		[14]={["type"]=3,},
-		[15]={["type"]=3,},
-		[17]={["type"]=3,},
 		[18]={["type"]=3,},
 		[21]={["type"]=3,},
 		[22]={["type"]=3,},
 		[25]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[9]={
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
 		[5]={["type"]=3,},
 		[6]={["type"]=3,},
 		[12]={["type"]=3,},
@@ -266,36 +411,58 @@
 		[18]={["type"]=3,},
 		[19]={["type"]=3,},
 		[25]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[10]={
+		[1]={["type"]=3,},
 		[5]={["type"]=3,},
 		[14]={["type"]=3,},
-		[18]={["type"]=3,},
 		[19]={["type"]=3,},
 		[20]={["type"]=3,},
 		[24]={["type"]=3,},
 		[25]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[11]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
+		[3]={["type"]=3,},
 		[5]={["type"]=3,},
 		[12]={["type"]=3,},
 		[14]={["type"]=3,},
+		[16]={["type"]=3,},
+		[17]={["type"]=3,},
 		[18]={["type"]=3,},
 		[19]={["type"]=3,},
 		[24]={["type"]=3,},
 		[25]={["type"]=3,},
+		[27]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[12]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
 		[5]={["type"]=3,},
 		[6]={["type"]=3,},
 		[12]={["type"]=3,},
 		[14]={["type"]=3,},
-		[15]={["type"]=3,},
-		[17]={["type"]=3,},
-		[18]={["type"]=3,},
 		[24]={["type"]=3,},
+		[25]={["type"]=3,},
+		[26]={["type"]=3,},
+		[27]={["type"]=3,},
+		[28]={["type"]=3,},
+		[29]={["type"]=3,},
+		[30]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[13]={
+		[1]={["type"]=3,},
 		[6]={["type"]=3,},
 		[7]={["type"]=3,},
 		[8]={["type"]=3,},
@@ -304,94 +471,157 @@
 		[12]={["type"]=3,},
 		[13]={["type"]=3,},
 		[14]={["type"]=3,},
-		[18]={["type"]=3,},
 		[24]={["type"]=3,},
+		[29]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[14]={
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
+		[8]={["type"]=3,},
 		[9]={["type"]=3,},
 		[11]={["type"]=3,},
 		[12]={["type"]=3,},
 		[13]={["type"]=3,},
-		[14]={["type"]=3,},
-		[18]={["type"]=3,},
-		[19]={["type"]=3,},
 		[24]={["type"]=3,},
+		[27]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[15]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
+		[4]={["type"]=3,},
+		[5]={["type"]=3,},
+		[7]={["type"]=3,},
 		[9]={["type"]=3,},
 		[11]={["type"]=3,},
 		[13]={["type"]=3,},
-		[19]={["type"]=3,},
-		[20]={["type"]=3,},
-		[21]={["type"]=3,},
 		[23]={["type"]=3,},
 		[24]={["type"]=3,},
+		[26]={["type"]=3,},
+		[27]={["type"]=3,},
+		[28]={["type"]=3,},
+		[29]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[16]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
 		[9]={["type"]=3,},
 		[23]={["type"]=3,},
+		[24]={["type"]=3,},
+		[27]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[17]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
+		[5]={["type"]=3,},
+		[6]={["type"]=3,},
+		[7]={["type"]=3,},
 		[9]={["type"]=3,},
 		[10]={["type"]=3,},
 		[11]={["type"]=3,},
 		[23]={["type"]=3,},
 		[24]={["type"]=3,},
+		[25]={["type"]=3,},
+		[27]={["type"]=3,},
+		[28]={["type"]=3,},
+		[29]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[18]={
+		[1]={["type"]=3,},
+		[7]={["type"]=3,},
 		[9]={["type"]=3,},
 		[24]={["type"]=3,},
+		[29]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[19]={
+		[1]={["type"]=3,},
+		[7]={["type"]=3,},
+		[8]={["type"]=3,},
 		[9]={["type"]=3,},
 		[24]={["type"]=3,},
+		[28]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[20]={
-		[9]={["type"]=3,},
+		[1]={["type"]=3,},
+		[7]={["type"]=3,},
 		[24]={["type"]=3,},
 		[25]={["type"]=3,},
 		[26]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[21]={
-		[9]={["type"]=3,},
+		[1]={["type"]=3,},
+		[7]={["type"]=3,},
 		[26]={["type"]=3,},
+		[27]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[22]={
-		[9]={["type"]=3,},
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
+		[5]={["type"]=3,},
+		[7]={["type"]=3,},
 		[26]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[23]={
-		[9]={["type"]=3,},
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
 		[26]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[24]={
-		[9]={["type"]=3,},
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
 		[26]={["type"]=3,},
 		[27]={["type"]=3,},
 		[28]={["type"]=3,},
 		[29]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[25]={
-		[9]={["type"]=3,},
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
 		[29]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[26]={
-		[9]={["type"]=3,},
-		[29]={["type"]=3,},
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[27]={
-		[9]={["type"]=3,},
-		[29]={["type"]=3,},
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[28]={
-		[9]={["type"]=3,},
+		[1]={["type"]=3,},
+		[4]={["type"]=3,},
+		[5]={["type"]=3,},
 		[29]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[29]={
+		[1]={["type"]=3,},
+		[5]={["type"]=3,},
+		[6]={["type"]=3,},
+		[8]={["type"]=3,},
 		[9]={["type"]=3,},
 		[29]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[30]={
+		[1]={["type"]=3,},
 		[9]={["type"]=3,},
 		[24]={["type"]=3,},
 		[25]={["type"]=3,},
@@ -399,12 +629,23 @@
 		[27]={["type"]=3,},
 		[28]={["type"]=3,},
 		[29]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[31]={
+		[1]={["type"]=3,},
 		[9]={["type"]=3,},
 		[24]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 	[32]={
+		[1]={["type"]=3,},
+		[2]={["type"]=3,},
+		[3]={["type"]=3,},
+		[4]={["type"]=3,},
+		[5]={["type"]=3,},
+		[6]={["type"]=3,},
+		[7]={["type"]=3,},
+		[8]={["type"]=3,},
 		[9]={["type"]=3,},
 		[10]={["type"]=3,},
 		[11]={["type"]=3,},
@@ -421,6 +662,14 @@
 		[22]={["type"]=3,},
 		[23]={["type"]=3,},
 		[24]={["type"]=3,},
+		[25]={["type"]=3,},
+		[26]={["type"]=3,},
+		[27]={["type"]=3,},
+		[28]={["type"]=3,},
+		[29]={["type"]=3,},
+		[30]={["type"]=3,},
+		[31]={["type"]=3,},
+		[32]={["type"]=3,},
 	},
 },
 enemyblockers={
@@ -432,17 +681,17 @@ enemyblockers={
 		}
 	},
 	[2] = {
-		x=2,
-		y=16,
-		properties={
-			id="city_92b1270e-92d5-55c2-28bf-0c360fded85e",
-		}
-	},
-	[3] = {
 		x=8,
 		y=20,
 		properties={
 			id="city_4aa68b25-8d58-f1da-a619-95ae837fc81a",
+		}
+	},
+	[3] = {
+		x=21,
+		y=29,
+		properties={
+			id="city_d6df5ff6-5c01-36e0-7a58-ba6cf983e691",
 		}
 	},
 },
@@ -455,7 +704,7 @@ enemies={
 			antsacs=0,
 			attack=1,
 			defence=1,
-			gold=5,
+			gold=0,
 			health=100,
 			health_max=100,
 			id="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c",
@@ -477,7 +726,7 @@ enemies={
 			antsacs=0,
 			attack=1,
 			defence=1,
-			gold=5,
+			gold=0,
 			health=100,
 			health_max=100,
 			id="city_81bdecd2-c200-017e-9d02-6065c4fc4fc6",
@@ -499,7 +748,7 @@ enemies={
 			antsacs=0,
 			attack=1,
 			defence=1,
-			gold=5,
+			gold=0,
 			health=100,
 			health_max=100,
 			id="city_4f1cda06-b79d-2a35-f00e-6f81afe3a022",
@@ -512,6 +761,94 @@ enemies={
 			state=1,
 			type=0,
 			wanderer=1,
+		}
+	},
+	[4] = {
+		x=19,
+		y=27,
+		properties={
+			antsacs=0,
+			attack=1,
+			defence=1,
+			gold=0,
+			health=100,
+			health_max=100,
+			id="city_848887b9-ee60-ff44-73aa-127f0b06b496",
+			loot="",
+			name="Fire ant",
+			sound_attack="ant-attack",
+			sound_die="ant-die",
+			sound_move="ant-move",
+			sound_scream="ant-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[5] = {
+		x=15,
+		y=25,
+		properties={
+			antsacs=0,
+			attack=1,
+			defence=1,
+			gold=0,
+			health=100,
+			health_max=100,
+			id="city_54ddce09-412a-c55b-1fa8-67c41d5f5c11",
+			loot="",
+			name="Fire ant",
+			sound_attack="ant-attack",
+			sound_die="ant-die",
+			sound_move="ant-move",
+			sound_scream="ant-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[6] = {
+		x=13,
+		y=30,
+		properties={
+			antsacs=0,
+			attack=1,
+			defence=1,
+			gold=0,
+			health=100,
+			health_max=100,
+			id="city_448f35a8-9a3e-bd75-0ea5-4393b4bc0c10",
+			loot="",
+			name="Fire ant",
+			sound_attack="ant-attack",
+			sound_die="ant-die",
+			sound_move="ant-move",
+			sound_scream="ant-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[7] = {
+		x=17,
+		y=30,
+		properties={
+			antsacs=0,
+			attack=1,
+			defence=1,
+			gold=0,
+			health=100,
+			health_max=100,
+			id="city_3ad22142-80c1-1a61-b506-73ad433f5b7d",
+			loot="",
+			name="Fire ant",
+			sound_attack="ant-attack",
+			sound_die="ant-die",
+			sound_move="ant-move",
+			sound_scream="ant-scream",
+			state=1,
+			type=0,
+			wanderer=0,
 		}
 	},
 },
@@ -556,6 +893,45 @@ chests={
 			state=1,
 		}
 	},
+	[4] = {
+		x=8,
+		y=26,
+		properties={
+			answer="",
+			gold=20,
+			id="city_af59cab0-b785-22ca-08ba-bf6d79cef3ea",
+			keyid="",
+			loot="",
+			riddle="",
+			state=1,
+		}
+	},
+	[5] = {
+		x=18,
+		y=30,
+		properties={
+			answer="",
+			gold=100,
+			id="city_87062c30-0f3f-7450-58eb-aea5bb6569e1",
+			keyid="",
+			loot="",
+			riddle="",
+			state=1,
+		}
+	},
+	[6] = {
+		x=2,
+		y=6,
+		properties={
+			answer="",
+			gold=15,
+			id="city_0f41b66e-18e7-fbd6-868d-10f457baecca",
+			keyid="",
+			loot="",
+			riddle="",
+			state=1,
+		}
+	},
 },
 
 spinners={},
@@ -570,6 +946,7 @@ portals={
 			targetdir=3,
 			targetx=3,
 			targety=10,
+			visible=1,
 		}
 	},
 	[2] = {
@@ -582,37 +959,25 @@ portals={
 			targetdir=2,
 			targetx=7,
 			targety=19,
+			visible=1,
+		}
+	},
+	[3] = {
+		x=11,
+		y=29,
+		properties={
+			direction=3,
+			id="city_c5a4c159-7fed-8ac3-2417-c2322ed3ff02",
+			state=1,
+			targetdir=3,
+			targetx=10,
+			targety=22,
+			visible=0,
 		}
 	},
 },
 
-wells={
-	[1] = {
-		x=21,
-		y=16,
-		properties={
-			counter=0,
-			counter_max=100,
-			direction=0,
-			id="city_ce1c8989-8d0c-1d0a-f3f4-8c678b0e603f",
-			state=1,
-			type=2,
-		}
-	},
-	[2] = {
-		x=21,
-		y=16,
-		properties={
-			counter=0,
-			counter_max=100,
-			direction=0,
-			id="city_ce1c8989-8d0c-1d0a-f3f4-8c678b0e603f",
-			state=1,
-			type=2,
-		}
-	},
-},
-
+wells={},
 npcs={
 	[1] = {
 		x=15,
@@ -695,13 +1060,13 @@ npcs={
 		y=17,
 		properties={
 			criterias="",
-			gold=0,
+			gold=5,
 			id="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015",
 			imageid="npc-guard",
 			loot="",
 			name="City guard",
-			questdelivertext="",
-			questdonetext="",
+			questdelivertext="Balle",
+			questdonetext="Mongis",
 			sound="npc-1",
 			state=1,
 			text="Don't be trying no funny business, ya hear?",
@@ -721,7 +1086,7 @@ npcs={
 			name="Adalie",
 			questdelivertext="",
 			questdonetext="",
-			sound="",
+			sound="girl-greetings",
 			state=1,
 			text="Hello stranger.",
 			vars="",
@@ -740,7 +1105,7 @@ npcs={
 			name="Yahnah Bemmo",
 			questdelivertext="",
 			questdonetext="",
-			sound="",
+			sound="female-greetings",
 			state=1,
 			text="",
 			vars="",
@@ -748,8 +1113,8 @@ npcs={
 		}
 	},
 	[8] = {
-		x=22,
-		y=19,
+		x=27,
+		y=5,
 		properties={
 			criterias="",
 			gold=0,
@@ -759,7 +1124,7 @@ npcs={
 			name="Brendudd Eagleroot",
 			questdelivertext="",
 			questdonetext="",
-			sound="",
+			sound="male-greetings",
 			state=1,
 			text="Hello stranger.",
 			vars="",
@@ -778,7 +1143,7 @@ npcs={
 			name="Jak Yelovan",
 			questdelivertext="",
 			questdonetext="",
-			sound="",
+			sound="male-greetings",
 			state=1,
 			text="Hello stranger.",
 			vars="",
@@ -786,7 +1151,7 @@ npcs={
 		}
 	},
 	[10] = {
-		x=14,
+		x=10,
 		y=17,
 		properties={
 			criterias="",
@@ -797,7 +1162,7 @@ npcs={
 			name="Nefa Bindred",
 			questdelivertext="",
 			questdonetext="",
-			sound="",
+			sound="female-greetings-2",
 			state=1,
 			text="Hello stranger.",
 			vars="",
@@ -816,9 +1181,9 @@ npcs={
 			name="Arorre Grandforge",
 			questdelivertext="",
 			questdonetext="",
-			sound="",
+			sound="female-greetings",
 			state=1,
-			text="Hello stranger.",
+			text="",
 			vars="",
 			visible=1,
 		}
@@ -826,13 +1191,27 @@ npcs={
 },
 
 triggers={},
+teleporters={
+	[1] = {
+		x=11,
+		y=23,
+		properties={
+			id="city_a7145d26-349b-5d58-1ab5-d18984536985",
+			state=1,
+			targetdir=3,
+			targetx=7,
+			targety=28,
+		}
+	},
+},
+
 signs={},
 doors={
 	[1] = {
 		x=21,
 		y=22,
 		properties={
-			direction=3,
+			direction=2,
 			id="city_a3d1d2c1-d307-c238-a7ad-5fe997ab90ec",
 			keyid="",
 			state=1,
@@ -844,7 +1223,7 @@ doors={
 		x=12,
 		y=22,
 		properties={
-			direction=3,
+			direction=2,
 			id="city_1e71a8b7-0440-dc46-a062-19baaf608332",
 			keyid="",
 			state=1,
@@ -853,11 +1232,11 @@ doors={
 		}
 	},
 	[3] = {
-		x=10,
-		y=9,
+		x=5,
+		y=23,
 		properties={
-			direction=3,
-			id="city_8f011a04-1083-984b-d81e-0bc9bc9b581b",
+			direction=0,
+			id="city_289a3d9f-839a-0c69-3af1-85a592a81503",
 			keyid="",
 			state=1,
 			type=1,
@@ -865,6 +1244,30 @@ doors={
 		}
 	},
 	[4] = {
+		x=2,
+		y=22,
+		properties={
+			direction=1,
+			id="city_2d51e6c0-68dd-ed35-2a5c-882dc4ccf3ce",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[5] = {
+		x=10,
+		y=9,
+		properties={
+			direction=2,
+			id="city_8f011a04-1083-984b-d81e-0bc9bc9b581b",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[6] = {
 		x=26,
 		y=21,
 		properties={
@@ -873,14 +1276,14 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
-			vendor="",
+			vendor="alchemist",
 		}
 	},
-	[5] = {
+	[7] = {
 		x=28,
 		y=25,
 		properties={
-			direction=3,
+			direction=1,
 			id="city_69ac9e27-f28d-40f9-b540-2b73744e6d06",
 			keyid="",
 			state=1,
@@ -888,11 +1291,11 @@ doors={
 			vendor="",
 		}
 	},
-	[6] = {
+	[8] = {
 		x=27,
 		y=27,
 		properties={
-			direction=3,
+			direction=2,
 			id="city_573db56c-5df2-48b1-d7ca-db76bcd84f95",
 			keyid="",
 			state=1,
@@ -900,11 +1303,11 @@ doors={
 			vendor="",
 		}
 	},
-	[7] = {
+	[9] = {
 		x=28,
 		y=18,
 		properties={
-			direction=3,
+			direction=2,
 			id="city_95aac015-63ef-1b7a-6651-45570ea4ed5a",
 			keyid="",
 			state=1,
@@ -912,11 +1315,11 @@ doors={
 			vendor="",
 		}
 	},
-	[8] = {
+	[10] = {
 		x=23,
 		y=20,
 		properties={
-			direction=3,
+			direction=1,
 			id="city_04287095-cf2c-b596-fc6d-d44069c018aa",
 			keyid="",
 			state=1,
@@ -924,31 +1327,31 @@ doors={
 			vendor="",
 		}
 	},
-	[9] = {
+	[11] = {
 		x=21,
 		y=20,
 		properties={
-			direction=3,
+			direction=0,
 			id="city_c5ab9d85-57cf-1d44-b7a6-12a4830c2ecd",
 			keyid="",
 			state=1,
 			type=1,
-			vendor="magicshop",
+			vendor="",
 		}
 	},
-	[10] = {
+	[12] = {
 		x=18,
 		y=19,
 		properties={
-			direction=3,
+			direction=1,
 			id="city_845f7ef2-9cd7-076b-4ec9-e86c823e1ccc",
 			keyid="",
 			state=1,
 			type=1,
-			vendor="alchemist",
+			vendor="",
 		}
 	},
-	[11] = {
+	[13] = {
 		x=16,
 		y=18,
 		properties={
@@ -957,14 +1360,14 @@ doors={
 			keyid="",
 			state=1,
 			type=1,
-			vendor="",
+			vendor="antsacs",
 		}
 	},
-	[12] = {
+	[14] = {
 		x=17,
 		y=14,
 		properties={
-			direction=3,
+			direction=1,
 			id="city_105e9430-cd7c-25ff-0356-aa6812d58c99",
 			keyid="",
 			state=1,
@@ -972,23 +1375,23 @@ doors={
 			vendor="",
 		}
 	},
-	[13] = {
+	[15] = {
 		x=20,
 		y=12,
 		properties={
-			direction=3,
+			direction=2,
 			id="city_7e200033-8f0e-4e39-0f8c-b0986db56a55",
 			keyid="",
 			state=1,
 			type=1,
-			vendor="antsacs",
+			vendor="tavern",
 		}
 	},
-	[14] = {
+	[16] = {
 		x=28,
 		y=15,
 		properties={
-			direction=3,
+			direction=2,
 			id="city_941a0d5b-9995-67d8-083e-ceba2c511880",
 			keyid="",
 			state=1,
@@ -996,11 +1399,59 @@ doors={
 			vendor="",
 		}
 	},
-	[15] = {
+	[17] = {
+		x=28,
+		y=6,
+		properties={
+			direction=2,
+			id="city_b556a149-7628-5ded-40a8-4c47c35d2997",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[18] = {
+		x=24,
+		y=9,
+		properties={
+			direction=2,
+			id="city_69312891-2261-6a93-118d-072568ff954d",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[19] = {
+		x=13,
+		y=21,
+		properties={
+			direction=1,
+			id="city_802b90c1-b9a0-e529-9f96-7252c950d355",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[20] = {
+		x=7,
+		y=15,
+		properties={
+			direction=2,
+			id="city_aeb3b073-f8c5-7c36-b821-6723ff7a33ce",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[21] = {
 		x=28,
 		y=12,
 		properties={
-			direction=3,
+			direction=1,
 			id="city_3707e5de-caf0-75d6-f137-addd4a252ca7",
 			keyid="",
 			state=1,
@@ -1008,7 +1459,7 @@ doors={
 			vendor="",
 		}
 	},
-	[16] = {
+	[22] = {
 		x=27,
 		y=14,
 		properties={
@@ -1020,11 +1471,11 @@ doors={
 			vendor="",
 		}
 	},
-	[17] = {
+	[23] = {
 		x=24,
 		y=11,
 		properties={
-			direction=3,
+			direction=0,
 			id="city_53a9e304-b3ec-871b-b6dd-0caf0fba9c8b",
 			keyid="",
 			state=1,
@@ -1032,7 +1483,7 @@ doors={
 			vendor="",
 		}
 	},
-	[18] = {
+	[24] = {
 		x=32,
 		y=16,
 		properties={
@@ -1047,7 +1498,7 @@ doors={
 			type=2,
 		}
 	},
-	[19] = {
+	[25] = {
 		x=1,
 		y=16,
 		properties={
@@ -1062,12 +1513,111 @@ doors={
 			type=2,
 		}
 	},
-	[20] = {
+	[26] = {
+		x=16,
+		y=23,
+		properties={
+			direction=-1,
+			id="city_545bd749-21f9-0456-ef1f-4998f549f89b",
+			keyid="",
+			state=2,
+			targetarea="garden",
+			targetdir=2,
+			targetx=15,
+			targety=1,
+			type=2,
+		}
+	},
+	[27] = {
 		x=16,
 		y=13,
 		properties={
-			direction=3,
+			direction=0,
 			id="city_722e6944-efab-2a83-6fd5-cfe847c7824a",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[28] = {
+		x=31,
+		y=2,
+		properties={
+			direction=2,
+			id="city_64aee96b-e0bc-08eb-f732-374a80ea5184",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[29] = {
+		x=22,
+		y=2,
+		properties={
+			direction=2,
+			id="city_954d6659-36e4-19d9-613f-6b85610f976d",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[30] = {
+		x=31,
+		y=7,
+		properties={
+			direction=3,
+			id="city_aecf17b4-501f-8b4e-4271-fa68485b3ade",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[31] = {
+		x=27,
+		y=6,
+		properties={
+			direction=0,
+			id="city_badd2978-a080-1817-0ffa-8b6af8382c6e",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="magicshop",
+		}
+	},
+	[32] = {
+		x=20,
+		y=4,
+		properties={
+			direction=0,
+			id="city_6da2b848-dbd3-861f-3f7f-88812793bbd1",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[33] = {
+		x=26,
+		y=3,
+		properties={
+			direction=0,
+			id="city_b274d576-f135-7ce5-6f6f-248d811330ea",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[34] = {
+		x=3,
+		y=7,
+		properties={
+			direction=1,
+			id="city_e11b8e1d-1dd7-3e7f-649b-167fdd31194e",
 			keyid="",
 			state=1,
 			type=1,
@@ -1086,6 +1636,7 @@ staticprops={
 			id="city_1be3bf61-229d-2005-9e43-5838ca6378af",
 			name="barricade",
 			state=1,
+			text="",
 			visible=1,
 		}
 	},
@@ -1098,10 +1649,37 @@ staticprops={
 			id="city_09dd4b24-943a-f316-3b55-a925d8d2e428",
 			name="city-foodstall",
 			state=1,
+			text="",
 			visible=1,
 		}
 	},
 	[3] = {
+		x=21,
+		y=16,
+		properties={
+			atlasid="city-props",
+			direction=3,
+			id="city_c2cc51fb-bb00-3ab0-383f-3629a8aa3b31",
+			name="city-foodstall",
+			state=1,
+			text="",
+			visible=1,
+		}
+	},
+	[4] = {
+		x=22,
+		y=16,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_f4fa3f51-bddc-e91d-c7e8-816125e2f088",
+			name="city-foodstall",
+			state=1,
+			text="",
+			visible=1,
+		}
+	},
+	[5] = {
 		x=21,
 		y=13,
 		properties={
@@ -1110,10 +1688,11 @@ staticprops={
 			id="city_48251eec-2857-d6d1-fdbb-d59de27aa03d",
 			name="city-foodstall",
 			state=1,
+			text="",
 			visible=1,
 		}
 	},
-	[4] = {
+	[6] = {
 		x=19,
 		y=14,
 		properties={
@@ -1122,10 +1701,24 @@ staticprops={
 			id="city_f955d3fe-aab5-e04a-d0ba-7272a7828712",
 			name="city-foodstall",
 			state=1,
+			text="",
 			visible=1,
 		}
 	},
-	[5] = {
+	[7] = {
+		x=22,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=0,
+			id="city_f955d3fe-aab5-e04a-d0ba-7272a7828712",
+			name="notice-board",
+			state=1,
+			text="Such handsome guys! I wonder what crimes they have committed.",
+			visible=1,
+		}
+	},
+	[8] = {
 		x=19,
 		y=20,
 		properties={
@@ -1134,6 +1727,813 @@ staticprops={
 			id="city_e86a9053-7752-8aab-53e2-fc223805df59",
 			name="city-foodstall",
 			state=1,
+			text="",
+			visible=1,
+		}
+	},
+	[9] = {
+		x=5,
+		y=15,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_a690c94e-ef8b-6b66-3407-508fcf48703a",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[10] = {
+		x=4,
+		y=15,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_07e4e74e-ca73-331b-aeb4-40886b8f5fe6",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[11] = {
+		x=4,
+		y=17,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_539ed64e-6c1c-6c31-186d-473e253687d7",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[12] = {
+		x=6,
+		y=18,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_ec37dc7f-956c-f8ef-893e-0e8e2bd1a885",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[13] = {
+		x=26,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_65fe118e-f341-89b3-800f-6b0a945bca9a",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[14] = {
+		x=13,
+		y=20,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ebe35a44-fb0c-7673-da46-dfcf2f07f8a7",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[15] = {
+		x=15,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_7824d3f2-84c6-5a9e-a644-ccd8fdc872c6",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[16] = {
+		x=9,
+		y=24,
+		properties={
+			atlasid="city-props",
+			direction=3,
+			id="city_c64aa989-15ea-5068-c7bf-bb4ea846ffea",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[17] = {
+		x=18,
+		y=23,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_1535a165-67b0-07cc-9fab-245ec0f4d9a6",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[18] = {
+		x=23,
+		y=22,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_02157f7a-124e-d605-ff66-bc113aab9238",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[19] = {
+		x=23,
+		y=5,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_14624ff0-96d9-aa54-0b95-b5e54008a21f",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[20] = {
+		x=24,
+		y=5,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_c42e729f-a8bc-1285-94f0-9b4bf1864e25",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[21] = {
+		x=20,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=3,
+			id="city_2a8a85ce-7983-c4ca-4073-cccb76f26ba8",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[22] = {
+		x=20,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_62409c9c-62a4-e460-d199-c199bd809db5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[23] = {
+		x=21,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_b4189c32-67a0-046a-fd08-66d704c0be31",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[24] = {
+		x=30,
+		y=10,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_553e8400-0790-e3ca-b0db-4236103fe596",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[25] = {
+		x=30,
+		y=12,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_f2ada858-f3b3-564c-1c50-1bed0773b39c",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[26] = {
+		x=8,
+		y=10,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_6257de81-02a3-f948-f550-49566dfe1ba5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[27] = {
+		x=8,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_bf76f9bb-28a2-d824-b75f-9b2bb2e8f693",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[28] = {
+		x=8,
+		y=24,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_1f7e2dec-47b7-fc9a-26d4-22794f992c40",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[29] = {
+		x=8,
+		y=23,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_e51936e6-f621-be95-de1a-22e147fbded5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[30] = {
+		x=6,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ae44dded-91d0-ecfe-3c31-f7889aa8cc1e",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[31] = {
+		x=10,
+		y=18,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_850c777d-9b53-4589-5114-e73fdb5e113d",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[32] = {
+		x=12,
+		y=16,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_31785ea0-70a3-6535-6887-849dd65cfc00",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[33] = {
+		x=15,
+		y=14,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_7e3b90a0-78ac-cddd-fdc4-7783389922f1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[34] = {
+		x=15,
+		y=17,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_ed530617-f10d-aa7d-6403-5e8fe997c84c",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[35] = {
+		x=14,
+		y=17,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_5db20ea0-b847-64df-fad2-c2a75acfec3b",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[36] = {
+		x=3,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_3ae7a33c-848a-cf0c-f4b1-68cd39ae39e1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[37] = {
+		x=2,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_3cf2d339-928e-e466-96c1-06758955b209",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[38] = {
+		x=21,
+		y=17,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=2,
+			id="city_eac6d6a3-fb63-1677-6c72-f7391b712bde",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[39] = {
+		x=25,
+		y=12,
+		properties={
+			atlasid="common-props",
+			direction=1,
+			gold=0,
+			id="city_7c6c8ffa-527d-1f2a-f492-e066de2b61e5",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[40] = {
+		x=2,
+		y=20,
+		properties={
+			atlasid="common-props",
+			direction=3,
+			gold=0,
+			id="city_9a335e09-d1a5-f454-e16b-cb3399b45077",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[41] = {
+		x=7,
+		y=7,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=0,
+			id="city_a3804602-1ef9-f68b-b771-1500b24937f4",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[42] = {
+		x=17,
+		y=20,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=0,
+			id="city_6b3dcbf2-abbc-4ad4-5ba6-2573e415a22f",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[43] = {
+		x=3,
+		y=12,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ac58c56f-fb2d-1d3e-50ca-19be268200bc",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[44] = {
+		x=5,
+		y=29,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_5c4edaac-9ff8-1bfb-4e80-7d5215a2d8e2",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[45] = {
+		x=5,
+		y=30,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_a859c39a-f113-e332-7a05-9c26b32fae40",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[46] = {
+		x=6,
+		y=30,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_9f8c32d5-eff0-f0db-c1fc-6d578c213c94",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[47] = {
+		x=8,
+		y=27,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=0,
+			id="city_ffb3a54f-7bed-addc-61ca-b0767de28909",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[48] = {
+		x=11,
+		y=26,
+		properties={
+			atlasid="common-props",
+			direction=1,
+			gold=3,
+			id="city_3800bdb0-b278-ff65-7f4f-7ad0621c8c23",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[49] = {
+		x=22,
+		y=27,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=0,
+			id="city_9959c766-7070-3a93-16fd-46ce1a76e871",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[50] = {
+		x=16,
+		y=31,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=0,
+			id="city_2466720e-f49d-bd39-221f-9915abc279fc",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[51] = {
+		x=13,
+		y=25,
+		properties={
+			atlasid="common-props",
+			direction=1,
+			gold=0,
+			id="city_550a53cf-5048-3ceb-8a3a-3198bfffbfc7",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[52] = {
+		x=16,
+		y=31,
+		properties={
+			atlasid="common-props",
+			direction=3,
+			gold=0,
+			id="city_dd0215b3-2d09-eb21-f026-a17a50efc1bd",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[53] = {
+		x=19,
+		y=3,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=0,
+			id="city_13eed849-c6d2-68b9-11c3-16d804870d50",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[54] = {
+		x=18,
+		y=25,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_6457da0e-a9c6-2ff8-0f4d-750c32002877",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[55] = {
+		x=19,
+		y=25,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_f64db0c8-65ec-af2d-587b-680cc3a7a574",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[56] = {
+		x=12,
+		y=31,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_a9cbdb81-1994-308d-83d7-f7bf686e42f4",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[57] = {
+		x=16,
+		y=28,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_23a4e7bd-60b7-74e7-fd2c-effcc44042af",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[58] = {
+		x=17,
+		y=3,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_3e0f56e7-0432-6601-a08d-aab2614fcd55",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[59] = {
+		x=14,
+		y=7,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_792fb00b-9b95-581d-5384-c9d60d8dca62",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[60] = {
+		x=8,
+		y=4,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_c7ff4010-4aa5-bd7c-6f07-2147d8cb7fc1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[61] = {
+		x=2,
+		y=2,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ccef29b2-4f15-b3fc-e9fe-6ed8c03c85d5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[62] = {
+		x=2,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_5d5416d7-20ac-0807-df7a-2c6c6d001c49",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[63] = {
+		x=2,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_2a528651-525d-72a6-70ac-c5fd26b0b0bf",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[64] = {
+		x=3,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_34a189de-c3cb-f366-3d3e-5e26384aee74",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[65] = {
+		x=4,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_f4448107-f40b-b8a4-b8d2-323221d54166",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[66] = {
+		x=4,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_517eb827-ade5-c688-a545-ea902ce554a5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[67] = {
+		x=5,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_e52c3365-260d-877f-c8f3-7c27e43bd87a",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[68] = {
+		x=26,
+		y=30,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_296af119-228e-8cf1-00f7-4ef999486ffd",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[69] = {
+		x=26,
+		y=29,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=0,
+			id="city_43700bca-4ab2-9485-baa7-21bf3679e031",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[70] = {
+		x=31,
+		y=25,
+		properties={
+			atlasid="common-props",
+			direction=2,
+			gold=50,
+			id="city_46681f12-2dac-62f4-950c-6c1e3968ffb8",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[71] = {
+		x=29,
+		y=26,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_97b14e3e-f50f-d847-76ed-de9efda5042d",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[72] = {
+		x=28,
+		y=28,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_39d1ba8d-e538-7c10-4cd1-af3d12d130b1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[73] = {
+		x=29,
+		y=28,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_391aa99b-3e78-3aa7-1617-1be7aa1f5499",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[74] = {
+		x=29,
+		y=27,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_135f80fe-254c-95c0-fec9-ff16fda7f1ba",
+			name="city-garden",
+			state=1,
 			visible=1,
 		}
 	},
@@ -1141,10 +2541,30 @@ staticprops={
 
 buttons={
 	[1] = {
-		x=32,
-		y=17,
+		x=11,
+		y=18,
 		properties={
 			id="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6",
+			state=1,
+			type=1,
+			vars="city_545bd749-21f9-0456-ef1f-4998f549f89b:state:1",
+		}
+	},
+	[2] = {
+		x=5,
+		y=28,
+		properties={
+			id="city_309c6a3c-04a0-4b52-3925-579ee9bb1f14",
+			state=1,
+			type=1,
+			vars="city_c5a4c159-7fed-8ac3-2417-c2322ed3ff02:visible:1|city_a7145d26-349b-5d58-1ab5-d18984536985:state:2",
+		}
+	},
+	[3] = {
+		x=1,
+		y=8,
+		properties={
+			id="city_387e3644-1066-6fd9-237d-c7fda0f1582b",
 			state=1,
 			type=1,
 			vars="",
@@ -1152,7 +2572,7 @@ buttons={
 	},
 },
 
-["partyX"]=19,
-["partyY"]=19,
-["partyDirection"]=3,
+["partyX"]=20,
+["partyY"]=13,
+["partyDirection"]=0,
 }

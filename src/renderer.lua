@@ -23,6 +23,7 @@ function Renderer:init(caller)
 	self.currentHoverItem = nil
 	self.currentHoverSpell = nil
 	self.showSpellEffect = false
+	self.showTavern = false
 	
 	self.popupText = ""
 	
@@ -52,6 +53,30 @@ function Renderer:init(caller)
 
 	self.buttons[button.id] = button
 
+	local button = Button:new()
+	button.id = "close-map"
+	button.x = 439
+	button.y = 216
+	button.width = 32
+	button.height = 32
+	button.normal = "button-close-1"
+	button.over = "button-close-2"
+	button.trigger = self.onCloseMapButtonClick
+
+	self.buttons[button.id] = button
+	
+	local button = Button:new()
+	button.id = "close-tavern"
+	button.x = 441
+	button.y = 226
+	button.width = 32
+	button.height = 32
+	button.normal = "button-close-1"
+	button.over = "button-close-2"
+	button.trigger = self.onCloseTavernButtonClick
+
+	self.buttons[button.id] = button	
+	
 	self.menuitemsOffsetX = 512
 	self.menuitemsOffsetY = 120
 	self.menuitems = {
@@ -68,6 +93,18 @@ function Renderer:init(caller)
 		{ caption = "Exit to main menu", trigger = function() self:onBackToMenuButtonClick() end},
 		{ caption = "Quit to desktop", trigger = self.onQuitButtonClick},
 	}	
+	
+	self.loadslots = {
+		{caption = "SLOT 1", x = 244, y = 214, w = 55, h = 17},
+		{caption = "SLOT 2", x = 244+60, y = 214, w = 55, h = 17},
+		{caption = "SLOT 3", x = 244+60*2, y = 214, w = 55, h = 17}
+	}
+	
+	self.saveslots = {
+		{caption = "SLOT 1", x = 244, y = 236, w = 55, h = 17},
+		{caption = "SLOT 2", x = 244+60, y = 236, w = 55, h = 17},
+		{caption = "SLOT 3", x = 244+60*2, y = 236, w = 55, h = 17}
+	}
 	
 end
 
@@ -159,6 +196,10 @@ function Renderer:update(dt)
 		self:drawVendor()
 	end
 	
+	if self.showTavern then
+		self:drawTavern()
+	end	
+	
 	if subState == SubStates.POPUP then
 		self:drawPopup()
 	end
@@ -231,8 +272,27 @@ function Renderer:handleMousePressed(x, y, button)
 			return
 		end
 		
-		if subState == SubStates.POPUP or subState == SubStates.NPC or subState == SubStates.FOUND_LOOT then
+		if subState == SubStates.POPUP or subState == SubStates.FOUND_LOOT then
 			subState = SubStates.IDLE
+		end
+		
+		if subState == SubStates.NPC then
+		
+			local npc = self.currentNPC
+		
+			if npc and npc.properties.state == 2 and npc.properties.gold > 0 or npc.properties.loot ~= "" then
+				self:showFoundLoot(npc.properties.gold, explode(npc.properties.loot, ":"))
+				party:addGold(npc.properties.gold)
+				party:addItems(npc.properties.loot)
+				npc.properties.gold = 0
+				npc.properties.loot = ""
+				globalvariables:add(npc.properties.id, "gold", npc.properties.gold)
+				globalvariables:add(npc.properties.id, "loot", npc.properties.loot)
+				return
+			else
+				subState = SubStates.IDLE
+			end			
+
 		end
 		
 		if subState == SubStates.VENDOR_ANTSACS then
@@ -246,7 +306,48 @@ function Renderer:handleMousePressed(x, y, button)
 		if subState == SubStates.AUTOMAPPER then
 			if intersect(x, y, 541, 321, 34, 34) then
 				self:showAutomapper(false)
+				return
 			end
+			
+			if self.buttons["close-map"]:isOver(x, y) then
+				self.buttons["close-map"].trigger()
+				return
+			end
+		end
+		
+		if subState == SubStates.TAVERN then
+			if self.buttons["close-tavern"]:isOver(x, y) then
+				self.buttons["close-tavern"].trigger()
+				return
+			end
+			
+			for i = 1, #self.loadslots do
+				if party:isSavegameAtSlot(i) then
+					if intersect(x, y, self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h) then
+						if party:loadGameFromSlot(i) then
+						end
+						return
+					end
+				end
+			end
+			
+			for i = 1, #self.saveslots do
+				if intersect(x, y, self.saveslots[i].x, self.saveslots[i].y, self.saveslots[i].w, self.saveslots[i].h) then
+					if party:saveGameAtSlot(i) then
+					Timer.script(function(wait)
+						Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad')
+						wait(1.25)
+						renderer.showTavern = false
+						Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad')
+						wait(1.25)
+						renderer:showPopup("Thank you for staying with us. Hope to see you again soon!")
+					end)					
+						
+					end
+					return
+				end
+			end	
+			return
 		end
 		
 		if subState == SubStates.SYSTEM_MENU then
@@ -306,16 +407,32 @@ function Renderer:handleInput(key)
 
 	if subState == SubStates.INVENTORY then
 	
-		if key == 'i' then
+		if key == 'i' or key == 'escape' then
 			self:showInventory(false)
 			return
 		end
-
+			
 	end
+	
+	if subState == SubStates.POPUP or subState == SubStates.VENDOR_ANTSACS or subState == SubStates.VENDOR or self.showTavern then
+		if key == 'escape' then
+			subState = SubStates.IDLE
+			return
+		end
+	end	
+	
+	if subState == SubStates.POPUP then
+	
+		if key == 'escape' then
+			subState = SubStates.IDLE
+			return
+		end
+			
+	end		
 	
 	if subState == SubStates.AUTOMAPPER then
 	
-		if key == 'm' then
+		if key == 'm' or key == 'escape'  then
 			self:showAutomapper(false)
 			return
 		end
@@ -534,8 +651,12 @@ function Renderer:drawFoundLoot()
 		table.insert(loot, "coins")
 	end
 
-	for i = 1, #self.foundloot.items do
-		table.insert(loot, self.foundloot.items[i])
+	if self.foundloot.items and #self.foundloot.items > 0 then
+		for i = 1, #self.foundloot.items do
+			if self.foundloot.items[i] ~= "" then
+				table.insert(loot, self.foundloot.items[i])
+			end
+		end
 	end
 
 	local offsetx = math.floor(320 - (#loot * 40)/2) + 4
@@ -740,6 +861,62 @@ function Renderer:drawNPC()
 
 end
 
+function Renderer:drawTavern() 
+
+	local mx, my = love.mouse.getPosition()
+	
+	local name = "The White Stag Inn"
+	local text = "Welcome adventurer. I am Biok Kai, the innkeeper of this fine establishment.\n\nDo you want to rest your weary bones in one of our comfortable rooms?"
+	local offsetx = 244
+	local offsety = 65
+	local portraitid = "npc-monk"
+
+	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
+
+	self.buttons["close-tavern"]:isOver(mx, my)
+
+	love.graphics.draw(assets.images["npc-background-large"], 160, offsety)	
+	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+	self:drawText(244,offsety + 8, name, {1,1,1,1}, "left")
+
+	for i = 1, #wrappedtext do
+		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+	end
+
+	self:drawText(self.loadslots[1].x-48, self.loadslots[1].y+2, "LOAD", {1,1,1,1})
+
+	for i = 1, #self.loadslots do
+		if party:isSavegameAtSlot(i) then
+			if intersect(mx, my, self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h) then
+				self:box(self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h, {1,1,1,1}, false)
+			else
+				self:box(self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h, settings.frameColor, false)
+			end
+			self:drawText(self.loadslots[i].x+4, self.loadslots[i].y+2, self.loadslots[i].caption, {1,1,1,1})
+		else
+			self:box(self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h, settings.frameColor, false)
+			self:drawText(self.loadslots[i].x+4, self.loadslots[i].y+2, self.loadslots[i].caption, settings.frameColor)
+		end
+	end
+
+	self:drawText(self.saveslots[1].x-48, self.saveslots[1].y+2, "SAVE", {1,1,1,1})
+
+	for i = 1, #self.saveslots do
+		if intersect(mx, my, self.saveslots[i].x, self.saveslots[i].y, self.saveslots[i].w, self.saveslots[i].h) then
+			self:box(self.saveslots[i].x, self.saveslots[i].y, self.saveslots[i].w, self.saveslots[i].h, {1,1,1,1}, false)
+		else
+			self:box(self.saveslots[i].x, self.saveslots[i].y, self.saveslots[i].w, self.saveslots[i].h, settings.frameColor, false)
+		end
+		self:drawText(self.saveslots[i].x+4, self.saveslots[i].y+2, self.saveslots[i].caption, {1,1,1,1})
+	end
+
+	love.graphics.draw(self.buttons["close-tavern"]:getImage(),  self.buttons["close-tavern"].x, self.buttons["close-tavern"].y)
+
+	love.graphics.setFont(assets.fonts["main"]);
+
+end
+
 function Renderer:drawVendor() 
 
 	local mx, my = love.mouse.getPosition()
@@ -908,9 +1085,9 @@ function Renderer:drawInventory()
 			if inventoryDragSource.item then
 				love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
 			else
-				if party.equipmentslots[i].id ~= "" then
+				if party.equipped[i].id ~= "" then
 					love.graphics.draw(assets.images["inventory-slot-highlight"], x, y)
-					self.currentHoverItem = itemtemplates:get(party.equipmentslots[i].id)
+					self.currentHoverItem = itemtemplates:get(party.equipped[i].id)
 				end
 			end
 			hovercell = {index = i}
@@ -930,9 +1107,9 @@ function Renderer:drawInventory()
 		
 		-- draw item icons
 		
-		if party.equipmentslots[i].id ~= "" then
+		if party.equipped[i].id ~= "" then
 		
-			local item = itemtemplates:get(party.equipmentslots[i].id)
+			local item = itemtemplates:get(party.equipped[i].id)
 
 			if item and assets.images[item.id] then
 				love.graphics.draw(assets.images[item.id], x+1, y+1)
@@ -942,9 +1119,9 @@ function Renderer:drawInventory()
 		
 	end	
 
-	if hovercell and not inventoryDragSource.item and party.equipmentslots[hovercell.index].id ~= "" then
+	if hovercell and not inventoryDragSource.item and party.equipped[hovercell.index].id ~= "" then
 		showingItemStats = true
-		local item = itemtemplates:get(party.equipmentslots[hovercell.index].id)
+		local item = itemtemplates:get(party.equipped[hovercell.index].id)
 	end
 	
 	-- inventory slots
@@ -1043,9 +1220,9 @@ function Renderer:clickOnInventory(mx, my)
 	
 				if party.equipmentslots[i].type == inventoryDragSource.item.slot then
 	
-					if party.equipmentslots[i].id == "" then
+					if party.equipped[i].id == "" then
 		
-						party.equipmentslots[i].id = inventoryDragSource.item.id
+						party.equipped[i].id = inventoryDragSource.item.id
 			
 						inventoryDragSource = {}
 
@@ -1053,9 +1230,9 @@ function Renderer:clickOnInventory(mx, my)
 
 					else
 					
-						local item = itemtemplates:get(party.equipmentslots[i].id)
+						local item = itemtemplates:get(party.equipped[i].id)
 						
-						party.equipmentslots[i].id = inventoryDragSource.item.id
+						party.equipped[i].id = inventoryDragSource.item.id
 
 						inventoryDragSource = {
 							source = "equipment",
@@ -1072,9 +1249,9 @@ function Renderer:clickOnInventory(mx, my)
 				
 			else
 			
-				if party.equipmentslots[i].id ~= "" then
+				if party.equipped[i].id ~= "" then
 
-					local item = itemtemplates:get(party.equipmentslots[i].id)
+					local item = itemtemplates:get(party.equipped[i].id)
 					
 					inventoryDragSource = {
 						source = "equipment",
@@ -1083,7 +1260,7 @@ function Renderer:clickOnInventory(mx, my)
 						src_col = col,
 					}
 					
-					party.equipmentslots[i].id = ""
+					party.equipped[i].id = ""
 					assets:playSound("click-2")
 				else 
 					inventoryDragSource = {}
@@ -1246,11 +1423,11 @@ end
 
 function Renderer:showPlayerStats()
 	
-	love.graphics.draw(assets.images["coins"], settings.inventoryX+8, settings.inventoryY+164)
-	love.graphics.draw(assets.images["antsac"], settings.inventoryX+86, settings.inventoryY+164)
+	love.graphics.draw(assets.images["coins"], settings.inventoryX+8, settings.inventoryY+162)
+	love.graphics.draw(assets.images["antsac"], settings.inventoryX+86, settings.inventoryY+162)
 
-	self:drawDigits(party.gold, 150, 236)
-	self:drawDigits(party.antsacs, 228, 236)
+	self:drawDigits(party.gold, 150, 234)
+	self:drawDigits(party.antsacs, 228, 234)
 
 	self:drawText(251, 228, "HEALTH", {1,1,1,1})
 	self:drawText(251, 228+14, "MANA", {1,1,1,1})
@@ -1372,28 +1549,35 @@ end
 
 function Renderer:drawAutomapper()
 
-	love.graphics.setColor(1,1,1,1)
+	local mx, my = love.mouse.getPosition()
 
 	local cellsize = 6
-	local offsetx = 222+2
-	local offsety = 39+2
+	local offsetx = 162+2
+	local offsety = 59+2
 
-	love.graphics.draw(assets.images["automapper-background"], 222, 39)
+	love.graphics.draw(assets.images["automapper-background"], 162, 59)
+	
+	self.buttons["close-map"]:isOver(mx, my)
+	
+	love.graphics.draw(self.buttons["close-map"]:getImage(),  self.buttons["close-map"].x, self.buttons["close-map"].y)
 	
 	for y = 1, level.data.mapSize do
 		for x = 1, level.data.mapSize do
-		
+
 			local dx = offsetx + ((x-1) * cellsize)
 			local dy = offsety + ((y-1) * cellsize)
-		
-			if level.data.walls[x] and level.data.walls[x][y] then
-				love.graphics.setColor(1,1,1,1)
-				love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
-			end
 
-			if level.data.boundarywalls[x] and level.data.boundarywalls[x][y] then
-				love.graphics.setColor(1,1,1,1)
-				love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
+			if party:seenSquare(x, y) then
+			
+				if level.data.walls[x] and level.data.walls[x][y] then
+					love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[1], dx, dy)
+				end
+
+				if level.data.boundarywalls[x] and level.data.boundarywalls[x][y] then
+					love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[0], dx, dy)
+				end
+			else
+				love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[17], dx, dy)
 			end
 		
 		end
@@ -1403,44 +1587,86 @@ function Renderer:drawAutomapper()
 
 	for key,value in pairs(level.data.doors) do
 		local door = level.data.doors[key]
-		local dx = offsetx + (door.x * cellsize)
-		local dy = offsety + (door.y * cellsize)
-		love.graphics.setColor(1,0.5,0,1)
-		love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
+		if party:seenSquare(door.x, door.y) then
+			local dx = offsetx + ((door.x-1) * cellsize)
+			local dy = offsety + ((door.y-1) * cellsize)
+			if door.properties.type == 1 then
+				love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[2 + door.properties.direction], dx, dy)
+				if door.properties.vendor ~= "" then
+					love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[18], dx, dy)
+				end
+			else
+				love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[6], dx, dy)
+			end
+		end
 	end
 	
+	-- npcs
+
+	for key,value in pairs(level.data.npcs) do
+		local npc = level.data.npcs[key]
+		if party:seenSquare(npc.x, npc.y) then
+			local dx = offsetx + ((npc.x-1) * cellsize)
+			local dy = offsety + ((npc.y-1) * cellsize)
+			love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[7], dx, dy)
+		end
+	end
+
 	-- wells
 
 	for key,value in pairs(level.data.wells) do
 		local well = level.data.wells[key]
-		local dx = offsetx + (well.x * cellsize)
-		local dy = offsety + (well.y * cellsize)
-		love.graphics.setColor(0,0.5,1,1)
-		love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
-	end
-	
-	-- enemies
-
-	for key,value in pairs(level.data.enemies) do
-		local enemy = level.data.enemies[key]
-		if enemy.properties.state == 1 then
-			local dx = offsetx + (enemy.x * cellsize)
-			local dy = offsety + (enemy.y * cellsize)
-			love.graphics.setColor(1,0,0,1)
-			love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
+		if party:seenSquare(well.x, well.y) then
+			local dx = offsetx + ((well.x-1) * cellsize)
+			local dy = offsety + ((well.y-1) * cellsize)
+			love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[9], dx, dy)
 		end
 	end
-		
+	
+	-- props
+
+	for key,value in pairs(level.data.staticprops) do
+		local prop = level.data.staticprops[key]
+		if party:seenSquare(prop.x, prop.y) then
+			if prop.properties.visible == 1 then
+				local dx = offsetx + ((prop.x-1) * cellsize)
+				local dy = offsety + ((prop.y-1) * cellsize)
+				love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[10], dx, dy)
+			end
+		end
+	end
+	
+	-- portals
+
+	for key,value in pairs(level.data.portals) do
+		local portal = level.data.portals[key]
+		if party:seenSquare(portal.x, portal.y) then
+			if portal.properties.state == 1 then
+				local dx = offsetx + ((portal.x-1) * cellsize)
+				local dy = offsety + ((portal.y-1) * cellsize)
+				love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[12], dx, dy)
+			end
+		end
+	end
+	
+	-- chest
+
+	for key,value in pairs(level.data.chests) do
+		local chest = level.data.chests[key]
+		if party:seenSquare(chest.x, chest.y) then
+			local dx = offsetx + ((chest.x-1) * cellsize)
+			local dy = offsety + ((chest.y-1) * cellsize)
+			love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[11], dx, dy)
+		end	
+	end	
+	
 	-- player
 	
-	local dx = offsetx + (party.x * cellsize)
-	local dy = offsety + (party.y * cellsize)
-	love.graphics.setColor(0,1,0,1)
-	love.graphics.rectangle("fill", dx, dy, cellsize, cellsize)
+	local dx = offsetx + ((party.x-1) * cellsize)
+	local dy = offsety + ((party.y-1) * cellsize)
+	love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[13 + party.direction], dx, dy)
 	
 
-	love.graphics.setColor(1,1,1,1)
-	
 end
 
 function Renderer:drawUI()
@@ -1452,9 +1678,16 @@ function Renderer:drawUI()
 	love.graphics.draw(assets.images["main-ui"], 0,0)
 	
 	-- compass
-	
-	love.graphics.draw(assets.images["compass"], assets.compass_quads[party.direction], 318, 7)
 
+	if party:hasCompass() then
+		love.graphics.draw(assets.images["compass-letters"], assets.compass_quads[party.direction], 286, 0)
+	end
+	
+	-- map
+
+	if party:hasMap() then
+		love.graphics.draw(assets.images["button-map"], 541, 322)
+	end
 	
 	-- left hand
 
@@ -1739,8 +1972,10 @@ function Renderer:drawSquare(x, z)
 		
 		for key,value in pairs(level.data.staticprops) do
 			local prop = level.data.staticprops[key]
-			if prop.x == p.x and prop.y == p.y then
-				self:drawObject(prop.properties.atlasid, self:getObjectDirectionID(prop.properties.name, prop.properties.direction), x, z)
+			if prop.properties.visible == 1 then
+				if prop.x == p.x and prop.y == p.y then
+					self:drawObject(prop.properties.atlasid, self:getObjectDirectionID(prop.properties.name, prop.properties.direction), x, z)
+				end
 			end
 		end
 		
@@ -1799,8 +2034,10 @@ function Renderer:drawSquare(x, z)
 		
 		for key,value in pairs(level.data.portals) do
 			local portal = level.data.portals[key]
-			if portal.x == p.x and portal.y == p.y then
-				self:drawObject(level.data.tileset .. "-props", self:getObjectDirectionID("portal", portal.properties.direction), x, z)			
+			if portal.properties.visible == 1 then
+				if portal.x == p.x and portal.y == p.y then
+					self:drawObject(level.data.tileset .. "-props", self:getObjectDirectionID("portal", portal.properties.direction), x, z)			
+				end
 			end
 		end	
 
@@ -1974,6 +2211,19 @@ function Renderer:onCloseVendorButtonClick()
 
 end
 
+function Renderer:onCloseTavernButtonClick()
+
+	subState = SubStates.IDLE
+	renderer.showTavern = false
+	
+end
+
+function Renderer:onCloseMapButtonClick()
+
+	renderer:showAutomapper(false)
+
+end
+
 function Renderer:showPopup(text, sound)
 	
 	if sound or sound == nil then
@@ -1993,7 +2243,6 @@ end
 
 function Renderer:showNPC(npc)
 
-	assets:playSound(npc.properties.sound)
 	self.currentNPC = npc
 	subState = SubStates.NPC
 
@@ -2008,14 +2257,21 @@ function Renderer:showVendor(id)
 			assets:playSound("vendor-"..id)
 		end
 		subState = SubStates.VENDOR_ANTSACS
+	elseif id == "tavern" then
+		assets:playSound("welcome-1")
+		self.showTavern = true
+		subState = SubStates.TAVERN
 	else
 		self.currentVendor = vendors.vendor[id]
+		assets:playSound("vendor-"..id)
 		subState = SubStates.VENDOR
 	end
 
 end
 
 function Renderer:showFoundLoot(gold, items)
+
+	assets:playSound("loot")
 
 	self.foundloot = {gold = gold, items = items}
 	

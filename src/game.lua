@@ -54,7 +54,7 @@ function Game:init()
 	self.isFullscreen = love.window.fullscreen
 	self.canvas = love.graphics.newCanvas(screen.width, screen.height)
 	self.teleportTarget = nil
-
+	self.loadTarget = nil
 	assets:load()
 	
 	renderer:init(self)
@@ -142,7 +142,22 @@ function Game:handleMousePressed(x, y, button, istouch)
 				end
 				
 				if intersect(x, y, 278, 321, 34, 34) then
-					party:attackWithMelee()
+				
+					local enemy = level:getFacingEnemy()
+
+					if party:attackWithMelee(enemy) then
+						if enemy.properties.gold > 0 or enemy.properties.loot ~= "" then
+							renderer:showFoundLoot(enemy.properties.gold, explode(enemy.properties.loot, ":"))
+							party:addGold(enemy.properties.gold)
+							party:addItems(enemy.properties.loot)
+							enemy.properties.gold = 0
+							enemy.properties.loot = ""
+							globalvariables:add(enemy.properties.id, "gold", enemy.properties.gold)
+							globalvariables:add(enemy.properties.id, "loot", enemy.properties.loot)
+						end
+						return
+					end
+					
 				end
 				
 				if intersect(x, y, 326, 321, 34, 34) then
@@ -172,8 +187,8 @@ function Game:handleMousePressed(x, y, button, istouch)
 						return
 					end
 				end
-				
-				if intersect(x, y, 541, 321, 34, 34) then
+
+				if intersect(x, y, 541, 321, 34, 34) and party:hasMap() then
 					if not renderer:automapperShowing() then
 						renderer:showAutomapper(true)
 						return
@@ -213,6 +228,30 @@ function Game:handleInput(key)
 
 	-- COMMON
 
+    if key == 'f1' then
+		if party:loadGameFromSlot(1) then
+			print("Loaded from slot " .. 1 .. " successfully.")
+		end
+    end
+	
+    if key == 'f2' then
+		if party:saveGameAtSlot(1) then
+			print("Saved to slot " .. 1 .. " successfully.")
+		end
+    end
+	
+    if key == 'f3' then
+		if party:loadGameFromSlot(2) then
+			print("Loaded from slot " .. 2 .. " successfully.")
+		end
+    end
+	
+    if key == 'f4' then
+		if party:saveGameAtSlot(2) then
+			print("Saved to slot " .. 2 .. " successfully.")
+		end
+    end
+	
     if key == 'return' then
 		if love.keyboard.isDown("lalt") then
 			love.window.setFullscreen(not love.window.getFullscreen())
@@ -224,14 +263,25 @@ function Game:handleInput(key)
 		return
 	end
 	
-	if key == 'escape' then
-		gameState = GameStates.QUITTING
-		love.event.quit()
+	if gameState == GameStates.MAIN_MENU then
+	
+		if key == 'escape' then
+			gameState = GameStates.QUITTING
+			love.event.quit()
+			return
+		end
+			
 	end
 	
 	if gameState == GameStates.EXPLORING then
 
 		if subState == SubStates.IDLE then
+
+			if key == 'escape' then
+				gameState = GameStates.QUITTING
+				love.event.quit()
+				return
+			end
 
 			if key == 'left' or key == 'kp7' or key == 'q' then
 				party.direction = party.direction - 1
@@ -289,7 +339,7 @@ function Game:handleInput(key)
 				end
 			end	
 			
-			if key == 'm' then
+			if key == 'm' and party:hasMap() then
 				if not renderer:automapperShowing() then
 					renderer:showAutomapper(true)
 					return
@@ -342,8 +392,6 @@ function Game:moveForward()
 	
 	self:stepOnGround()
 
-	self:playFootstepSound()
-
 	self:tick()
 
 end
@@ -374,8 +422,6 @@ function Game:moveBackward()
 	renderer:flipGround()
 	
 	self:stepOnGround()
-
-	self:playFootstepSound()
 
 	self:tick()
 
@@ -408,8 +454,6 @@ function Game:strafeLeft()
 	
 	self:stepOnGround()
 
-	self:playFootstepSound()
-
 	self:tick()
 
 end
@@ -441,8 +485,6 @@ function Game:strafeRight()
 	
 	self:stepOnGround()
 
-	self:playFootstepSound()
-
 	self:tick()
 
 end
@@ -458,7 +500,7 @@ function Game:handleTileCollide(x, y)
 		end
 
 		if level.data.walls[x][y].type == 2 then
-			assets:playSound("bushes")
+			assets:playSound(level.data.tileset .. "-illusionary-wall")
 			return false
 		end
 	
@@ -488,6 +530,12 @@ function Game:handleTileCollide(x, y)
 			return true
 		end
 	
+		if prop.properties.name == "city-garden" then
+
+			return false
+		end
+	
+	
 		return true
 	end		
 	
@@ -501,7 +549,9 @@ function Game:handleTileCollide(x, y)
 	
 	-- portal
 	
-	if level:getObject(level.data.portals, x,y) then
+	local portal = level:getObject(level.data.portals, x,y)
+	
+	if portal and portal.properties.visible == 1 then
 		return true
 	end
 	
@@ -541,8 +591,25 @@ function Game:teleportTo(x, y, direction)
 
 end
 
-function Game:stepOnGround()
+function Game:stepOnGround(playFootsteps)
 
+	party:squareIsSeen(party.x, party.y)
+
+	-- Spinner
+
+	local teleporter = level:getObject(level.data.teleporters, party.x, party.y)
+
+	if teleporter then
+		if teleporter.properties.state == 1 then
+			self:teleportTo(teleporter.properties.targetx+1, teleporter.properties.targety+1, teleporter.properties.targetdir)
+			return
+		end
+	end
+
+	if playFootsteps == true or playFootsteps == nil then
+		self:playFootstepSound()
+	end
+	
 	-- Spinner
 
 	local spinner = level:getObject(level.data.spinners, party.x, party.y)
@@ -560,12 +627,12 @@ function Game:stepOnGround()
 	local trigger = level:getObject(level.data.triggers, party.x, party.y)
 
 	if trigger and trigger.properties.state == 1 then
-		renderer:showPopup(trigger.properties.text)
+		if trigger.properties.text ~= "" then
+			renderer:showPopup(trigger.properties.text)
+		end
 		trigger.properties.state = 2
 		globalvariables:add(trigger.properties.id, "state", trigger.properties.state)
-		if trigger.vars ~= "" then
-			--messages:add(trigger.vars)
-		end		
+		level:applyVars(trigger.properties.vars)
 		return
 	end	
 	
@@ -575,12 +642,17 @@ function Game:loadArea(id)
 
 	local target = nil
 
-	if self.currentDoor then
-		target.x = self.currentDoor.properties.targetx
-		target.y = self.currentDoor.properties.targety
-		target.direction = self.currentDoor.properties.targetdir
-	elseif self.teleportTarget then
-		target = self.teleportTarget
+	if self.fromSaveFile then
+		target = self.loadTarget
+	else
+		if self.currentDoor then
+			target = {}
+			target.x = self.currentDoor.properties.targetx
+			target.y = self.currentDoor.properties.targety
+			target.direction = self.currentDoor.properties.targetdir
+		elseif self.teleportTarget then
+			target = self.teleportTarget
+		end
 	end
 
 	if level:load(id, target) then
@@ -640,8 +712,8 @@ function Game:loadArea(id)
 		-- fade in
 
 		Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad', function()
-			Game:stepOnGround()
 			Game.footStepIndex = 1
+			Game:stepOnGround(false)
 			assets:playMusic(level.data.tileset)
 		end)
 		
@@ -690,9 +762,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 		if door.properties.type == 1 then
 			
 			if door.properties.vendor ~= "" then
-			
 				renderer:showVendor(door.properties.vendor)
-
 			else
 				assets:playSound("door-locked", false)
 				renderer:showPopup("There doesn't seem to be anyone home, or they're just too scared to open the door.", false)
@@ -705,7 +775,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 						renderer:showPopup("You use a key to unlock the door.")
 						door.properties.keyid = ""
 						globalvariables:add(door.properties.id, "keyid", door.properties.keyid)
-						assets:playSound("chest-open")
+						assets:playSound("door-open")
 						return true
 					else
 						renderer:showPopup("You don't have the key that unlocks this door.")
@@ -726,7 +796,8 @@ function Game:checkIfClickedOnFacingObject(x, y)
 					end)				
 				end
 			else
-				renderer:showPopup("The door is blocked by some unknown mechanism.")
+				assets:playSound("hmm")
+				renderer:showPopup("The door is blocked by some unknown mechanism.", false)
 			end
 		end
 		return true
@@ -740,21 +811,15 @@ function Game:checkIfClickedOnFacingObject(x, y)
 		if npc.properties.state == 2 then
 			npc.properties.state = 3
 			globalvariables:add(npc.properties.id, "state", npc.properties.state)
+			assets:playSound(npc.properties.sound)
 		else
 			if checkCriterias(npc.properties.criterias) then
+				assets:playSound("quest-complete")
 				npc.properties.state = 2
 				globalvariables:add(npc.properties.id, "state", npc.properties.state)
 				level:applyVars(npc.properties.vars)
-				
-				if npc.properties.gold > 0 or npc.properties.loot ~= "" then
-					party:addGold(npc.properties.gold)
-					party:addItems(npc.properties.loot)
-					npc.properties.gold = 0
-					npc.properties.loot = ""
-					globalvariables:add(npc.properties.id, "gold", npc.properties.gold)
-					globalvariables:add(npc.properties.id, "loot", npc.properties.loot)
-				end
-				
+			else
+				assets:playSound(npc.properties.sound)
 			end		
 		end
 		renderer:showNPC(npc)
@@ -847,11 +912,18 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	
 	if prop and intersectBox(x, y, world_hitboxes["prop"]) then
 	
-		if prop.properties.name == "notice-board" then
-			renderer:showPopup("Such handsome guys!")
+		if prop.properties.name == "barrels" then
+			if prop.properties.gold > 0 then
+				renderer:showFoundLoot(prop.properties.gold, {})
+				party:addGold(prop.properties.gold)
+				prop.properties.gold = 0
+				globalvariables:add(prop.properties.id, "gold", prop.properties.gold)
+				return true
+			end		
+		elseif prop.properties.text ~= "" then
+			renderer:showPopup(prop.properties.text)
 			return true
 		end
-	
 	end		
 	
 	-- button
@@ -926,6 +998,7 @@ function Game:tick()
 		local well = level.data.wells[key]
 
 		well.properties.counter = well.properties.counter - 1
+		globalvariables:add(well.properties.id, "counter", well.properties.counter)
 		
 		if well.properties.counter < 0 then
 			well.properties.counter = 0
