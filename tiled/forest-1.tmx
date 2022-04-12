@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="169">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="172">
  <editorsettings>
   <export target="../src/files/areas/forest-1.lua" format="custom"/>
  </editorsettings>
@@ -35,8 +35,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,1,1,1,1,1,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1,1,0,0,1,1,0,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,1,1,1,1,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,1,1,0,0,0,1,0,1,1,0,1,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,1,0,1,1,0,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -82,7 +82,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="5" x="544" y="416" width="32" height="32"/>
+  <object id="34" gid="6" x="608" y="640" width="32" height="32"/>
   <object id="107" gid="22" x="992" y="512" width="32" height="32">
    <properties>
     <property name="direction" type="int" value="1"/>
@@ -171,6 +171,18 @@
     <property name="direction" type="int" value="3"/>
     <property name="gold" type="int" value="12"/>
     <property name="id" value="forest-1_208881eb-81a3-50d3-0e33-d9c9125376a0"/>
+   </properties>
+  </object>
+  <object id="169" gid="24" x="544" y="640" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="forest-props"/>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="forest-1_4e09ed1c-1128-37a9-5eea-f55cd83fc4cd"/>
+    <property name="imageid" value="dungeon-entrance"/>
+    <property name="targetarea" value="dungeon-1"/>
+    <property name="targetdir" type="int" value="2"/>
+    <property name="targetx" type="int" value="3"/>
+    <property name="targety" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>

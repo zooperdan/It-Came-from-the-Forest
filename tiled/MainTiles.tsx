@@ -45,14 +45,15 @@
  <tile id="7" type="Enemy">
   <properties>
    <property name="antsacs" type="int" value="0"/>
-   <property name="attack" type="int" value="1"/>
-   <property name="defence" type="int" value="1"/>
+   <property name="attack" type="int" value="5"/>
+   <property name="defence" type="int" value="5"/>
    <property name="gold" type="int" value="0"/>
-   <property name="health" type="int" value="100"/>
-   <property name="health_max" type="int" value="100"/>
+   <property name="health" type="int" value="25"/>
+   <property name="health_max" type="int" value="25"/>
    <property name="id" value=""/>
+   <property name="imageid" value="ant"/>
    <property name="loot" value=""/>
-   <property name="name" value="Fire ant"/>
+   <property name="name" value="Young fire ant"/>
    <property name="sound_attack" value="ant-attack"/>
    <property name="sound_die" value="ant-die"/>
    <property name="sound_move" value="ant-move"/>
@@ -64,13 +65,14 @@
  </tile>
  <tile id="8" type="Enemy">
   <properties>
-   <property name="attack" type="int" value="1"/>
-   <property name="defence" type="int" value="1"/>
+   <property name="attack" type="int" value="15"/>
+   <property name="defence" type="int" value="15"/>
    <property name="experience" type="int" value="10"/>
    <property name="gold" type="int" value="0"/>
    <property name="health" type="int" value="100"/>
    <property name="health_max" type="int" value="100"/>
    <property name="id" value=""/>
+   <property name="imageid" value="ant"/>
    <property name="loot" value=""/>
    <property name="name" value="Fire ant"/>
    <property name="sound_attack" value="ant-attack"/>
@@ -84,15 +86,16 @@
  </tile>
  <tile id="9" type="Enemy">
   <properties>
-   <property name="attack" type="int" value="1"/>
-   <property name="defence" type="int" value="1"/>
+   <property name="attack" type="int" value="40"/>
+   <property name="defence" type="int" value="20"/>
    <property name="experience" type="int" value="10"/>
    <property name="gold" type="int" value="0"/>
-   <property name="health" type="int" value="100"/>
-   <property name="health_max" type="int" value="100"/>
+   <property name="health" type="int" value="250"/>
+   <property name="health_max" type="int" value="250"/>
    <property name="id" value=""/>
+   <property name="imageid" value="ant"/>
    <property name="loot" value=""/>
-   <property name="name" value="Fire ant"/>
+   <property name="name" value="Fire ant soldier"/>
    <property name="sound_attack" value="ant-attack"/>
    <property name="sound_die" value="ant-die"/>
    <property name="sound_move" value="ant-move"/>
@@ -102,12 +105,34 @@
    <property name="wanderer" type="int" value="0"/>
   </properties>
  </tile>
+ <tile id="10" type="Enemy">
+  <properties>
+   <property name="antsacs" type="int" value="0"/>
+   <property name="attack" type="int" value="3"/>
+   <property name="defence" type="int" value="1"/>
+   <property name="gold" type="int" value="0"/>
+   <property name="health" type="int" value="25"/>
+   <property name="health_max" type="int" value="25"/>
+   <property name="id" value=""/>
+   <property name="imageid" value="rat"/>
+   <property name="loot" value=""/>
+   <property name="name" value="Rat"/>
+   <property name="sound_attack" value="rat-attack"/>
+   <property name="sound_die" value="rat-die"/>
+   <property name="sound_move" value="rat-move"/>
+   <property name="sound_scream" value="rat-scream"/>
+   <property name="state" type="int" value="1"/>
+   <property name="type" type="int" value="0"/>
+   <property name="wanderer" type="int" value="0"/>
+  </properties>
+ </tile>
  <tile id="13" type="NPC">
   <properties>
    <property name="criterias" value=""/>
    <property name="gold" type="int" value="0"/>
    <property name="id" value=""/>
    <property name="imageid" value=""/>
+   <property name="init_vars" value=""/>
    <property name="loot" value=""/>
    <property name="name" value=""/>
    <property name="questdelivertext" value=""/>
@@ -202,7 +227,17 @@
    <property name="vars" value=""/>
   </properties>
  </tile>
- <tile id="23" type="Sign"/>
+ <tile id="23" type="LevelExit">
+  <properties>
+   <property name="direction" type="int" value="3"/>
+   <property name="id" value=""/>
+   <property name="state" type="int" value="1"/>
+   <property name="targetarea" value=""/>
+   <property name="targetdir" type="int" value="0"/>
+   <property name="targetx" type="int" value="0"/>
+   <property name="targety" type="int" value="0"/>
+  </properties>
+ </tile>
  <tile id="32" type="Wall">
   <properties>
    <property name="type" type="int" value="3"/>

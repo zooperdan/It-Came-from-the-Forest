@@ -19,9 +19,17 @@ function Atlases:load(tileset)
 			"city-props",
 			"npc",
 		}	
-	else
+	elseif tileset == "forest" then
 		self.filenames = {
 			"forest-environment",
+			"forest-props",
+			"enemies",
+			"common-props",
+			"npc",
+		}	
+	elseif tileset == "dungeon" then
+		self.filenames = {
+			"dungeon-environment",
 			"forest-props",
 			"enemies",
 			"common-props",

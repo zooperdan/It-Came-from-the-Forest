@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="156">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="157">
  <editorsettings>
   <export target="../src/files/areas/forest-2.lua" format="custom"/>
  </editorsettings>
@@ -82,7 +82,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="4" x="96" y="576" width="32" height="32"/>
+  <object id="34" gid="4" x="32" y="480" width="32" height="32"/>
   <object id="107" gid="22" x="0" y="480" width="32" height="32">
    <properties>
     <property name="id" value="dark_forest_1_75e341b5-5f43-cd1d-0acf-c64eb1917fd5"/>

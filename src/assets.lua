@@ -9,7 +9,8 @@ function Assets:initialize()
 	self.sfx = {
 		footsteps = {
 			city = {},
-			forest = {}
+			forest = {},
+			dungeon = {}
 		},
 		misc = {}
 	}
@@ -31,6 +32,7 @@ function Assets:load()
 	
 	for i = 1, #city_footsteps do
 		table.insert(self.sfx.footsteps.city, love.audio.newSource("files/sfx/movement/"..city_footsteps[i], "static"))
+		table.insert(self.sfx.footsteps.dungeon, love.audio.newSource("files/sfx/movement/"..city_footsteps[i], "static"))
 	end
 	
 	local forest_footsteps = {

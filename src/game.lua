@@ -53,8 +53,7 @@ function Game:init()
 	
 	self.isFullscreen = love.window.fullscreen
 	self.canvas = love.graphics.newCanvas(screen.width, screen.height)
-	self.teleportTarget = nil
-	self.loadTarget = nil
+	spawnTarget = nil
 	assets:load()
 	
 	renderer:init(self)
@@ -64,6 +63,7 @@ function Game:init()
 	if settings.quickstart then
 		gameState = GameStates.LOADING_LEVEL
 		assets:stopMusic("mainmenu")
+		self.fromSaveFile = false
 		Game:loadArea(settings.startingArea)
 	else 
 		assets:playMusic("buildup")
@@ -141,26 +141,23 @@ function Game:handleMousePressed(x, y, button, istouch)
 					return
 				end
 				
-				if intersect(x, y, 278, 321, 34, 34) then
+				if intersect(x, y, 278, 321, 34, 34) then -- attack with left hand
 				
 					local enemy = level:getFacingEnemy()
 
-					if party:attackWithMelee(enemy) then
-						if enemy.properties.gold > 0 or enemy.properties.loot ~= "" then
-							renderer:showFoundLoot(enemy.properties.gold, explode(enemy.properties.loot, ":"))
+					if party:attackWithMelee(enemy) then -- returns true if enemy is killed
+						if enemy.properties.antsacs > 0 or enemy.properties.gold > 0 or enemy.properties.loot ~= "" then
+							renderer:showFoundLoot(enemy.properties.gold, explode(enemy.properties.loot, ":"), enemy.properties.antsacs)
+							party:addAntsacs(enemy.properties.antsacs)
 							party:addGold(enemy.properties.gold)
 							party:addItems(enemy.properties.loot)
-							enemy.properties.gold = 0
-							enemy.properties.loot = ""
-							globalvariables:add(enemy.properties.id, "gold", enemy.properties.gold)
-							globalvariables:add(enemy.properties.id, "loot", enemy.properties.loot)
 						end
 						return
 					end
 					
 				end
 				
-				if intersect(x, y, 326, 321, 34, 34) then
+				if intersect(x, y, 326, 321, 34, 34) then-- attack with right hand
 					if party:getrightHand() and not party:hasCooldown(2) then
 						if #party.spells == 0 then
 							renderer:showPopup("You don't have any spells.")
@@ -518,23 +515,27 @@ function Game:handleTileCollide(x, y)
 	
 		if prop.properties.name == "barricade" then
 
-			assets:playSound("barricade-hurt")
+			if prop.properties.visible == 1 then
+
+				assets:playSound("barricade-hurt")
+				
+				party.stats.health = party.stats.health - 10
 			
-			party.stats.health = party.stats.health - 10
-		
-			if party.stats.health <= 0 then
-				assets:playSound("player-death")
-				party:died()
-			end			
-			
-			return true
+				if party.stats.health <= 0 then
+					assets:playSound("player-death")
+					party:died()
+				end			
+				
+				return true
+			else
+				return false
+			end	
 		end
 	
 		if prop.properties.name == "city-garden" then
 
 			return false
 		end
-	
 	
 		return true
 	end		
@@ -571,9 +572,13 @@ function Game:handleTileCollide(x, y)
 	
 	-- well
 	
-	local well = level:getObject(level.data.wells, x,y)
-	
 	if level:getObject(level.data.wells, x,y) then
+		return true
+	end		
+	
+	-- levelexit
+	
+	if level:getObject(level.data.levelexits, x,y) then
 		return true
 	end		
 	
@@ -642,17 +647,13 @@ function Game:loadArea(id)
 
 	local target = nil
 
-	if self.fromSaveFile then
-		target = self.loadTarget
+	if self.currentDoor then
+		target = {}
+		target.x = self.currentDoor.properties.targetx
+		target.y = self.currentDoor.properties.targety
+		target.direction = self.currentDoor.properties.targetdir
 	else
-		if self.currentDoor then
-			target = {}
-			target.x = self.currentDoor.properties.targetx
-			target.y = self.currentDoor.properties.targety
-			target.direction = self.currentDoor.properties.targetdir
-		elseif self.teleportTarget then
-			target = self.teleportTarget
-		end
+		target = spawnTarget
 	end
 
 	if level:load(id, target) then
@@ -746,6 +747,7 @@ function Game:startGame()
 		Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
 			gameState = GameStates.LOADING_LEVEL
 			assets:stopMusic("mainmenu")
+			self.fromSaveFile = false
 			Game:loadArea(settings.startingArea)
 		end)
 	end)
@@ -754,7 +756,7 @@ end
 
 function Game:checkIfClickedOnFacingObject(x, y)
 
-	-- npc
+	-- door
 
 	local door = level:getFacingObject(level.data.doors, x, y)
 	
@@ -786,6 +788,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 					assets:playSound("city-gate")
 					Game.currentDoor = door
 					fadeMusicVolume.v = settings.musicVolume
+					self.fromSaveFile = false
 					Timer.script(function(wait)
 						Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
 						end)
@@ -807,7 +810,36 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	
 	local npc = level:getFacingObject(level.data.npcs, x, y)
 
-	if npc and intersectBox(x, y, world_hitboxes["npc"]) then
+	if npc and npc.properties.visible == 1 and intersectBox(x, y, world_hitboxes["npc"]) then
+	
+		if npc.properties.state == 1 then
+			level:applyVars(npc.properties.init_vars)
+		end
+		
+		if checkCriterias(npc.properties.criterias) then
+			npc.properties.delayedLoot = (npc.properties.state == 1) and true or false
+			assets:playSound("quest-complete")
+			npc.properties.state = 2
+			npc.properties.criterias = ""
+			globalvariables:add(npc.properties.id, "state", npc.properties.state)
+			globalvariables:add(npc.properties.id, "criterias", npc.properties.criterias)
+			level:applyVars(npc.properties.vars)
+			renderer:showNPC(npc)
+			return true
+		end
+
+		if npc.properties.state == 2 then
+			npc.properties.state = 3
+			globalvariables:add(npc.properties.id, "state", npc.properties.state)
+			assets:playSound(npc.properties.sound)
+			renderer:showNPC(npc)
+			return true
+		else
+			assets:playSound(npc.properties.sound)
+			renderer:showNPC(npc)
+			return true
+		end
+		--[[
 		if npc.properties.state == 2 then
 			npc.properties.state = 3
 			globalvariables:add(npc.properties.id, "state", npc.properties.state)
@@ -822,8 +854,8 @@ function Game:checkIfClickedOnFacingObject(x, y)
 				assets:playSound(npc.properties.sound)
 			end		
 		end
-		renderer:showNPC(npc)
-		return true
+		]]--
+		
 	end
 
 	-- portal
@@ -865,7 +897,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 			else
 				chest.properties.state = 2
 				if chest.properties.gold > 0 or chest.properties.loot ~= "" then
-					renderer:showFoundLoot(chest.properties.gold, explode(chest.properties.loot, ":"))
+					renderer:showFoundLoot(chest.properties.gold, explode(chest.properties.loot, ":"), 0)
 					party:addGold(chest.properties.gold)
 					party:addItems(chest.properties.loot)
 					chest.properties.gold = 0
@@ -877,10 +909,12 @@ function Game:checkIfClickedOnFacingObject(x, y)
 				assets:playSound("chest-open")
 			end
 		
-		else
+		elseif chest.properties.state == 2 then
 			chest.properties.state = 1
 			globalvariables:add(chest.properties.id, "state", chest.properties.state)
 			assets:playSound("chest-close")
+		elseif chest.properties.state == 3 then
+			renderer:showPopup("The chest is blocked by some unknown mechanism.")
 		end
 		return true
 	end
@@ -940,6 +974,36 @@ function Game:checkIfClickedOnFacingObject(x, y)
 		return true
 	end		
 	
+	-- levelexit
+	
+	local levelexit = level:getFacingObject(level.data.levelexits, x,y)
+	
+	if levelexit and intersectBox(x, y, world_hitboxes["levelexit"]) then
+		
+		spawnTarget =  {
+			x = levelexit.properties.targetx,
+			y = levelexit.properties.targety,
+			direction = levelexit.properties.targetdir
+		}
+		
+		Game.currentDoor = nil
+		gameState = GameStates.LOADING_LEVEL
+		fadeColor = {1,1,1}
+		self.fromSaveFile = false
+		--assets:playSound("city-gate")
+		fadeMusicVolume.v = settings.musicVolume
+		Timer.script(function(wait)
+			Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+			end)
+			Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
+				assets:stopMusic(level.data.tileset)
+				Game:loadArea(levelexit.properties.targetarea)
+			end)
+		end)	
+					
+		return true
+	end	
+	
 	return false
 	
 end
@@ -968,7 +1032,7 @@ end
 
 function Game:invokeTownPortal()
 
-	self.teleportTarget =  {
+	spawnTarget =  {
 		x = 19,
 		y = 15,
 		direction = 1

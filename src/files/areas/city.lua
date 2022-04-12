@@ -79,6 +79,7 @@
 	},
 	[15]={
 		[21]={["type"]=1,},
+		[23]={["type"]=1,},
 	},
 	[16]={
 		[13]={["type"]=1,},
@@ -87,6 +88,7 @@
 		[17]={["type"]=1,},
 		[18]={["type"]=1,},
 		[19]={["type"]=1,},
+		[23]={["type"]=1,},
 	},
 	[17]={
 		[13]={["type"]=1,},
@@ -96,6 +98,7 @@
 		[18]={["type"]=1,},
 		[19]={["type"]=1,},
 		[21]={["type"]=1,},
+		[23]={["type"]=1,},
 	},
 	[18]={
 		[2]={["type"]=1,},
@@ -182,7 +185,6 @@
 		[15]={["type"]=1,},
 		[16]={["type"]=1,},
 		[17]={["type"]=1,},
-		[18]={["type"]=1,},
 		[19]={["type"]=1,},
 		[20]={["type"]=1,},
 		[22]={["type"]=1,},
@@ -190,6 +192,8 @@
 	[26]={
 		[3]={["type"]=1,},
 		[6]={["type"]=1,},
+		[18]={["type"]=1,},
+		[19]={["type"]=1,},
 		[20]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
@@ -497,7 +501,6 @@
 		[9]={["type"]=3,},
 		[11]={["type"]=3,},
 		[13]={["type"]=3,},
-		[23]={["type"]=3,},
 		[24]={["type"]=3,},
 		[26]={["type"]=3,},
 		[27]={["type"]=3,},
@@ -510,7 +513,6 @@
 		[1]={["type"]=3,},
 		[2]={["type"]=3,},
 		[9]={["type"]=3,},
-		[23]={["type"]=3,},
 		[24]={["type"]=3,},
 		[27]={["type"]=3,},
 		[32]={["type"]=3,},
@@ -524,7 +526,6 @@
 		[9]={["type"]=3,},
 		[10]={["type"]=3,},
 		[11]={["type"]=3,},
-		[23]={["type"]=3,},
 		[24]={["type"]=3,},
 		[25]={["type"]=3,},
 		[27]={["type"]=3,},
@@ -694,88 +695,99 @@ enemyblockers={
 			id="city_d6df5ff6-5c01-36e0-7a58-ba6cf983e691",
 		}
 	},
+	[4] = {
+		x=10,
+		y=4,
+		properties={
+			id="city_54f2b588-ce63-038e-00af-99a9f8bd6852",
+		}
+	},
 },
 
 enemies={
 	[1] = {
-		x=12,
-		y=10,
-		properties={
-			antsacs=0,
-			attack=1,
-			defence=1,
-			gold=0,
-			health=100,
-			health_max=100,
-			id="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c",
-			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
-			state=1,
-			type=0,
-			wanderer=1,
-		}
-	},
-	[2] = {
-		x=10,
-		y=7,
-		properties={
-			antsacs=0,
-			attack=1,
-			defence=1,
-			gold=0,
-			health=100,
-			health_max=100,
-			id="city_81bdecd2-c200-017e-9d02-6065c4fc4fc6",
-			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
-			state=1,
-			type=0,
-			wanderer=1,
-		}
-	},
-	[3] = {
-		x=10,
-		y=13,
-		properties={
-			antsacs=0,
-			attack=1,
-			defence=1,
-			gold=0,
-			health=100,
-			health_max=100,
-			id="city_4f1cda06-b79d-2a35-f00e-6f81afe3a022",
-			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
-			state=1,
-			type=0,
-			wanderer=1,
-		}
-	},
-	[4] = {
 		x=19,
 		y=27,
 		properties={
-			antsacs=0,
-			attack=1,
-			defence=1,
-			gold=0,
-			health=100,
-			health_max=100,
+			antsacs=1,
+			attack=5,
+			defence=5,
+			gold=5,
+			health=25,
+			health_max=25,
 			id="city_848887b9-ee60-ff44-73aa-127f0b06b496",
+			imageid="ant",
 			loot="",
-			name="Fire ant",
+			name="Young fire ant",
+			sound_attack="ant-attack",
+			sound_die="ant-die",
+			sound_move="ant-move",
+			sound_scream="ant-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[2] = {
+		x=15,
+		y=25,
+		properties={
+			antsacs=0,
+			attack=5,
+			defence=5,
+			gold=0,
+			health=25,
+			health_max=25,
+			id="city_54ddce09-412a-c55b-1fa8-67c41d5f5c11",
+			imageid="ant",
+			loot="",
+			name="Young fire ant",
+			sound_attack="ant-attack",
+			sound_die="ant-die",
+			sound_move="ant-move",
+			sound_scream="ant-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[3] = {
+		x=13,
+		y=30,
+		properties={
+			antsacs=1,
+			attack=5,
+			defence=5,
+			gold=0,
+			health=25,
+			health_max=25,
+			id="city_448f35a8-9a3e-bd75-0ea5-4393b4bc0c10",
+			imageid="ant",
+			loot="",
+			name="Young fire ant",
+			sound_attack="ant-attack",
+			sound_die="ant-die",
+			sound_move="ant-move",
+			sound_scream="ant-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[4] = {
+		x=17,
+		y=30,
+		properties={
+			antsacs=1,
+			attack=5,
+			defence=5,
+			gold=0,
+			health=25,
+			health_max=25,
+			id="city_3ad22142-80c1-1a61-b506-73ad433f5b7d",
+			imageid="ant",
+			loot="",
+			name="Young fire ant",
 			sound_attack="ant-attack",
 			sound_die="ant-die",
 			sound_move="ant-move",
@@ -786,66 +798,115 @@ enemies={
 		}
 	},
 	[5] = {
-		x=15,
-		y=25,
+		x=12,
+		y=10,
 		properties={
 			antsacs=0,
-			attack=1,
+			attack=3,
 			defence=1,
 			gold=0,
-			health=100,
-			health_max=100,
-			id="city_54ddce09-412a-c55b-1fa8-67c41d5f5c11",
+			health=5,
+			health_max=5,
+			id="city_c1069e4d-6310-74aa-6711-1b57636d9080",
+			imageid="rat",
 			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
+			name="Rat",
+			sound_attack="rat-attack",
+			sound_die="rat-die",
+			sound_move="rat-move",
+			sound_scream="rat-scream",
 			state=1,
 			type=0,
 			wanderer=0,
 		}
 	},
 	[6] = {
-		x=13,
-		y=30,
+		x=8,
+		y=13,
 		properties={
 			antsacs=0,
-			attack=1,
+			attack=3,
 			defence=1,
 			gold=0,
-			health=100,
-			health_max=100,
-			id="city_448f35a8-9a3e-bd75-0ea5-4393b4bc0c10",
+			health=5,
+			health_max=5,
+			id="city_9a9aaac8-77b5-67be-8af5-3ab5fbb99bf8",
+			imageid="rat",
 			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
+			name="Rat",
+			sound_attack="rat-attack",
+			sound_die="rat-die",
+			sound_move="rat-move",
+			sound_scream="rat-scream",
 			state=1,
 			type=0,
 			wanderer=0,
 		}
 	},
 	[7] = {
-		x=17,
-		y=30,
+		x=9,
+		y=7,
 		properties={
 			antsacs=0,
-			attack=1,
+			attack=3,
 			defence=1,
 			gold=0,
-			health=100,
-			health_max=100,
-			id="city_3ad22142-80c1-1a61-b506-73ad433f5b7d",
+			health=5,
+			health_max=5,
+			id="city_0a5a315e-b90f-05ac-a024-5e59c6e53664",
+			imageid="rat",
 			loot="",
-			name="Fire ant",
-			sound_attack="ant-attack",
-			sound_die="ant-die",
-			sound_move="ant-move",
-			sound_scream="ant-scream",
+			name="Rat",
+			sound_attack="rat-attack",
+			sound_die="rat-die",
+			sound_move="rat-move",
+			sound_scream="rat-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[8] = {
+		x=4,
+		y=7,
+		properties={
+			antsacs=0,
+			attack=3,
+			defence=1,
+			gold=0,
+			health=5,
+			health_max=5,
+			id="city_13a6cbf2-9ad5-137d-f031-bab894b456b2",
+			imageid="rat",
+			loot="",
+			name="Rat",
+			sound_attack="rat-attack",
+			sound_die="rat-die",
+			sound_move="rat-move",
+			sound_scream="rat-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+	[9] = {
+		x=2,
+		y=5,
+		properties={
+			antsacs=0,
+			attack=3,
+			defence=1,
+			gold=0,
+			health=5,
+			health_max=5,
+			id="city_f8625039-f0ad-9604-2cfe-2dc232ad0a82",
+			imageid="rat",
+			loot="",
+			name="Rat",
+			sound_attack="rat-attack",
+			sound_die="rat-die",
+			sound_move="rat-move",
+			sound_scream="rat-scream",
 			state=1,
 			type=0,
 			wanderer=0,
@@ -861,8 +922,8 @@ chests={
 			answer="",
 			gold=0,
 			id="city_89eefd9a-f595-2b34-5b8d-4869b337c877",
-			keyid="",
-			loot="",
+			keyid="key-1",
+			loot="map",
 			riddle="",
 			state=1,
 		}
@@ -875,7 +936,7 @@ chests={
 			gold=10,
 			id="city_76ef7cfb-af43-78a7-e869-fec96294a4a6",
 			keyid="key-1",
-			loot="dagger-1:ring-1",
+			loot="gloves-1:ring-1",
 			riddle="",
 			state=1,
 		}
@@ -901,7 +962,7 @@ chests={
 			gold=20,
 			id="city_af59cab0-b785-22ca-08ba-bf6d79cef3ea",
 			keyid="",
-			loot="",
+			loot="sword-2",
 			riddle="",
 			state=1,
 		}
@@ -927,9 +988,9 @@ chests={
 			gold=15,
 			id="city_0f41b66e-18e7-fbd6-868d-10f457baecca",
 			keyid="",
-			loot="",
+			loot="key-1",
 			riddle="",
-			state=1,
+			state=3,
 		}
 	},
 },
@@ -983,18 +1044,19 @@ npcs={
 		x=15,
 		y=12,
 		properties={
-			criterias="",
+			criterias="city_ratquest:state:1",
 			gold=0,
 			id="city_ae1aaf01-e3a9-c68f-0971-74fd26b6ef7e",
 			imageid="npc-guard",
+			init_vars="",
 			loot="",
-			name="",
-			questdelivertext="",
-			questdonetext="",
+			name="City guard",
+			questdelivertext="So you're helping Arorre? Alright then, I will remove the barricade. Good luck in there.",
+			questdonetext="Hello again.\n\nDon't mind me. I'm just standing here guarding, because I'm a guard. That's what guards do... We guard!\n\nHave you ever guarded something, then maybe you are a guard too. Perhaps we are all guards in our own ways.\n\nFood for thought, that is.",
 			sound="",
 			state=1,
-			text="",
-			vars="",
+			text="Stop! Nobody get's past this point. Bloodthirsty rats have overrun this area.",
+			vars="city_1be3bf61-229d-2005-9e43-5838ca6378af:visible:0",
 			visible=1,
 		}
 	},
@@ -1006,6 +1068,7 @@ npcs={
 			gold=0,
 			id="city_4c920ff2-f574-e5b3-3fa5-18cfc312b088",
 			imageid="npc-guard",
+			init_vars="",
 			loot="",
 			name="City guard",
 			questdelivertext="",
@@ -1025,6 +1088,7 @@ npcs={
 			gold=20,
 			id="city_eb1bdfcf-a8cb-b5cc-63ce-701b38890881",
 			imageid="npc-guard",
+			init_vars="",
 			loot="ring-3:sword-2",
 			name="City guard",
 			questdelivertext="Alright then. I guess we can open the gate for you now.",
@@ -1044,6 +1108,7 @@ npcs={
 			gold=0,
 			id="city_9357509c-af97-48ad-0d8c-2862298367bc",
 			imageid="npc-guard",
+			init_vars="",
 			loot="",
 			name="City guard",
 			questdelivertext="",
@@ -1056,6 +1121,26 @@ npcs={
 		}
 	},
 	[5] = {
+		x=25,
+		y=18,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_1e4d5ba7-8a75-7a77-7588-257910a2448d",
+			imageid="npc-guard",
+			init_vars="",
+			loot="",
+			name="City guard",
+			questdelivertext="",
+			questdonetext="",
+			sound="npc-1",
+			state=1,
+			text="Hm. You look fit and all, but are you well prepared for what's waiting in the deep forest outside the city?\n\nI heard there is a sorcerer living in the northeast who peddle with the magic arts.\n\nIt would probably be wise to pay him a visit.",
+			vars="",
+			visible=1,
+		}
+	},
+	[6] = {
 		x=3,
 		y=17,
 		properties={
@@ -1063,6 +1148,7 @@ npcs={
 			gold=5,
 			id="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015",
 			imageid="npc-guard",
+			init_vars="",
 			loot="",
 			name="City guard",
 			questdelivertext="Balle",
@@ -1074,7 +1160,7 @@ npcs={
 			visible=1,
 		}
 	},
-	[6] = {
+	[7] = {
 		x=24,
 		y=15,
 		properties={
@@ -1082,18 +1168,19 @@ npcs={
 			gold=0,
 			id="city_69a8e3a6-8467-3768-9ef9-f970a07fb2ab",
 			imageid="npc-girl",
+			init_vars="",
 			loot="",
 			name="Adalie",
 			questdelivertext="",
 			questdonetext="",
 			sound="girl-greetings",
 			state=1,
-			text="Hello stranger.",
+			text="Hello. Can you please help me? I can't find my mommy.\n\nShe went to buy vegetables earlier today but didn't come back so I came here to look for her.\n\nI have been waiting here for hours now.\n\nCan you please find her for me?",
 			vars="",
 			visible=1,
 		}
 	},
-	[7] = {
+	[8] = {
 		x=19,
 		y=15,
 		properties={
@@ -1101,37 +1188,39 @@ npcs={
 			gold=0,
 			id="city_baa096d2-b0a6-03d7-d277-6319c0b7af8a",
 			imageid="npc-peasant-1",
+			init_vars="",
 			loot="",
 			name="Yahnah Bemmo",
 			questdelivertext="",
 			questdonetext="",
 			sound="female-greetings",
 			state=1,
-			text="",
-			vars="",
-			visible=1,
-		}
-	},
-	[8] = {
-		x=27,
-		y=5,
-		properties={
-			criterias="",
-			gold=0,
-			id="city_77cd3bbe-64da-259e-af22-c8bc8934b44f",
-			imageid="npc-peasant-3",
-			loot="",
-			name="Brendudd Eagleroot",
-			questdelivertext="",
-			questdonetext="",
-			sound="male-greetings",
-			state=1,
-			text="Hello stranger.",
+			text="Are you here to save us from these awful creatures?\n\nI hope so!\n\nIt has been what seems like an eternity since I have been outside the city walls.",
 			vars="",
 			visible=1,
 		}
 	},
 	[9] = {
+		x=12,
+		y=3,
+		properties={
+			criterias="city_13a6cbf2-9ad5-137d-f031-bab894b456b2:state:2|city_f8625039-f0ad-9604-2cfe-2dc232ad0a82:state:2",
+			gold=0,
+			id="city_77cd3bbe-64da-259e-af22-c8bc8934b44f",
+			imageid="npc-peasant-3",
+			init_vars="",
+			loot="",
+			name="Brendudd Eagleroot",
+			questdelivertext="Oh, rats you say? You killed them all yes? Excellent!\n\nI have a chest nearby with some stuff in it. Go have a look. You can have whatever is inside it.",
+			questdonetext="Hello again. No more scary noises thanks to you!",
+			sound="male-greetings",
+			state=1,
+			text="Psst! I heard scary noises coming from the west. I am too afraid to go there and check it out.\n\nCould you take a look for me?",
+			vars="city_0f41b66e-18e7-fbd6-868d-10f457baecca:state:1",
+			visible=1,
+		}
+	},
+	[10] = {
 		x=19,
 		y=18,
 		properties={
@@ -1139,18 +1228,19 @@ npcs={
 			gold=0,
 			id="city_98523b8c-f3e7-5efb-0cb1-d12c17b56b30",
 			imageid="npc-peasant-2",
+			init_vars="",
 			loot="",
 			name="Jak Yelovan",
 			questdelivertext="",
 			questdonetext="",
 			sound="male-greetings",
 			state=1,
-			text="Hello stranger.",
+			text="Yup! It's go time, right? I presume you're here to lay down the law, so to speak.\n\nIt's about time someone came along with sufficiently sized gonads.\n\nGood luck to ya' I say. Good luck to ya'!",
 			vars="",
 			visible=1,
 		}
 	},
-	[10] = {
+	[11] = {
 		x=10,
 		y=17,
 		properties={
@@ -1158,39 +1248,53 @@ npcs={
 			gold=0,
 			id="city_d9c5f027-86d9-2cdb-1855-7be82c955c86",
 			imageid="npc-hunter",
+			init_vars="",
 			loot="",
 			name="Nefa Bindred",
 			questdelivertext="",
 			questdonetext="",
 			sound="female-greetings-2",
 			state=1,
-			text="Hello stranger.",
+			text="Oh, hi. I am not hiding. Honestly I am not. This spot is just so... safe..",
 			vars="",
 			visible=1,
 		}
 	},
-	[11] = {
+	[12] = {
 		x=22,
 		y=13,
 		properties={
-			criterias="",
-			gold=0,
+			criterias="city_0a5a315e-b90f-05ac-a024-5e59c6e53664:state:2|city_c1069e4d-6310-74aa-6711-1b57636d9080:state:2|city_9a9aaac8-77b5-67be-8af5-3ab5fbb99bf8:state:2",
+			gold=20,
 			id="city_56d94b33-10ca-385f-e361-e3e63b2e4eac",
 			imageid="npc-peasant-4",
-			loot="",
+			init_vars="city_ratquest:state:1",
+			loot="map",
 			name="Arorre Grandforge",
-			questdelivertext="",
-			questdonetext="",
+			questdelivertext="You actually did it? I can go home again?\n\nYou are my hero and I can't possibly thank you enough.\n\nI don't have much but here; some coins and this little trinket which might come in handy.",
+			questdonetext="You're the best!",
 			sound="female-greetings",
 			state=1,
-			text="",
-			vars="",
+			text="I can't believe it! The streets around my home is overrun by rats and I haven't been home for days now.\n\nYou look like someone who could take care of that, yes?\n\nMy home is a short walk to the northwest.\n\nWill you please do it?",
+			vars="city_ratquest:state:2|city_56d94b33-10ca-385f-e361-e3e63b2e4eac:visible:0",
 			visible=1,
 		}
 	},
 },
 
-triggers={},
+triggers={
+	[1] = {
+		x=11,
+		y=15,
+		properties={
+			id="city_8a1fbdd2-7d69-9e46-5a34-ef4c8b79b092",
+			state=1,
+			text="Aventurers visiting the city for the first time are advised to first drop by The Randy Boar Inn.\n\nJust walk straight ahead to the marketplace and you'll find it.",
+			vars="",
+		}
+	},
+},
+
 teleporters={
 	[1] = {
 		x=11,
@@ -1514,8 +1618,8 @@ doors={
 		}
 	},
 	[26] = {
-		x=16,
-		y=23,
+		x=26,
+		y=32,
 		properties={
 			direction=-1,
 			id="city_545bd749-21f9-0456-ef1f-4998f549f89b",
@@ -1618,6 +1722,18 @@ doors={
 		properties={
 			direction=1,
 			id="city_e11b8e1d-1dd7-3e7f-649b-167fdd31194e",
+			keyid="",
+			state=1,
+			type=1,
+			vendor="",
+		}
+	},
+	[35] = {
+		x=16,
+		y=23,
+		properties={
+			direction=0,
+			id="city_94b6b523-6679-924b-b4ec-87e5257ce72a",
 			keyid="",
 			state=1,
 			type=1,
@@ -2258,19 +2374,6 @@ staticprops={
 		}
 	},
 	[52] = {
-		x=16,
-		y=31,
-		properties={
-			atlasid="common-props",
-			direction=3,
-			gold=0,
-			id="city_dd0215b3-2d09-eb21-f026-a17a50efc1bd",
-			name="barrels",
-			state=1,
-			visible=1,
-		}
-	},
-	[53] = {
 		x=19,
 		y=3,
 		properties={
@@ -2283,7 +2386,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[54] = {
+	[53] = {
 		x=18,
 		y=25,
 		properties={
@@ -2295,7 +2398,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[55] = {
+	[54] = {
 		x=19,
 		y=25,
 		properties={
@@ -2307,7 +2410,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[56] = {
+	[55] = {
 		x=12,
 		y=31,
 		properties={
@@ -2319,7 +2422,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[57] = {
+	[56] = {
 		x=16,
 		y=28,
 		properties={
@@ -2331,7 +2434,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[58] = {
+	[57] = {
 		x=17,
 		y=3,
 		properties={
@@ -2343,7 +2446,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[59] = {
+	[58] = {
 		x=14,
 		y=7,
 		properties={
@@ -2355,7 +2458,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[60] = {
+	[59] = {
 		x=8,
 		y=4,
 		properties={
@@ -2367,7 +2470,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[61] = {
+	[60] = {
 		x=2,
 		y=2,
 		properties={
@@ -2379,7 +2482,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[62] = {
+	[61] = {
 		x=2,
 		y=8,
 		properties={
@@ -2391,7 +2494,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[63] = {
+	[62] = {
 		x=2,
 		y=9,
 		properties={
@@ -2403,7 +2506,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[64] = {
+	[63] = {
 		x=3,
 		y=9,
 		properties={
@@ -2415,7 +2518,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[65] = {
+	[64] = {
 		x=4,
 		y=9,
 		properties={
@@ -2427,7 +2530,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[66] = {
+	[65] = {
 		x=4,
 		y=8,
 		properties={
@@ -2439,7 +2542,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[67] = {
+	[66] = {
 		x=5,
 		y=8,
 		properties={
@@ -2451,7 +2554,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[68] = {
+	[67] = {
 		x=26,
 		y=30,
 		properties={
@@ -2463,7 +2566,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[69] = {
+	[68] = {
 		x=26,
 		y=29,
 		properties={
@@ -2476,7 +2579,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[70] = {
+	[69] = {
 		x=31,
 		y=25,
 		properties={
@@ -2489,7 +2592,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[71] = {
+	[70] = {
 		x=29,
 		y=26,
 		properties={
@@ -2501,7 +2604,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[72] = {
+	[71] = {
 		x=28,
 		y=28,
 		properties={
@@ -2513,7 +2616,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[73] = {
+	[72] = {
 		x=29,
 		y=28,
 		properties={
@@ -2525,7 +2628,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[74] = {
+	[73] = {
 		x=29,
 		y=27,
 		properties={
@@ -2541,8 +2644,8 @@ staticprops={
 
 buttons={
 	[1] = {
-		x=11,
-		y=18,
+		x=25,
+		y=32,
 		properties={
 			id="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6",
 			state=1,
@@ -2572,7 +2675,8 @@ buttons={
 	},
 },
 
-["partyX"]=20,
-["partyY"]=13,
-["partyDirection"]=0,
+levelexits={},
+["partyX"]=10,
+["partyY"]=3,
+["partyDirection"]=3,
 }

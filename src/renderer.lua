@@ -7,8 +7,7 @@ function Renderer:initialize()
 end
 
 function Renderer:init(caller)
-	
-	
+		
 	self.caller = caller
 	self.canvas = caller.canvas
 	self.dungeonDepth = 6
@@ -43,8 +42,8 @@ function Renderer:init(caller)
 	
 	local button = Button:new()
 	button.id = "close-vendor"
-	button.x = 441
-	button.y = 226
+	button.x = 516
+	button.y = 236
 	button.width = 32
 	button.height = 32
 	button.normal = "button-close-1"
@@ -281,17 +280,22 @@ function Renderer:handleMousePressed(x, y, button)
 			local npc = self.currentNPC
 		
 			if npc and npc.properties.state == 2 and npc.properties.gold > 0 or npc.properties.loot ~= "" then
-				self:showFoundLoot(npc.properties.gold, explode(npc.properties.loot, ":"))
-				party:addGold(npc.properties.gold)
-				party:addItems(npc.properties.loot)
-				npc.properties.gold = 0
-				npc.properties.loot = ""
-				globalvariables:add(npc.properties.id, "gold", npc.properties.gold)
-				globalvariables:add(npc.properties.id, "loot", npc.properties.loot)
-				return
+				if npc.properties.delayedLoot and npc.properties.delayedLoot == true then
+					self:showFoundLoot(npc.properties.gold, explode(npc.properties.loot, ":"), 0)
+					party:addGold(npc.properties.gold)
+					party:addItems(npc.properties.loot)
+					npc.properties.gold = 0
+					npc.properties.loot = ""
+					globalvariables:add(npc.properties.id, "gold", npc.properties.gold)
+					globalvariables:add(npc.properties.id, "loot", npc.properties.loot)
+				else
+				subState = SubStates.IDLE
+				end
 			else
 				subState = SubStates.IDLE
 			end			
+
+			return
 
 		end
 		
@@ -651,6 +655,10 @@ function Renderer:drawFoundLoot()
 		table.insert(loot, "coins")
 	end
 
+	if self.foundloot.antsacs and self.foundloot.antsacs > 0 then
+		table.insert(loot, "antsac")
+	end
+
 	if self.foundloot.items and #self.foundloot.items > 0 then
 		for i = 1, #self.foundloot.items do
 			if self.foundloot.items[i] ~= "" then
@@ -826,7 +834,9 @@ end
 function Renderer:drawNPC()
 
 	local text
+	local offsetx
 	local offsety
+	local textx
 	local imageid
 	local portraitid = self.currentNPC.properties.imageid
 
@@ -837,24 +847,29 @@ function Renderer:drawNPC()
 	elseif self.currentNPC.properties.state == 3 then
 		text = self.currentNPC.properties.questdonetext
 	end
-	
-	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
 
-	if #wrappedtext <= 3 then
-		offsety = 100
-		imageid = "npc-background-small"
-	else
+	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
+	
+	if #wrappedtext > 3 then
+		width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227+135)
 		offsety = 65
+		offsetx = 85
 		imageid = "npc-background-large"
+		textx = 169
+	else
+		offsety = 100
+		offsetx = 160
+		imageid = "npc-background-small"
+		textx = 244
 	end
 
-	love.graphics.draw(assets.images[imageid], 160, offsety)	
-	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.draw(assets.images[imageid], offsetx, offsety)	
+	love.graphics.draw(assets.images[portraitid], offsetx+9, offsety+9)	
 	love.graphics.setFont(assets.fonts["mainmenu"]);
-	self:drawText(244,offsety + 8, self.currentNPC.properties.name, {1,1,1,1}, "left")
+	self:drawText(textx, offsety + 8, self.currentNPC.properties.name, {1,1,1,1}, "left")
 
 	for i = 1, #wrappedtext do
-		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+		self:drawText(textx,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
 	end
 
 	love.graphics.setFont(assets.fonts["main"]);
@@ -865,7 +880,7 @@ function Renderer:drawTavern()
 
 	local mx, my = love.mouse.getPosition()
 	
-	local name = "The White Stag Inn"
+	local name = "The Randy Boar Inn"
 	local text = "Welcome adventurer. I am Biok Kai, the innkeeper of this fine establishment.\n\nDo you want to rest your weary bones in one of our comfortable rooms?"
 	local offsetx = 244
 	local offsety = 65
@@ -923,21 +938,21 @@ function Renderer:drawVendor()
 	
 	local text = self.currentVendor.text
 	local name = self.currentVendor.name
-	local offsetx = 244
+	local offsetx = 168
 	local offsety = 65
 	local portraitid = self.currentVendor.imageid
 
-	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
+	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227+135)
 
 	self.buttons["close-vendor"]:isOver(mx, my)
 
-	love.graphics.draw(assets.images["npc-background-large"], 160, offsety)	
-	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.draw(assets.images["npc-background-large"], 85, offsety)	
+	love.graphics.draw(assets.images[portraitid], 85+9, offsety+9)	
 	love.graphics.setFont(assets.fonts["mainmenu"]);
-	self:drawText(244,offsety + 8, name, {1,1,1,1}, "left")
+	self:drawText(169,offsety + 8, name, {1,1,1,1}, "left")
 
 	for i = 1, #wrappedtext do
-		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+		self:drawText(169,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
 	end
 
 	-- draw items in stock
@@ -953,6 +968,7 @@ function Renderer:drawVendor()
 		end
 		local x = offsetx + (i-1)*34
 		local y = 188
+		
 		love.graphics.draw(assets.images[item.id], x, y)	
 		if intersect(mx, my, x, y, 32, 32) then
 			self.currentHoverItem = item
@@ -963,10 +979,10 @@ function Renderer:drawVendor()
 
 	love.graphics.draw(self.buttons["close-vendor"]:getImage(),  self.buttons["close-vendor"].x, self.buttons["close-vendor"].y)
 
-	love.graphics.draw(assets.images["coins"], 167, 228)
-	self:drawDigits(party.gold, 190,250)
+	love.graphics.draw(assets.images["coins"], 92, 237)
+	self:drawDigits(party.gold, 92+23,237+22)
 	love.graphics.setFont(assets.fonts["main"]);
-
+	
 end
 
 function Renderer:clickOnVendor(x, y)
@@ -1004,7 +1020,9 @@ function Renderer:drawAntsacsVendor()
 
 	local text = ""
 	local name = "Gurik Masiv"
+	local offsetx
 	local offsety
+	local textx
 	local imageid
 	local portraitid = "npc-sorcerer-1"
 
@@ -1016,22 +1034,27 @@ function Renderer:drawAntsacsVendor()
 	end
 
 	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
-
-	if #wrappedtext <= 3 then
-		offsety = 100
-		imageid = "npc-background-small"
-	else
+	
+	if #wrappedtext > 3 then
+		width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227+135)
 		offsety = 65
+		offsetx = 85
 		imageid = "npc-background-large"
+		textx = 169
+	else
+		offsety = 100
+		offsetx = 160
+		imageid = "npc-background-small"
+		textx = 244
 	end
 
-	love.graphics.draw(assets.images[imageid], 160, offsety)	
-	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.draw(assets.images[imageid], offsetx, offsety)	
+	love.graphics.draw(assets.images[portraitid], offsetx+9, offsety+9)	
 	love.graphics.setFont(assets.fonts["mainmenu"]);
-	self:drawText(244,offsety + 8, name, {1,1,1,1}, "left")
+	self:drawText(textx,offsety + 8, name, {1,1,1,1}, "left")
 
 	for i = 1, #wrappedtext do
-		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+		self:drawText(textx,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
 	end
 
 	love.graphics.setFont(assets.fonts["main"]);
@@ -1695,8 +1718,6 @@ function Renderer:drawUI()
 	
 	if leftHand then
 		love.graphics.draw(assets.images[leftHand.id], 282,321)
-	else
-		love.graphics.draw(assets.images["lefthand-background"], 282,321)
 	end
 	
 	if party:hasCooldown(1) then
@@ -1709,8 +1730,6 @@ function Renderer:drawUI()
 
 	if rightHand then
 		love.graphics.draw(assets.images[rightHand.id], 329,321)
-	else
-		love.graphics.draw(assets.images["spellbook-background"], 329,321)
 	end
 
 	if party:hasCooldown(2) then
@@ -1902,7 +1921,6 @@ function Renderer:drawDecal(atlasId, layerId, x, z)
 end
 
 function Renderer:drawGround()
-	
 
 	local atlasId = level.data.tileset .. "-environment"
 
@@ -1919,6 +1937,44 @@ function Renderer:drawGround()
 				local xx = bothsides and x - (x * 2) or 0
 				local tile = self:getTile(atlasId, layerId, "ground", xx, z);
 				
+				if tile then
+
+					local quad = love.graphics.newQuad(tile.coords.x, tile.coords.y, tile.coords.w, tile.coords.h, atlases.images[atlasId]:getWidth(), atlases.images[atlasId]:getHeight())
+
+					if bothsides then
+						love.graphics.draw(atlases.images[atlasId], quad, tile.screen.x, tile.screen.y)
+					else
+						local tx = tile.screen.x + (x * tile.coords.w)
+						love.graphics.draw(atlases.images[atlasId], quad, tx, tile.screen.y)
+					end
+
+				end		
+				
+			end
+			
+		end		
+
+	end
+	
+end
+
+function Renderer:drawCeiling()
+
+	local atlasId = level.data.tileset .. "-environment"
+
+    for z = -self.dungeonDepth, 0 do
+		
+		for x = -self.dungeonWidth, self.dungeonWidth do
+
+			local p = self:getPlayerDirectionVectorOffsets(x, z);
+
+			if p.x >= 1 and p.y >= 1 and p.x <= level.data.mapSize and p.y <= level.data.mapSize then
+			
+				local layerId = self.backgroundIndex == 1 and level.data.tileset.."-ceiling-1" or level.data.tileset.."-ceiling-2"
+				local bothsides = atlases.jsondata[atlasId].layer[layerId] and atlases.jsondata[atlasId].layer[layerId].mode == 2
+				local xx = bothsides and x - (x * 2) or 0
+				local tile = self:getTile(atlasId, layerId, "ceiling", xx, z);
+
 				if tile then
 
 					local quad = love.graphics.newQuad(tile.coords.x, tile.coords.y, tile.coords.w, tile.coords.h, atlases.images[atlasId]:getWidth(), atlases.images[atlasId]:getHeight())
@@ -1979,20 +2035,28 @@ function Renderer:drawSquare(x, z)
 			end
 		end
 		
+		for key,value in pairs(level.data.levelexits) do
+			local levelexit = level.data.levelexits[key]
+			if levelexit.x == p.x and levelexit.y == p.y then
+				self:drawObject(levelexit.properties.atlasid, self:getObjectDirectionID(levelexit.properties.imageid, levelexit.properties.direction), x, z)
+			end
+		end		
+		
 		for key,value in pairs(level.data.enemies) do
 			local enemy = level.data.enemies[key]
 			if enemy.x == p.x and enemy.y == p.y then
+				local imageid = enemy.properties.imageid
 				if enemy.highlight and enemy.highlight == 1 then
 					highlightshader:send("WhiteFactor", 0.5)
 				end
 				if enemy.properties.state == 1 then
 					if enemy.properties.attacking == 1 then
-						self:drawObject("enemies", self:getObjectDirectionID("ant-attack", enemy.properties.direction), x, z)
+						self:drawObject("enemies", self:getObjectDirectionID(imageid .. "-attack", enemy.properties.direction), x, z)
 					else 
-						self:drawObject("enemies", self:getObjectDirectionID("ant", enemy.properties.direction), x, z)
+						self:drawObject("enemies", self:getObjectDirectionID(imageid, enemy.properties.direction), x, z)
 					end
 				elseif enemy.properties.state == 3 then
-					self:drawObject("enemies", self:getObjectDirectionID("ant-dead", enemy.properties.direction), x, z)
+					self:drawObject("enemies", self:getObjectDirectionID(imageid .. "-dead", enemy.properties.direction), x, z)
 				end			
 				highlightshader:send("WhiteFactor", 0)
 			end
@@ -2000,7 +2064,7 @@ function Renderer:drawSquare(x, z)
 		
 		for key,value in pairs(level.data.npcs) do
 			local npc = level.data.npcs[key]
-			if npc.x == p.x and npc.y == p.y then
+			if npc.properties.visible == 1 and npc.x == p.x and npc.y == p.y then
 				self:drawObject("npc", npc.properties.imageid, x, z)			
 			end
 		end		
@@ -2009,6 +2073,7 @@ function Renderer:drawSquare(x, z)
 			local chest = level.data.chests[key]
 			if chest.x == p.x and chest.y == p.y then
 				local imageid = chest.properties.state == 1 and "chest-closed" or "chest-open"
+				if chest.properties.state == 3 then imageid = "chest-closed" end
 				self:drawObject("common-props", imageid, x, z)			
 			end
 		end
@@ -2045,9 +2110,9 @@ function Renderer:drawSquare(x, z)
 			local button = level.data.buttons[key]
 			if button.x == p.x and button.y == p.y then
 				if button.properties.state == 1 then
-					self:drawDecal(level.data.tileset .. "-props", "secret-button-1", x, z)			
+					self:drawObject(level.data.tileset .. "-props", self:getObjectDirectionID("secret-button-out", 1), x, z)
 				else
-					self:drawDecal(level.data.tileset .. "-props", "secret-button-2", x, z)			
+					self:drawObject(level.data.tileset .. "-props", self:getObjectDirectionID("secret-button-in", 1), x, z)
 				end
 			end
 		end	
@@ -2064,6 +2129,10 @@ function Renderer:drawViewport()
 
 	self:drawSky()
 	self:drawGround()
+	self:drawCeiling()
+
+	--love.graphics.draw(self.groundCanvas, 0, 0)
+	--love.graphics.draw(self.groundCanvas, 0, self.groundCanvas:getHeight(), 0, 1, -1)
 	
     for z = -self.dungeonDepth, 0 do
 		
@@ -2269,11 +2338,11 @@ function Renderer:showVendor(id)
 
 end
 
-function Renderer:showFoundLoot(gold, items)
+function Renderer:showFoundLoot(gold, items, antsacs)
 
 	assets:playSound("loot")
 
-	self.foundloot = {gold = gold, items = items}
+	self.foundloot = {gold = gold, items = items, antsacs = antsacs}
 	
 	subState = SubStates.FOUND_LOOT
 

@@ -9,4 +9,5 @@ function love.conf(t)
 	t.window.fullscreen = true
 	t.window.fullscreentype = "desktop"
 	t.window.fsaa = 0
+	t.window.icon = "files/icon.png"
 end

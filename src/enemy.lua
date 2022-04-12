@@ -30,7 +30,7 @@ function Enemy:initialize(enemy)
 	
 	self.tickDelay = 1.5
 	self.attackDelay = 2
-	self.decayDelay = 2
+	self.decayDelay = 10
 	self.tickCounter = math.random()
 	self.attackCounter = math.random()
 	self.decayCounter = 0
@@ -54,6 +54,8 @@ function Enemy:update(dt)
 		return
 	end
 
+	balle = self.state
+
 	if self.state == EnemyState.DEAD then
 		self.decayCounter = self.decayCounter + dt
 		if self.decayCounter > self.decayDelay then
@@ -61,6 +63,16 @@ function Enemy:update(dt)
 		end
 	end
 
+	if self.enemy.highlight == 1 then
+	
+		self.highlightCounter = self.highlightCounter + dt * 1
+		
+		if self.highlightCounter > 0.25 then
+			self.highlightCounter = 0
+			self.enemy.highlight = 0
+		end
+	end
+	
 	if self.state == EnemyState.ATTACKING then
 
 		if self.attackCounter > self.attackDelay then
@@ -74,9 +86,9 @@ function Enemy:update(dt)
 		
 		self.attackCounter = self.attackCounter + dt
 		
-	end
-		
-	if self.tickCounter > self.tickDelay then
+		return
+	
+	elseif self.tickCounter > self.tickDelay then
 
 		self.tickCounter = 0
 
@@ -85,7 +97,8 @@ function Enemy:update(dt)
 			if self:canSeePlayer() then
 				if self:calcPathToPlayerPosition() then
 					self.state = EnemyState.TRACKING
-					if self:walkToNextPathNode() then
+					if not self:walkToNextPathNode() then
+						self:initiateAttack()
 					end
 				end
 			else
@@ -93,7 +106,8 @@ function Enemy:update(dt)
 			end	
 		elseif self.state == EnemyState.TRACKING then
 			if self:calcPathToPlayerPosition() then
-				if self:walkToNextPathNode() then
+				if not self:walkToNextPathNode() then
+					self:initiateAttack()
 				end
 			else 
 				self.state = EnemyState.WANDER
@@ -103,16 +117,6 @@ function Enemy:update(dt)
 	end
 
 	self.tickCounter = self.tickCounter + dt;
-
-	if self.enemy.highlight == 1 then
-	
-		self.highlightCounter = self.highlightCounter + dt * 1
-		
-		if self.highlightCounter > 0.25 then
-			self.highlightCounter = 0
-			self.enemy.highlight = 0
-		end
-	end
 
 end
 
@@ -146,6 +150,17 @@ function Enemy:canSeePlayer()
 	
 	return false
 
+end
+
+function Enemy:initiateAttack()
+
+	self.state = EnemyState.ATTACKING
+	if math.random() > 0.5 then
+		self.attackCounter = self.attackDelay  -0.2
+	else
+		self.attackCounter = 0.5 + math.random()
+	end
+	
 end
 
 function Enemy:walkToNextPathNode()
@@ -184,6 +199,15 @@ function Enemy:walkToNextPathNode()
 				end
 			end
 			
+			local angle = math.angle(self.enemy.x, self.enemy.y, nx, ny)
+			
+			local dir = 0
+			if angle == 0 then dir = 1 end
+			if angle == 90 then dir = 2 end
+			if angle == 180 then dir = 3 end
+			if angle == 270 then dir = 0 end
+			
+			self.enemy.properties.direction = dir
 			self.enemy.x = nx
 			self.enemy.y = ny
 			
@@ -195,18 +219,10 @@ function Enemy:walkToNextPathNode()
 				assets:playSound(self.enemy.properties.sound_move)
 			end
 			
-			local dir = 0
-			if party.x > nx then dir = 1
-			elseif party.x < nx then dir = 3 
-			elseif party.y > ny then dir = 2 
-			elseif party.y < ny then dir = 0 end
-			
-			self.enemy.properties.direction = dir
+
 			self.pathNodeIndex = self.pathNodeIndex + 1
 			
 			if self.pathNodeIndex > self.pathlength then
-				self.state = EnemyState.ATTACKING
-				self.attackCounter = 0.5 + math.random()
 				self.path = nil
 				return false
 			end			
@@ -354,7 +370,7 @@ function Enemy:attack()
 		
 		-- there is always a small chance that there will be a miss
 		
-		if math.random() > 0.75 then
+		if math.random() > 0.5 then
 			return
 		end		
 
@@ -362,7 +378,7 @@ function Enemy:attack()
 
 		damage = randomizeDamage(damage)
 
-		print("Enemy:" .. damage)
+		--print("Enemy:" .. damage)
 	
 		party.stats.health = party.stats.health - damage
 	

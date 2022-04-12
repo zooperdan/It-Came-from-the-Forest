@@ -40,6 +40,10 @@ function Level:load(id, location)
 			self.data.boundarywalls = {}
 		end
 		
+		if not self.data.levelexits then
+			self.data.levelexits = {}
+		end		
+		
 		-- randomize enemy facing direction
 		
 		for key,value in pairs(self.data.enemies) do
@@ -51,8 +55,10 @@ function Level:load(id, location)
 		
 		for key,value in pairs(self.data.npcs) do
 			local npc = level.data.npcs[key]
-			local text = strings.npc_texts[math.floor(math.random()*#strings.npc_texts)+1]
-			npc.properties.text = text
+			if npc.properties.text == "" then
+				local text = strings.npc_texts[math.floor(math.random()*#strings.npc_texts)+1]
+				npc.properties.text = text
+			end
 		end		
 
 		self:applyGlobalVariables()
@@ -128,7 +134,7 @@ function Level:applyGlobalVariables()
 		
 		gvar = globalvariables:get(enemy.properties.id, "direction")
 		if gvar then enemy.properties.direction = tonumber(gvar) end		
-		
+
 	end
 	
 	for key,value in pairs(self.data.triggers) do
@@ -191,6 +197,9 @@ function Level:applyGlobalVariables()
 
 		local gvar = globalvariables:get(npc.properties.id, "loot")
 		if gvar then npc.properties.loot = tostring(gvar) end		
+
+		local gvar = globalvariables:get(npc.properties.id, "criterias")
+		if gvar then npc.properties.criterias = tostring(gvar) end		
 
 	end	
 	
@@ -312,28 +321,28 @@ function Level:generatePathMap()
 		
 			for key,value in pairs(self.data.chests) do
 				local chest = self.data.chests[key]
-				if chest.x == nx and chest.y == ny then
+				if chest.x == x and chest.y == y then
 					walkable = 1
 				end
 			end
 
 			for key,value in pairs(self.data.wells) do
 				local well = self.data.wells[key]
-				if well.x == nx and well.y == ny then
+				if well.x == x and well.y == y then
 					walkable = 1
 				end
 			end
 			
 			for key,value in pairs(self.data.doors) do
 				local door = self.data.doors[key]
-				if door.x == nx and door.y == ny then
+				if door.x == x and door.y == y then
 					walkable = 1
 				end
 			end
 			
 			for key,value in pairs(self.data.portals) do
 				local portal = level.data.portals[key]
-				if portal.x == nx and portal.y == ny then
+				if portal.x == x and portal.y == y then
 					walkable = 1
 				end
 			end	
@@ -361,13 +370,17 @@ function Level:getFacingEnemy()
 	local x = party.x + adjancentSquare[party.direction].x
 	local y = party.y + adjancentSquare[party.direction].y
 
-	local enemy = self:getObject(self.data.enemies, x,y)
+	local enemy = nil
 
-	if enemy and enemy.properties.state == 1 then
-		return enemy
+	for key,value in pairs(self.data.enemies) do
+		if self.data.enemies[key].x == x and self.data.enemies[key].y == y then
+			if self.data.enemies[key].properties.state == 1 then
+				enemy = self.data.enemies[key]
+			end
+		end
 	end
-	
-	return nil
+
+	return enemy
 
 end
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="305">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="318">
  <editorsettings>
   <export target="../src/files/areas/city.lua" format="custom"/>
  </editorsettings>
@@ -28,12 +28,12 @@
 0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,
 0,0,0,0,0,0,0,1,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,0,0,1,1,0,1,1,1,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,0,1,0,1,1,1,1,1,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,0,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,1,0,0,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,0,1,1,1,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,0,0,
 0,1,0,0,0,1,0,0,2,1,1,1,1,0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,
-0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,
@@ -69,7 +69,7 @@
 33,0,0,33,0,33,33,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,33,0,0,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,0,0,33,0,0,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
-33,33,33,33,0,0,33,0,0,0,0,0,0,0,33,33,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+33,33,33,33,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,0,0,33,33,33,33,0,0,33,33,33,33,33,33,33,33,33,33,33,0,0,0,0,0,0,0,0,0,33,33,33,
 33,0,0,0,0,0,33,33,33,33,33,33,0,0,0,0,33,0,0,33,0,0,0,0,0,0,0,0,0,33,0,33,
 33,0,0,0,0,0,33,0,0,0,0,33,0,0,33,0,0,0,0,33,33,33,33,33,0,0,0,0,0,33,0,33,
@@ -228,7 +228,7 @@
     <property name="targety" type="int" value="4"/>
    </properties>
   </object>
-  <object id="243" gid="22" x="480" y="736" width="32" height="32">
+  <object id="243" gid="22" x="800" y="1024" width="32" height="32">
    <properties>
     <property name="direction" type="int" value="-1"/>
     <property name="id" value="city_545bd749-21f9-0456-ef1f-4998f549f89b"/>
@@ -243,6 +243,8 @@
   <object id="127" gid="17" x="960" y="608" width="32" height="32">
    <properties>
     <property name="id" value="city_89eefd9a-f595-2b34-5b8d-4869b337c877"/>
+    <property name="keyid" value="key-1"/>
+    <property name="loot" value="map"/>
    </properties>
   </object>
   <object id="148" gid="17" x="128" y="416" width="32" height="32">
@@ -250,33 +252,13 @@
     <property name="gold" type="int" value="10"/>
     <property name="id" value="city_76ef7cfb-af43-78a7-e869-fec96294a4a6"/>
     <property name="keyid" value="key-1"/>
-    <property name="loot" value="dagger-1:ring-1"/>
+    <property name="loot" value="gloves-1:ring-1"/>
     <property name="state" type="int" value="1"/>
    </properties>
   </object>
   <object id="129" gid="17" x="960" y="416" width="32" height="32">
    <properties>
     <property name="id" value="city_2eed5c40-1174-d1a2-23c3-c8eca1df2615"/>
-   </properties>
-  </object>
-  <object id="132" gid="8" x="352" y="320" width="32" height="32">
-   <properties>
-    <property name="id" value="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c"/>
-    <property name="wanderer" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="133" gid="8" x="288" y="224" width="32" height="32">
-   <properties>
-    <property name="id" value="city_81bdecd2-c200-017e-9d02-6065c4fc4fc6"/>
-    <property name="wanderer" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="151" gid="8" x="288" y="416" width="32" height="32">
-   <properties>
-    <property name="gold" type="int" value="0"/>
-    <property name="id" value="city_4f1cda06-b79d-2a35-f00e-6f81afe3a022"/>
-    <property name="loot" value=""/>
-    <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
   <object id="134" gid="37" x="480" y="416" width="32" height="32">
@@ -293,8 +275,14 @@
   </object>
   <object id="144" gid="14" x="448" y="384" width="32" height="32">
    <properties>
+    <property name="criterias" value="city_ratquest:state:1"/>
     <property name="id" value="city_ae1aaf01-e3a9-c68f-0971-74fd26b6ef7e"/>
     <property name="imageid" value="npc-guard"/>
+    <property name="name" value="City guard"/>
+    <property name="questdelivertext" value="So you're helping Arorre? Alright then, I will remove the barricade. Good luck in there."/>
+    <property name="questdonetext" value="Hello again.\n\nDon't mind me. I'm just standing here guarding, because I'm a guard. That's what guards do... We guard!\n\nHave you ever guarded something, then maybe you are a guard too. Perhaps we are all guards in our own ways.\n\nFood for thought, that is."/>
+    <property name="text" value="Stop! Nobody get's past this point. Bloodthirsty rats have overrun this area."/>
+    <property name="vars" value="city_1be3bf61-229d-2005-9e43-5838ca6378af:visible:0"/>
    </properties>
   </object>
   <object id="161" gid="14" x="64" y="480" width="32" height="32">
@@ -328,6 +316,15 @@
     <property name="name" value="City guard"/>
     <property name="sound" value="npc-1"/>
     <property name="text" value="Move along. Nothing to see here."/>
+   </properties>
+  </object>
+  <object id="316" gid="14" x="768" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="city_1e4d5ba7-8a75-7a77-7588-257910a2448d"/>
+    <property name="imageid" value="npc-guard"/>
+    <property name="name" value="City guard"/>
+    <property name="sound" value="npc-1"/>
+    <property name="text" value="Hm. You look fit and all, but are you well prepared for what's waiting in the deep forest outside the city?\n\nI heard there is a sorcerer living in the northeast who peddle with the magic arts.\n\nIt would probably be wise to pay him a visit."/>
    </properties>
   </object>
   <object id="162" gid="14" x="64" y="544" width="32" height="32">
@@ -371,7 +368,7 @@
     <property name="targety" type="int" value="19"/>
    </properties>
   </object>
-  <object id="175" gid="23" x="320" y="576" width="32" height="32">
+  <object id="175" gid="23" x="768" y="1024" width="32" height="32">
    <properties>
     <property name="id" value="city_b2aeb240-a41a-6b3d-2cae-a7f72bf3bfa6"/>
     <property name="vars" value="city_545bd749-21f9-0456-ef1f-4998f549f89b:state:1"/>
@@ -438,7 +435,7 @@
     <property name="imageid" value="npc-girl"/>
     <property name="name" value="Adalie"/>
     <property name="sound" value="girl-greetings"/>
-    <property name="text" value="Hello stranger."/>
+    <property name="text" value="Hello. Can you please help me? I can't find my mommy.\n\nShe went to buy vegetables earlier today but didn't come back so I came here to look for her.\n\nI have been waiting here for hours now.\n\nCan you please find her for me?"/>
    </properties>
   </object>
   <object id="182" gid="14" x="576" y="480" width="32" height="32">
@@ -447,16 +444,20 @@
     <property name="imageid" value="npc-peasant-1"/>
     <property name="name" value="Yahnah Bemmo"/>
     <property name="sound" value="female-greetings"/>
-    <property name="text" value=""/>
+    <property name="text" value="Are you here to save us from these awful creatures?\n\nI hope so!\n\nIt has been what seems like an eternity since I have been outside the city walls."/>
    </properties>
   </object>
-  <object id="184" gid="14" x="832" y="160" width="32" height="32">
+  <object id="184" gid="14" x="352" y="96" width="32" height="32">
    <properties>
+    <property name="criterias" value="city_13a6cbf2-9ad5-137d-f031-bab894b456b2:state:2|city_f8625039-f0ad-9604-2cfe-2dc232ad0a82:state:2"/>
     <property name="id" value="city_77cd3bbe-64da-259e-af22-c8bc8934b44f"/>
     <property name="imageid" value="npc-peasant-3"/>
     <property name="name" value="Brendudd Eagleroot"/>
+    <property name="questdelivertext" value="Oh, rats you say? You killed them all yes? Excellent!\n\nI have a chest nearby with some stuff in it. Go have a look. You can have whatever is inside it."/>
+    <property name="questdonetext" value="Hello again. No more scary noises thanks to you!"/>
     <property name="sound" value="male-greetings"/>
-    <property name="text" value="Hello stranger."/>
+    <property name="text" value="Psst! I heard scary noises coming from the west. I am too afraid to go there and check it out.\n\nCould you take a look for me?"/>
+    <property name="vars" value="city_0f41b66e-18e7-fbd6-868d-10f457baecca:state:1"/>
    </properties>
   </object>
   <object id="183" gid="14" x="576" y="576" width="32" height="32">
@@ -465,7 +466,7 @@
     <property name="imageid" value="npc-peasant-2"/>
     <property name="name" value="Jak Yelovan"/>
     <property name="sound" value="male-greetings"/>
-    <property name="text" value="Hello stranger."/>
+    <property name="text" value="Yup! It's go time, right? I presume you're here to lay down the law, so to speak.\n\nIt's about time someone came along with sufficiently sized gonads.\n\nGood luck to ya' I say. Good luck to ya'!"/>
    </properties>
   </object>
   <object id="187" gid="14" x="288" y="544" width="32" height="32">
@@ -474,16 +475,23 @@
     <property name="imageid" value="npc-hunter"/>
     <property name="name" value="Nefa Bindred"/>
     <property name="sound" value="female-greetings-2"/>
-    <property name="text" value="Hello stranger."/>
+    <property name="text" value="Oh, hi. I am not hiding. Honestly I am not. This spot is just so... safe.."/>
    </properties>
   </object>
   <object id="185" gid="14" x="672" y="416" width="32" height="32">
    <properties>
+    <property name="criterias" value="city_0a5a315e-b90f-05ac-a024-5e59c6e53664:state:2|city_c1069e4d-6310-74aa-6711-1b57636d9080:state:2|city_9a9aaac8-77b5-67be-8af5-3ab5fbb99bf8:state:2"/>
+    <property name="gold" type="int" value="20"/>
     <property name="id" value="city_56d94b33-10ca-385f-e361-e3e63b2e4eac"/>
     <property name="imageid" value="npc-peasant-4"/>
+    <property name="init_vars" value="city_ratquest:state:1"/>
+    <property name="loot" value="map"/>
     <property name="name" value="Arorre Grandforge"/>
+    <property name="questdelivertext" value="You actually did it? I can go home again?\n\nYou are my hero and I can't possibly thank you enough.\n\nI don't have much but here; some coins and this little trinket which might come in handy."/>
+    <property name="questdonetext" value="You're the best!"/>
     <property name="sound" value="female-greetings"/>
-    <property name="text" value=""/>
+    <property name="text" value="I can't believe it! The streets around my home is overrun by rats and I haven't been home for days now.\n\nYou look like someone who could take care of that, yes?\n\nMy home is a short walk to the northwest.\n\nWill you please do it?"/>
+    <property name="vars" value="city_ratquest:state:2|city_56d94b33-10ca-385f-e361-e3e63b2e4eac:visible:0"/>
    </properties>
   </object>
   <object id="210" gid="35" x="128" y="480" width="32" height="32">
@@ -640,7 +648,7 @@
     <property name="id" value="city_3cf2d339-928e-e466-96c1-06758955b209"/>
    </properties>
   </object>
-  <object id="242" gid="3" x="608" y="416" width="32" height="32"/>
+  <object id="242" gid="6" x="288" y="96" width="32" height="32"/>
   <object id="246" gid="36" x="640" y="544" width="32" height="32">
    <properties>
     <property name="gold" type="int" value="2"/>
@@ -717,6 +725,7 @@
    <properties>
     <property name="gold" type="int" value="20"/>
     <property name="id" value="city_af59cab0-b785-22ca-08ba-bf6d79cef3ea"/>
+    <property name="loot" value="sword-2"/>
    </properties>
   </object>
   <object id="260" gid="36" x="224" y="864" width="32" height="32">
@@ -733,6 +742,8 @@
   </object>
   <object id="262" gid="8" x="576" y="864" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
+    <property name="gold" type="int" value="5"/>
     <property name="id" value="city_848887b9-ee60-ff44-73aa-127f0b06b496"/>
    </properties>
   </object>
@@ -743,11 +754,13 @@
   </object>
   <object id="264" gid="8" x="384" y="960" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="city_448f35a8-9a3e-bd75-0ea5-4393b4bc0c10"/>
    </properties>
   </object>
   <object id="265" gid="8" x="512" y="960" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="city_3ad22142-80c1-1a61-b506-73ad433f5b7d"/>
    </properties>
   </object>
@@ -776,12 +789,6 @@
    <properties>
     <property name="direction" type="int" value="1"/>
     <property name="id" value="city_550a53cf-5048-3ceb-8a3a-3198bfffbfc7"/>
-   </properties>
-  </object>
-  <object id="271" gid="36" x="480" y="992" width="32" height="32">
-   <properties>
-    <property name="direction" type="int" value="3"/>
-    <property name="id" value="city_dd0215b3-2d09-eb21-f026-a17a50efc1bd"/>
    </properties>
   </object>
   <object id="272" gid="36" x="576" y="96" width="32" height="32">
@@ -849,6 +856,8 @@
    <properties>
     <property name="gold" type="int" value="15"/>
     <property name="id" value="city_0f41b66e-18e7-fbd6-868d-10f457baecca"/>
+    <property name="loot" value="key-1"/>
+    <property name="state" type="int" value="3"/>
    </properties>
   </object>
   <object id="286" gid="35" x="512" y="96" width="32" height="32">
@@ -940,6 +949,57 @@
   <object id="303" gid="35" x="896" y="864" width="32" height="32">
    <properties>
     <property name="id" value="city_135f80fe-254c-95c0-fec9-ff16fda7f1ba"/>
+   </properties>
+  </object>
+  <object id="306" gid="16" x="320" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="city_8a1fbdd2-7d69-9e46-5a34-ef4c8b79b092"/>
+    <property name="text" value="Aventurers visiting the city for the first time are advised to first drop by The Randy Boar Inn.\n\nJust walk straight ahead to the marketplace and you'll find it."/>
+   </properties>
+  </object>
+  <object id="307" gid="11" x="352" y="320" width="32" height="32">
+   <properties>
+    <property name="health" type="int" value="5"/>
+    <property name="health_max" type="int" value="5"/>
+    <property name="id" value="city_c1069e4d-6310-74aa-6711-1b57636d9080"/>
+   </properties>
+  </object>
+  <object id="308" gid="11" x="224" y="416" width="32" height="32">
+   <properties>
+    <property name="health" type="int" value="5"/>
+    <property name="health_max" type="int" value="5"/>
+    <property name="id" value="city_9a9aaac8-77b5-67be-8af5-3ab5fbb99bf8"/>
+   </properties>
+  </object>
+  <object id="309" gid="11" x="256" y="224" width="32" height="32">
+   <properties>
+    <property name="health" type="int" value="5"/>
+    <property name="health_max" type="int" value="5"/>
+    <property name="id" value="city_0a5a315e-b90f-05ac-a024-5e59c6e53664"/>
+   </properties>
+  </object>
+  <object id="313" gid="11" x="96" y="224" width="32" height="32">
+   <properties>
+    <property name="health" type="int" value="5"/>
+    <property name="health_max" type="int" value="5"/>
+    <property name="id" value="city_13a6cbf2-9ad5-137d-f031-bab894b456b2"/>
+   </properties>
+  </object>
+  <object id="311" gid="11" x="32" y="160" width="32" height="32">
+   <properties>
+    <property name="health" type="int" value="5"/>
+    <property name="health_max" type="int" value="5"/>
+    <property name="id" value="city_f8625039-f0ad-9604-2cfe-2dc232ad0a82"/>
+   </properties>
+  </object>
+  <object id="315" gid="34" x="288" y="128" width="32" height="32">
+   <properties>
+    <property name="id" value="city_54f2b588-ce63-038e-00af-99a9f8bd6852"/>
+   </properties>
+  </object>
+  <object id="317" gid="37" x="480" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="city_94b6b523-6679-924b-b4ec-87e5257ce72a"/>
    </properties>
   </object>
  </objectgroup>

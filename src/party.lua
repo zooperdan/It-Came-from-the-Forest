@@ -19,7 +19,7 @@ function Party:initialize()
 	self.cooldownCounters = {[1] = 0, [2] = 0, [3] = 0, [4] = 0}
 
 	self.basestats =  {
-		attack = 20,
+		attack = 1,
 		defence = 1,
 		health_max = 100,
 		mana_max = 100,
@@ -51,14 +51,14 @@ function Party:initialize()
 	self.stats =  {
 		attack = 1,
 		defence = 1,
-		health = 10,
+		health = 100,
 		health_max = 100,
 		mana = 100,
 		mana_max = 100,
 	}
 
 	self.inventory = {
-		{"key-1", "key-2", "compass", "map", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
 		{"", "", "", "", "", "", "", ""},
 		{"", "", "", "", "", "", "", ""},
 		{"", "", "", "", "", "", "", ""},
@@ -74,7 +74,7 @@ function Party:initialize()
 		{ id = ""},
 		{ id = ""},
 		{ id = "sword-5"},
-		{ id = ""},
+		{ id = "compass"},
 		{ id = "map"},
 		{ id = ""},
 		{ id = ""},
@@ -461,7 +461,10 @@ end
 
 function Party:squareIsSeen(x, y)
 
-
+	if not self:hasMap() then
+		return
+	end
+	
 	if not self.mappedsquares then
 		self.mappedsquares = {}
 	end
@@ -518,7 +521,9 @@ function Party:loadGameFromSlot(index)
 		fadeColor = {1,1,1}
 		fadeMusicVolume.v = settings.musicVolume
 		
-		Game.teleportTarget =  {
+		Game.currentDoor = nil
+		
+		spawnTarget =  {
 			x = savedata.x-1,
 			y = savedata.y-1,
 			direction = savedata.direction

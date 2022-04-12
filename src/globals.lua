@@ -1,7 +1,7 @@
 settings = {
 	quickstart = true,
-	debug = true,
-	startingArea = "city",
+	debug = false,
+	startingArea = "garden",
 	musicVolume = 0.0,
 	sfxVolume = 1,
 	inventoryX = 119,
@@ -18,6 +18,7 @@ isFading = false
 fadeColor = {0,0,0}
 fadeMusicVolume = {v = settings.musicVolume}
 inventoryDragSource = {}
+spawnTarget = {}
 
 loadingSavedFile = false
 
@@ -60,7 +61,8 @@ world_hitboxes["portal"] = {x = 233, y = 58, w = 180, h = 244}
 world_hitboxes["chest"] = {x = 248, y = 199, w = 146, h = 99}
 world_hitboxes["well"] = {x = 233, y = 58, w = 180, h = 244}
 world_hitboxes["prop"] = {x = 233, y = 58, w = 180, h = 244}
-world_hitboxes["button"] = {x = 252, y = 217, w = 24, h = 24}
+world_hitboxes["button"] = {x = 352, y = 211, w = 12, h = 23}
+world_hitboxes["levelexit"] = {x = 225, y = 10, w = 230, h = 295}
 
 highlightshader = love.graphics.newShader[[
 extern float WhiteFactor;

@@ -6,7 +6,7 @@ function ItemTemplates:initialize()
 
 	-- weapons
 
-	self:addTemplate("sword-1", "Sword", "weapon", { ["atk"] = 2 })
+	self:addTemplate("sword-1", "Wooden training sword", "weapon", { ["atk"] = 1 })
 	self:addTemplate("sword-2", "Golden sword", "weapon", { ["atk"] = 4 })
 	self:addTemplate("sword-3", "Sword", "weapon", { ["atk"] = 2 })
 	self:addTemplate("sword-4", "Sword", "weapon", { ["atk"] = 2 })

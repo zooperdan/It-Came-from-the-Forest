@@ -289,7 +289,32 @@
 	},
 },
 enemyblockers={},
-enemies={},
+enemies={
+	[1] = {
+		x=16,
+		y=9,
+		properties={
+			antsacs=0,
+			attack=3,
+			defence=1,
+			gold=0,
+			health=25,
+			health_max=25,
+			id="garden_7e562919-03ba-0821-b945-a9d8d84a8e29",
+			imageid="rat",
+			loot="",
+			name="Rat",
+			sound_attack="rat-attack",
+			sound_die="rat-die",
+			sound_move="rat-move",
+			sound_scream="rat-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
+},
+
 chests={},
 spinners={},
 portals={},
@@ -323,8 +348,8 @@ doors={
 			state=1,
 			targetarea="city",
 			targetdir=0,
-			targetx=15,
-			targety=21,
+			targetx=25,
+			targety=30,
 			type=2,
 		}
 	},
@@ -532,7 +557,7 @@ staticprops={
 			id="garden_68b28a70-2df8-488d-7b00-5b470bad3200",
 			name="city-statue",
 			state=1,
-			text="Balls!",
+			text="",
 			visible=1,
 		}
 	},
@@ -545,7 +570,7 @@ staticprops={
 			id="garden_66c2ded8-beb7-81f6-c245-d51b1064e9a9",
 			name="city-statue",
 			state=1,
-			text="Balls!",
+			text="",
 			visible=1,
 		}
 	},
@@ -558,7 +583,7 @@ staticprops={
 			id="garden_e218fb34-4be6-90a6-fc50-9ae7354708a4",
 			name="city-statue",
 			state=1,
-			text="Balls!",
+			text="",
 			visible=1,
 		}
 	},
@@ -571,11 +596,15 @@ staticprops={
 			id="garden_2974a953-11ae-57c1-7f1b-00bb7b73863a",
 			name="city-statue",
 			state=1,
-			text="Balls!",
+			text="",
 			visible=1,
 		}
 	},
 },
 
 buttons={},
+levelexits={},
+["partyX"]=16,
+["partyY"]=2,
+["partyDirection"]=2,
 }

@@ -1,3 +1,12 @@
+function math.angle(x1, y1, x2, y2)
+    local a = math.deg(math.atan2(y2 - y1, x2 - x1))
+    if a < 0 then
+        return a + 360
+    else
+        return a
+    end
+end
+
 function string.trim(s)
    return (s:gsub("^%s*(.-)%s*$", "%1"))
 end

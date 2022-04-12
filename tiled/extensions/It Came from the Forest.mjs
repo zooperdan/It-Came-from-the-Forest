@@ -422,6 +422,7 @@ var customMapFormat = {
 				buffer += getByType("Door", "doors", layer);
 				buffer += getByType("StaticProp", "staticprops", layer);
 				buffer += getByType("Button", "buttons", layer);
+				buffer += getByType("LevelExit", "levelexits", layer);
 
 				/*
 				buffer += getByType("Button", "buttons", layer);
