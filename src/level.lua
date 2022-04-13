@@ -135,6 +135,9 @@ function Level:applyGlobalVariables()
 		gvar = globalvariables:get(enemy.properties.id, "direction")
 		if gvar then enemy.properties.direction = tonumber(gvar) end		
 
+		gvar = globalvariables:get(enemy.properties.id, "health")
+		if gvar then enemy.properties.health = tonumber(gvar) end		
+
 	end
 	
 	for key,value in pairs(self.data.triggers) do
@@ -167,6 +170,9 @@ function Level:applyGlobalVariables()
 
 		local gvar = globalvariables:get(prop.properties.id, "gold")
 		if gvar then prop.properties.gold = tonumber(gvar) end		
+
+		local gvar = globalvariables:get(prop.properties.id, "loot")
+		if gvar then prop.properties.loot = tostring(gvar) end		
 
 	end		
 	

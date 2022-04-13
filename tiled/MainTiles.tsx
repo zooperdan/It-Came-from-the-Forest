@@ -264,6 +264,7 @@
    <property name="direction" type="int" value="2"/>
    <property name="gold" type="int" value="0"/>
    <property name="id" value=""/>
+   <property name="loot" value=""/>
    <property name="name" value="barrels"/>
    <property name="state" type="int" value="1"/>
    <property name="visible" type="int" value="1"/>

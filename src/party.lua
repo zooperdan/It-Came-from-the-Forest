@@ -8,10 +8,10 @@ function Party:initialize()
 	self.direction = 0
 	self.x = 1
 	self.y = 1
-	self.gold = 1000
+	self.gold = 0
 	self.antsacs = 0
-	self.healing_potions = 1
-	self.mana_potions = 1
+	self.healing_potions = 0
+	self.mana_potions = 0
 	
 	self.ticksElapsed = 0
 
@@ -21,8 +21,8 @@ function Party:initialize()
 	self.basestats =  {
 		attack = 1,
 		defence = 1,
-		health_max = 100,
-		mana_max = 100,
+		health_max = 20,
+		mana_max = 20,
 	}
 
 	self.equipmentslots =  {
@@ -51,10 +51,10 @@ function Party:initialize()
 	self.stats =  {
 		attack = 1,
 		defence = 1,
-		health = 100,
-		health_max = 100,
-		mana = 100,
-		mana_max = 100,
+		health = 20,
+		health_max = 20,
+		mana = 20,
+		mana_max = 20,
 	}
 
 	self.inventory = {
@@ -73,9 +73,9 @@ function Party:initialize()
 		{ id = ""},
 		{ id = ""},
 		{ id = ""},
-		{ id = "sword-5"},
-		{ id = "compass"},
-		{ id = "map"},
+		{ id = "sword-1"},
+		{ id = ""},
+		{ id = ""},
 		{ id = ""},
 		{ id = ""},
 		{ id = ""},
@@ -142,6 +142,8 @@ function Party:attackWithMelee(enemy)
 
 	enemy.properties.health = enemy.properties.health - damage
 	
+	globalvariables:add(enemy.properties.id, "health", enemy.properties.health)
+	
 	for i = 1, #enemies do
 		if enemies[i].enemy == enemy then
 			enemies[i]:showHighlight()
@@ -184,6 +186,8 @@ function Party:attackWithSpell(spell)
 		print("Player spell:" .. damage)
 
 		enemy.properties.health = enemy.properties.health - damage
+
+		globalvariables:add(enemy.properties.id, "health", enemy.properties.health)
 		
 		for i = 1, #enemies do
 			if enemies[i].enemy == enemy then
@@ -223,7 +227,14 @@ end
 
 function Party:died()
 
-	love.event.quit()
+	gameState = GameStates.GAMEOVER
+	subState = SubStates.IDLE
+
+	Timer.script(function(wait)
+		wait(0.1)
+		Timer.tween(1.0, fadeColor, {1,1,1}, 'in-out-quad', function()
+		end)
+	end)
 	
 end
 
@@ -315,7 +326,13 @@ function Party:addItems(items)
 	local itemslist = explode(items, ":")
 	
 	for i = 1, #itemslist do
-		self:addItem(itemslist[i])
+		if itemslist[i] == "healing-potion" then
+			self.healing_potions = self.healing_potions + 1
+		elseif itemslist[i] == "mana-potion" then
+			self.mana_potions = self.mana_potions + 1
+		else
+			self:addItem(itemslist[i])
+		end
 	end
 
 end
@@ -487,6 +504,18 @@ function Party:squareIsSeen(x, y)
 
 end
 
+function Party:hasSavegames()
+
+	for i = 1, 3 do
+		if self:isSavegameAtSlot(i) then
+			return true
+		end
+	end
+
+	return false
+	
+end
+
 function Party:isSavegameAtSlot(index)
 
 	return love.filesystem.getInfo("saves/slot" .. index .. ".dat")
@@ -495,12 +524,13 @@ end
 
 function Party:loadGameFromSlot(index)
 
+	subState = SubStates.DISK_IO
+
 	file, err = io.open("saves/slot"..index..".dat", "rb")
 	
 	if not err and file then
 		
 		local content = file:read("*all")
-		
 		file:close()
 		
 		local savedata = lume.deserialize(content)
@@ -519,7 +549,7 @@ function Party:loadGameFromSlot(index)
 
 		gameState = GameStates.LOADING_LEVEL
 		fadeColor = {1,1,1}
-		fadeMusicVolume.v = settings.musicVolume
+		fadeMusicVolume.v = savedsettings.musicVolume
 		
 		Game.currentDoor = nil
 		
@@ -537,14 +567,22 @@ function Party:loadGameFromSlot(index)
 				Game:loadArea(savedata.levelid)
 			end)
 		end)
+
+		subState = SubStates.IDLE
 		
 		return true
 
 	end
 
+	subState = SubStates.IDLE
+	
+	return false
+
 end
 
 function Party:saveGameAtSlot(index)
+
+	subState = SubStates.DISK_IO
 
 	local savedata = {
 		vars = globalvariables.list,
@@ -570,10 +608,15 @@ function Party:saveGameAtSlot(index)
 	if not err and file then
 		file:write(serialized)
 		file:close()
+		savedsettings.lastSavegameSlot = index
+		Game:saveSettings()
+		subState = SubStates.IDLE
+		return true
+	else
+		subState = SubStates.IDLE
+		return false
 	end
 	
-	return true
-
 end
 
 return Party

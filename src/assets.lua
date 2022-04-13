@@ -80,11 +80,6 @@ function Assets:load()
 		self.images[shortname] = love.graphics.newImage("files/itemicons/"..file)
 	end
 	
-	-- font
-
-	self.fonts["main"] = love.graphics.newFont("files/fonts/windows_command_prompt.ttf", 16 , "none", love.graphics.getDPIScale())
-	self.fonts["mainmenu"] = love.graphics.newFont("files/fonts/alagard.ttf", 16 , "none", love.graphics.getDPIScale())
-	
 	-- music
 
 	self.music["forest"] = love.audio.newSource("files/music/forest.mp3", "stream")
@@ -93,8 +88,13 @@ function Assets:load()
 	self.music["city"]:setLooping(true)
 	self.music["mainmenu"] = love.audio.newSource("files/music/mainmenu.mp3", "stream")
 	self.music["mainmenu"]:setLooping(true)
-	self.music["buildup"] = love.audio.newSource("files/music/intro.mp3", "stream")
+	self.music["buildup"] = love.audio.newSource("files/music/buildup.mp3", "stream")
 	self.music["buildup"]:setLooping(false)
+	
+	-- font
+
+	self.fonts["main"] = love.graphics.newFont("files/fonts/windows_command_prompt.ttf", 16 , "none", love.graphics.getDPIScale())
+	self.fonts["mainmenu"] = love.graphics.newFont("files/fonts/alagard.ttf", 16 , "none", love.graphics.getDPIScale())
 	
 	-- generate quads for compass
 	
@@ -125,13 +125,21 @@ function Assets:load()
 	
 end
 
+function Assets:setMusicVolume(id, value)
+
+	if self.music[id] then
+		self.music[id]:setVolume(value)
+	end
+
+end
+
 function Assets:playMusic(id)
 
 	if not self.music[id] then
 		return
 	end
 
-	self.music[id]:setVolume(settings.musicVolume)
+	self.music[id]:setVolume(savedsettings.musicVolume)
 	self.music[id]:play()
 
 end
@@ -162,11 +170,11 @@ function Assets:playSound(value)
 		local sound = self.sfx.misc[value]
 		if sound then
 			sound:stop()
-			sound:setVolume(settings.sfxVolume)
+			sound:setVolume(savedsettings.sfxVolume)
 			sound:play()
 		end
 	elseif type(value) == 'userdata' then
-		value:setVolume(settings.sfxVolume)
+		value:setVolume(savedsettings.sfxVolume)
 		value:play()
 	end
 	

@@ -2,11 +2,19 @@ local Atlases = class('Atlases')
 
 function Atlases:initialize()
 
+	self.images = {}
+
 end
 
 function Atlases:load(tileset)
 
 	local filenames = {}
+	
+	for i = 1, #self.images do
+		if self.images[i] then
+			self.images[i]:release()
+		end
+	end
 	
 	self.images = {}
 	self.jsondata = {}

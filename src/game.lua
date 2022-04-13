@@ -48,15 +48,20 @@ end
 
 function Game:init()
 
+	self:loadSettings()
+
+	love.window.setFullscreen(savedsettings.fullScreen and savedsettings.fullScreen == true)
+	
 	love.mouse.setGrabbed(true)
 	love.mouse.setVisible(false)
 	
-	self.isFullscreen = love.window.fullscreen
 	self.canvas = love.graphics.newCanvas(screen.width, screen.height)
 	spawnTarget = nil
 	assets:load()
 	
 	renderer:init(self)
+	
+	settings.canContinue = party:isSavegameAtSlot(savedsettings.lastSavegameSlot)
 	
 	party:updateStats()
 	
@@ -66,10 +71,9 @@ function Game:init()
 		self.fromSaveFile = false
 		Game:loadArea(settings.startingArea)
 	else 
+		fadeMusicVolume.v = savedsettings.musicVolume
 		assets:playMusic("buildup")
-		
 		gameState = GameStates.BUILDUP1
-
 		Timer.script(function(wait)
 			Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
 			wait(4)
@@ -104,13 +108,19 @@ function Game:update(dt)
 	
 	if gameState == GameStates.MAIN_MENU then
 		if assets.music["mainmenu"] then
-			assets.music["mainmenu"]:setVolume(fadeMusicVolume.v)
+			assets:setMusicVolume("mainmenu", fadeMusicVolume.v)
 		end
 	end
 	
 	if gameState == GameStates.LOADING_LEVEL then
 		if assets.music[level.data.tileset] then
-			assets.music[level.data.tileset]:setVolume(fadeMusicVolume.v)
+			assets:setMusicVolume(level.data.tileset, fadeMusicVolume.v)
+		end
+	end	
+	
+	if subState == SubStates.TWEENING then
+		if assets.music[level.data.tileset] then
+			assets:setMusicVolume(level.data.tileset, fadeMusicVolume.v)
 		end
 	end	
 	
@@ -227,31 +237,28 @@ function Game:handleInput(key)
 
     if key == 'f1' then
 		if party:loadGameFromSlot(1) then
-			print("Loaded from slot " .. 1 .. " successfully.")
 		end
     end
 	
     if key == 'f2' then
 		if party:saveGameAtSlot(1) then
-			print("Saved to slot " .. 1 .. " successfully.")
 		end
     end
 	
     if key == 'f3' then
 		if party:loadGameFromSlot(2) then
-			print("Loaded from slot " .. 2 .. " successfully.")
 		end
     end
 	
     if key == 'f4' then
 		if party:saveGameAtSlot(2) then
-			print("Saved to slot " .. 2 .. " successfully.")
 		end
     end
 	
     if key == 'return' then
 		if love.keyboard.isDown("lalt") then
 			love.window.setFullscreen(not love.window.getFullscreen())
+			savedsettings.fullScreen = love.window.getFullscreen()
 		end
     end
 
@@ -263,8 +270,7 @@ function Game:handleInput(key)
 	if gameState == GameStates.MAIN_MENU then
 	
 		if key == 'escape' then
-			gameState = GameStates.QUITTING
-			love.event.quit()
+			self:quitGame()
 			return
 		end
 			
@@ -275,8 +281,7 @@ function Game:handleInput(key)
 		if subState == SubStates.IDLE then
 
 			if key == 'escape' then
-				gameState = GameStates.QUITTING
-				love.event.quit()
+				self:quitGame()
 				return
 			end
 
@@ -600,13 +605,14 @@ function Game:stepOnGround(playFootsteps)
 
 	party:squareIsSeen(party.x, party.y)
 
-	-- Spinner
+	-- Invisible teleporter
 
 	local teleporter = level:getObject(level.data.teleporters, party.x, party.y)
 
 	if teleporter then
 		if teleporter.properties.state == 1 then
 			self:teleportTo(teleporter.properties.targetx+1, teleporter.properties.targety+1, teleporter.properties.targetdir)
+			assets:playSound("teleport")
 			return
 		end
 	end
@@ -659,20 +665,10 @@ function Game:loadArea(id)
 	if level:load(id, target) then
 
 		if not atlases:load(level.data.tileset) then
-			love.graphics.setCanvas(self.canvas)
-			love.graphics.clear()
-			love.graphics.setColor(1,1,1,1)
-			love.graphics.setLineWidth(1)
-			love.graphics.setLineStyle("rough")
-
-			love.graphics.setColor(1,1,1,1)
-			love.graphics.setFont(assets.fonts["main"]);	
-			love.graphics.print("-- FATAL ERROR --",10,10)
-			love.graphics.print("> Error loading atlases. Check console output.",10,40)
-			love.graphics.print("Press any key to quit.",10,70)
-			love.graphics.setCanvas()
-			gameState = GameStates.FATAL_ERROR
-			subState = SubStates.IDLE
+			print("-- FATAL ERROR --",10,10)
+			print("> Error loading atlases. Check console output.",10,40)
+			print("Press any key to quit.",10,70)
+			love.event.quit()
 			return
 		end	
 	
@@ -712,32 +708,32 @@ function Game:loadArea(id)
 
 		-- fade in
 
-		Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad', function()
-			Game.footStepIndex = 1
-			Game:stepOnGround(false)
-			assets:playMusic(level.data.tileset)
+		fadeColor = color.black
+		
+		Timer.clear()
+		
+		Timer.script(function(wait)
+			Timer.tween(1, fadeMusicVolume, {v = savedsettings.musicVolume}, 'in-out-quad', function()
+			end)
+			Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad', function()
+				Game.footStepIndex = 1
+				Game:stepOnGround(false)
+				assets:playMusic(level.data.tileset)
+			end)
 		end)
 		
 	else
-		love.graphics.setCanvas(self.canvas)
-		love.graphics.clear()
-		love.graphics.setColor(1,1,1,1)
-		love.graphics.setLineWidth(1)
-		love.graphics.setLineStyle("rough")
-
-		love.graphics.setColor(1,1,1,1)
-		love.graphics.setFont(assets.fonts["main"]);	
-		love.graphics.print("-- FATAL ERROR --",10,10)
-		love.graphics.print("> Error loading level: \""..id..".lua\"",10,40)
-		love.graphics.print("Press any key to quit.",10,70)
-		love.graphics.setCanvas()
-		gameState = GameStates.FATAL_ERROR
-		subState = SubStates.IDLE
+		print("-- FATAL ERROR --",10,10)
+		print("> Error loading level: \""..id..".lua\"",10,40)
+		print("Press any key to quit.",10,70)
+		love.event.quit()
 	end
 
 end
 
 function Game:startGame()
+
+	spawnTarget = nil
 
 	subState = SubStates.LOADING_LEVEL
 	fadeColor = {1,1,1}
@@ -752,6 +748,22 @@ function Game:startGame()
 		end)
 	end)
 			
+end
+
+function Game:continueGame()
+
+	subState = SubStates.LOADING_LEVEL
+	fadeColor = {1,1,1}
+	Timer.script(function(wait)
+		Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+		end)
+		Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
+			assets:stopMusic("mainmenu")
+			party:loadGameFromSlot(savedsettings.lastSavegameSlot)
+		end)
+		
+	end)
+
 end
 
 function Game:checkIfClickedOnFacingObject(x, y)
@@ -787,7 +799,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 					fadeColor = {1,1,1}
 					assets:playSound("city-gate")
 					Game.currentDoor = door
-					fadeMusicVolume.v = settings.musicVolume
+					fadeMusicVolume.v = savedsettings.musicVolume
 					self.fromSaveFile = false
 					Timer.script(function(wait)
 						Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
@@ -839,22 +851,6 @@ function Game:checkIfClickedOnFacingObject(x, y)
 			renderer:showNPC(npc)
 			return true
 		end
-		--[[
-		if npc.properties.state == 2 then
-			npc.properties.state = 3
-			globalvariables:add(npc.properties.id, "state", npc.properties.state)
-			assets:playSound(npc.properties.sound)
-		else
-			if checkCriterias(npc.properties.criterias) then
-				assets:playSound("quest-complete")
-				npc.properties.state = 2
-				globalvariables:add(npc.properties.id, "state", npc.properties.state)
-				level:applyVars(npc.properties.vars)
-			else
-				assets:playSound(npc.properties.sound)
-			end		
-		end
-		]]--
 		
 	end
 
@@ -883,6 +879,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	local chest = level:getFacingObject(level.data.chests, x,y)
 	
 	if chest and intersectBox(x, y, world_hitboxes["chest"]) then
+		print(chest.properties.state)
 		if chest.properties.state == 1 then
 			if chest.properties.keyid and chest.properties.keyid ~= "" then
 				if party:consumeItem(chest.properties.keyid) then
@@ -908,7 +905,6 @@ function Game:checkIfClickedOnFacingObject(x, y)
 				globalvariables:add(chest.properties.id, "state", chest.properties.state)
 				assets:playSound("chest-open")
 			end
-		
 		elseif chest.properties.state == 2 then
 			chest.properties.state = 1
 			globalvariables:add(chest.properties.id, "state", chest.properties.state)
@@ -947,13 +943,18 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	if prop and intersectBox(x, y, world_hitboxes["prop"]) then
 	
 		if prop.properties.name == "barrels" then
-			if prop.properties.gold > 0 then
-				renderer:showFoundLoot(prop.properties.gold, {})
+		
+			if prop.properties.gold > 0 or prop.properties.loot ~= "" then
+				renderer:showFoundLoot(prop.properties.gold, explode(prop.properties.loot, ":"), 0)
 				party:addGold(prop.properties.gold)
+				party:addItems(prop.properties.loot)
 				prop.properties.gold = 0
+				prop.properties.loot = ""
 				globalvariables:add(prop.properties.id, "gold", prop.properties.gold)
+				globalvariables:add(prop.properties.id, "loot", prop.properties.loot)
 				return true
-			end		
+			end
+	
 		elseif prop.properties.text ~= "" then
 			renderer:showPopup(prop.properties.text)
 			return true
@@ -991,7 +992,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 		fadeColor = {1,1,1}
 		self.fromSaveFile = false
 		--assets:playSound("city-gate")
-		fadeMusicVolume.v = settings.musicVolume
+		fadeMusicVolume.v = savedsettings.musicVolume
 		Timer.script(function(wait)
 			Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
 			end)
@@ -1010,7 +1011,6 @@ end
 
 function Game:jumpToMainmenu()
 
-
 	Timer.clear()
 
 	gameState = GameStates.MAIN_MENU
@@ -1024,12 +1024,6 @@ function Game:jumpToMainmenu()
 
 end
 
-function Game:canContinue()
-
-	return false
-	
-end
-
 function Game:invokeTownPortal()
 
 	spawnTarget =  {
@@ -1041,7 +1035,7 @@ function Game:invokeTownPortal()
 	gameState = GameStates.LOADING_LEVEL
 	fadeColor = {1,1,1}
 	assets:playSound("portal")
-	fadeMusicVolume.v = settings.musicVolume
+	fadeMusicVolume.v = savedsettings.musicVolume
 	Timer.script(function(wait)
 		Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
 		end)
@@ -1050,6 +1044,51 @@ function Game:invokeTownPortal()
 			Game:loadArea("city")
 		end)
 	end)	
+
+end
+
+function Game:loadSettings()
+
+	if not love.filesystem.getInfo("files/settings.cfg") then
+		return
+	end
+
+	file, err = io.open("files/settings.cfg", "rb")
+	
+	if not err and file then
+		local content = file:read("*all")
+		savedsettings = lume.deserialize(content)
+		file:close()
+		return true
+	else
+		return false
+	end
+
+end
+
+function Game:saveSettings()
+
+	local serialized = lume.serialize(savedsettings)
+	
+	file, err = io.open("files/settings.cfg", "wb")
+	
+	if not err and file then
+		file:write(serialized)
+		file:close()
+		return true
+	else
+		return false
+	end
+
+end
+
+function Game:quitGame()
+
+	gameState = GameStates.QUITTING
+
+	self:saveSettings()
+
+	love.event.quit()
 
 end
 

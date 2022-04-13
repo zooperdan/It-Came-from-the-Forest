@@ -218,7 +218,6 @@ function Enemy:walkToNextPathNode()
 			if distanceFrom(party.x, party.y, self.enemy.x, self.enemy.y) < 5 then
 				assets:playSound(self.enemy.properties.sound_move)
 			end
-			
 
 			self.pathNodeIndex = self.pathNodeIndex + 1
 			
@@ -383,8 +382,27 @@ function Enemy:attack()
 		party.stats.health = party.stats.health - damage
 	
 		if party.stats.health <= 0 then
-			assets:playSound("player-death")
-			party:died()
+			party.stats.health = 0
+			assets:playSound("player-hit")
+			subState = SubStates.TWEENING
+			Timer.script(function(wait)
+				wait(1)
+				fadeMusicVolume.v = savedsettings.musicVolume
+				
+				--wait(2)
+				assets:playSound("player-death")
+				Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+				end)
+				Timer.tween(2, fadeColor, {0,0,0}, 'in-out-quad', function()
+					local id = "gameover"
+					local m = love.audio.newSource("files/music/gameover.mp3", "static")
+					m:setLooping(false)
+					m:setVolume(savedsettings.musicVolume)
+					m:play()
+				
+					party:died()
+				end)
+			end)		
 		else
 			assets:playSound("player-hit")
 		end

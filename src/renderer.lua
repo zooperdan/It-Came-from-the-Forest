@@ -66,8 +66,8 @@ function Renderer:init(caller)
 	
 	local button = Button:new()
 	button.id = "close-tavern"
-	button.x = 441
-	button.y = 226
+	button.x = 516
+	button.y = 236
 	button.width = 32
 	button.height = 32
 	button.normal = "button-close-1"
@@ -80,29 +80,30 @@ function Renderer:init(caller)
 	self.menuitemsOffsetY = 120
 	self.menuitems = {
 		{ caption = "New game", trigger = self.onStartButtonClick},
-		{ caption = "Continue", trigger = self.onContinueButtonClick},
+		{ caption = "Continue", trigger = self.onContinueGameButtonClick},
 		{ caption = "Credits", trigger = self.onCreditsButtonClick},
 		{ caption = "About", trigger = self.onAboutButtonClick},
 		{ caption = "Quit", trigger = self.onQuitButtonClick}
 	}	
 
 	self.systemmenuOffsetY = 65
-	self.systemmenuitemsOffsetY = 130
+	self.systemmenuitemsOffsetY = 110
 	self.systemmenuitems = {
 		{ caption = "Exit to main menu", trigger = function() self:onBackToMenuButtonClick() end},
-		{ caption = "Quit to desktop", trigger = self.onQuitButtonClick},
+		{ caption = "Quit to desktop", trigger = function() self:onQuitButtonClick() end},
+		{ caption = "Close", trigger = function() self:onCloseSystemMenuButtonClick() end},
 	}	
 	
 	self.loadslots = {
-		{caption = "SLOT 1", x = 244, y = 214, w = 55, h = 17},
-		{caption = "SLOT 2", x = 244+60, y = 214, w = 55, h = 17},
-		{caption = "SLOT 3", x = 244+60*2, y = 214, w = 55, h = 17}
+		{caption = "SLOT 1", x = 214, y = 214, w = 55, h = 17},
+		{caption = "SLOT 2", x = 214+60, y = 214, w = 55, h = 17},
+		{caption = "SLOT 3", x = 214+60*2, y = 214, w = 55, h = 17}
 	}
 	
 	self.saveslots = {
-		{caption = "SLOT 1", x = 244, y = 236, w = 55, h = 17},
-		{caption = "SLOT 2", x = 244+60, y = 236, w = 55, h = 17},
-		{caption = "SLOT 3", x = 244+60*2, y = 236, w = 55, h = 17}
+		{caption = "SLOT 1", x = 214, y = 236, w = 55, h = 17},
+		{caption = "SLOT 2", x = 214+60, y = 236, w = 55, h = 17},
+		{caption = "SLOT 3", x = 214+60*2, y = 236, w = 55, h = 17}
 	}
 	
 end
@@ -209,6 +210,9 @@ function Renderer:update(dt)
 		end
 	end
 	
+	if gameState == GameStates.GAMEOVER then
+		self:drawGameOver()
+	end
 	
 	if subState == SubStates.FOUND_LOOT then
 		self:drawFoundLoot()
@@ -226,7 +230,12 @@ function Renderer:update(dt)
 		self:drawImage(320, 170, self.currentSpell.imageid, true)
 	end
 	
-	if gameState == GameStates.EXPLORING or gameState == GameStates.MAIN_MENU or gameState == GameStates.CREDITS then
+	if gameState == GameStates.EXPLORING
+	or gameState == GameStates.MAIN_MENU
+	or gameState == GameStates.CREDITS
+	or gameState == GameStates.ABOUT
+	or gameState == GameStates.GAMEOVER
+	then
 		self:drawPointer()	
 	end
 	
@@ -254,6 +263,16 @@ function Renderer:handleMousePressed(x, y, button)
 	
 	if button == 1 then
 
+		if gameState == GameStates.GAMEOVER then
+			fadeMusicVolume.v = savedsettings.musicVolume
+			assets:stopMusic(level.data.tileset)
+			assets:setMusicVolume("mainmenu", savedsettings.musicVolume)
+			assets:playMusic("mainmenu")
+			gameState = GameStates.MAIN_MENU
+			subState = SubStates.IDLE
+			return
+		end
+		
 		if subState == SubStates.INVENTORY then
 			if self.doShowInventory then
 				self:clickOnInventory(x, y)
@@ -320,6 +339,7 @@ function Renderer:handleMousePressed(x, y, button)
 		end
 		
 		if subState == SubStates.TAVERN then
+			
 			if self.buttons["close-tavern"]:isOver(x, y) then
 				self.buttons["close-tavern"].trigger()
 				return
@@ -330,6 +350,7 @@ function Renderer:handleMousePressed(x, y, button)
 					if intersect(x, y, self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h) then
 						if party:loadGameFromSlot(i) then
 						end
+						renderer.showTavern = false
 						return
 					end
 				end
@@ -338,15 +359,15 @@ function Renderer:handleMousePressed(x, y, button)
 			for i = 1, #self.saveslots do
 				if intersect(x, y, self.saveslots[i].x, self.saveslots[i].y, self.saveslots[i].w, self.saveslots[i].h) then
 					if party:saveGameAtSlot(i) then
-					Timer.script(function(wait)
-						Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad')
-						wait(1.25)
-						renderer.showTavern = false
-						Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad')
-						wait(1.25)
-						renderer:showPopup("Thank you for staying with us. Hope to see you again soon!")
-					end)					
-						
+						subState = SubStates.TWEENING
+						Timer.script(function(wait)
+							Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad')
+							wait(1.25)
+							renderer.showTavern = false
+							Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad')
+							wait(1.25)
+							renderer:showPopup("Thank you for staying with us. Hope to see you again soon!")
+						end)					
 					end
 					return
 				end
@@ -358,24 +379,46 @@ function Renderer:handleMousePressed(x, y, button)
 		
 			if intersect(x, y, 587, 321, 34, 34) then
 				self:showSystemMenu(false)
+				return
 			end	
+			
 			for i = 1, #self.systemmenuitems do
 				if intersect(x, y, 247, self.systemmenuOffsetY + self.systemmenuitemsOffsetY + ((i-1)*25), 150, 20) then
 					self.systemmenuitems[i].trigger()
+					return
 				end
 			end	
+			
+			if intersect(x, y, 300, self.systemmenuOffsetY + 53, 88, 15) then
+				local bw = (x-300)/88
+				if bw > 0.99 then bw = 1.0 end
+				if bw < 0.01 then bw = 0.0 end
+				savedsettings.musicVolume = bw
+				assets:setMusicVolume(level.data.tileset, bw)
+				assets:playSound("click-1")
+				return
+			end
+			
+			if intersect(x, y, 300, self.systemmenuOffsetY + 73, 88, 15) then
+				local bw = (x-300)/88
+				if bw > 0.99 then bw = 1.0 end
+				if bw < 0.01 then bw = 0.0 end
+				savedsettings.sfxVolume = bw
+				assets:playSound("click-1")
+				return
+			end
+			
 			return
 		end
 		
 		if gameState == GameStates.MAIN_MENU and subState == SubStates.IDLE then
 		
-			local canContinue = Game:canContinue()
-			local adjustY = canContinue and -15 or 0
+			local adjustY = settings.canContinue and -15 or 0
 			local index = 0
 			
 			for i = 1, #self.menuitems do
 			
-				if not canContinue and i == 2 then
+				if not settings.canContinue and i == 2 then
 					-- skip this menuitem
 				else
 					if intersect(x, y, self.menuitemsOffsetX, self.menuitemsOffsetY + adjustY + (index*30), 100, 20) then
@@ -641,6 +684,20 @@ function Renderer:drawPointer()
 	
 end
 
+function Renderer:drawGameOver()
+
+	love.graphics.draw(assets.images["gameover"], 0,0)	
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	local text = "Death must be so beautiful.\n\nTo lie in the soft brown earth, with the grasses waving above one's head, and listen to silence.\n\nTo have no yesterday, and no to-morrow.\n\nTo forget time, to forget life, to be at peace."
+
+	self:drawWrappedText(50, 50+10, text, 240, color.white, "left")
+
+	self:drawText(50,255+10, "- Oscar Wilde", {1,1,1,1}, "left")
+
+end
+
 function Renderer:drawFoundLoot()
 
 	love.graphics.draw(assets.images["popup-background-small"], 194, 100)	
@@ -764,7 +821,20 @@ end
 
 function Renderer:drawAbout()
 
-	self:drawText(0, 40, "- ABOUT -", {1,1,1,1}, "center")
+	--self:drawText(0, 40, "- ABOUT -", {1,1,1,1}, "center")
+
+	local text = "I made this game to demonstrate the capabilities of an AtlasMaker tool I created. It is a Unity package and runs inside the editor. With it you can automate then render of 3D-models into 2D sprites and pack them together on one or more image atlases. These atlases can in turn be used in a game to render dungeons using the old methods of back to front drawing. All the in-game graphics in this game has been made using AtlasMaker."
+
+	local offsety = 10
+
+	self:drawWrappedText(30, offsety, text, screen.width-60, {1,1,1,1}, "center")
+
+	self:drawImage(0,offsety+75, "about", true)
+
+	self:drawText(93, offsety + 85, "Image atlas", {1,1,1,1})
+
+	self:drawWrappedText(30, 275, "If you are interested in using AtlasMaker in your own projects you will find it at https://github.com/zooperdan/AtlasMaker-for-2D-Dungeon-Crawlers", screen.width-60, {1,1,1,1}, "center")
+	self:drawWrappedText(30, 315, "If you run into any problems or have some questions or suggestions then find me on the dungeoncrawler.org Discord server or Twitter (@zooperdan).", screen.width-60, {1,1,1,1}, "center")
 
 end
 
@@ -882,24 +952,25 @@ function Renderer:drawTavern()
 	
 	local name = "The Randy Boar Inn"
 	local text = "Welcome adventurer. I am Biok Kai, the innkeeper of this fine establishment.\n\nDo you want to rest your weary bones in one of our comfortable rooms?"
-	local offsetx = 244
+	local offsetx = 85
 	local offsety = 65
+	local textx = 169
 	local portraitid = "npc-monk"
 
-	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227)
+	local width, wrappedtext = assets.fonts["mainmenu"]:getWrap(text, 227+135)
 
 	self.buttons["close-tavern"]:isOver(mx, my)
 
-	love.graphics.draw(assets.images["npc-background-large"], 160, offsety)	
-	love.graphics.draw(assets.images[portraitid], 160+9, offsety+9)	
+	love.graphics.draw(assets.images["npc-background-large"], offsetx, offsety)	
+	love.graphics.draw(assets.images[portraitid], offsetx+9, offsety+9)	
 	love.graphics.setFont(assets.fonts["mainmenu"]);
-	self:drawText(244,offsety + 8, name, {1,1,1,1}, "left")
+	self:drawText(textx,offsety + 8, name, {1,1,1,1}, "left")
 
 	for i = 1, #wrappedtext do
-		self:drawText(244,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
+		self:drawText(textx,offsety + 37 + (i-1)*14, wrappedtext[i], {1,1,1,1}, "left")
 	end
 
-	self:drawText(self.loadslots[1].x-48, self.loadslots[1].y+2, "LOAD", {1,1,1,1})
+	self:drawText(textx, self.loadslots[1].y+2, "LOAD", {1,1,1,1})
 
 	for i = 1, #self.loadslots do
 		if party:isSavegameAtSlot(i) then
@@ -915,7 +986,7 @@ function Renderer:drawTavern()
 		end
 	end
 
-	self:drawText(self.saveslots[1].x-48, self.saveslots[1].y+2, "SAVE", {1,1,1,1})
+	self:drawText(textx, self.saveslots[1].y+2, "SAVE", {1,1,1,1})
 
 	for i = 1, #self.saveslots do
 		if intersect(mx, my, self.saveslots[i].x, self.saveslots[i].y, self.saveslots[i].w, self.saveslots[i].h) then
@@ -992,16 +1063,15 @@ function Renderer:clickOnVendor(x, y)
 		return
 	end		
 
-	local offsetx = 244
+	local offsetx = 168
 
 	for i = 1, #self.currentVendor.stock do
 		local xx = offsetx + (i-1)*34
 		local yy = 188
 		if intersect(x, y, xx, yy, 32, 32) then
-			
 			if party.gold >= self.currentVendor.prices[i] then
 				party.gold = party.gold - self.currentVendor.prices[i]
-				
+				assets:playSound("buy")
 				if self.currentVendor.stock[i] == "healing-potion" then
 					party.healing_potions = party.healing_potions + 1
 				elseif self.currentVendor.stock[i] == "mana-potion" then
@@ -1403,6 +1473,20 @@ function Renderer:drawSystemMenu()
 
 	self:drawText(0, offsety + 15, "System menu", {1,1,1,1}, "center")
 
+	local bw = math.floor(88*savedsettings.musicVolume)
+
+	self:box(300,offsety + 53,bw, 15, settings.sliderColor, true)
+	self:drawText(251, self.systemmenuOffsetY + 53, "Music", {1,1,1,1}, "left")
+	self:box(300,offsety + 53,88, 15,settings.frameColor,false)
+	self:box(300+1,offsety + 53 +1,86, 13, color.black,false)
+
+	local bw = math.floor(88*savedsettings.sfxVolume)
+
+	self:box(300,offsety + 73,bw, 15, settings.sliderColor,true)
+	self:drawText(251, self.systemmenuOffsetY + 73, "SFX", {1,1,1,1}, "left")
+	self:box(300,offsety + 73,88, 15,settings.frameColor,false)
+	self:box(300+1,offsety + 73 +1,86, 13, color.black,false)
+
 	love.graphics.setFont(assets.fonts["main"]);
 
 end
@@ -1416,12 +1500,11 @@ function Renderer:drawMainmenu()
 	love.graphics.setFont(assets.fonts["mainmenu"]);
 
 	local index = 0
-	local canContinue = Game:canContinue()
-	local adjustY = canContinue and -15 or 0
+	local adjustY = settings.canContinue and -15 or 0
 	
 	for i = 1, #self.menuitems do
 	
-		if not canContinue and i == 2 then
+		if not settings.canContinue and i == 2 then
 			-- skip this menuitem
 		else
 
@@ -1812,8 +1895,12 @@ end
 function Renderer:drawBar(x, y, maxval, minval, maxbarsize, bartype)
 
 	local f = maxval/minval
-	local barsize = maxbarsize * f
+	local barsize = math.floor(maxbarsize * f)
 	local quad = nil
+
+	if barsize <= 0 then
+		return
+	end
 
 	local offs = 3
 
@@ -1823,6 +1910,7 @@ function Renderer:drawBar(x, y, maxval, minval, maxbarsize, bartype)
 		img = assets.images["bar-type-2"]
 	end
 
+	
 	-- bar body
 	quad = love.graphics.newQuad(1, 0, 1, 5, img:getWidth(), img:getHeight())
 	love.graphics.draw(img, quad, x + offs, y + offs, 0, barsize, 1)
@@ -2229,16 +2317,19 @@ function Renderer:onCloseButtonClick()
 end
 
 function Renderer:onStartButtonClick()
+	
 	Game:startGame()
+	
 end
 
-function Renderer:onContinueButtonClick()
+function Renderer:onContinueGameButtonClick()
+
+	Game:continueGame()
 
 end
 
 function Renderer:onSettingsButtonClick()
 
---	gameState = GameStates.SETTINGS
 	self:showSystemMenu(true)
 
 end
@@ -2257,16 +2348,16 @@ end
 
 function Renderer:onQuitButtonClick()
 
-	love.event.quit()
+	Game:quitGame()
 
 end
 
 function Renderer:onBackToMenuButtonClick()
 
 	self:showSystemMenu(false)
-
+	fadeMusicVolume.v = savedsettings.musicVolume
 	assets:stopMusic(level.data.tileset)
-	assets.music["mainmenu"]:setVolume(settings.musicVolume)
+	assets:setMusicVolume("mainmenu", savedsettings.musicVolume)
 	assets:playMusic("mainmenu")
 	
 	gameState = GameStates.MAIN_MENU
@@ -2285,6 +2376,13 @@ function Renderer:onCloseTavernButtonClick()
 	subState = SubStates.IDLE
 	renderer.showTavern = false
 	
+end
+
+function Renderer:onCloseSystemMenuButtonClick()
+
+	subState = SubStates.IDLE
+	self.doShowSystemMenu = false
+
 end
 
 function Renderer:onCloseMapButtonClick()

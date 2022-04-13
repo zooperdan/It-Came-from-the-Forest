@@ -193,7 +193,7 @@
 enemyblockers={
 	[1] = {
 		x=10,
-		y=6,
+		y=8,
 		properties={
 			id="dungeon-1_715d0d0f-81f8-96e0-d0e2-2820fbf8da9b",
 		}
@@ -209,15 +209,15 @@ enemyblockers={
 
 enemies={
 	[1] = {
-		x=8,
+		x=7,
 		y=10,
 		properties={
 			antsacs=0,
 			attack=1,
 			defence=1,
 			gold=0,
-			health=5,
-			health_max=5,
+			health=15,
+			health_max=15,
 			id="dungeon-1_9f91f9ca-47f8-c5da-a576-1bc013829680",
 			imageid="rat",
 			loot="",
@@ -232,15 +232,15 @@ enemies={
 		}
 	},
 	[2] = {
-		x=10,
-		y=7,
+		x=9,
+		y=10,
 		properties={
 			antsacs=0,
 			attack=1,
 			defence=1,
 			gold=0,
-			health=5,
-			health_max=5,
+			health=15,
+			health_max=15,
 			id="dungeon-1_71c09fa5-1e6e-8875-5f01-554b8c3cc368",
 			imageid="rat",
 			loot="",
@@ -300,6 +300,16 @@ triggers={
 			vars="",
 		}
 	},
+	[2] = {
+		x=8,
+		y=11,
+		properties={
+			id="dungeon-1_de8274cb-1518-4ac6-7882-9ae8fc6724dc",
+			state=1,
+			text="The rats were guarding this chest? There must be something really important inside it.",
+			vars="",
+		}
+	},
 },
 
 teleporters={
@@ -311,13 +321,30 @@ teleporters={
 			state=1,
 			targetdir=1,
 			targetx=9,
-			targety=6,
+			targety=5,
 		}
 	},
 },
 
 signs={},
-doors={},
+doors={
+	[1] = {
+		x=4,
+		y=3,
+		properties={
+			direction=-1,
+			id="dungeon-1_ab58559d-7f5d-998b-8135-787876ca4e5a",
+			keyid="",
+			state=1,
+			targetarea="forest-1",
+			targetdir=1,
+			targetx=18,
+			targety=19,
+			type=2,
+		}
+	},
+},
+
 staticprops={
 	[1] = {
 		x=5,
@@ -327,6 +354,7 @@ staticprops={
 			direction=2,
 			gold=1,
 			id="dungeon-1_7663c2fa-4722-fc02-5a73-ab94c4b6f065",
+			loot="",
 			name="barrels",
 			state=1,
 			visible=1,
@@ -340,6 +368,7 @@ staticprops={
 			direction=1,
 			gold=0,
 			id="dungeon-1_cea94c6f-7802-a70a-347f-b87ffe0ff523",
+			loot="",
 			name="barrels",
 			state=1,
 			visible=1,

@@ -10,7 +10,7 @@ function Vendors:initialize()
 		imageid = "npc-sorcerer-2",
 		text = "Welcome to my humble alchemy shop.\n\nWould you like to buy some potions?",
 		stock = {"healing-potion", "mana-potion"},
-		prices = {100, 100},
+		prices = {50, 100},
 	}
 	
 	self.vendor["magicshop"] = {
@@ -19,7 +19,7 @@ function Vendors:initialize()
 		imageid = "npc-sorcerer-3",
 		text = "Welcome traveller.\n\nCould I interest you in some spells?",
 		stock = {"lesser-heal", "full-heal", "firebolt", "fireball", "town-portal"},
-		prices = {250, 750, 250, 750, 1000},
+		prices = {150, 450, 150, 450, 750},
 	}	
 	
 end	

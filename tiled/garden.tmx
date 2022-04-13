@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="274">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="276">
  <editorsettings>
   <export target="../src/files/areas/garden.lua" format="custom"/>
  </editorsettings>
@@ -215,9 +215,19 @@
     <property name="text" value=""/>
    </properties>
   </object>
-  <object id="272" gid="11" x="480" y="288" width="32" height="32">
+  <object id="272" gid="11" x="416" y="320" width="32" height="32">
    <properties>
     <property name="id" value="garden_7e562919-03ba-0821-b945-a9d8d84a8e29"/>
+   </properties>
+  </object>
+  <object id="274" gid="11" x="352" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="garden_c1d580b8-f8a6-0011-2733-c6738e2cd252"/>
+   </properties>
+  </object>
+  <object id="275" gid="11" x="608" y="160" width="32" height="32">
+   <properties>
+    <property name="id" value="garden_1d372b5a-7acd-f635-ca61-1030df0a7dc5"/>
    </properties>
   </object>
   <object id="273" gid="5" x="480" y="64" width="32" height="32"/>

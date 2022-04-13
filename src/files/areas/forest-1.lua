@@ -123,7 +123,6 @@
 		[12]={["type"]=1,},
 		[13]={["type"]=1,},
 		[15]={["type"]=2,},
-		[19]={["type"]=1,},
 		[23]={["type"]=1,},
 		[26]={["type"]=1,},
 		[27]={["type"]=1,},
@@ -134,7 +133,6 @@
 		[15]={["type"]=1,},
 		[16]={["type"]=1,},
 		[17]={["type"]=1,},
-		[19]={["type"]=1,},
 		[21]={["type"]=1,},
 		[22]={["type"]=1,},
 		[23]={["type"]=1,},
@@ -288,7 +286,16 @@
 		[27]={["type"]=3,},
 	},
 },
-enemyblockers={},
+enemyblockers={
+	[1] = {
+		x=24,
+		y=15,
+		properties={
+			id="forest-1_196eb28d-cfbd-29e1-f2fc-6b81560474ce",
+		}
+	},
+},
+
 enemies={
 	[1] = {
 		x=20,
@@ -428,6 +435,29 @@ enemies={
 			wanderer=1,
 		}
 	},
+	[7] = {
+		x=25,
+		y=14,
+		properties={
+			antsacs=0,
+			attack=2,
+			defence=1,
+			gold=0,
+			health=10,
+			health_max=10,
+			id="forest-1_5d99ae2a-6a8d-f8de-2274-368d49ef585f",
+			imageid="rat",
+			loot="",
+			name="Rat",
+			sound_attack="rat-attack",
+			sound_die="rat-die",
+			sound_move="rat-move",
+			sound_scream="rat-scream",
+			state=1,
+			type=0,
+			wanderer=0,
+		}
+	},
 },
 
 chests={
@@ -439,7 +469,7 @@ chests={
 			gold=8,
 			id="forest-1_78543826-7d2d-b036-5903-1a59d7106d89",
 			keyid="",
-			loot="compass",
+			loot="helmet-1",
 			riddle="",
 			state=1,
 		}
@@ -461,8 +491,84 @@ chests={
 
 spinners={},
 portals={},
-wells={},
-npcs={},
+wells={
+	[1] = {
+		x=25,
+		y=19,
+		properties={
+			counter=0,
+			counter_max=100,
+			direction=3,
+			id="forest-1_ba7ded6d-91a1-081f-febd-7a7efba07f91",
+			state=1,
+			type=2,
+		}
+	},
+},
+
+npcs={
+	[1] = {
+		x=18,
+		y=25,
+		properties={
+			criterias="",
+			gold=0,
+			id="forest-1_4f0083c7-8c80-832b-9ce1-ec73427d8ee4",
+			imageid="npc-peasant-3",
+			init_vars="",
+			loot="",
+			name="Karo Presi",
+			questdelivertext="",
+			questdonetext="",
+			sound="male-greetings",
+			state=1,
+			text="Listen to the sound of the forest. It's the sound of nightmares!\n\nYou can hear them but you cannot see them, yet you know they are watching your every move. ",
+			vars="",
+			visible=1,
+		}
+	},
+	[2] = {
+		x=31,
+		y=26,
+		properties={
+			criterias="",
+			gold=0,
+			id="forest-1_4d51b506-d5e9-afd3-2ab2-6d4b4e5b9baf",
+			imageid="npc-peasant-4",
+			init_vars="",
+			loot="",
+			name="Berto Lemas",
+			questdelivertext="",
+			questdonetext="",
+			sound="female-greetings",
+			state=1,
+			text="Hi there. I am just practicing being invisible. Want me to show you?\n\nAlright, close your eyes.\n\nBam! There it was!. Invisible. Isn't that just amazing or what?",
+			vars="",
+			visible=1,
+		}
+	},
+	[3] = {
+		x=27,
+		y=13,
+		properties={
+			criterias="forest-1_5d99ae2a-6a8d-f8de-2274-368d49ef585f:state:2",
+			gold=0,
+			id="forest-1_069fe0a9-b6a3-473b-c6e6-4ac02ac2e6b8",
+			imageid="npc-peasant-1",
+			init_vars="",
+			loot="healing-potion:dagger-1",
+			name="Rigio Kalmek",
+			questdelivertext="Yes yes, thank you!\n\nI thought for sure that I was going to die out here in the forest.\n\nHere, take this. You probably need it more than me.",
+			questdonetext="You are a life saver, quite literally!",
+			sound="male-greetings",
+			state=1,
+			text="Help me! I've been trapped in here by a fierce beast!",
+			vars="",
+			visible=1,
+		}
+	},
+},
+
 triggers={
 	[1] = {
 		x=18,
@@ -476,11 +582,11 @@ triggers={
 	},
 	[2] = {
 		x=19,
-		y=16,
+		y=19,
 		properties={
 			id="forest-1_64322d51-ec07-ef84-c231-a540e141a375",
 			state=1,
-			text="This is a single line",
+			text="You approach a towering structure which looks old and abandoned.\n\nPerhaps the previous residents have left something of value behind.\n\nIt's worth investigating.",
 			vars="",
 		}
 	},
@@ -515,6 +621,7 @@ staticprops={
 			direction=2,
 			gold=0,
 			id="forest-1_f640e6bd-6011-de78-6b64-49db9281a737",
+			loot="",
 			name="barrels",
 			state=1,
 			visible=1,
@@ -525,15 +632,30 @@ staticprops={
 		y=25,
 		properties={
 			atlasid="common-props",
-			direction=1,
+			direction=3,
 			gold=3,
 			id="forest-1_d03d4d34-04c0-afef-bb13-d63b7c7a08f7",
+			loot="",
 			name="barrels",
 			state=1,
 			visible=1,
 		}
 	},
 	[3] = {
+		x=22,
+		y=20,
+		properties={
+			atlasid="common-props",
+			direction=1,
+			gold=3,
+			id="forest-1_5ced2888-54bf-cd48-ab30-d20f56bd3581",
+			loot="healing-potion",
+			name="barrels",
+			state=1,
+			visible=1,
+		}
+	},
+	[4] = {
 		x=31,
 		y=24,
 		properties={
@@ -541,6 +663,7 @@ staticprops={
 			direction=3,
 			gold=12,
 			id="forest-1_208881eb-81a3-50d3-0e33-d9c9125376a0",
+			loot="",
 			name="barrels",
 			state=1,
 			visible=1,
@@ -567,7 +690,7 @@ levelexits={
 	},
 },
 
-["partyX"]=20,
-["partyY"]=20,
-["partyDirection"]=3,
+["partyX"]=18,
+["partyY"]=13,
+["partyDirection"]=2,
 }

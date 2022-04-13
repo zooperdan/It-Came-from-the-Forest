@@ -1,26 +1,37 @@
 settings = {
 	quickstart = true,
 	debug = false,
-	startingArea = "garden",
-	musicVolume = 0.0,
-	sfxVolume = 1,
+	startingArea = "city",
 	inventoryX = 119,
 	inventoryY = 50,
 	inventorySlotsStartX = 251,
 	inventorySlotsStartY = 57,
 	prices = {
-		antsacs = 20,
+		antsacs = 30,
 	},
-	frameColor = {105/255,102/255,130/255,1}
+	frameColor = {105/255,102/255,130/255,1},
+	canContinue = nil,
+	sliderColor = {0.7,0.7,0.7,1},
+}
+
+savedsettings = {
+	musicVolume = 0.75,
+	sfxVolume = 1,
+	lastSavegameSlot = -1,
+	fullScreen = false
 }
 
 isFading = false
 fadeColor = {0,0,0}
-fadeMusicVolume = {v = settings.musicVolume}
+fadeMusicVolume = {v = savedsettings.musicVolume}
 inventoryDragSource = {}
 spawnTarget = {}
-
 loadingSavedFile = false
+
+color = {
+	black = {0,0,0,1},
+	white = {1,1,1,1},
+}
 
 GameStates = {
 	INIT = 0,
@@ -35,7 +46,10 @@ GameStates = {
 	CREDITS = 9,
 	ABOUT = 10,
 	SETTINGS = 11,
-	QUITTING = 12
+	QUITTING = 12,
+	GAMEOVER = 13,
+	VICTORY = 14,
+	
 }
 
 SubStates = {
@@ -49,7 +63,9 @@ SubStates = {
 	VENDOR_ANTSACS = 7,
 	SYSTEM_MENU = 8,
 	VENDOR = 9,
-	TAVERN = 10
+	TAVERN = 10,
+	DISK_IO = 11,
+	TWEENING = 12
 }
 
 gameState = GameStates.LOADING_LEVEL

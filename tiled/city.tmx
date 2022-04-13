@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="318">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="319">
  <editorsettings>
   <export target="../src/files/areas/city.lua" format="custom"/>
  </editorsettings>
@@ -221,11 +221,12 @@
     <property name="direction" type="int" value="-1"/>
     <property name="id" value="city_dae20e19-6cdc-9db1-91f9-5fe2302de736"/>
     <property name="keyid" value=""/>
-    <property name="state" type="int" value="2"/>
+    <property name="state" type="int" value="1"/>
     <property name="targetarea" value="forest-1"/>
     <property name="targetdir" type="int" value="3"/>
-    <property name="targetx" type="int" value="14"/>
-    <property name="targety" type="int" value="4"/>
+    <property name="targetx" type="int" value="30"/>
+    <property name="targety" type="int" value="15"/>
+    <property name="type" type="int" value="2"/>
    </properties>
   </object>
   <object id="243" gid="22" x="800" y="1024" width="32" height="32">
@@ -251,7 +252,7 @@
    <properties>
     <property name="gold" type="int" value="10"/>
     <property name="id" value="city_76ef7cfb-af43-78a7-e869-fec96294a4a6"/>
-    <property name="keyid" value="key-1"/>
+    <property name="keyid" value=""/>
     <property name="loot" value="gloves-1:ring-1"/>
     <property name="state" type="int" value="1"/>
    </properties>
@@ -296,13 +297,13 @@
   </object>
   <object id="174" gid="14" x="960" y="480" width="32" height="32">
    <properties>
-    <property name="criterias" value="city_64d0b92a-2b2b-2f09-a745-0a1c721b5f3c:state:2"/>
-    <property name="gold" type="int" value="20"/>
+    <property name="criterias" value="homebakedpie_quest:state:1"/>
+    <property name="gold" type="int" value="0"/>
     <property name="id" value="city_eb1bdfcf-a8cb-b5cc-63ce-701b38890881"/>
     <property name="imageid" value="npc-guard"/>
-    <property name="loot" value="ring-3:sword-2"/>
+    <property name="loot" value=""/>
     <property name="name" value="City guard"/>
-    <property name="questdelivertext" value="Alright then. I guess we can open the gate for you now."/>
+    <property name="questdelivertext" value="Oh my! Lyana's homebaked pie! I could smell that long before you rounded the corner.\n\nSo you want to leave the city, huh? Alright then. I will open the gate for you. Just don't come complaining to me when you lose an arm or a leg...\n\nLyana want to meet me in the gardens, you say? Noon tomorrow? Oh my, that is the best news I heard the whole week."/>
     <property name="questdonetext" value="Be careful out in the forest.\n\nI've seen many brave adventurers pass through that gate never to return.\n\nKeep your head down, move slowly and be always vigilant.\n\n"/>
     <property name="sound" value="npc-1"/>
     <property name="text" value="This gate is closed. King's orders!"/>
@@ -324,7 +325,7 @@
     <property name="imageid" value="npc-guard"/>
     <property name="name" value="City guard"/>
     <property name="sound" value="npc-1"/>
-    <property name="text" value="Hm. You look fit and all, but are you well prepared for what's waiting in the deep forest outside the city?\n\nI heard there is a sorcerer living in the northeast who peddle with the magic arts.\n\nIt would probably be wise to pay him a visit."/>
+    <property name="text" value="Hm. You look fit and all, but are you well prepared for what's waiting in the deep forest outside the city?\n\nI heard there is a sorcerer living in the northeast who dabble in the magic arts.\n\nIt would probably be wise to pay him a visit."/>
    </properties>
   </object>
   <object id="162" gid="14" x="64" y="544" width="32" height="32">
@@ -444,20 +445,35 @@
     <property name="imageid" value="npc-peasant-1"/>
     <property name="name" value="Yahnah Bemmo"/>
     <property name="sound" value="female-greetings"/>
-    <property name="text" value="Are you here to save us from these awful creatures?\n\nI hope so!\n\nIt has been what seems like an eternity since I have been outside the city walls."/>
+    <property name="text" value="Are you here to save us from these awful creatures?\n\nI hope so!\n\nIt has been what seems like an eternity since I have been outside the city walls.\n\nI miss being able to gather herbs and mushrooms."/>
+   </properties>
+  </object>
+  <object id="318" gid="14" x="608" y="64" width="32" height="32">
+   <properties>
+    <property name="criterias" value="city_6974755c-a6c3-b9b0-6499-e0919dff6219:state:1"/>
+    <property name="id" value="city_566c9af0-72f9-6843-a2fb-a44fff318c21"/>
+    <property name="imageid" value="npc-peasant-1"/>
+    <property name="init_vars" value="homebakedpie_quest:state:1"/>
+    <property name="name" value="Lyana Terstap"/>
+    <property name="questdelivertext" value="Thank you for delivering my message to him. I've been eyeing him up for a while now and I think the time is right. I just hope he feels the same."/>
+    <property name="questdonetext" value="Wish me luck tomorrow."/>
+    <property name="sound" value="female-greetings"/>
+    <property name="text" value="Hey there. You seem like a fella who are up for some adventuring, am I right?\n\nYes, I thought as much. Well, as it happens I know a guard who can let you through the gate. Just give him this homebaked pie, his favorite, and he'll gladly open the gate for you.\n\nThe only thing I want in return is that you tell him to meet me in the gardens at noon tomorrow."/>
+    <property name="vars" value=""/>
    </properties>
   </object>
   <object id="184" gid="14" x="352" y="96" width="32" height="32">
    <properties>
-    <property name="criterias" value="city_13a6cbf2-9ad5-137d-f031-bab894b456b2:state:2|city_f8625039-f0ad-9604-2cfe-2dc232ad0a82:state:2"/>
+    <property name="criterias" value="city_f8625039-f0ad-9604-2cfe-2dc232ad0a82:state:2|city_13a6cbf2-9ad5-137d-f031-bab894b456b2:state:2"/>
     <property name="id" value="city_77cd3bbe-64da-259e-af22-c8bc8934b44f"/>
     <property name="imageid" value="npc-peasant-3"/>
+    <property name="init_vars" value="city_0f41b66e-18e7-fbd6-868d-10f457baecca:state:1"/>
     <property name="name" value="Brendudd Eagleroot"/>
     <property name="questdelivertext" value="Oh, rats you say? You killed them all yes? Excellent!\n\nI have a chest nearby with some stuff in it. Go have a look. You can have whatever is inside it."/>
     <property name="questdonetext" value="Hello again. No more scary noises thanks to you!"/>
     <property name="sound" value="male-greetings"/>
     <property name="text" value="Psst! I heard scary noises coming from the west. I am too afraid to go there and check it out.\n\nCould you take a look for me?"/>
-    <property name="vars" value="city_0f41b66e-18e7-fbd6-868d-10f457baecca:state:1"/>
+    <property name="vars" value="city_13a6cbf2-9ad5-137d-f031-bab894b456b2:state:2|city_f8625039-f0ad-9604-2cfe-2dc232ad0a82:state:2"/>
    </properties>
   </object>
   <object id="183" gid="14" x="576" y="576" width="32" height="32">
@@ -648,7 +664,7 @@
     <property name="id" value="city_3cf2d339-928e-e466-96c1-06758955b209"/>
    </properties>
   </object>
-  <object id="242" gid="6" x="288" y="96" width="32" height="32"/>
+  <object id="242" gid="6" x="448" y="704" width="32" height="32"/>
   <object id="246" gid="36" x="640" y="544" width="32" height="32">
    <properties>
     <property name="gold" type="int" value="2"/>
@@ -670,6 +686,7 @@
   <object id="249" gid="36" x="192" y="224" width="32" height="32">
    <properties>
     <property name="id" value="city_a3804602-1ef9-f68b-b771-1500b24937f4"/>
+    <property name="loot" value="spellbook-1"/>
    </properties>
   </object>
   <object id="250" gid="36" x="512" y="640" width="32" height="32">
@@ -738,6 +755,7 @@
     <property name="direction" type="int" value="1"/>
     <property name="gold" type="int" value="3"/>
     <property name="id" value="city_3800bdb0-b278-ff65-7f4f-7ad0621c8c23"/>
+    <property name="loot" value="mana-potion"/>
    </properties>
   </object>
   <object id="262" gid="8" x="576" y="864" width="32" height="32">
@@ -910,11 +928,6 @@
     <property name="id" value="city_e52c3365-260d-877f-c8f3-7c27e43bd87a"/>
    </properties>
   </object>
-  <object id="296" gid="23" x="0" y="256" width="32" height="32">
-   <properties>
-    <property name="id" value="city_387e3644-1066-6fd9-237d-c7fda0f1582b"/>
-   </properties>
-  </object>
   <object id="297" gid="35" x="800" y="960" width="32" height="32">
    <properties>
     <property name="id" value="city_296af119-228e-8cf1-00f7-4ef999486ffd"/>
@@ -929,6 +942,7 @@
    <properties>
     <property name="gold" type="int" value="50"/>
     <property name="id" value="city_46681f12-2dac-62f4-950c-6c1e3968ffb8"/>
+    <property name="loot" value="healing-potion"/>
    </properties>
   </object>
   <object id="300" gid="35" x="896" y="832" width="32" height="32">
@@ -954,27 +968,27 @@
   <object id="306" gid="16" x="320" y="480" width="32" height="32">
    <properties>
     <property name="id" value="city_8a1fbdd2-7d69-9e46-5a34-ef4c8b79b092"/>
-    <property name="text" value="Aventurers visiting the city for the first time are advised to first drop by The Randy Boar Inn.\n\nJust walk straight ahead to the marketplace and you'll find it."/>
+    <property name="text" value="There is a sign here that says:\n\n\&quot;Aventurers visiting the city for the first time are advised to first drop by The Randy Boar Inn.\n\nJust walk straight ahead to the marketplace and you'll find it.\&quot;"/>
    </properties>
   </object>
   <object id="307" gid="11" x="352" y="320" width="32" height="32">
    <properties>
-    <property name="health" type="int" value="5"/>
-    <property name="health_max" type="int" value="5"/>
+    <property name="health" type="int" value="15"/>
+    <property name="health_max" type="int" value="15"/>
     <property name="id" value="city_c1069e4d-6310-74aa-6711-1b57636d9080"/>
    </properties>
   </object>
   <object id="308" gid="11" x="224" y="416" width="32" height="32">
    <properties>
-    <property name="health" type="int" value="5"/>
-    <property name="health_max" type="int" value="5"/>
+    <property name="health" type="int" value="15"/>
+    <property name="health_max" type="int" value="15"/>
     <property name="id" value="city_9a9aaac8-77b5-67be-8af5-3ab5fbb99bf8"/>
    </properties>
   </object>
   <object id="309" gid="11" x="256" y="224" width="32" height="32">
    <properties>
-    <property name="health" type="int" value="5"/>
-    <property name="health_max" type="int" value="5"/>
+    <property name="health" type="int" value="15"/>
+    <property name="health_max" type="int" value="15"/>
     <property name="id" value="city_0a5a315e-b90f-05ac-a024-5e59c6e53664"/>
    </properties>
   </object>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="157">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="213">
  <editorsettings>
   <export target="../src/files/areas/forest-2.lua" format="custom"/>
  </editorsettings>
@@ -11,57 +11,47 @@
  <tileset firstgid="1" source="MainTiles.tsx"/>
  <layer id="1" name="Walls" width="32" height="32">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,0,0,0,1,1,1,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,0,0,1,1,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,1,0,0,1,1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,2,1,1,1,1,0,2,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,1,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,1,1,0,0,0,1,1,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,0,0,1,1,0,1,1,0,0,0,2,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,1,1,1,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,2,0,0,0,0,1,0,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1,1,0,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,1,1,1,1,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,0,0,1,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,0,0,0,2,0,0,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+0,1,0,0,0,0,1,1,1,0,0,0,1,0,0,1,0,1,1,0,0,0,1,1,0,0,0,0,0,1,1,1,
+0,1,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,1,1,0,1,1,1,0,0,0,0,0,0,0,1,1,
+0,1,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,
+0,1,0,1,1,0,0,0,0,1,1,0,0,1,0,1,1,0,0,1,0,1,1,0,0,0,0,0,0,0,1,1,
+0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,1,1,
+0,0,0,0,1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,1,1,0,1,1,1,0,1,1,1,0,1,
+0,1,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,1,1,0,1,1,0,0,1,
+1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,0,0,0,0,0,1,0,1,
+0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,1,0,1,1,0,1,1,0,1,0,1,
+0,0,0,0,0,1,1,1,0,0,0,1,1,0,1,1,1,1,0,1,1,1,1,0,0,0,1,0,0,0,1,1,
+0,1,0,0,1,1,0,0,0,1,0,1,1,0,0,1,1,1,1,1,0,0,0,0,1,1,1,0,1,1,0,1,
+0,0,0,0,1,0,0,1,1,1,0,0,1,1,0,1,1,1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,
+0,1,1,2,1,1,1,1,0,2,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,1,0,1,1,
+0,0,0,0,0,0,1,0,0,1,1,1,1,0,1,1,1,0,0,0,0,0,1,1,1,0,0,1,0,0,1,1,
+0,1,1,1,1,0,0,0,1,1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,
+0,1,0,0,1,1,0,1,1,0,0,0,2,0,0,1,1,1,0,0,0,1,0,1,1,0,0,1,1,1,0,1,
+0,1,1,0,0,1,1,1,0,0,0,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,
+0,0,2,0,0,0,0,1,0,1,1,1,0,0,0,1,0,0,0,1,1,1,0,0,0,1,1,1,1,0,0,1,
+0,0,1,1,0,0,1,1,1,1,0,0,0,0,1,1,0,1,0,0,0,1,1,0,1,1,0,0,1,1,0,1,
+0,0,0,1,1,1,1,0,0,0,0,0,1,0,1,1,1,1,1,1,0,0,1,0,0,0,0,1,0,1,1,1,
+0,0,0,0,1,1,0,0,1,1,0,1,1,0,0,1,0,0,0,1,1,0,1,1,0,1,0,0,0,0,0,1,
+0,1,0,0,0,2,0,0,0,1,0,0,1,1,0,0,0,0,0,1,1,0,1,0,0,1,1,1,0,0,1,1,
+0,1,1,0,1,1,1,0,1,1,1,1,0,1,0,1,0,0,1,1,0,0,1,0,1,1,0,1,1,0,0,1,
+0,1,1,0,0,1,1,0,0,1,0,0,0,0,0,1,1,1,1,0,0,1,1,0,0,0,0,0,1,1,0,1,
+0,0,1,1,0,1,0,1,1,0,1,1,1,1,0,0,0,1,0,0,1,1,0,1,0,1,1,0,0,0,0,1,
+0,0,0,1,1,1,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,1,1,1,
+0,1,0,0,0,0,1,1,0,1,1,0,1,0,1,1,1,0,0,1,1,1,1,0,0,0,0,0,1,1,0,1,
+0,0,1,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,1,0,0,1,1,0,0,1,1,1,0,0,1,
+0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,1,0,0,0,1,1,
+0,0,1,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,0,1,
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
  <layer id="5" name="BoundaryWalls" width="32" height="32">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -72,17 +62,100 @@
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="Object Layer 1">
+ <objectgroup id="2" name="Chests">
+  <object id="152" gid="17" x="256" y="608" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="35"/>
+    <property name="id" value="dark_forest_1_c99bd6ae-9c63-99f5-a95f-5c1899601cc0"/>
+   </properties>
+  </object>
+  <object id="170" gid="17" x="160" y="320" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="40"/>
+    <property name="id" value="forest-2_7d437a92-a86f-2932-76b1-120affebf134"/>
+    <property name="loot" value="healing-potion:belt-1"/>
+   </properties>
+  </object>
+  <object id="171" gid="17" x="640" y="256" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="5"/>
+    <property name="id" value="forest-2_c61c1efe-d40e-d7c6-aedf-cf8d7bb8ea62"/>
+   </properties>
+  </object>
+  <object id="172" gid="17" x="864" y="64" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="50"/>
+    <property name="id" value="forest-2_60a13477-81d4-9e89-46c1-dc4cd909f0a5"/>
+   </properties>
+  </object>
+  <object id="173" gid="17" x="800" y="64" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="50"/>
+    <property name="id" value="forest-2_b400dcde-979b-ad6e-ecee-501cadcd69d8"/>
+    <property name="loot" value="sword-4"/>
+   </properties>
+  </object>
+  <object id="174" gid="17" x="960" y="544" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="25"/>
+    <property name="id" value="forest-2_c073d295-829a-4bb4-68fe-491b9665c5b6"/>
+   </properties>
+  </object>
+  <object id="176" gid="17" x="32" y="992" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="25"/>
+    <property name="id" value="forest-2_98a2f055-65f4-7bd5-e668-390cd31cb450"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="10" name="Other">
   <object id="34" gid="4" x="32" y="480" width="32" height="32"/>
+  <object id="148" gid="34" x="32" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_0132192f-d4cb-9120-2080-ae014122661d"/>
+   </properties>
+  </object>
+  <object id="154" gid="34" x="96" y="544" width="32" height="32">
+   <properties>
+    <property name="id" value="dark_forest_1_d00f4ae7-385a-b9f2-6707-61ddf49a2a60"/>
+   </properties>
+  </object>
+  <object id="166" gid="20" x="640" y="160" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_7ea64cbe-f63f-0b40-8067-eb691cc92128"/>
+   </properties>
+  </object>
+  <object id="168" gid="20" x="256" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_6fead681-6d6f-00b7-7cd7-1e6c834ccb82"/>
+   </properties>
+  </object>
+  <object id="212" gid="34" x="832" y="256" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_1586e2bc-1bad-5427-90ee-829a8c04c09d"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="Doors">
   <object id="107" gid="22" x="0" y="480" width="32" height="32">
    <properties>
     <property name="id" value="dark_forest_1_75e341b5-5f43-cd1d-0acf-c64eb1917fd5"/>
@@ -90,6 +163,219 @@
     <property name="targetdir" type="int" value="3"/>
     <property name="targetx" type="int" value="30"/>
     <property name="targety" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="159" gid="24" x="672" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_007be87c-be2c-00b8-038a-12015135ea4d"/>
+   </properties>
+  </object>
+  <object id="160" gid="24" x="544" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_c264adeb-77c4-8c7f-e1e4-8633cd97dbba"/>
+   </properties>
+  </object>
+  <object id="161" gid="24" x="672" y="992" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_847ff778-c69b-c9a2-042c-3d638386f63a"/>
+   </properties>
+  </object>
+  <object id="162" gid="24" x="960" y="896" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_a58da8e4-3353-a442-3e18-b0689be36a94"/>
+   </properties>
+  </object>
+  <object id="163" gid="24" x="32" y="832" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_a167c84e-a181-f3e2-ea82-63420d9210ba"/>
+   </properties>
+  </object>
+  <object id="164" gid="24" x="512" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_e74ef929-e94c-00d5-d8e7-8369a3babee0"/>
+   </properties>
+  </object>
+  <object id="165" gid="24" x="800" y="416" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_0e96bc0a-cec0-6e77-e3a3-18518af604c2"/>
+   </properties>
+  </object>
+  <object id="169" gid="24" x="512" y="640" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_7f75fa99-67df-83f8-d722-c4f74a7cc025"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Barrels">
+  <object id="177" gid="36" x="160" y="896" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_04ec6049-45a4-e6ed-47ac-0e1b1fb41eed"/>
+   </properties>
+  </object>
+  <object id="178" gid="36" x="640" y="992" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="gold" type="int" value="10"/>
+    <property name="id" value="forest-2_ff9175be-b6ce-cf65-097c-fa65cff17420"/>
+   </properties>
+  </object>
+  <object id="179" gid="36" x="896" y="672" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_a14b5eda-cf70-518d-bffe-6f2b4e5835e5"/>
+   </properties>
+  </object>
+  <object id="180" gid="36" x="544" y="480" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="forest-2_39343952-7ebb-fa2b-4f34-12f3350f640c"/>
+   </properties>
+  </object>
+  <object id="181" gid="36" x="320" y="512" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_d9b6a520-4635-3679-6c8e-8c62e52cbcbf"/>
+   </properties>
+  </object>
+  <object id="182" gid="36" x="416" y="128" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_5bbfc5e2-1d4b-52a2-ee58-6e513e5fc462"/>
+   </properties>
+  </object>
+  <object id="183" gid="36" x="768" y="192" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="forest-2_e4262ba8-7e5e-17fb-ba6d-91c865a3dd5d"/>
+   </properties>
+  </object>
+  <object id="184" gid="36" x="896" y="192" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_7650466e-c888-6ab7-b557-476f7602f107"/>
+   </properties>
+  </object>
+  <object id="185" gid="36" x="32" y="416" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="forest-2_eb94808a-a891-c7c8-1a6a-eb0e9d968c75"/>
+   </properties>
+  </object>
+  <object id="186" gid="36" x="128" y="576" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="forest-2_a943c465-9836-5a0d-485d-647db7e7609b"/>
+   </properties>
+  </object>
+  <object id="187" gid="36" x="32" y="704" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_f6eded96-1751-c819-9a44-daa62430d035"/>
+   </properties>
+  </object>
+  <object id="188" gid="36" x="320" y="800" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_cc76c74f-cf0f-2361-a15e-d517d1a0e571"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Props"/>
+ <objectgroup id="6" name="Fire ants">
+  <object id="189" gid="9" x="768" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_ad33f084-dfa6-5675-940b-a4bda04cdabc"/>
+   </properties>
+  </object>
+  <object id="190" gid="9" x="832" y="160" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_b4640122-fb88-fcb6-e760-b14eb2f98e2c"/>
+   </properties>
+  </object>
+  <object id="191" gid="9" x="896" y="96" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_20fcae6e-7283-f69f-91ba-8acad5984982"/>
+   </properties>
+  </object>
+  <object id="192" gid="9" x="928" y="576" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_09230c3f-1adc-0b22-c1f3-eb1231394606"/>
+   </properties>
+  </object>
+  <object id="193" gid="9" x="736" y="864" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_e7a0a37b-7194-c475-7a94-605e630b4f19"/>
+   </properties>
+  </object>
+  <object id="194" gid="9" x="928" y="832" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_5c4baa77-2745-b0af-803c-e0f67456dccf"/>
+   </properties>
+  </object>
+  <object id="195" gid="9" x="928" y="960" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_b0778c35-4a11-ba50-3ba4-59b4fe66c186"/>
+   </properties>
+  </object>
+  <object id="196" gid="9" x="352" y="992" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_8f8c25e9-bde5-bbfc-3825-e81aad7377db"/>
+   </properties>
+  </object>
+  <object id="197" gid="9" x="224" y="768" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_d0194f71-0c99-a38b-0f5f-978f578999ec"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="Young fire ants">
+  <object id="198" gid="8" x="96" y="928" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_18a7e26f-f0ce-c229-b4f0-ad4f0ff89e7e"/>
+   </properties>
+  </object>
+  <object id="199" gid="8" x="576" y="864" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_aba082da-5249-430b-712e-ca2247bc566b"/>
+   </properties>
+  </object>
+  <object id="200" gid="8" x="576" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_a276d235-bbad-ec32-10f8-2b4385e71b86"/>
+   </properties>
+  </object>
+  <object id="201" gid="8" x="640" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_dcad5251-56ad-a483-3195-c910af069d13"/>
+   </properties>
+  </object>
+  <object id="202" gid="8" x="864" y="416" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_5cc3c0e2-717b-60b9-3bcf-f734dcff9e87"/>
+   </properties>
+  </object>
+  <object id="203" gid="8" x="800" y="672" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_2ffbf787-e616-0fcf-9e97-fc918e309418"/>
+   </properties>
+  </object>
+  <object id="204" gid="8" x="256" y="128" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_d411d360-8689-bef7-c8a1-851844b5dfe7"/>
+   </properties>
+  </object>
+  <object id="205" gid="8" x="32" y="192" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_bb4f4f9c-d949-0c91-4d6a-fef04a89f81c"/>
+   </properties>
+  </object>
+  <object id="206" gid="8" x="128" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_a503c1e5-e3e7-8b02-bd11-9e2e9713dd4f"/>
+   </properties>
+  </object>
+  <object id="207" gid="8" x="544" y="160" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_81b7c49c-e551-028b-a981-75f98233416a"/>
+   </properties>
+  </object>
+  <object id="208" gid="8" x="736" y="288" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_3f71302f-2e92-452a-2ec5-e63126e23693"/>
    </properties>
   </object>
   <object id="117" gid="8" x="64" y="736" width="32" height="32">
@@ -132,21 +418,6 @@
    <properties>
     <property name="id" value="dark_forest_1_67eb4735-2b81-d4eb-1540-e57e382e7fc1"/>
     <property name="wanderer" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="148" gid="34" x="32" y="480" width="32" height="32">
-   <properties>
-    <property name="id" value="dark_forest_1_0132192f-d4cb-9120-2080-ae014122661d"/>
-   </properties>
-  </object>
-  <object id="152" gid="17" x="256" y="608" width="32" height="32">
-   <properties>
-    <property name="id" value="dark_forest_1_c99bd6ae-9c63-99f5-a95f-5c1899601cc0"/>
-   </properties>
-  </object>
-  <object id="154" gid="34" x="96" y="544" width="32" height="32">
-   <properties>
-    <property name="id" value="dark_forest_1_d00f4ae7-385a-b9f2-6707-61ddf49a2a60"/>
    </properties>
   </object>
  </objectgroup>

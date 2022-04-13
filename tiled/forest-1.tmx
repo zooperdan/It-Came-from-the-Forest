@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="172">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="180">
  <editorsettings>
   <export target="../src/files/areas/forest-1.lua" format="custom"/>
  </editorsettings>
@@ -29,7 +29,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,1,1,1,0,0,1,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,1,0,0,0,1,1,0,1,1,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1,0,0,1,0,1,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,0,0,0,0,1,0,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,1,1,1,1,1,0,0,0,
@@ -82,7 +82,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="34" gid="6" x="608" y="640" width="32" height="32"/>
+  <object id="34" gid="5" x="544" y="416" width="32" height="32"/>
   <object id="107" gid="22" x="992" y="512" width="32" height="32">
    <properties>
     <property name="direction" type="int" value="1"/>
@@ -135,17 +135,17 @@
     <property name="text" value="You have just entered the outskirts of Ariken, the largest city in this region."/>
    </properties>
   </object>
-  <object id="163" gid="16" x="576" y="512" width="32" height="32">
+  <object id="163" gid="16" x="576" y="608" width="32" height="32">
    <properties>
     <property name="id" value="forest-1_64322d51-ec07-ef84-c231-a540e141a375"/>
-    <property name="text" value="This is a single line"/>
+    <property name="text" value="You approach a towering structure which looks old and abandoned.\n\nPerhaps the previous residents have left something of value behind.\n\nIt's worth investigating."/>
    </properties>
   </object>
   <object id="164" gid="17" x="960" y="608" width="32" height="32">
    <properties>
     <property name="gold" type="int" value="8"/>
     <property name="id" value="forest-1_78543826-7d2d-b036-5903-1a59d7106d89"/>
-    <property name="loot" value="compass"/>
+    <property name="loot" value="helmet-1"/>
    </properties>
   </object>
   <object id="165" gid="17" x="800" y="416" width="32" height="32">
@@ -161,9 +161,17 @@
   </object>
   <object id="167" gid="36" x="832" y="800" width="32" height="32">
    <properties>
-    <property name="direction" type="int" value="1"/>
+    <property name="direction" type="int" value="3"/>
     <property name="gold" type="int" value="3"/>
     <property name="id" value="forest-1_d03d4d34-04c0-afef-bb13-d63b7c7a08f7"/>
+   </properties>
+  </object>
+  <object id="173" gid="36" x="672" y="640" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="gold" type="int" value="3"/>
+    <property name="id" value="forest-1_5ced2888-54bf-cd48-ab30-d20f56bd3581"/>
+    <property name="loot" value="healing-potion"/>
    </properties>
   </object>
   <object id="168" gid="36" x="960" y="768" width="32" height="32">
@@ -183,6 +191,55 @@
     <property name="targetdir" type="int" value="2"/>
     <property name="targetx" type="int" value="3"/>
     <property name="targety" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="174" gid="14" x="544" y="800" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_4f0083c7-8c80-832b-9ce1-ec73427d8ee4"/>
+    <property name="imageid" value="npc-peasant-3"/>
+    <property name="name" value="Karo Presi"/>
+    <property name="sound" value="male-greetings"/>
+    <property name="text" value="Listen to the sound of the forest. It's the sound of nightmares!\n\nYou can hear them but you cannot see them, yet you know they are watching your every move. "/>
+   </properties>
+  </object>
+  <object id="175" gid="14" x="960" y="832" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_4d51b506-d5e9-afd3-2ab2-6d4b4e5b9baf"/>
+    <property name="imageid" value="npc-peasant-4"/>
+    <property name="name" value="Berto Lemas"/>
+    <property name="sound" value="female-greetings"/>
+    <property name="text" value="Hi there. I am just practicing being invisible. Want me to show you?\n\nAlright, close your eyes.\n\nBam! There it was!. Invisible. Isn't that just amazing or what?"/>
+   </properties>
+  </object>
+  <object id="176" gid="14" x="832" y="416" width="32" height="32">
+   <properties>
+    <property name="criterias" value="forest-1_5d99ae2a-6a8d-f8de-2274-368d49ef585f:state:2"/>
+    <property name="id" value="forest-1_069fe0a9-b6a3-473b-c6e6-4ac02ac2e6b8"/>
+    <property name="imageid" value="npc-peasant-1"/>
+    <property name="loot" value="healing-potion:dagger-1"/>
+    <property name="name" value="Rigio Kalmek"/>
+    <property name="questdelivertext" value="Yes yes, thank you!\n\nI thought for sure that I was going to die out here in the forest.\n\nHere, take this. You probably need it more than me."/>
+    <property name="questdonetext" value="You are a life saver, quite literally!"/>
+    <property name="sound" value="male-greetings"/>
+    <property name="text" value="Help me! I've been trapped in here by a fierce beast!"/>
+   </properties>
+  </object>
+  <object id="177" gid="11" x="768" y="448" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="2"/>
+    <property name="health" type="int" value="10"/>
+    <property name="health_max" type="int" value="10"/>
+    <property name="id" value="forest-1_5d99ae2a-6a8d-f8de-2274-368d49ef585f"/>
+   </properties>
+  </object>
+  <object id="178" gid="34" x="736" y="480" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_196eb28d-cfbd-29e1-f2fc-6b81560474ce"/>
+   </properties>
+  </object>
+  <object id="179" gid="20" x="768" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-1_ba7ded6d-91a1-081f-febd-7a7efba07f91"/>
    </properties>
   </object>
  </objectgroup>

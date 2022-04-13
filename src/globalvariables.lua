@@ -13,7 +13,7 @@ function GlobalVariables:add(id, property, value)
 		self.list[id][property] = value
 	end
 
-	--print(id.." : " .. property .. " : " .. value)
+	print(id.." : " .. property .. " : " .. value)
 
 end
 

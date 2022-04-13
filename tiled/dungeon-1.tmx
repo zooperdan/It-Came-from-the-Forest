@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="181">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="183">
  <editorsettings>
   <export target="../src/files/areas/dungeon-1.lua" format="custom"/>
  </editorsettings>
@@ -102,7 +102,7 @@
     <property name="id" value="dungeon-1_e38c0923-e9dd-c219-dac2-0ff8e85cfed2"/>
     <property name="targetdir" type="int" value="1"/>
     <property name="targetx" type="int" value="9"/>
-    <property name="targety" type="int" value="6"/>
+    <property name="targety" type="int" value="5"/>
    </properties>
   </object>
   <object id="173" gid="16" x="96" y="160" width="32" height="32">
@@ -111,26 +111,32 @@
     <property name="text" value="Some walls are actually an illusion and you can walk right through them."/>
    </properties>
   </object>
+  <object id="182" gid="16" x="224" y="352" width="32" height="32">
+   <properties>
+    <property name="id" value="dungeon-1_de8274cb-1518-4ac6-7882-9ae8fc6724dc"/>
+    <property name="text" value="The rats were guarding this chest? There must be something really important inside it."/>
+   </properties>
+  </object>
   <object id="174" gid="17" x="320" y="192" width="32" height="32">
    <properties>
     <property name="gold" type="int" value="3"/>
     <property name="id" value="dungeon-1_6f611782-d262-f96e-d4e1-550abb92505c"/>
    </properties>
   </object>
-  <object id="175" gid="11" x="224" y="320" width="32" height="32">
+  <object id="175" gid="11" x="192" y="320" width="32" height="32">
    <properties>
     <property name="attack" type="int" value="1"/>
-    <property name="health" type="int" value="5"/>
-    <property name="health_max" type="int" value="5"/>
+    <property name="health" type="int" value="15"/>
+    <property name="health_max" type="int" value="15"/>
     <property name="id" value="dungeon-1_9f91f9ca-47f8-c5da-a576-1bc013829680"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
-  <object id="178" gid="11" x="288" y="224" width="32" height="32">
+  <object id="178" gid="11" x="256" y="320" width="32" height="32">
    <properties>
     <property name="attack" type="int" value="1"/>
-    <property name="health" type="int" value="5"/>
-    <property name="health_max" type="int" value="5"/>
+    <property name="health" type="int" value="15"/>
+    <property name="health_max" type="int" value="15"/>
     <property name="id" value="dungeon-1_71c09fa5-1e6e-8875-5f01-554b8c3cc368"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
@@ -141,7 +147,7 @@
     <property name="id" value="dungeon-1_cea94c6f-7802-a70a-347f-b87ffe0ff523"/>
    </properties>
   </object>
-  <object id="179" gid="34" x="288" y="192" width="32" height="32">
+  <object id="179" gid="34" x="288" y="256" width="32" height="32">
    <properties>
     <property name="id" value="dungeon-1_715d0d0f-81f8-96e0-d0e2-2820fbf8da9b"/>
    </properties>
@@ -149,6 +155,16 @@
   <object id="180" gid="34" x="128" y="160" width="32" height="32">
    <properties>
     <property name="id" value="dungeon-1_e7504aa3-60a4-191e-b4b6-f7d8c5460776"/>
+   </properties>
+  </object>
+  <object id="181" gid="22" x="96" y="96" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="-1"/>
+    <property name="id" value="dungeon-1_ab58559d-7f5d-998b-8135-787876ca4e5a"/>
+    <property name="targetarea" value="forest-1"/>
+    <property name="targetdir" type="int" value="1"/>
+    <property name="targetx" type="int" value="18"/>
+    <property name="targety" type="int" value="19"/>
    </properties>
   </object>
  </objectgroup>
