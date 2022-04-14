@@ -377,8 +377,6 @@ function Enemy:attack()
 
 		damage = randomizeDamage(damage)
 
-		--print("Enemy:" .. damage)
-	
 		party.stats.health = party.stats.health - damage
 	
 		if party.stats.health <= 0 then
@@ -394,12 +392,8 @@ function Enemy:attack()
 				Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
 				end)
 				Timer.tween(2, fadeColor, {0,0,0}, 'in-out-quad', function()
-					local id = "gameover"
-					local m = love.audio.newSource("files/music/gameover.mp3", "static")
-					m:setLooping(false)
-					m:setVolume(savedsettings.musicVolume)
-					m:play()
-				
+					assets:stopMusic(level.data.tileset)
+					assets:playMusic("gameover")
 					party:died()
 				end)
 			end)		

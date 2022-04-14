@@ -127,7 +127,7 @@ function Party:attackWithMelee(enemy)
 
 	-- there is always a small chance that there will be a miss in melee
 		
-	if math.random() > 0.75 then
+	if math.random() > 0.85 then
 		assets:playSound("player-miss")
 		return false
 	end
@@ -138,8 +138,6 @@ function Party:attackWithMelee(enemy)
 	
 	damage = randomizeDamage(damage)
 	
-	print("Player:" .. damage)
-
 	enemy.properties.health = enemy.properties.health - damage
 	
 	globalvariables:add(enemy.properties.id, "health", enemy.properties.health)
@@ -152,6 +150,12 @@ function Party:attackWithMelee(enemy)
 		
 	if enemy.properties.health <= 0 then
 		assets:playSound(enemy.properties.sound_die)
+		
+		if enemy.properties.name == "The Queen" then
+			self:victory()
+			return true
+		end
+		
 		globalvariables:add(enemy.properties.id, "state", 2)
 		enemy.properties.state = 2
 		
@@ -183,8 +187,6 @@ function Party:attackWithSpell(spell)
 
 		assets:playSound(spell.id)
 		
-		print("Player spell:" .. damage)
-
 		enemy.properties.health = enemy.properties.health - damage
 
 		globalvariables:add(enemy.properties.id, "health", enemy.properties.health)
@@ -197,6 +199,12 @@ function Party:attackWithSpell(spell)
 			
 		if enemy.properties.health <= 0 then
 			assets:playSound(enemy.properties.sound_die)
+			
+			if enemy.properties.name == "The Queen" then
+				self:victory()
+				return true
+			end
+			
 			globalvariables:add(enemy.properties.id, "state", 2)
 			enemy.properties.state = 2
 			
@@ -238,6 +246,33 @@ function Party:died()
 	
 end
 
+function Party:victory()
+
+	subState = SubStates.TWEENING
+	Timer.script(function(wait)
+		wait(1)
+		fadeMusicVolume.v = savedsettings.musicVolume
+		
+		Timer.tween(1, fadeMusicVolume, {v = 0}, 'in-out-quad', function()
+		end)
+		Timer.tween(2, fadeColor, {0,0,0}, 'in-out-quad', function()
+			assets:stopMusic(level.data.tileset)
+			assets:playMusic("victory")
+			
+			gameState = GameStates.VICTORY
+			subState = SubStates.IDLE
+
+			Timer.script(function(wait)
+				wait(0.1)
+				Timer.tween(1.0, fadeColor, {1,1,1}, 'in-out-quad', function()
+				end)
+			end)	
+			
+		end)
+	end)
+	
+end
+
 function Party:updateStats()
 
 	-- add the item modifiers
@@ -268,6 +303,11 @@ function Party:updateStats()
 	self.stats.defence = self.basestats.defence + def_mod
 	self.stats.health_max = self.basestats.health_max + hpmax_mod
 	self.stats.mana_max = self.basestats.mana_max + mpmax_mod
+	
+	-- make sure health and mana are never greater than max
+	
+	if self.stats.health > self.stats.health_max then self.stats.health = self.stats.health_max end
+	if self.stats.mana > self.stats.mana_max then self.stats.mana = self.stats.mana_max end
 	
 
 end
@@ -311,13 +351,21 @@ function Party:addItem(id)
 		end
 	end
 
-	print("Inventory is full. Unable to add '" .. id .."'")
+	--print("Inventory is full. Unable to add '" .. id .."'")
 
 end
 
 function Party:addSpell(id)
 
+	for i = 1, #self.spells do
+		if self.spells[i] == id then
+			return false
+		end
+	end
+
 	table.insert(self.spells, id)
+
+	return true
 
 end
 

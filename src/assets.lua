@@ -90,6 +90,10 @@ function Assets:load()
 	self.music["mainmenu"]:setLooping(true)
 	self.music["buildup"] = love.audio.newSource("files/music/buildup.mp3", "stream")
 	self.music["buildup"]:setLooping(false)
+	self.music["gameover"] = love.audio.newSource("files/music/gameover.mp3", "stream")
+	self.music["gameover"]:setLooping(false)
+	self.music["victory"] = love.audio.newSource("files/music/victory.mp3", "stream")
+	self.music["victory"]:setLooping(false)
 	
 	-- font
 

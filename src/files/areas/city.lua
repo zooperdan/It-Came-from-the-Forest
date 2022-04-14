@@ -710,8 +710,8 @@ enemies={
 		y=27,
 		properties={
 			antsacs=1,
-			attack=5,
-			defence=5,
+			attack=4,
+			defence=1,
 			gold=5,
 			health=25,
 			health_max=25,
@@ -733,8 +733,8 @@ enemies={
 		y=25,
 		properties={
 			antsacs=0,
-			attack=5,
-			defence=5,
+			attack=4,
+			defence=1,
 			gold=0,
 			health=25,
 			health_max=25,
@@ -756,8 +756,8 @@ enemies={
 		y=30,
 		properties={
 			antsacs=1,
-			attack=5,
-			defence=5,
+			attack=4,
+			defence=1,
 			gold=0,
 			health=25,
 			health_max=25,
@@ -779,8 +779,8 @@ enemies={
 		y=30,
 		properties={
 			antsacs=1,
-			attack=5,
-			defence=5,
+			attack=4,
+			defence=1,
 			gold=0,
 			health=25,
 			health_max=25,
@@ -874,8 +874,8 @@ enemies={
 			attack=3,
 			defence=1,
 			gold=0,
-			health=5,
-			health_max=5,
+			health=15,
+			health_max=15,
 			id="city_13a6cbf2-9ad5-137d-f031-bab894b456b2",
 			imageid="rat",
 			loot="",
@@ -897,8 +897,8 @@ enemies={
 			attack=3,
 			defence=1,
 			gold=0,
-			health=5,
-			health_max=5,
+			health=15,
+			health_max=15,
 			id="city_f8625039-f0ad-9604-2cfe-2dc232ad0a82",
 			imageid="rat",
 			loot="",
@@ -920,10 +920,10 @@ chests={
 		y=19,
 		properties={
 			answer="",
-			gold=0,
+			gold=25,
 			id="city_89eefd9a-f595-2b34-5b8d-4869b337c877",
 			keyid="key-1",
-			loot="map",
+			loot="armor-1",
 			riddle="",
 			state=1,
 		}
@@ -933,10 +933,10 @@ chests={
 		y=13,
 		properties={
 			answer="",
-			gold=10,
+			gold=35,
 			id="city_76ef7cfb-af43-78a7-e869-fec96294a4a6",
 			keyid="",
-			loot="gloves-1:ring-1",
+			loot="gloves-1",
 			riddle="",
 			state=1,
 		}
@@ -946,7 +946,7 @@ chests={
 		y=13,
 		properties={
 			answer="",
-			gold=0,
+			gold=15,
 			id="city_2eed5c40-1174-d1a2-23c3-c8eca1df2615",
 			keyid="",
 			loot="",
@@ -959,10 +959,10 @@ chests={
 		y=26,
 		properties={
 			answer="",
-			gold=20,
+			gold=25,
 			id="city_af59cab0-b785-22ca-08ba-bf6d79cef3ea",
 			keyid="",
-			loot="sword-2",
+			loot="",
 			riddle="",
 			state=1,
 		}
@@ -972,10 +972,10 @@ chests={
 		y=30,
 		properties={
 			answer="",
-			gold=100,
+			gold=50,
 			id="city_87062c30-0f3f-7450-58eb-aea5bb6569e1",
 			keyid="",
-			loot="",
+			loot="helmet-1",
 			riddle="",
 			state=1,
 		}
@@ -988,7 +988,7 @@ chests={
 			gold=15,
 			id="city_0f41b66e-18e7-fbd6-868d-10f457baecca",
 			keyid="",
-			loot="key-1",
+			loot="key-1:boots-1",
 			riddle="",
 			state=3,
 		}
@@ -1145,14 +1145,14 @@ npcs={
 		y=17,
 		properties={
 			criterias="",
-			gold=5,
+			gold=0,
 			id="city_123bea90-4a3c-f16f-4a64-77dd9a6c1015",
 			imageid="npc-guard",
 			init_vars="",
 			loot="",
 			name="City guard",
-			questdelivertext="Balle",
-			questdonetext="Mongis",
+			questdelivertext="",
+			questdonetext="",
 			sound="npc-1",
 			state=1,
 			text="Don't be trying no funny business, ya hear?",
@@ -1164,15 +1164,15 @@ npcs={
 		x=24,
 		y=15,
 		properties={
-			criterias="",
+			criterias="motherfound_quest:state:1",
 			gold=0,
 			id="city_69a8e3a6-8467-3768-9ef9-f970a07fb2ab",
 			imageid="npc-girl",
 			init_vars="",
 			loot="",
 			name="Adalie",
-			questdelivertext="",
-			questdonetext="",
+			questdelivertext="You found my mom! I will always remember you. You are a kind man.",
+			questdonetext="I am so happy!",
 			sound="girl-greetings",
 			state=1,
 			text="Hello. Can you please help me? I can't find my mommy.\n\nShe went to buy vegetables earlier today but didn't come back so I came here to look for her.\n\nI have been waiting here for hours now.\n\nCan you please find her for me?",
@@ -1228,7 +1228,7 @@ npcs={
 			gold=0,
 			id="city_77cd3bbe-64da-259e-af22-c8bc8934b44f",
 			imageid="npc-peasant-3",
-			init_vars="city_0f41b66e-18e7-fbd6-868d-10f457baecca:state:1",
+			init_vars="",
 			loot="",
 			name="Brendudd Eagleroot",
 			questdelivertext="Oh, rats you say? You killed them all yes? Excellent!\n\nI have a chest nearby with some stuff in it. Go have a look. You can have whatever is inside it.",
@@ -1236,7 +1236,7 @@ npcs={
 			sound="male-greetings",
 			state=1,
 			text="Psst! I heard scary noises coming from the west. I am too afraid to go there and check it out.\n\nCould you take a look for me?",
-			vars="city_13a6cbf2-9ad5-137d-f031-bab894b456b2:state:2|city_f8625039-f0ad-9604-2cfe-2dc232ad0a82:state:2",
+			vars="city_0f41b66e-18e7-fbd6-868d-10f457baecca:state:1",
 			visible=1,
 		}
 	},
@@ -1285,19 +1285,39 @@ npcs={
 		y=13,
 		properties={
 			criterias="city_0a5a315e-b90f-05ac-a024-5e59c6e53664:state:2|city_c1069e4d-6310-74aa-6711-1b57636d9080:state:2|city_9a9aaac8-77b5-67be-8af5-3ab5fbb99bf8:state:2",
-			gold=20,
+			gold=25,
 			id="city_56d94b33-10ca-385f-e361-e3e63b2e4eac",
 			imageid="npc-peasant-4",
 			init_vars="city_ratquest:state:1",
-			loot="map",
+			loot="",
 			name="Arorre Grandforge",
-			questdelivertext="You actually did it? I can go home again?\n\nYou are my hero and I can't possibly thank you enough.\n\nI don't have much but here; some coins and this little trinket which might come in handy.",
+			questdelivertext="You actually did it? I can go home again?\n\nYou are my hero and I can't possibly thank you enough.\n\nI don't have much but here are some coins.",
 			questdonetext="You're the best!",
 			sound="female-greetings",
 			state=1,
 			text="I can't believe it! The streets around my home is overrun by rats and I haven't been home for days now.\n\nYou look like someone who could take care of that, yes?\n\nMy home is a short walk to the northwest.\n\nWill you please do it?",
 			vars="city_ratquest:state:2|city_56d94b33-10ca-385f-e361-e3e63b2e4eac:visible:0",
 			visible=1,
+		}
+	},
+	[14] = {
+		x=23,
+		y=15,
+		properties={
+			criterias="",
+			gold=0,
+			id="city_a80cf6ac-af94-c0c7-0da5-4c05d6340a26",
+			imageid="npc-peasant-1",
+			init_vars="",
+			loot="",
+			name="Rebeka Vindekorn",
+			questdelivertext="",
+			questdonetext="",
+			sound="female-greetings",
+			state=1,
+			text="Thank you for finding me out in the forest and reuniting me with my daughter.\n\nYou are a true hero and songs will be made in your name.",
+			vars="",
+			visible=0,
 		}
 	},
 },
@@ -1764,19 +1784,630 @@ doors={
 
 staticprops={
 	[1] = {
-		x=16,
-		y=11,
+		x=5,
+		y=15,
 		properties={
 			atlasid="city-props",
 			direction=2,
-			id="city_1be3bf61-229d-2005-9e43-5838ca6378af",
-			name="barricade",
+			id="city_a690c94e-ef8b-6b66-3407-508fcf48703a",
+			name="city-garden",
 			state=1,
-			text="",
 			visible=1,
 		}
 	},
 	[2] = {
+		x=4,
+		y=15,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_07e4e74e-ca73-331b-aeb4-40886b8f5fe6",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[3] = {
+		x=4,
+		y=17,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_539ed64e-6c1c-6c31-186d-473e253687d7",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[4] = {
+		x=6,
+		y=18,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_ec37dc7f-956c-f8ef-893e-0e8e2bd1a885",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[5] = {
+		x=26,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_65fe118e-f341-89b3-800f-6b0a945bca9a",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[6] = {
+		x=13,
+		y=20,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ebe35a44-fb0c-7673-da46-dfcf2f07f8a7",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[7] = {
+		x=15,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_7824d3f2-84c6-5a9e-a644-ccd8fdc872c6",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[8] = {
+		x=9,
+		y=24,
+		properties={
+			atlasid="city-props",
+			direction=3,
+			id="city_c64aa989-15ea-5068-c7bf-bb4ea846ffea",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[9] = {
+		x=18,
+		y=23,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_1535a165-67b0-07cc-9fab-245ec0f4d9a6",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[10] = {
+		x=23,
+		y=22,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_02157f7a-124e-d605-ff66-bc113aab9238",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[11] = {
+		x=23,
+		y=5,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_14624ff0-96d9-aa54-0b95-b5e54008a21f",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[12] = {
+		x=24,
+		y=5,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_c42e729f-a8bc-1285-94f0-9b4bf1864e25",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[13] = {
+		x=20,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=3,
+			id="city_2a8a85ce-7983-c4ca-4073-cccb76f26ba8",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[14] = {
+		x=20,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_62409c9c-62a4-e460-d199-c199bd809db5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[15] = {
+		x=21,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_b4189c32-67a0-046a-fd08-66d704c0be31",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[16] = {
+		x=30,
+		y=10,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_553e8400-0790-e3ca-b0db-4236103fe596",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[17] = {
+		x=30,
+		y=12,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_f2ada858-f3b3-564c-1c50-1bed0773b39c",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[18] = {
+		x=8,
+		y=10,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_6257de81-02a3-f948-f550-49566dfe1ba5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[19] = {
+		x=8,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_bf76f9bb-28a2-d824-b75f-9b2bb2e8f693",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[20] = {
+		x=8,
+		y=24,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_1f7e2dec-47b7-fc9a-26d4-22794f992c40",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[21] = {
+		x=8,
+		y=23,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_e51936e6-f621-be95-de1a-22e147fbded5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[22] = {
+		x=6,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ae44dded-91d0-ecfe-3c31-f7889aa8cc1e",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[23] = {
+		x=10,
+		y=18,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_850c777d-9b53-4589-5114-e73fdb5e113d",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[24] = {
+		x=12,
+		y=16,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_31785ea0-70a3-6535-6887-849dd65cfc00",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[25] = {
+		x=15,
+		y=14,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_7e3b90a0-78ac-cddd-fdc4-7783389922f1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[26] = {
+		x=15,
+		y=17,
+		properties={
+			atlasid="city-props",
+			direction=1,
+			id="city_ed530617-f10d-aa7d-6403-5e8fe997c84c",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[27] = {
+		x=14,
+		y=17,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_5db20ea0-b847-64df-fad2-c2a75acfec3b",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[28] = {
+		x=3,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_3ae7a33c-848a-cf0c-f4b1-68cd39ae39e1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[29] = {
+		x=2,
+		y=19,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_3cf2d339-928e-e466-96c1-06758955b209",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[30] = {
+		x=3,
+		y=12,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ac58c56f-fb2d-1d3e-50ca-19be268200bc",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[31] = {
+		x=5,
+		y=29,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_5c4edaac-9ff8-1bfb-4e80-7d5215a2d8e2",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[32] = {
+		x=5,
+		y=30,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_a859c39a-f113-e332-7a05-9c26b32fae40",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[33] = {
+		x=6,
+		y=30,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_9f8c32d5-eff0-f0db-c1fc-6d578c213c94",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[34] = {
+		x=18,
+		y=25,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_6457da0e-a9c6-2ff8-0f4d-750c32002877",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[35] = {
+		x=19,
+		y=25,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_f64db0c8-65ec-af2d-587b-680cc3a7a574",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[36] = {
+		x=12,
+		y=31,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_a9cbdb81-1994-308d-83d7-f7bf686e42f4",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[37] = {
+		x=16,
+		y=28,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_23a4e7bd-60b7-74e7-fd2c-effcc44042af",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[38] = {
+		x=17,
+		y=3,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_3e0f56e7-0432-6601-a08d-aab2614fcd55",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[39] = {
+		x=14,
+		y=7,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_792fb00b-9b95-581d-5384-c9d60d8dca62",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[40] = {
+		x=8,
+		y=4,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_c7ff4010-4aa5-bd7c-6f07-2147d8cb7fc1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[41] = {
+		x=2,
+		y=2,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_ccef29b2-4f15-b3fc-e9fe-6ed8c03c85d5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[42] = {
+		x=2,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_5d5416d7-20ac-0807-df7a-2c6c6d001c49",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[43] = {
+		x=2,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_2a528651-525d-72a6-70ac-c5fd26b0b0bf",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[44] = {
+		x=3,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_34a189de-c3cb-f366-3d3e-5e26384aee74",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[45] = {
+		x=4,
+		y=9,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_f4448107-f40b-b8a4-b8d2-323221d54166",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[46] = {
+		x=4,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_517eb827-ade5-c688-a545-ea902ce554a5",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[47] = {
+		x=5,
+		y=8,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_e52c3365-260d-877f-c8f3-7c27e43bd87a",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[48] = {
+		x=26,
+		y=30,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_296af119-228e-8cf1-00f7-4ef999486ffd",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[49] = {
+		x=29,
+		y=26,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_97b14e3e-f50f-d847-76ed-de9efda5042d",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[50] = {
+		x=28,
+		y=28,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_39d1ba8d-e538-7c10-4cd1-af3d12d130b1",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[51] = {
+		x=29,
+		y=28,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_391aa99b-3e78-3aa7-1617-1be7aa1f5499",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[52] = {
+		x=29,
+		y=27,
+		properties={
+			atlasid="city-props",
+			direction=2,
+			id="city_135f80fe-254c-95c0-fec9-ff16fda7f1ba",
+			name="city-garden",
+			state=1,
+			visible=1,
+		}
+	},
+	[53] = {
 		x=24,
 		y=16,
 		properties={
@@ -1789,7 +2420,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[3] = {
+	[54] = {
 		x=21,
 		y=16,
 		properties={
@@ -1802,7 +2433,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[4] = {
+	[55] = {
 		x=22,
 		y=16,
 		properties={
@@ -1815,7 +2446,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[5] = {
+	[56] = {
 		x=21,
 		y=13,
 		properties={
@@ -1828,7 +2459,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[6] = {
+	[57] = {
 		x=19,
 		y=14,
 		properties={
@@ -1841,7 +2472,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[7] = {
+	[58] = {
 		x=22,
 		y=19,
 		properties={
@@ -1854,7 +2485,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[8] = {
+	[59] = {
 		x=19,
 		y=20,
 		properties={
@@ -1867,355 +2498,20 @@ staticprops={
 			visible=1,
 		}
 	},
-	[9] = {
-		x=5,
-		y=15,
+	[60] = {
+		x=16,
+		y=11,
 		properties={
 			atlasid="city-props",
 			direction=2,
-			id="city_a690c94e-ef8b-6b66-3407-508fcf48703a",
-			name="city-garden",
+			id="city_1be3bf61-229d-2005-9e43-5838ca6378af",
+			name="barricade",
 			state=1,
+			text="",
 			visible=1,
 		}
 	},
-	[10] = {
-		x=4,
-		y=15,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_07e4e74e-ca73-331b-aeb4-40886b8f5fe6",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[11] = {
-		x=4,
-		y=17,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_539ed64e-6c1c-6c31-186d-473e253687d7",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[12] = {
-		x=6,
-		y=18,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_ec37dc7f-956c-f8ef-893e-0e8e2bd1a885",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[13] = {
-		x=26,
-		y=9,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_65fe118e-f341-89b3-800f-6b0a945bca9a",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[14] = {
-		x=13,
-		y=20,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_ebe35a44-fb0c-7673-da46-dfcf2f07f8a7",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[15] = {
-		x=15,
-		y=19,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_7824d3f2-84c6-5a9e-a644-ccd8fdc872c6",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[16] = {
-		x=9,
-		y=24,
-		properties={
-			atlasid="city-props",
-			direction=3,
-			id="city_c64aa989-15ea-5068-c7bf-bb4ea846ffea",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[17] = {
-		x=18,
-		y=23,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_1535a165-67b0-07cc-9fab-245ec0f4d9a6",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[18] = {
-		x=23,
-		y=22,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_02157f7a-124e-d605-ff66-bc113aab9238",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[19] = {
-		x=23,
-		y=5,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_14624ff0-96d9-aa54-0b95-b5e54008a21f",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[20] = {
-		x=24,
-		y=5,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_c42e729f-a8bc-1285-94f0-9b4bf1864e25",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[21] = {
-		x=20,
-		y=8,
-		properties={
-			atlasid="city-props",
-			direction=3,
-			id="city_2a8a85ce-7983-c4ca-4073-cccb76f26ba8",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[22] = {
-		x=20,
-		y=9,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_62409c9c-62a4-e460-d199-c199bd809db5",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[23] = {
-		x=21,
-		y=8,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_b4189c32-67a0-046a-fd08-66d704c0be31",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[24] = {
-		x=30,
-		y=10,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_553e8400-0790-e3ca-b0db-4236103fe596",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[25] = {
-		x=30,
-		y=12,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_f2ada858-f3b3-564c-1c50-1bed0773b39c",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[26] = {
-		x=8,
-		y=10,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_6257de81-02a3-f948-f550-49566dfe1ba5",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[27] = {
-		x=8,
-		y=9,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_bf76f9bb-28a2-d824-b75f-9b2bb2e8f693",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[28] = {
-		x=8,
-		y=24,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_1f7e2dec-47b7-fc9a-26d4-22794f992c40",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[29] = {
-		x=8,
-		y=23,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_e51936e6-f621-be95-de1a-22e147fbded5",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[30] = {
-		x=6,
-		y=19,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_ae44dded-91d0-ecfe-3c31-f7889aa8cc1e",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[31] = {
-		x=10,
-		y=18,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_850c777d-9b53-4589-5114-e73fdb5e113d",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[32] = {
-		x=12,
-		y=16,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_31785ea0-70a3-6535-6887-849dd65cfc00",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[33] = {
-		x=15,
-		y=14,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_7e3b90a0-78ac-cddd-fdc4-7783389922f1",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[34] = {
-		x=15,
-		y=17,
-		properties={
-			atlasid="city-props",
-			direction=1,
-			id="city_ed530617-f10d-aa7d-6403-5e8fe997c84c",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[35] = {
-		x=14,
-		y=17,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_5db20ea0-b847-64df-fad2-c2a75acfec3b",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[36] = {
-		x=3,
-		y=19,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_3ae7a33c-848a-cf0c-f4b1-68cd39ae39e1",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[37] = {
-		x=2,
-		y=19,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_3cf2d339-928e-e466-96c1-06758955b209",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[38] = {
+	[61] = {
 		x=21,
 		y=17,
 		properties={
@@ -2229,7 +2525,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[39] = {
+	[62] = {
 		x=25,
 		y=12,
 		properties={
@@ -2237,13 +2533,13 @@ staticprops={
 			direction=1,
 			gold=0,
 			id="city_7c6c8ffa-527d-1f2a-f492-e066de2b61e5",
-			loot="",
+			loot="dagger-1",
 			name="barrels",
 			state=1,
 			visible=1,
 		}
 	},
-	[40] = {
+	[63] = {
 		x=2,
 		y=20,
 		properties={
@@ -2251,13 +2547,13 @@ staticprops={
 			direction=3,
 			gold=0,
 			id="city_9a335e09-d1a5-f454-e16b-cb3399b45077",
-			loot="",
+			loot="map",
 			name="barrels",
 			state=1,
 			visible=1,
 		}
 	},
-	[41] = {
+	[64] = {
 		x=7,
 		y=7,
 		properties={
@@ -2271,7 +2567,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[42] = {
+	[65] = {
 		x=17,
 		y=20,
 		properties={
@@ -2285,55 +2581,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[43] = {
-		x=3,
-		y=12,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_ac58c56f-fb2d-1d3e-50ca-19be268200bc",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[44] = {
-		x=5,
-		y=29,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_5c4edaac-9ff8-1bfb-4e80-7d5215a2d8e2",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[45] = {
-		x=5,
-		y=30,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_a859c39a-f113-e332-7a05-9c26b32fae40",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[46] = {
-		x=6,
-		y=30,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_9f8c32d5-eff0-f0db-c1fc-6d578c213c94",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[47] = {
+	[66] = {
 		x=8,
 		y=27,
 		properties={
@@ -2347,7 +2595,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[48] = {
+	[67] = {
 		x=11,
 		y=26,
 		properties={
@@ -2361,7 +2609,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[49] = {
+	[68] = {
 		x=22,
 		y=27,
 		properties={
@@ -2375,7 +2623,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[50] = {
+	[69] = {
 		x=16,
 		y=31,
 		properties={
@@ -2389,7 +2637,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[51] = {
+	[70] = {
 		x=13,
 		y=25,
 		properties={
@@ -2403,13 +2651,13 @@ staticprops={
 			visible=1,
 		}
 	},
-	[52] = {
+	[71] = {
 		x=19,
 		y=3,
 		properties={
 			atlasid="common-props",
 			direction=2,
-			gold=0,
+			gold=15,
 			id="city_13eed849-c6d2-68b9-11c3-16d804870d50",
 			loot="",
 			name="barrels",
@@ -2417,187 +2665,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[53] = {
-		x=18,
-		y=25,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_6457da0e-a9c6-2ff8-0f4d-750c32002877",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[54] = {
-		x=19,
-		y=25,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_f64db0c8-65ec-af2d-587b-680cc3a7a574",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[55] = {
-		x=12,
-		y=31,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_a9cbdb81-1994-308d-83d7-f7bf686e42f4",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[56] = {
-		x=16,
-		y=28,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_23a4e7bd-60b7-74e7-fd2c-effcc44042af",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[57] = {
-		x=17,
-		y=3,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_3e0f56e7-0432-6601-a08d-aab2614fcd55",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[58] = {
-		x=14,
-		y=7,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_792fb00b-9b95-581d-5384-c9d60d8dca62",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[59] = {
-		x=8,
-		y=4,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_c7ff4010-4aa5-bd7c-6f07-2147d8cb7fc1",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[60] = {
-		x=2,
-		y=2,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_ccef29b2-4f15-b3fc-e9fe-6ed8c03c85d5",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[61] = {
-		x=2,
-		y=8,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_5d5416d7-20ac-0807-df7a-2c6c6d001c49",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[62] = {
-		x=2,
-		y=9,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_2a528651-525d-72a6-70ac-c5fd26b0b0bf",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[63] = {
-		x=3,
-		y=9,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_34a189de-c3cb-f366-3d3e-5e26384aee74",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[64] = {
-		x=4,
-		y=9,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_f4448107-f40b-b8a4-b8d2-323221d54166",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[65] = {
-		x=4,
-		y=8,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_517eb827-ade5-c688-a545-ea902ce554a5",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[66] = {
-		x=5,
-		y=8,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_e52c3365-260d-877f-c8f3-7c27e43bd87a",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[67] = {
-		x=26,
-		y=30,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_296af119-228e-8cf1-00f7-4ef999486ffd",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[68] = {
+	[72] = {
 		x=26,
 		y=29,
 		properties={
@@ -2611,64 +2679,44 @@ staticprops={
 			visible=1,
 		}
 	},
-	[69] = {
+	[73] = {
 		x=31,
 		y=25,
 		properties={
 			atlasid="common-props",
-			direction=2,
+			direction=1,
 			gold=50,
-			id="city_46681f12-2dac-62f4-950c-6c1e3968ffb8",
+			id="city_ee151f66-725d-1396-86d2-572b57af34a8",
 			loot="healing-potion",
 			name="barrels",
 			state=1,
 			visible=1,
 		}
 	},
-	[70] = {
-		x=29,
-		y=26,
+	[74] = {
+		x=31,
+		y=17,
 		properties={
-			atlasid="city-props",
+			atlasid="common-props",
 			direction=2,
-			id="city_97b14e3e-f50f-d847-76ed-de9efda5042d",
-			name="city-garden",
+			gold=5,
+			id="city_fd5e2eca-aeea-d429-1e5a-b0d2974791cd",
+			loot="",
+			name="barrels",
 			state=1,
 			visible=1,
 		}
 	},
-	[71] = {
-		x=28,
-		y=28,
+	[75] = {
+		x=30,
+		y=17,
 		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_39d1ba8d-e538-7c10-4cd1-af3d12d130b1",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[72] = {
-		x=29,
-		y=28,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_391aa99b-3e78-3aa7-1617-1be7aa1f5499",
-			name="city-garden",
-			state=1,
-			visible=1,
-		}
-	},
-	[73] = {
-		x=29,
-		y=27,
-		properties={
-			atlasid="city-props",
-			direction=2,
-			id="city_135f80fe-254c-95c0-fec9-ff16fda7f1ba",
-			name="city-garden",
+			atlasid="common-props",
+			direction=1,
+			gold=0,
+			id="city_c2c42c9f-9cd3-f82c-e768-37e334684c34",
+			loot="",
+			name="barrels",
 			state=1,
 			visible=1,
 		}
@@ -2699,7 +2747,8 @@ buttons={
 },
 
 levelexits={},
-["partyX"]=15,
-["partyY"]=22,
+bossgates={},
+["partyX"]=3,
+["partyY"]=20,
 ["partyDirection"]=3,
 }

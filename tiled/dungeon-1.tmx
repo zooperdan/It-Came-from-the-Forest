@@ -86,13 +86,13 @@
   <object id="34" gid="5" x="96" y="128" width="32" height="32"/>
   <object id="170" gid="36" x="128" y="64" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="1"/>
+    <property name="gold" type="int" value="20"/>
     <property name="id" value="dungeon-1_7663c2fa-4722-fc02-5a73-ab94c4b6f065"/>
    </properties>
   </object>
   <object id="171" gid="17" x="224" y="384" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="4"/>
+    <property name="gold" type="int" value="10"/>
     <property name="id" value="dungeon-1_34d0a95b-f65b-e5bf-909c-9193afb7d397"/>
     <property name="loot" value="compass"/>
    </properties>
@@ -119,15 +119,15 @@
   </object>
   <object id="174" gid="17" x="320" y="192" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="3"/>
+    <property name="gold" type="int" value="20"/>
     <property name="id" value="dungeon-1_6f611782-d262-f96e-d4e1-550abb92505c"/>
    </properties>
   </object>
   <object id="175" gid="11" x="192" y="320" width="32" height="32">
    <properties>
     <property name="attack" type="int" value="1"/>
-    <property name="health" type="int" value="15"/>
-    <property name="health_max" type="int" value="15"/>
+    <property name="health" type="int" value="8"/>
+    <property name="health_max" type="int" value="8"/>
     <property name="id" value="dungeon-1_9f91f9ca-47f8-c5da-a576-1bc013829680"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
@@ -135,8 +135,8 @@
   <object id="178" gid="11" x="256" y="320" width="32" height="32">
    <properties>
     <property name="attack" type="int" value="1"/>
-    <property name="health" type="int" value="15"/>
-    <property name="health_max" type="int" value="15"/>
+    <property name="health" type="int" value="8"/>
+    <property name="health_max" type="int" value="8"/>
     <property name="id" value="dungeon-1_71c09fa5-1e6e-8875-5f01-554b8c3cc368"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>

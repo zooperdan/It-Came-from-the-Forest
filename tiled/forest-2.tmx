@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="213">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="240">
  <editorsettings>
   <export target="../src/files/areas/forest-2.lua" format="custom"/>
  </editorsettings>
@@ -17,11 +17,11 @@
 0,1,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,
 0,1,0,1,1,0,0,0,0,1,1,0,0,1,0,1,1,0,0,1,0,1,1,0,0,0,0,0,0,0,1,1,
 0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,1,1,
-0,0,0,0,1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,1,1,0,1,1,1,0,1,1,1,0,1,
-0,1,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,1,1,0,1,1,0,0,1,
-1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,0,0,0,0,0,1,0,1,
-0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,1,0,1,1,0,1,1,0,1,0,1,
-0,0,0,0,0,1,1,1,0,0,0,1,1,0,1,1,1,1,0,1,1,1,1,0,0,0,1,0,0,0,1,1,
+0,0,0,0,1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,1,1,0,1,1,1,0,1,1,1,1,1,
+0,1,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,1,1,0,1,1,1,1,1,
+1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,
+0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,
+0,0,0,0,0,1,1,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,1,1,
 0,1,0,0,1,1,0,0,0,1,0,1,1,0,0,1,1,1,1,1,0,0,0,0,1,1,1,0,1,1,0,1,
 0,0,0,0,1,0,0,1,1,1,0,0,1,1,0,1,1,1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,
 0,1,1,2,1,1,1,1,0,2,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,1,0,1,1,
@@ -61,7 +61,7 @@
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -84,59 +84,115 @@
  <objectgroup id="2" name="Chests">
   <object id="152" gid="17" x="256" y="608" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="35"/>
+    <property name="gold" type="int" value="125"/>
     <property name="id" value="dark_forest_1_c99bd6ae-9c63-99f5-a95f-5c1899601cc0"/>
+    <property name="loot" value="boots-2"/>
    </properties>
   </object>
   <object id="170" gid="17" x="160" y="320" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="40"/>
+    <property name="gold" type="int" value="50"/>
     <property name="id" value="forest-2_7d437a92-a86f-2932-76b1-120affebf134"/>
-    <property name="loot" value="healing-potion:belt-1"/>
+    <property name="loot" value="sword-2"/>
    </properties>
   </object>
   <object id="171" gid="17" x="640" y="256" width="32" height="32">
    <properties>
     <property name="gold" type="int" value="5"/>
     <property name="id" value="forest-2_c61c1efe-d40e-d7c6-aedf-cf8d7bb8ea62"/>
+    <property name="loot" value="gloves-2"/>
+   </properties>
+  </object>
+  <object id="213" gid="17" x="448" y="320" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="5"/>
+    <property name="id" value="forest-2_bdce4529-926c-370b-58ff-90a6e2772b7f"/>
+    <property name="loot" value="belt-1"/>
+   </properties>
+  </object>
+  <object id="215" gid="17" x="576" y="544" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="5"/>
+    <property name="id" value="forest-2_6f92d255-4611-6d48-8980-8a81a7677627"/>
+    <property name="loot" value="armor-2"/>
+   </properties>
+  </object>
+  <object id="214" gid="17" x="288" y="256" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="5"/>
+    <property name="id" value="forest-2_f0c7e2eb-e364-c2fd-0d61-cde5128e4f8d"/>
+    <property name="loot" value="axe-1"/>
    </properties>
   </object>
   <object id="172" gid="17" x="864" y="64" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="50"/>
+    <property name="gold" type="int" value="250"/>
     <property name="id" value="forest-2_60a13477-81d4-9e89-46c1-dc4cd909f0a5"/>
+    <property name="loot" value="mana-potion"/>
    </properties>
   </object>
   <object id="173" gid="17" x="800" y="64" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="50"/>
+    <property name="gold" type="int" value="250"/>
     <property name="id" value="forest-2_b400dcde-979b-ad6e-ecee-501cadcd69d8"/>
-    <property name="loot" value="sword-4"/>
+    <property name="loot" value="healing-potion"/>
    </properties>
   </object>
   <object id="174" gid="17" x="960" y="544" width="32" height="32">
    <properties>
     <property name="gold" type="int" value="25"/>
     <property name="id" value="forest-2_c073d295-829a-4bb4-68fe-491b9665c5b6"/>
+    <property name="loot" value="necklace-1"/>
    </properties>
   </object>
   <object id="176" gid="17" x="32" y="992" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="25"/>
+    <property name="gold" type="int" value="100"/>
     <property name="id" value="forest-2_98a2f055-65f4-7bd5-e668-390cd31cb450"/>
+    <property name="loot" value="cape-2"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="10" name="Other">
-  <object id="34" gid="4" x="32" y="480" width="32" height="32"/>
+  <object id="34" gid="4" x="480" y="224" width="32" height="32"/>
   <object id="148" gid="34" x="32" y="480" width="32" height="32">
    <properties>
     <property name="id" value="dark_forest_1_0132192f-d4cb-9120-2080-ae014122661d"/>
    </properties>
   </object>
-  <object id="154" gid="34" x="96" y="544" width="32" height="32">
+  <object id="154" gid="34" x="32" y="864" width="32" height="32">
    <properties>
-    <property name="id" value="dark_forest_1_d00f4ae7-385a-b9f2-6707-61ddf49a2a60"/>
+    <property name="id" value="forest-2_f4c15e10-519c-d373-810f-acbebfe50eb1"/>
+   </properties>
+  </object>
+  <object id="233" gid="34" x="960" y="928" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_b5f80640-f457-aca6-8653-b7c4fc45141a"/>
+   </properties>
+  </object>
+  <object id="235" gid="34" x="800" y="448" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_545e8b22-632a-7d9e-bb2e-bea6aec5039b"/>
+   </properties>
+  </object>
+  <object id="236" gid="34" x="512" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_67b4cb91-8c47-b3bc-bd44-81d0e07e2e94"/>
+   </properties>
+  </object>
+  <object id="237" gid="34" x="512" y="736" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_c5b3cc21-3a57-f834-38d7-7921df2c5c88"/>
+   </properties>
+  </object>
+  <object id="238" gid="34" x="512" y="256" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_e7190b47-9707-47f1-fdd3-84f562594673"/>
+   </properties>
+  </object>
+  <object id="239" gid="34" x="640" y="64" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_f9ea2c3f-11f3-c43b-1bcb-3154b494b26a"/>
    </properties>
   </object>
   <object id="166" gid="20" x="640" y="160" width="32" height="32">
@@ -144,20 +200,103 @@
     <property name="id" value="forest-2_7ea64cbe-f63f-0b40-8067-eb691cc92128"/>
    </properties>
   </object>
+  <object id="218" gid="20" x="832" y="768" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="3"/>
+    <property name="id" value="forest-2_de087d54-ed4b-fd88-a8d5-9559e5eaa1f6"/>
+   </properties>
+  </object>
   <object id="168" gid="20" x="256" y="736" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="2"/>
     <property name="id" value="forest-2_6fead681-6d6f-00b7-7cd7-1e6c834ccb82"/>
    </properties>
   </object>
-  <object id="212" gid="34" x="832" y="256" width="32" height="32">
+  <object id="219" gid="25" x="832" y="256" width="32" height="32">
    <properties>
-    <property name="id" value="forest-2_1586e2bc-1bad-5427-90ee-829a8c04c09d"/>
+    <property name="direction" type="int" value="2"/>
+    <property name="id" value="forest-2_5d7f1c7d-7afd-c3a3-e6d6-635e550588c6"/>
+    <property name="keyid" value="key-2"/>
+    <property name="state" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="221" gid="21" x="768" y="608" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_2ee37ed8-7edb-5556-3e79-db5dbfa13dde"/>
+    <property name="targetdir" type="int" value="3"/>
+    <property name="targetx" type="int" value="22"/>
+    <property name="targety" type="int" value="29"/>
+   </properties>
+  </object>
+  <object id="222" gid="21" x="608" y="960" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_d451398f-c8f8-a199-47bf-9248b954a72c"/>
+    <property name="targetdir" type="int" value="3"/>
+    <property name="targetx" type="int" value="23"/>
+    <property name="targety" type="int" value="18"/>
+   </properties>
+  </object>
+  <object id="223" gid="16" x="800" y="320" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_cb88f442-2de9-a14a-92e5-23e66461580a"/>
+    <property name="text" value="Suddenly you hear a loud shriek that almost knocks you to the ground. It causes the hair on your back to stand and you feel very uncomfortable.\n\nYou sense great evil beyond this point."/>
+   </properties>
+  </object>
+  <object id="225" gid="16" x="832" y="224" width="32" height="32">
+   <properties>
+    <property name="id" value="forest-2_d93667a4-08ee-d60a-ade5-b2268c07e046"/>
+    <property name="text" value="Upon entering the lair of the Fire ant Queen you immediately spot the Queen standing tall together with her soldiers.\n\nShe gaze upon you as her next meal to devour.\n\nIt's time to end this once and for all.\n\nFor gold and glory!"/>
+   </properties>
+  </object>
+  <object id="230" gid="14" x="960" y="992" width="32" height="32">
+   <properties>
+    <property name="criterias" value="motherfound_quest:state:1"/>
+    <property name="id" value="forest-2_89392937-219f-607f-1d8d-0fcfe9637a9b"/>
+    <property name="imageid" value="npc-peasant-1"/>
+    <property name="init_vars" value="motherfound_quest:state:1"/>
+    <property name="name" value="Rebeka Vindekorn"/>
+    <property name="questdelivertext" value="We are ready to go? Ok. I'm right behind you!"/>
+    <property name="questdonetext" value=""/>
+    <property name="sound" value="female-greetings"/>
+    <property name="text" value="I got so terribly lost out here. I just went outside for a quick stroll to see if I found some flowers. I thought for sure that I would never see my beautiful daughter again.\n\nYou've spoken to her? Poor child. She must be so hungry and afraid.\n\nI will follow you back to the city, just let me know when."/>
+    <property name="vars" value="forest-2_89392937-219f-607f-1d8d-0fcfe9637a9b:visible:0|city_a80cf6ac-af94-c0c7-0da5-4c05d6340a26:visible:1"/>
+   </properties>
+  </object>
+  <object id="231" gid="14" x="576" y="416" width="32" height="32">
+   <properties>
+    <property name="criterias" value=""/>
+    <property name="id" value="forest-2_8cc35334-e783-448f-3aa7-1d02703d3b74"/>
+    <property name="imageid" value="npc-peasant-3"/>
+    <property name="init_vars" value=""/>
+    <property name="name" value="Kimmo Akor"/>
+    <property name="questdelivertext" value=""/>
+    <property name="questdonetext" value=""/>
+    <property name="sound" value="male-greetings"/>
+    <property name="text" value="An old legend tells that somewhere there is a sword that is so magnificent and powerful that it could best any beast.\n\nQuestion is, do we believe in the old legends?"/>
+    <property name="vars" value=""/>
+   </properties>
+  </object>
+  <object id="232" gid="14" x="352" y="736" width="32" height="32">
+   <properties>
+    <property name="criterias" value=""/>
+    <property name="gold" type="int" value="0"/>
+    <property name="id" value="forest-2_888ab240-7bc0-4919-6999-c4422a6c899f"/>
+    <property name="imageid" value="npc-peasant-4"/>
+    <property name="init_vars" value=""/>
+    <property name="loot" value=""/>
+    <property name="name" value="Genevive Goudbriar"/>
+    <property name="questdelivertext" value=""/>
+    <property name="questdonetext" value=""/>
+    <property name="sound" value="female-greetings"/>
+    <property name="text" value="Go away! I don't want the creatures to find me."/>
+    <property name="vars" value=""/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="9" name="Doors">
   <object id="107" gid="22" x="0" y="480" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="1"/>
     <property name="id" value="dark_forest_1_75e341b5-5f43-cd1d-0acf-c64eb1917fd5"/>
     <property name="targetarea" value="city"/>
     <property name="targetdir" type="int" value="3"/>
@@ -168,41 +307,78 @@
   <object id="159" gid="24" x="672" y="64" width="32" height="32">
    <properties>
     <property name="id" value="forest-2_007be87c-be2c-00b8-038a-12015135ea4d"/>
+    <property name="targetarea" value="dungeon-3"/>
+    <property name="targetdir" type="int" value="1"/>
+    <property name="targetx" type="int" value="1"/>
+    <property name="targety" type="int" value="6"/>
    </properties>
   </object>
   <object id="160" gid="24" x="544" y="736" width="32" height="32">
    <properties>
     <property name="id" value="forest-2_c264adeb-77c4-8c7f-e1e4-8633cd97dbba"/>
+    <property name="targetarea" value="dungeon-6"/>
+    <property name="targetdir" type="int" value="1"/>
+    <property name="targetx" type="int" value="15"/>
+    <property name="targety" type="int" value="17"/>
    </properties>
   </object>
   <object id="161" gid="24" x="672" y="992" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="0"/>
     <property name="id" value="forest-2_847ff778-c69b-c9a2-042c-3d638386f63a"/>
+    <property name="targetarea" value="dungeon-9"/>
+    <property name="targetdir" type="int" value="3"/>
+    <property name="targetx" type="int" value="26"/>
+    <property name="targety" type="int" value="9"/>
    </properties>
   </object>
   <object id="162" gid="24" x="960" y="896" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="2"/>
     <property name="id" value="forest-2_a58da8e4-3353-a442-3e18-b0689be36a94"/>
+    <property name="targetarea" value="dungeon-8"/>
+    <property name="targetx" type="int" value="12"/>
+    <property name="targety" type="int" value="7"/>
    </properties>
   </object>
   <object id="163" gid="24" x="32" y="832" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="2"/>
     <property name="id" value="forest-2_a167c84e-a181-f3e2-ea82-63420d9210ba"/>
+    <property name="targetarea" value="dungeon-7"/>
+    <property name="targetdir" type="int" value="1"/>
+    <property name="targetx" type="int" value="7"/>
+    <property name="targety" type="int" value="13"/>
    </properties>
   </object>
   <object id="164" gid="24" x="512" y="224" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="2"/>
     <property name="id" value="forest-2_e74ef929-e94c-00d5-d8e7-8369a3babee0"/>
+    <property name="targetarea" value="dungeon-2"/>
+    <property name="targetdir" type="int" value="2"/>
+    <property name="targetx" type="int" value="5"/>
+    <property name="targety" type="int" value="1"/>
    </properties>
   </object>
   <object id="165" gid="24" x="800" y="416" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="2"/>
     <property name="id" value="forest-2_0e96bc0a-cec0-6e77-e3a3-18518af604c2"/>
+    <property name="targetarea" value="dungeon-4"/>
+    <property name="targetdir" type="int" value="1"/>
+    <property name="targetx" type="int" value="18"/>
+    <property name="targety" type="int" value="11"/>
    </properties>
   </object>
   <object id="169" gid="24" x="512" y="640" width="32" height="32">
    <properties>
+    <property name="direction" type="int" value="0"/>
     <property name="id" value="forest-2_7f75fa99-67df-83f8-d722-c4f74a7cc025"/>
+    <property name="targetarea" value="dungeon-5"/>
+    <property name="targetdir" type="int" value="2"/>
+    <property name="targetx" type="int" value="13"/>
+    <property name="targety" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>
@@ -221,6 +397,7 @@
   </object>
   <object id="179" gid="36" x="896" y="672" width="32" height="32">
    <properties>
+    <property name="gold" type="int" value="45"/>
     <property name="id" value="forest-2_a14b5eda-cf70-518d-bffe-6f2b4e5835e5"/>
    </properties>
   </object>
@@ -230,13 +407,27 @@
     <property name="id" value="forest-2_39343952-7ebb-fa2b-4f34-12f3350f640c"/>
    </properties>
   </object>
+  <object id="216" gid="36" x="576" y="736" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="id" value="forest-2_265e23ac-5a15-ec0e-7f71-64a86b9c22ad"/>
+   </properties>
+  </object>
+  <object id="217" gid="36" x="544" y="768" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="2"/>
+    <property name="id" value="forest-2_f2e187a0-0780-6810-bd7a-5371420a7826"/>
+   </properties>
+  </object>
   <object id="181" gid="36" x="320" y="512" width="32" height="32">
    <properties>
+    <property name="gold" type="int" value="10"/>
     <property name="id" value="forest-2_d9b6a520-4635-3679-6c8e-8c62e52cbcbf"/>
    </properties>
   </object>
   <object id="182" gid="36" x="416" y="128" width="32" height="32">
    <properties>
+    <property name="gold" type="int" value="0"/>
     <property name="id" value="forest-2_5bbfc5e2-1d4b-52a2-ee58-6e513e5fc462"/>
    </properties>
   </object>
@@ -244,32 +435,39 @@
    <properties>
     <property name="direction" type="int" value="1"/>
     <property name="id" value="forest-2_e4262ba8-7e5e-17fb-ba6d-91c865a3dd5d"/>
+    <property name="loot" value="mana-potion"/>
    </properties>
   </object>
   <object id="184" gid="36" x="896" y="192" width="32" height="32">
    <properties>
+    <property name="gold" type="int" value="35"/>
     <property name="id" value="forest-2_7650466e-c888-6ab7-b557-476f7602f107"/>
+    <property name="loot" value="healing-potion"/>
    </properties>
   </object>
   <object id="185" gid="36" x="32" y="416" width="32" height="32">
    <properties>
     <property name="direction" type="int" value="1"/>
+    <property name="gold" type="int" value="10"/>
     <property name="id" value="forest-2_eb94808a-a891-c7c8-1a6a-eb0e9d968c75"/>
    </properties>
   </object>
   <object id="186" gid="36" x="128" y="576" width="32" height="32">
    <properties>
     <property name="direction" type="int" value="1"/>
+    <property name="gold" type="int" value="50"/>
     <property name="id" value="forest-2_a943c465-9836-5a0d-485d-647db7e7609b"/>
    </properties>
   </object>
   <object id="187" gid="36" x="32" y="704" width="32" height="32">
    <properties>
+    <property name="gold" type="int" value="15"/>
     <property name="id" value="forest-2_f6eded96-1751-c819-9a44-daa62430d035"/>
    </properties>
   </object>
   <object id="188" gid="36" x="320" y="800" width="32" height="32">
    <properties>
+    <property name="gold" type="int" value="25"/>
     <property name="id" value="forest-2_cc76c74f-cf0f-2361-a15e-d517d1a0e571"/>
    </properties>
   </object>
@@ -278,58 +476,96 @@
  <objectgroup id="6" name="Fire ants">
   <object id="189" gid="9" x="768" y="96" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
+    <property name="attack" type="int" value="8"/>
+    <property name="defence" type="int" value="4"/>
+    <property name="health" type="int" value="100"/>
+    <property name="health_max" type="int" value="100"/>
     <property name="id" value="forest-2_ad33f084-dfa6-5675-940b-a4bda04cdabc"/>
+    <property name="name" value="Fire ant guard"/>
    </properties>
   </object>
   <object id="190" gid="9" x="832" y="160" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
+    <property name="attack" type="int" value="8"/>
+    <property name="defence" type="int" value="4"/>
+    <property name="health" type="int" value="100"/>
+    <property name="health_max" type="int" value="100"/>
     <property name="id" value="forest-2_b4640122-fb88-fcb6-e760-b14eb2f98e2c"/>
+    <property name="name" value="Fire ant guard"/>
    </properties>
   </object>
   <object id="191" gid="9" x="896" y="96" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
+    <property name="attack" type="int" value="8"/>
+    <property name="defence" type="int" value="4"/>
+    <property name="health" type="int" value="100"/>
+    <property name="health_max" type="int" value="100"/>
     <property name="id" value="forest-2_20fcae6e-7283-f69f-91ba-8acad5984982"/>
+    <property name="name" value="Fire ant guard"/>
    </properties>
   </object>
   <object id="192" gid="9" x="928" y="576" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_09230c3f-1adc-0b22-c1f3-eb1231394606"/>
    </properties>
   </object>
   <object id="193" gid="9" x="736" y="864" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_e7a0a37b-7194-c475-7a94-605e630b4f19"/>
    </properties>
   </object>
   <object id="194" gid="9" x="928" y="832" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_5c4baa77-2745-b0af-803c-e0f67456dccf"/>
    </properties>
   </object>
-  <object id="195" gid="9" x="928" y="960" width="32" height="32">
+  <object id="195" gid="9" x="960" y="928" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_b0778c35-4a11-ba50-3ba4-59b4fe66c186"/>
    </properties>
   </object>
   <object id="196" gid="9" x="352" y="992" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_8f8c25e9-bde5-bbfc-3825-e81aad7377db"/>
    </properties>
   </object>
   <object id="197" gid="9" x="224" y="768" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_d0194f71-0c99-a38b-0f5f-978f578999ec"/>
+   </properties>
+  </object>
+  <object id="220" gid="10" x="832" y="96" width="32" height="32">
+   <properties>
+    <property name="antsacs" type="int" value="0"/>
+    <property name="attack" type="int" value="8"/>
+    <property name="defence" type="int" value="6"/>
+    <property name="health" type="int" value="40"/>
+    <property name="health_max" type="int" value="40"/>
+    <property name="id" value="forest-2_0ae07af9-bc85-6edd-3cbf-c31f38657757"/>
+    <property name="imageid" value="ant-queen"/>
+    <property name="sound_scream" value="ant-queen-scream"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="11" name="Young fire ants">
   <object id="198" gid="8" x="96" y="928" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_18a7e26f-f0ce-c229-b4f0-ad4f0ff89e7e"/>
    </properties>
   </object>
   <object id="199" gid="8" x="576" y="864" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_aba082da-5249-430b-712e-ca2247bc566b"/>
    </properties>
   </object>
@@ -340,6 +576,7 @@
   </object>
   <object id="201" gid="8" x="640" y="480" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_dcad5251-56ad-a483-3195-c910af069d13"/>
    </properties>
   </object>
@@ -350,6 +587,7 @@
   </object>
   <object id="203" gid="8" x="800" y="672" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_2ffbf787-e616-0fcf-9e97-fc918e309418"/>
    </properties>
   </object>
@@ -360,26 +598,31 @@
   </object>
   <object id="205" gid="8" x="32" y="192" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_bb4f4f9c-d949-0c91-4d6a-fef04a89f81c"/>
    </properties>
   </object>
   <object id="206" gid="8" x="128" y="64" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_a503c1e5-e3e7-8b02-bd11-9e2e9713dd4f"/>
    </properties>
   </object>
   <object id="207" gid="8" x="544" y="160" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_81b7c49c-e551-028b-a981-75f98233416a"/>
    </properties>
   </object>
   <object id="208" gid="8" x="736" y="288" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="forest-2_3f71302f-2e92-452a-2ec5-e63126e23693"/>
    </properties>
   </object>
   <object id="117" gid="8" x="64" y="736" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="dark_forest_1_b91be9ed-fb7e-dc85-c1b7-270d3eab7a35"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
@@ -392,12 +635,14 @@
   </object>
   <object id="118" gid="8" x="320" y="448" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="dark_forest_1_1ee1b50a-934d-f20e-f344-faf651d77ec6"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
   </object>
   <object id="119" gid="8" x="416" y="320" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="dark_forest_1_a73e6c3f-136c-37a7-e78d-14a354f5795b"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>
@@ -410,6 +655,7 @@
   </object>
   <object id="140" gid="8" x="320" y="640" width="32" height="32">
    <properties>
+    <property name="antsacs" type="int" value="1"/>
     <property name="id" value="dark_forest_1_7165bca9-8eae-4f78-9963-1b095bfd9627"/>
     <property name="wanderer" type="int" value="1"/>
    </properties>

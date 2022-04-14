@@ -5,10 +5,10 @@ function SpellTemplates:initialize()
 	self.templates = {}
 
 	self:addTemplate("lesser-heal", "Lesser heal", "player", "spelleffect-heal", 5, { ["health"] = 25 })
-	self:addTemplate("full-heal", "Full heal", "player", "spelleffect-heal", 25, { ["health"] = 100 })
+	self:addTemplate("full-heal", "Full heal", "player", "spelleffect-heal", 15, { ["health"] = 100 })
 	self:addTemplate("firebolt", "Firebolt", "enemy", "spelleffect-fireball", 5, { ["atk"] = 10 })
-	self:addTemplate("fireball", "Fireball", "enemy", "spelleffect-fireball", 25, { ["atk"] = 25 })
-	self:addTemplate("town-portal", "Town portal", "player", "spelleffect-townportal", 25, {})
+	self:addTemplate("fireball", "Fireball", "enemy", "spelleffect-fireball", 15, { ["atk"] = 25 })
+	self:addTemplate("town-portal", "Town portal", "player", "spelleffect-townportal", 5, {})
 
 end
 

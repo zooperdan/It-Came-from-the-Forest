@@ -139,7 +139,9 @@ function Game:handleMousePressed(x, y, button, istouch)
 	if button == 1 then
 	
 		if gameState == GameStates.BUILDUP1 or gameState == GameStates.BUILDUP2 or gameState == GameStates.BUILDUP3 or gameState == GameStates.BUILDUP4 then
-			self:jumpToMainmenu()
+			if not savedsettings.firstRun then
+				self:jumpToMainmenu()
+			end
 			return
 		end	
 	
@@ -234,6 +236,11 @@ function Game:handleInput(key)
 	local key = string.lower(key)
 
 	-- COMMON
+
+    if key == 'f9' then
+		gameState = GameStates.VICTORY
+		subState = SubStates.IDLE
+    end
 
     if key == 'f1' then
 		if party:loadGameFromSlot(1) then
@@ -493,6 +500,16 @@ end
 
 function Game:handleTileCollide(x, y)
 
+	-- enemies
+	
+	for key,value in pairs(level.data.enemies) do
+		if level.data.enemies[key].x == x and level.data.enemies[key].y == y then
+			if level.data.enemies[key].properties.state == 1 then
+				return true
+			end
+		end
+	end	
+	
 	-- wall
 
 	if level.data.walls and level.data.walls[x][y] then
@@ -545,19 +562,19 @@ function Game:handleTileCollide(x, y)
 		return true
 	end		
 	
-	-- enemies
-	
-	local enemy = level:getObject(level.data.enemies, x,y)
-	
-	if enemy and enemy.properties.state == 1 then
-		return true
-	end
-	
 	-- portal
 	
 	local portal = level:getObject(level.data.portals, x,y)
 	
 	if portal and portal.properties.visible == 1 then
+		return true
+	end
+	
+	-- boss gate
+	
+	local bossgate = level:getObject(level.data.bossgates, x,y)
+	
+	if bossgate and bossgate.properties.state ~= 1 then
 		return true
 	end
 	
@@ -797,7 +814,11 @@ function Game:checkIfClickedOnFacingObject(x, y)
 				else
 					gameState = GameStates.LOADING_LEVEL
 					fadeColor = {1,1,1}
-					assets:playSound("city-gate")
+					if level.data.tileset == "dungeon" then
+						assets:playSound("stairs")
+					else
+						assets:playSound("city-gate")
+					end
 					Game.currentDoor = door
 					fadeMusicVolume.v = savedsettings.musicVolume
 					self.fromSaveFile = false
@@ -824,9 +845,6 @@ function Game:checkIfClickedOnFacingObject(x, y)
 
 	if npc and npc.properties.visible == 1 and intersectBox(x, y, world_hitboxes["npc"]) then
 	
-		if npc.properties.state == 1 then
-			level:applyVars(npc.properties.init_vars)
-		end
 		
 		if checkCriterias(npc.properties.criterias) then
 			npc.properties.delayedLoot = (npc.properties.state == 1) and true or false
@@ -840,6 +858,10 @@ function Game:checkIfClickedOnFacingObject(x, y)
 			return true
 		end
 
+		if npc.properties.state == 1 then
+			level:applyVars(npc.properties.init_vars)
+		end
+		
 		if npc.properties.state == 2 then
 			npc.properties.state = 3
 			globalvariables:add(npc.properties.id, "state", npc.properties.state)
@@ -854,6 +876,38 @@ function Game:checkIfClickedOnFacingObject(x, y)
 		
 	end
 
+	-- boss gate
+
+	local bossgate = level:getFacingObject(level.data.bossgates, x,y)
+	
+	if bossgate and intersectBox(x, y, world_hitboxes["door"]) then
+		
+		if bossgate.properties.state == 2 then
+			if bossgate.properties.keyid and bossgate.properties.keyid ~= "" then
+				if party:consumeItem(bossgate.properties.keyid) then
+					bossgate.properties.keyid = ""
+					globalvariables:add(bossgate.properties.id, "keyid", bossgate.properties.keyid)
+					assets:playSound("unlock")
+					renderer:showPopup("You use a key to unlock the gate.", false)
+				else
+					renderer:showPopup("You don't have the key that unlocks this gate.")
+				end
+			else
+				bossgate.properties.state = 1
+				globalvariables:add(bossgate.properties.id, "state", bossgate.properties.state)
+				assets:playSound("bossgate")		
+				
+				local map = level:generatePathMap()
+				for key,value in pairs(self.enemies) do
+					self.enemies[key]:setMap(map)
+				end
+				
+			end
+			return true
+		end
+		
+	end
+	
 	-- portal
 	
 	local portal = level:getFacingObject(level.data.portals, x, y)
@@ -879,7 +933,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 	local chest = level:getFacingObject(level.data.chests, x,y)
 	
 	if chest and intersectBox(x, y, world_hitboxes["chest"]) then
-		print(chest.properties.state)
+		
 		if chest.properties.state == 1 then
 			if chest.properties.keyid and chest.properties.keyid ~= "" then
 				if party:consumeItem(chest.properties.keyid) then
@@ -1013,6 +1067,8 @@ function Game:jumpToMainmenu()
 
 	Timer.clear()
 
+	savedsettings.firstRun = false
+
 	gameState = GameStates.MAIN_MENU
 
 	fadeColor = {1,1,1}
@@ -1026,13 +1082,8 @@ end
 
 function Game:invokeTownPortal()
 
-	spawnTarget =  {
-		x = 19,
-		y = 15,
-		direction = 1
-	}
-
 	gameState = GameStates.LOADING_LEVEL
+	self.currentDoor = nil
 	fadeColor = {1,1,1}
 	assets:playSound("portal")
 	fadeMusicVolume.v = savedsettings.musicVolume
@@ -1041,6 +1092,11 @@ function Game:invokeTownPortal()
 		end)
 		Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad', function()
 			assets:stopMusic(level.data.tileset)
+			spawnTarget =  {
+				x = 19,
+				y = 15,
+				direction = 1
+			}			
 			Game:loadArea("city")
 		end)
 	end)	
@@ -1144,7 +1200,7 @@ function buildUpStep4()
 
 	Timer.script(function(wait)
 		Timer.tween(2, fadeColor, {1,1,1}, 'in-out-quad')
-		wait(5.5)
+		wait(5.4)
 		Game:jumpToMainmenu()
 	end)
 

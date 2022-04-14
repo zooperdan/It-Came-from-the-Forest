@@ -1,7 +1,7 @@
 settings = {
-	quickstart = true,
+	quickstart = false,
 	debug = false,
-	startingArea = "city",
+	startingArea = "forest-1",
 	inventoryX = 119,
 	inventoryY = 50,
 	inventorySlotsStartX = 251,
@@ -18,7 +18,8 @@ savedsettings = {
 	musicVolume = 0.75,
 	sfxVolume = 1,
 	lastSavegameSlot = -1,
-	fullScreen = false
+	fullScreen = true,
+	firstRun = true,
 }
 
 isFading = false

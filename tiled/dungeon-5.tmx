@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="201">
+ <editorsettings>
+  <export format="custom"/>
+ </editorsettings>
+ <properties>
+  <property name="ceiling" type="int" value="1"/>
+  <property name="id" value="dungeon-5"/>
+  <property name="name" value="Dungeon 5"/>
+  <property name="tileset" value="dungeon"/>
+ </properties>
+ <tileset firstgid="1" source="MainTiles.tsx"/>
+ <layer id="1" name="Walls" width="32" height="32">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,0,1,1,1,1,1,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="5" name="BoundaryWalls" width="32" height="32">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="34" gid="4" x="416" y="160" width="32" height="32"/>
+  <object id="170" gid="36" x="544" y="320" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="gold" type="int" value="15"/>
+    <property name="id" value="dungeon-5_fc122025-94e5-fbb0-a56b-d9159c77e254"/>
+    <property name="loot" value="necklace-2"/>
+   </properties>
+  </object>
+  <object id="174" gid="17" x="384" y="480" width="32" height="32">
+   <properties>
+    <property name="gold" type="int" value="150"/>
+    <property name="id" value="dungeon-5_b45d3372-dbbe-de99-49c5-0e415a94fd22"/>
+    <property name="loot" value="boots-3"/>
+   </properties>
+  </object>
+  <object id="185" gid="11" x="416" y="256" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="3"/>
+    <property name="defence" type="int" value="2"/>
+    <property name="health" type="int" value="20"/>
+    <property name="health_max" type="int" value="20"/>
+    <property name="id" value="dungeon-5_27db1205-a2a1-b9bf-8a2d-4e57bb4718b3"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="187" gid="11" x="512" y="192" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="3"/>
+    <property name="defence" type="int" value="2"/>
+    <property name="health" type="int" value="20"/>
+    <property name="health_max" type="int" value="20"/>
+    <property name="id" value="dungeon-5_a13d5bf6-84e7-9aee-ca45-a47c7a4c17fc"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="191" gid="11" x="288" y="128" width="32" height="32">
+   <properties>
+    <property name="attack" type="int" value="3"/>
+    <property name="defence" type="int" value="2"/>
+    <property name="health" type="int" value="20"/>
+    <property name="health_max" type="int" value="20"/>
+    <property name="id" value="dungeon-5_39c2970b-c502-e23a-1e1f-37bc345c2c5e"/>
+    <property name="wanderer" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="190" gid="36" x="544" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="2"/>
+    <property name="gold" type="int" value="60"/>
+    <property name="id" value="dungeon-5_ac5757a7-a6e9-09f5-fd73-1842e6e7c6c8"/>
+    <property name="loot" value=""/>
+   </properties>
+  </object>
+  <object id="200" gid="36" x="608" y="96" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="2"/>
+    <property name="gold" type="int" value="25"/>
+    <property name="id" value="dungeon-5_dbf4296d-984c-e67f-0fff-4a1a9d451439"/>
+    <property name="loot" value=""/>
+   </properties>
+  </object>
+  <object id="194" gid="36" x="448" y="480" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="2"/>
+    <property name="gold" type="int" value="22"/>
+    <property name="id" value="dungeon-5_b43e1394-7668-af9d-3f56-aaa0a273464b"/>
+    <property name="loot" value=""/>
+   </properties>
+  </object>
+  <object id="195" gid="36" x="288" y="320" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="2"/>
+    <property name="gold" type="int" value="25"/>
+    <property name="id" value="dungeon-5_d0b50dac-617e-b900-bb1b-bed49792a3ed"/>
+    <property name="loot" value=""/>
+   </properties>
+  </object>
+  <object id="196" gid="36" x="288" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="1"/>
+    <property name="gold" type="int" value="0"/>
+    <property name="id" value="dungeon-5_336a05a5-2cb9-1fa0-22d4-7541314b480c"/>
+    <property name="loot" value="mana-potion"/>
+   </properties>
+  </object>
+  <object id="180" gid="34" x="416" y="128" width="32" height="32">
+   <properties>
+    <property name="id" value="dungeon-5_4f76795e-7e66-aa1b-e0a8-963a148b43ff"/>
+   </properties>
+  </object>
+  <object id="181" gid="22" x="416" y="96" width="32" height="32">
+   <properties>
+    <property name="direction" type="int" value="-1"/>
+    <property name="id" value="dungeon-5_4fdd8bc5-2374-bc61-e692-cdb332a6e04d"/>
+    <property name="targetarea" value="forest-2"/>
+    <property name="targetdir" type="int" value="0"/>
+    <property name="targetx" type="int" value="16"/>
+    <property name="targety" type="int" value="18"/>
+   </properties>
+  </object>
+  <object id="197" gid="9" x="416" y="448" width="32" height="32">
+   <properties>
+    <property name="antsacs" type="int" value="1"/>
+    <property name="id" value="dungeon-5_43d54e9e-a039-d338-5595-5c4e116fac2a"/>
+   </properties>
+  </object>
+  <object id="198" gid="9" x="480" y="352" width="32" height="32">
+   <properties>
+    <property name="antsacs" type="int" value="1"/>
+    <property name="id" value="dungeon-5_6ed37b9b-13ba-d830-9f1a-38c0f5b5ec6a"/>
+   </properties>
+  </object>
+  <object id="199" gid="9" x="352" y="352" width="32" height="32">
+   <properties>
+    <property name="antsacs" type="int" value="1"/>
+    <property name="id" value="dungeon-5_56bbf396-4c72-72af-cb91-d94407880aec"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -44,6 +44,10 @@ function Level:load(id, location)
 			self.data.levelexits = {}
 		end		
 		
+		if not self.data.bossgates then
+			self.data.bossgates = {}
+		end	
+		
 		-- randomize enemy facing direction
 		
 		for key,value in pairs(self.data.enemies) do
@@ -188,6 +192,18 @@ function Level:applyGlobalVariables()
 
 	end	
 	
+	for key,value in pairs(self.data.bossgates) do
+		
+		local bossgate = level.data.bossgates[key]
+
+		local gvar = globalvariables:get(bossgate.properties.id, "state")
+		if gvar then bossgate.properties.state = tonumber(gvar) end		
+
+		local gvar = globalvariables:get(bossgate.properties.id, "keyid")
+		if gvar then bossgate.properties.keyid = tostring(gvar) end		
+
+	end	
+	
 	for key,value in pairs(self.data.npcs) do
 		
 		local npc = level.data.npcs[key]
@@ -314,7 +330,16 @@ function Level:generatePathMap()
 			for key,value in pairs(self.data.enemyblockers) do
 				local enemyblocker = self.data.enemyblockers[key]
 				if enemyblocker.x == x and enemyblocker.y == y then
-					walkable = 1
+					--walkable = 1
+				end
+			end	
+			
+			for key,value in pairs(self.data.bossgates) do
+				local bossgate = self.data.bossgates[key]
+				if bossgate.x == x and bossgate.y == y then
+					if bossgate.properties.state ~= 1 then
+						walkable = 1
+					end
 				end
 			end	
 			

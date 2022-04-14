@@ -213,6 +213,10 @@ function Renderer:update(dt)
 	if gameState == GameStates.GAMEOVER then
 		self:drawGameOver()
 	end
+
+	if gameState == GameStates.VICTORY then
+		self:drawVictory()
+	end
 	
 	if subState == SubStates.FOUND_LOOT then
 		self:drawFoundLoot()
@@ -235,6 +239,7 @@ function Renderer:update(dt)
 	or gameState == GameStates.CREDITS
 	or gameState == GameStates.ABOUT
 	or gameState == GameStates.GAMEOVER
+	or gameState == GameStates.VICTORY
 	then
 		self:drawPointer()	
 	end
@@ -263,7 +268,7 @@ function Renderer:handleMousePressed(x, y, button)
 	
 	if button == 1 then
 
-		if gameState == GameStates.GAMEOVER then
+		if gameState == GameStates.GAMEOVER or gameState == GameStates.VICTORY then
 			fadeMusicVolume.v = savedsettings.musicVolume
 			assets:stopMusic(level.data.tileset)
 			assets:setMusicVolume("mainmenu", savedsettings.musicVolume)
@@ -364,6 +369,8 @@ function Renderer:handleMousePressed(x, y, button)
 							Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad')
 							wait(1.25)
 							renderer.showTavern = false
+							party.stats.health = party.stats.health_max
+							party.stats.mana = party.stats.mana_max
 							Timer.tween(1, fadeColor, {1,1,1}, 'in-out-quad')
 							wait(1.25)
 							renderer:showPopup("Thank you for staying with us. Hope to see you again soon!")
@@ -632,6 +639,16 @@ function Renderer:drawText(x, y, text, color, align)
 	
 end
 
+function Renderer:drawText2(x, y, text, color, align)
+
+	align = align and align or "left"
+
+	love.graphics.setColor(0,0,0,1)
+	love.graphics.printf(text, x, y, 640, align)
+	love.graphics.setColor(1,1,1,1)
+	
+end
+
 function Renderer:drawCenteredText(x, y, text, color)
 
 
@@ -646,6 +663,7 @@ function Renderer:drawCenteredText(x, y, text, color)
 	love.graphics.setColor(1,1,1,1)
 	
 end
+
 function Renderer:drawWrappedText(x, y, text, wrapAt, color, align)
 
 	align = align and align or "left"
@@ -653,6 +671,16 @@ function Renderer:drawWrappedText(x, y, text, wrapAt, color, align)
 	love.graphics.setColor(0,0,0,1)
 	love.graphics.printf(text, x+1, y+1, wrapAt, align)
 	love.graphics.setColor(color)
+	love.graphics.printf(text, x, y, wrapAt, align)
+	love.graphics.setColor(1,1,1,1)
+	
+end
+
+function Renderer:drawWrappedText2(x, y, text, wrapAt, color, align)
+
+	align = align and align or "left"
+
+	love.graphics.setColor(0,0,0,1)
 	love.graphics.printf(text, x, y, wrapAt, align)
 	love.graphics.setColor(1,1,1,1)
 	
@@ -695,6 +723,26 @@ function Renderer:drawGameOver()
 	self:drawWrappedText(50, 50+10, text, 240, color.white, "left")
 
 	self:drawText(50,255+10, "- Oscar Wilde", {1,1,1,1}, "left")
+
+end
+
+function Renderer:drawVictory()
+
+	love.graphics.draw(assets.images["victory"], 0,0)	
+
+	love.graphics.setFont(assets.fonts["mainmenu"]);
+
+	local text = "Victory is sweetest when you've known defeat.."
+
+	self:drawWrappedText2(350, 50+10, text, 240, color.white, "left")
+
+	self:drawText2(350,100, "- Malcolm Forbes", {1,1,1,1}, "left")
+	
+	text = "Once again the sun rise over the kingdom. The people have been liberated from the terrifying scourge which plagued them for so long."
+	self:drawWrappedText2(350, 150, text, 240, color.white, "left")
+
+	text = "Thank you for your service!"
+	self:drawWrappedText2(350, 280, text, 240, color.white, "left")
 
 end
 
@@ -1070,16 +1118,25 @@ function Renderer:clickOnVendor(x, y)
 		local yy = 188
 		if intersect(x, y, xx, yy, 32, 32) then
 			if party.gold >= self.currentVendor.prices[i] then
-				party.gold = party.gold - self.currentVendor.prices[i]
-				assets:playSound("buy")
 				if self.currentVendor.stock[i] == "healing-potion" then
 					party.healing_potions = party.healing_potions + 1
+					party.gold = party.gold - self.currentVendor.prices[i]
+					assets:playSound("buy")
 				elseif self.currentVendor.stock[i] == "mana-potion" then
 					party.mana_potions = party.mana_potions + 1
+					party.gold = party.gold - self.currentVendor.prices[i]
+					assets:playSound("buy")
 				else
-					party:addSpell(self.currentVendor.stock[i])
+					if party:addSpell(self.currentVendor.stock[i]) then
+						party.gold = party.gold - self.currentVendor.prices[i]
+						assets:playSound("buy")
+					else
+						assets:playSound("cantafford")
+					end
 				end
 				
+			else
+				assets:playSound("cantafford")
 			end
 		end
 	end	
@@ -1338,6 +1395,8 @@ function Renderer:clickOnInventory(mx, my)
 
 					end
 
+					party:squareIsSeen(party.x, party.y)
+
 				end
 				
 			else
@@ -1550,8 +1609,8 @@ function Renderer:showPlayerStats()
 	local g = 197/255
 	local b = 58/255
 
-	self:drawText(304, 228, party.stats.health, {r,g,b,1})
-	self:drawText(304, 228+14, party.stats.mana, {r,g,b,1})
+	self:drawText(304, 228, party.stats.health .. " (" .. party.stats.health_max .. ")", {r,g,b,1})
+	self:drawText(304, 228+14, party.stats.mana .. " (" .. party.stats.mana_max .. ")", {r,g,b,1})
 	self:drawText(304, 228+28, party.stats.attack, {r,g,b,1})
 	self:drawText(304, 228+42, party.stats.defence, {r,g,b,1})
 	
@@ -1568,6 +1627,10 @@ function Renderer:showItemHoverStats(item)
 			local mod = item.modifiers[key]
 			if key == "health" or key == "mana" then
 				str = str .. key:upper() .. ": " .. value .. "%  "
+			elseif key == "maxhp" then
+				str = str .. "HEALTH" .. ": " .. value .. "  "
+			elseif key == "maxmp" then
+				str = str .. "MANA" .. ": " .. value .. "  "
 			else
 				str = str .. key:upper() .. ": " .. value .. "   "
 			end
@@ -1706,6 +1769,28 @@ function Renderer:drawAutomapper()
 			end
 		end
 	end
+	
+	-- levelexits
+
+	for key,value in pairs(level.data.levelexits) do
+		local levelexit = level.data.levelexits[key]
+		if party:seenSquare(levelexit.x, levelexit.y) then
+			local dx = offsetx + ((levelexit.x-1) * cellsize)
+			local dy = offsety + ((levelexit.y-1) * cellsize)
+			love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[6], dx, dy)
+		end
+	end	
+	
+	-- bossgates
+	
+	for key,value in pairs(level.data.bossgates) do
+		local bossgate = level.data.bossgates[key]
+		if party:seenSquare(bossgate.x, bossgate.y) then
+			local dx = offsetx + ((bossgate.x-1) * cellsize)
+			local dy = offsety + ((bossgate.y-1) * cellsize)
+			love.graphics.draw(assets.images["automapper-sprites"], assets.automapper_quads[19], dx, dy)
+		end
+	end	
 	
 	-- npcs
 
@@ -2130,6 +2215,14 @@ function Renderer:drawSquare(x, z)
 			end
 		end		
 		
+		for key,value in pairs(level.data.bossgates) do
+			local bossgate = level.data.bossgates[key]
+			if bossgate.x == p.x and bossgate.y == p.y then
+				local imageid = bossgate.properties.state == 1 and "boss-gate-open" or "boss-gate-closed"
+				self:drawObject("forest-environment", self:getObjectDirectionID(imageid, bossgate.properties.direction), x, z)
+			end
+		end			
+		
 		for key,value in pairs(level.data.enemies) do
 			local enemy = level.data.enemies[key]
 			if enemy.x == p.x and enemy.y == p.y then
@@ -2215,13 +2308,12 @@ function Renderer:drawViewport()
 		return
 	end	
 
-	self:drawSky()
+	if level.data.tileset ~= "dungeon" then
+		self:drawSky()
+	end
 	self:drawGround()
 	self:drawCeiling()
 
-	--love.graphics.draw(self.groundCanvas, 0, 0)
-	--love.graphics.draw(self.groundCanvas, 0, self.groundCanvas:getHeight(), 0, 1, -1)
-	
     for z = -self.dungeonDepth, 0 do
 		
 		for x = -self.dungeonWidth, -1 do

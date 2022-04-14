@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.8" tiledversion="1.8.2" name="MainTiles" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+ <editorsettings>
+  <export target="../src/files/areas/MainTiles..tsx" format="tsx"/>
+ </editorsettings>
  <image source="MainTiles.png" width="512" height="512"/>
  <tile id="0" type="Wall">
   <properties>
@@ -45,8 +48,8 @@
  <tile id="7" type="Enemy">
   <properties>
    <property name="antsacs" type="int" value="0"/>
-   <property name="attack" type="int" value="5"/>
-   <property name="defence" type="int" value="5"/>
+   <property name="attack" type="int" value="4"/>
+   <property name="defence" type="int" value="1"/>
    <property name="gold" type="int" value="0"/>
    <property name="health" type="int" value="25"/>
    <property name="health_max" type="int" value="25"/>
@@ -65,12 +68,13 @@
  </tile>
  <tile id="8" type="Enemy">
   <properties>
-   <property name="attack" type="int" value="15"/>
-   <property name="defence" type="int" value="15"/>
+   <property name="antsacs" type="int" value="1"/>
+   <property name="attack" type="int" value="6"/>
+   <property name="defence" type="int" value="2"/>
    <property name="experience" type="int" value="10"/>
    <property name="gold" type="int" value="0"/>
-   <property name="health" type="int" value="100"/>
-   <property name="health_max" type="int" value="100"/>
+   <property name="health" type="int" value="50"/>
+   <property name="health_max" type="int" value="50"/>
    <property name="id" value=""/>
    <property name="imageid" value="ant"/>
    <property name="loot" value=""/>
@@ -86,8 +90,9 @@
  </tile>
  <tile id="9" type="Enemy">
   <properties>
-   <property name="attack" type="int" value="40"/>
-   <property name="defence" type="int" value="20"/>
+   <property name="antsacs" type="int" value="1"/>
+   <property name="attack" type="int" value="20"/>
+   <property name="defence" type="int" value="10"/>
    <property name="experience" type="int" value="10"/>
    <property name="gold" type="int" value="0"/>
    <property name="health" type="int" value="250"/>
@@ -95,7 +100,7 @@
    <property name="id" value=""/>
    <property name="imageid" value="ant"/>
    <property name="loot" value=""/>
-   <property name="name" value="Fire ant soldier"/>
+   <property name="name" value="The Queen"/>
    <property name="sound_attack" value="ant-attack"/>
    <property name="sound_die" value="ant-die"/>
    <property name="sound_move" value="ant-move"/>
@@ -190,7 +195,7 @@
  <tile id="19" type="Well">
   <properties>
    <property name="counter" type="int" value="0"/>
-   <property name="counter_max" type="int" value="100"/>
+   <property name="counter_max" type="int" value="200"/>
    <property name="direction" type="int" value="3"/>
    <property name="id" value=""/>
    <property name="state" type="int" value="1"/>
@@ -229,13 +234,23 @@
  </tile>
  <tile id="23" type="LevelExit">
   <properties>
+   <property name="atlasid" value="forest-props"/>
    <property name="direction" type="int" value="3"/>
    <property name="id" value=""/>
+   <property name="imageid" value="dungeon-entrance"/>
    <property name="state" type="int" value="1"/>
    <property name="targetarea" value=""/>
    <property name="targetdir" type="int" value="0"/>
    <property name="targetx" type="int" value="0"/>
    <property name="targety" type="int" value="0"/>
+  </properties>
+ </tile>
+ <tile id="24" type="BossGate">
+  <properties>
+   <property name="direction" type="int" value="3"/>
+   <property name="id" value=""/>
+   <property name="keyid" value=""/>
+   <property name="state" type="int" value="1"/>
   </properties>
  </tile>
  <tile id="32" type="Wall">

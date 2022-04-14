@@ -19,7 +19,7 @@ function Vendors:initialize()
 		imageid = "npc-sorcerer-3",
 		text = "Welcome traveller.\n\nCould I interest you in some spells?",
 		stock = {"lesser-heal", "full-heal", "firebolt", "fireball", "town-portal"},
-		prices = {150, 450, 150, 450, 750},
+		prices = {150, 450, 150, 450, 200},
 	}	
 	
 end	

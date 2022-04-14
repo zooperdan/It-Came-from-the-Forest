@@ -62,72 +62,92 @@ function getMapSize(x) {
 }
 
 
-function getPlayer(layer) {
+function getPlayer(map) {
 	
 	var buffer = '';
 	
-	for (var i = 0; i < layer.objectCount; ++i) {
-		
-		var props = layer.objects[i].resolvedProperties();
-		
-		if (layer.objects[i].tile.type == "Player") {
-			buffer += `["partyX"]=${(layer.objects[i].x/32)+1},\n`;
-			buffer += `["partyY"]=${(layer.objects[i].y/32)},\n`;
-			buffer += `["partyDirection"]=${layer.objects[i].resolvedProperty("direction")},\n`;
+	for (var j = 0; j < map.layerCount; ++j) {
+
+		var layer = map.layerAt(j);
+	
+		if (layer.isObjectLayer) {
+			
+			for (var i = 0; i < layer.objectCount; ++i) {
+				
+				var props = layer.objects[i].resolvedProperties();
+				
+				if (layer.objects[i].tile.type == "Player") {
+					buffer += `["partyX"]=${(layer.objects[i].x/32)+1},\n`;
+					buffer += `["partyY"]=${(layer.objects[i].y/32)},\n`;
+					buffer += `["partyDirection"]=${layer.objects[i].resolvedProperty("direction")},\n`;
+				}
+				
+			}		
+
 		}
 		
-	}		
+	}
 	
 	return buffer;
 	
 }
 
-function getByType(id, name, layer) {
+function getByType(id, name, map) {
 		
 		// first iterate through objects and store temporarily in a hashmap
 		
 		var data = new Array();
 		
-		for (var i = 0; i < layer.objectCount; ++i) {
+        for (var j = 0; j < map.layerCount; ++j) {
+            
+			var layer = map.layerAt(j);
+		
+			if (layer.isObjectLayer) {
+		
+				for (var i = 0; i < layer.objectCount; ++i) {
 
-			var props = layer.objects[i].resolvedProperties();
-			
-			if (layer.objects[i].tile.type == id) {
-
-				var x = (layer.objects[i].x/32)+1;
-				var y = layer.objects[i].y/32;
-				
-				var obj = new Object();
-				obj.x = x;
-				obj.y = y;
-				obj.properties = new Map()
-				
-				for (const key in props) {
-
-					var value = props[key];
+					var props = layer.objects[i].resolvedProperties();
 					
-					if (!isNumeric(value)) {
-						if (value && !isNumeric(value) && value.substring(0,1) == "#") {
-						} else {
-							value = '"' + value + '"';
-						}
-					} else {
-						if (parseInt(value) == 0) {
+					if (layer.objects[i].tile.type == id) {
 
-						} else {
-							value = value ? value : '""';
+						var x = (layer.objects[i].x/32)+1;
+						var y = layer.objects[i].y/32;
+						
+						var obj = new Object();
+						obj.x = x;
+						obj.y = y;
+						obj.properties = new Map()
+						
+						for (const key in props) {
+
+							var value = props[key];
+							
+							if (!isNumeric(value)) {
+								if (value && !isNumeric(value) && value.substring(0,1) == "#") {
+								} else {
+									value = '"' + value + '"';
+								}
+							} else {
+								if (parseInt(value) == 0) {
+
+								} else {
+									value = value ? value : '""';
+								}
+							}
+							
+							obj.properties.set(key, value);
+							
 						}
+					
+						data.push(obj);
+					
 					}
 					
-					obj.properties.set(key, value);
-					
-				}
-			
-				data.push(obj);
-			
+				}		
+
 			}
-			
-		}		
+
+		}
 			
 
 		// no objects found
@@ -405,32 +425,25 @@ var customMapFormat = {
 			
 			}
 
-		
-			// objects
-			
-			if (layer.isObjectLayer) {
-				buffer += getByType("EnemyBlocker", "enemyblockers", layer);
-				buffer += getByType("Enemy", "enemies", layer);
-				buffer += getByType("Chest", "chests", layer);
-				buffer += getByType("Spinner", "spinners", layer);
-				buffer += getByType("Portal", "portals", layer);
-				buffer += getByType("Well", "wells", layer);
-				buffer += getByType("NPC", "npcs", layer);
-				buffer += getByType("Trigger", "triggers", layer);
-				buffer += getByType("Teleporter", "teleporters", layer);
-				buffer += getByType("Sign", "signs", layer);
-				buffer += getByType("Door", "doors", layer);
-				buffer += getByType("StaticProp", "staticprops", layer);
-				buffer += getByType("Button", "buttons", layer);
-				buffer += getByType("LevelExit", "levelexits", layer);
-
-				/*
-				buffer += getByType("Button", "buttons", layer);
-				*/
-				buffer += getPlayer(layer);
-            }
-			
         }
+
+		buffer += getByType("EnemyBlocker", "enemyblockers", map);
+		buffer += getByType("Enemy", "enemies", map);
+		buffer += getByType("Chest", "chests", map);
+		buffer += getByType("Spinner", "spinners", map);
+		buffer += getByType("Portal", "portals", map);
+		buffer += getByType("Well", "wells", map);
+		buffer += getByType("NPC", "npcs", map);
+		buffer += getByType("Trigger", "triggers", map);
+		buffer += getByType("Teleporter", "teleporters", map);
+		buffer += getByType("Sign", "signs", map);
+		buffer += getByType("Door", "doors", map);
+		buffer += getByType("StaticProp", "staticprops", map);
+		buffer += getByType("Button", "buttons", map);
+		buffer += getByType("LevelExit", "levelexits", map);
+		buffer += getByType("BossGate", "bossgates", map);
+
+		buffer += getPlayer(map);
 
 		buffer += '}';
 

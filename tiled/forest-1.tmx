@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="180">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="180">
  <editorsettings>
   <export target="../src/files/areas/forest-1.lua" format="custom"/>
  </editorsettings>
@@ -143,15 +143,16 @@
   </object>
   <object id="164" gid="17" x="960" y="608" width="32" height="32">
    <properties>
-    <property name="gold" type="int" value="8"/>
+    <property name="gold" type="int" value="27"/>
     <property name="id" value="forest-1_78543826-7d2d-b036-5903-1a59d7106d89"/>
-    <property name="loot" value="helmet-1"/>
+    <property name="loot" value="cape-1"/>
    </properties>
   </object>
   <object id="165" gid="17" x="800" y="416" width="32" height="32">
    <properties>
     <property name="gold" type="int" value="5"/>
     <property name="id" value="forest-1_03019c51-9d3a-d966-3400-e1ef00ca1674"/>
+    <property name="loot" value="healing-potion"/>
    </properties>
   </object>
   <object id="166" gid="36" x="864" y="832" width="32" height="32">
@@ -214,9 +215,10 @@
   <object id="176" gid="14" x="832" y="416" width="32" height="32">
    <properties>
     <property name="criterias" value="forest-1_5d99ae2a-6a8d-f8de-2274-368d49ef585f:state:2"/>
+    <property name="gold" type="int" value="50"/>
     <property name="id" value="forest-1_069fe0a9-b6a3-473b-c6e6-4ac02ac2e6b8"/>
     <property name="imageid" value="npc-peasant-1"/>
-    <property name="loot" value="healing-potion:dagger-1"/>
+    <property name="loot" value="ring-1"/>
     <property name="name" value="Rigio Kalmek"/>
     <property name="questdelivertext" value="Yes yes, thank you!\n\nI thought for sure that I was going to die out here in the forest.\n\nHere, take this. You probably need it more than me."/>
     <property name="questdonetext" value="You are a life saver, quite literally!"/>
@@ -227,8 +229,8 @@
   <object id="177" gid="11" x="768" y="448" width="32" height="32">
    <properties>
     <property name="attack" type="int" value="2"/>
-    <property name="health" type="int" value="10"/>
-    <property name="health_max" type="int" value="10"/>
+    <property name="health" type="int" value="15"/>
+    <property name="health_max" type="int" value="15"/>
     <property name="id" value="forest-1_5d99ae2a-6a8d-f8de-2274-368d49ef585f"/>
    </properties>
   </object>

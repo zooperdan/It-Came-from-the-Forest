@@ -39,12 +39,12 @@ function Atlases:load(tileset)
 		self.filenames = {
 			"dungeon-environment",
 			"forest-props",
+			"dungeon-props",
 			"enemies",
 			"common-props",
 			"npc",
 		}	
 	end
-
 
 	local numerrors = 0
 	local path = "files/atlases/"
