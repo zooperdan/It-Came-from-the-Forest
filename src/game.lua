@@ -1,4 +1,3 @@
-local Messages = require "messages"
 local Renderer = require "renderer"
 local Assets = require "assets"
 local Party = require "party"
@@ -20,7 +19,6 @@ renderer = Renderer:new()
 level = Level:new()
 atlases = Atlases:new()
 party = Party:new()
-messages = Messages:new()
 globalvariables = GlobalVariables:new()
 vendors = Vendors:new()
 
@@ -139,7 +137,7 @@ function Game:handleMousePressed(x, y, button, istouch)
 	if button == 1 then
 	
 		if gameState == GameStates.BUILDUP1 or gameState == GameStates.BUILDUP2 or gameState == GameStates.BUILDUP3 or gameState == GameStates.BUILDUP4 then
-			if not savedsettings.firstRun then
+			if savedsettings.skipIntro then
 				self:jumpToMainmenu()
 			end
 			return
@@ -236,31 +234,30 @@ function Game:handleInput(key)
 	local key = string.lower(key)
 
 	-- COMMON
+	
+	if settings.debugmode then
+	
+		if key == 'f9' then
+			gameState = GameStates.VICTORY
+			subState = SubStates.IDLE
+		end
 
-    if key == 'f9' then
-		gameState = GameStates.VICTORY
-		subState = SubStates.IDLE
-    end
-
-    if key == 'f1' then
-		if party:loadGameFromSlot(1) then
+		if key == 'f1' then
+			if party:loadGameFromSlot(1) then
+			end
 		end
-    end
+		
+		if key == 'f3' then
+			if party:loadGameFromSlot(2) then
+			end
+		end
+		
+		if key == 'f4' then
+			if party:saveGameAtSlot(2) then
+			end
+		end
 	
-    if key == 'f2' then
-		if party:saveGameAtSlot(1) then
-		end
-    end
-	
-    if key == 'f3' then
-		if party:loadGameFromSlot(2) then
-		end
-    end
-	
-    if key == 'f4' then
-		if party:saveGameAtSlot(2) then
-		end
-    end
+	end
 	
     if key == 'return' then
 		if love.keyboard.isDown("lalt") then
@@ -288,8 +285,8 @@ function Game:handleInput(key)
 		if subState == SubStates.IDLE then
 
 			if key == 'escape' then
-				self:quitGame()
-				return
+				--self:quitGame()
+				--return
 			end
 
 			if key == 'left' or key == 'kp7' or key == 'q' then
@@ -750,8 +747,13 @@ end
 
 function Game:startGame()
 
-	spawnTarget = nil
+	globalvariables:clear()
+	party:resetStats()
+	party:updateStats()
 
+	spawnTarget = nil
+	self.currentDoor = nil
+	
 	subState = SubStates.LOADING_LEVEL
 	fadeColor = {1,1,1}
 	Timer.script(function(wait)
@@ -1009,7 +1011,7 @@ function Game:checkIfClickedOnFacingObject(x, y)
 				return true
 			end
 	
-		elseif prop.properties.text ~= "" then
+		elseif prop.properties.text and prop.properties.text ~= "" then
 			renderer:showPopup(prop.properties.text)
 			return true
 		end
@@ -1067,7 +1069,7 @@ function Game:jumpToMainmenu()
 
 	Timer.clear()
 
-	savedsettings.firstRun = false
+	savedsettings.skipIntro = true
 
 	gameState = GameStates.MAIN_MENU
 
@@ -1105,11 +1107,9 @@ end
 
 function Game:loadSettings()
 
-	if not love.filesystem.getInfo("files/settings.cfg") then
-		return
-	end
+	local filename = love.filesystem.getSourceBaseDirectory() .. "/settings.cfg"
 
-	file, err = io.open("files/settings.cfg", "rb")
+	file, err = io.open(filename, "rb")
 	
 	if not err and file then
 		local content = file:read("*all")
@@ -1124,9 +1124,11 @@ end
 
 function Game:saveSettings()
 
+	local filename = love.filesystem.getSourceBaseDirectory() .. "/settings.cfg"
+
 	local serialized = lume.serialize(savedsettings)
 	
-	file, err = io.open("files/settings.cfg", "wb")
+	file, err = io.open(filename, "wb")
 	
 	if not err and file then
 		file:write(serialized)

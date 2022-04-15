@@ -1,6 +1,6 @@
 settings = {
 	quickstart = false,
-	debug = false,
+	debugmode = false,
 	startingArea = "forest-1",
 	inventoryX = 119,
 	inventoryY = 50,
@@ -19,7 +19,7 @@ savedsettings = {
 	sfxVolume = 1,
 	lastSavegameSlot = -1,
 	fullScreen = true,
-	firstRun = true,
+	skipIntro = false,
 }
 
 isFading = false

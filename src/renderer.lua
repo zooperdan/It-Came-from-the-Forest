@@ -253,11 +253,10 @@ function Renderer:update(dt)
 	end	
 
 
-	if settings.debug then
-		local mx, my = love.mouse.getPosition()
-		self:drawText(20, 20, mx .. "/" .. my, {1,1,1,1}, "left")
-		
-		self:drawText(20, 40, tostring(love.timer.getFPS()), {1,1,1,1})
+	if settings.debugmode then
+		--local mx, my = love.mouse.getPosition()
+		--self:drawText(20, 20, mx .. "/" .. my, {1,1,1,1}, "left")
+		--self:drawText(20, 40, tostring(love.timer.getFPS()), {1,1,1,1})
 	end
 	
 	love.graphics.setCanvas()
@@ -270,6 +269,8 @@ function Renderer:handleMousePressed(x, y, button)
 
 		if gameState == GameStates.GAMEOVER or gameState == GameStates.VICTORY then
 			fadeMusicVolume.v = savedsettings.musicVolume
+			assets:stopMusic("victory")
+			assets:stopMusic("gameover")
 			assets:stopMusic(level.data.tileset)
 			assets:setMusicVolume("mainmenu", savedsettings.musicVolume)
 			assets:playMusic("mainmenu")
@@ -862,6 +863,8 @@ function Renderer:drawCredits()
 	self:drawText(378,288, "travissullivan.com/composer/", {1,1,1,1})
 
 	self:drawText(0,340, "* Refer to attribution.txt for more information", {1,1,1,.25}, "center")
+
+	self:drawText(600,340, "v0.9", {1,1,1,.25}, "left")
 
 	love.graphics.setFont(assets.fonts["main"]);
 

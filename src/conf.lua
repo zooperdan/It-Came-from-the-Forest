@@ -5,7 +5,7 @@ function love.conf(t)
 	t.appendidentity = true
 	t.window.width = 1280
 	t.window.height = 720
-	t.console = true
+	t.console = false
 	t.window.fullscreen = true
 	t.window.fullscreentype = "desktop"
 	t.window.fsaa = 0

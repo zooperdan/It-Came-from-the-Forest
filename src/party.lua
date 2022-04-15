@@ -8,13 +8,7 @@ function Party:initialize()
 	self.direction = 0
 	self.x = 1
 	self.y = 1
-	self.gold = 0
-	self.antsacs = 0
-	self.healing_potions = 0
-	self.mana_potions = 0
 	
-	self.ticksElapsed = 0
-
 	self.cooldownDelays = {[1] = 2, [2] = 4, [3] = 8, [4] = 8}
 	self.cooldownCounters = {[1] = 0, [2] = 0, [3] = 0, [4] = 0}
 
@@ -43,44 +37,7 @@ function Party:initialize()
 		
 	}
 	
-	-- saved properties
-
-	self.spells = {}
-	self.mappedsquares = {}
-	
-	self.stats =  {
-		attack = 1,
-		defence = 1,
-		health = 20,
-		health_max = 20,
-		mana = 20,
-		mana_max = 20,
-	}
-
-	self.inventory = {
-		{"", "", "", "", "", "", "", ""},
-		{"", "", "", "", "", "", "", ""},
-		{"", "", "", "", "", "", "", ""},
-		{"", "", "", "", "", "", "", ""},
-		{"", "", "", "", "", "", "", ""},
-	}
-	
-	self.equipped =  {
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = "sword-1"},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-		{ id = ""},
-	}
+	self:resetStats()
 	
 end
 
@@ -566,7 +523,7 @@ end
 
 function Party:isSavegameAtSlot(index)
 
-	return love.filesystem.getInfo("saves/slot" .. index .. ".dat")
+	return love.filesystem.getInfo("savegame" .. index .. ".dat")
 
 end
 
@@ -574,7 +531,7 @@ function Party:loadGameFromSlot(index)
 
 	subState = SubStates.DISK_IO
 
-	file, err = io.open("saves/slot"..index..".dat", "rb")
+	file, err = io.open("savegame"..index..".dat", "rb")
 	
 	if not err and file then
 		
@@ -594,6 +551,8 @@ function Party:loadGameFromSlot(index)
 		self.inventory = table.shallow_copy(savedata.inventory)
 		self.equipped = table.shallow_copy(savedata.equipped)
 		self.stats = table.shallow_copy(savedata.stats)
+
+		self.ticksElapsed = savedata.ticksElapsed and savedata.ticksElapsed or 0
 
 		gameState = GameStates.LOADING_LEVEL
 		fadeColor = {1,1,1}
@@ -646,12 +605,13 @@ function Party:saveGameAtSlot(index)
 		antsacs = self.antsacs,
 		healing_potions = self.healing_potions,
 		mana_potions = self.mana_potions,
-		levelid = level.data.id
+		levelid = level.data.id,
+		ticksElapsed = self.ticksElapsed
 	}
 	
 	local serialized = lume.serialize(savedata)
 	
-	file, err = io.open("saves/slot"..index..".dat", "wb")
+	file, err = io.open("savegame"..index..".dat", "wb")
 	
 	if not err and file then
 		file:write(serialized)
@@ -664,6 +624,59 @@ function Party:saveGameAtSlot(index)
 		subState = SubStates.IDLE
 		return false
 	end
+	
+end
+
+function Party:resetStats()
+
+	-- saved properties
+
+	self.spells = {}
+	self.mappedsquares = {}
+
+	self.gold = 0
+	self.antsacs = 0
+	self.healing_potions = 0
+	self.mana_potions = 0
+	
+	self.ticksElapsed = 0
+	
+	self.stats =  {
+		attack = 1,
+		defence = 1,
+		health = 20,
+		health_max = 20,
+		mana = 20,
+		mana_max = 20,
+	}
+	
+	self.spells = {}
+	self.mappedsquares = {}
+	
+	self.inventory = {
+		{"", "", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
+		{"", "", "", "", "", "", "", ""},
+	}
+	
+	self.equipped =  {
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = "sword-1"},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+		{ id = ""},
+	}
 	
 end
 

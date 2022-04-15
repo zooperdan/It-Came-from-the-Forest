@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "forest-2.tmx",
+    "activeFile": "city.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -36,10 +36,10 @@
         },
         "city.tmx": {
             "scale": 0.75,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 784.6666666666665,
-                "y": 545.3333333333334
+                "x": 516.6666666666665,
+                "y": 510.6666666666666
             }
         },
         "dungeon-1.tmx": {
@@ -124,7 +124,7 @@
         },
         "forest-1.tmx": {
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 847.5,
                 "y": 655
@@ -132,10 +132,10 @@
         },
         "forest-2.tmx": {
             "scale": 0.75,
-            "selectedLayer": 3,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 543.3333333333334,
-                "y": 524
+                "x": 471.33333333333337,
+                "y": 401.33333333333337
             }
         },
         "forest-3.tmx": {
@@ -172,19 +172,19 @@
     "map.width": 16,
     "openFiles": [
         "MainTiles.tsx",
-        "forest-2.tmx"
+        "city.tmx"
     ],
     "project": "It Came from the Forest.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "dungeon-9.tmx",
+        "MainTiles.tsx",
         "city.tmx",
+        "forest-1.tmx",
+        "forest-2.tmx",
+        "dungeon-9.tmx",
         "dungeon-6.tmx",
         "dungeon-2.tmx",
-        "forest-1.tmx",
         "garden.tmx",
-        "forest-2.tmx",
-        "MainTiles.tsx",
         "dungeon-1.tmx",
         "forest-3.tmx",
         "test.tmx",

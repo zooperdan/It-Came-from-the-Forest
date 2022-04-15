@@ -45,8 +45,6 @@
 	},
 	[4]={
 		[1]={["type"]=1,},
-		[4]={["type"]=1,},
-		[5]={["type"]=1,},
 		[9]={["type"]=1,},
 		[14]={["type"]=2,},
 		[16]={["type"]=1,},
@@ -58,9 +56,6 @@
 	},
 	[5]={
 		[1]={["type"]=1,},
-		[4]={["type"]=1,},
-		[5]={["type"]=1,},
-		[6]={["type"]=1,},
 		[7]={["type"]=1,},
 		[9]={["type"]=1,},
 		[12]={["type"]=1,},
@@ -77,7 +72,6 @@
 	},
 	[6]={
 		[1]={["type"]=1,},
-		[6]={["type"]=1,},
 		[9]={["type"]=1,},
 		[11]={["type"]=1,},
 		[12]={["type"]=1,},
@@ -97,7 +91,6 @@
 		[1]={["type"]=1,},
 		[2]={["type"]=1,},
 		[4]={["type"]=1,},
-		[6]={["type"]=1,},
 		[9]={["type"]=1,},
 		[10]={["type"]=1,},
 		[11]={["type"]=1,},
@@ -453,8 +446,7 @@
 		[22]={["type"]=1,},
 		[23]={["type"]=1,},
 		[24]={["type"]=1,},
-		[26]={["type"]=1,},
-		[27]={["type"]=1,},
+		[29]={["type"]=1,},
 		[32]={["type"]=1,},
 	},
 	[27]={
@@ -465,7 +457,7 @@
 		[13]={["type"]=1,},
 		[19]={["type"]=1,},
 		[23]={["type"]=1,},
-		[26]={["type"]=1,},
+		[28]={["type"]=1,},
 		[29]={["type"]=1,},
 		[30]={["type"]=1,},
 		[32]={["type"]=1,},
@@ -958,8 +950,8 @@ enemies={
 			defence=6,
 			experience=10,
 			gold=0,
-			health=40,
-			health_max=40,
+			health=500,
+			health_max=500,
 			id="forest-2_0ae07af9-bc85-6edd-3cbf-c31f38657757",
 			imageid="ant-queen",
 			loot="",
@@ -1695,6 +1687,32 @@ doors={
 
 staticprops={
 	[1] = {
+		x=5,
+		y=5,
+		properties={
+			atlasid="forest-props",
+			direction=2,
+			id="forest-2_7f8c376b-f4cd-b8f8-dffd-f72739d25651",
+			name="tower",
+			state=1,
+			text="",
+			visible=1,
+		}
+	},
+	[2] = {
+		x=26,
+		y=26,
+		properties={
+			atlasid="forest-props",
+			direction=2,
+			id="forest-2_817b6e7c-a182-ab58-a530-2ac45c365fb5",
+			name="ancient-tree",
+			state=1,
+			text="",
+			visible=1,
+		}
+	},
+	[3] = {
 		x=6,
 		y=28,
 		properties={
@@ -1708,7 +1726,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[2] = {
+	[4] = {
 		x=21,
 		y=31,
 		properties={
@@ -1722,7 +1740,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[3] = {
+	[5] = {
 		x=29,
 		y=21,
 		properties={
@@ -1736,7 +1754,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[4] = {
+	[6] = {
 		x=18,
 		y=15,
 		properties={
@@ -1750,7 +1768,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[5] = {
+	[7] = {
 		x=19,
 		y=23,
 		properties={
@@ -1764,7 +1782,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[6] = {
+	[8] = {
 		x=18,
 		y=24,
 		properties={
@@ -1778,7 +1796,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[7] = {
+	[9] = {
 		x=11,
 		y=16,
 		properties={
@@ -1792,7 +1810,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[8] = {
+	[10] = {
 		x=14,
 		y=4,
 		properties={
@@ -1806,7 +1824,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[9] = {
+	[11] = {
 		x=25,
 		y=6,
 		properties={
@@ -1820,7 +1838,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[10] = {
+	[12] = {
 		x=29,
 		y=6,
 		properties={
@@ -1834,7 +1852,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[11] = {
+	[13] = {
 		x=2,
 		y=13,
 		properties={
@@ -1848,7 +1866,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[12] = {
+	[14] = {
 		x=5,
 		y=18,
 		properties={
@@ -1862,7 +1880,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[13] = {
+	[15] = {
 		x=2,
 		y=22,
 		properties={
@@ -1876,7 +1894,7 @@ staticprops={
 			visible=1,
 		}
 	},
-	[14] = {
+	[16] = {
 		x=11,
 		y=25,
 		properties={

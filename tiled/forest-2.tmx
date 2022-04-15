@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="240">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="242">
  <editorsettings>
   <export target="../src/files/areas/forest-2.lua" format="custom"/>
  </editorsettings>
@@ -14,9 +14,9 @@
 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 0,1,0,0,0,0,1,1,1,0,0,0,1,0,0,1,0,1,1,0,0,0,1,1,0,0,0,0,0,1,1,1,
 0,1,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,1,1,0,1,1,1,0,0,0,0,0,0,0,1,1,
-0,1,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,
-0,1,0,1,1,0,0,0,0,1,1,0,0,1,0,1,1,0,0,1,0,1,1,0,0,0,0,0,0,0,1,1,
-0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,1,1,
+0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,
+0,1,0,0,0,0,0,0,0,1,1,0,0,1,0,1,1,0,0,1,0,1,1,0,0,0,0,0,0,0,1,1,
+0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,1,1,
 0,0,0,0,1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,1,1,0,1,1,1,0,1,1,1,1,1,
 0,1,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,1,1,0,1,1,1,1,1,
 1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,
@@ -36,10 +36,10 @@
 0,1,0,0,0,2,0,0,0,1,0,0,1,1,0,0,0,0,0,1,1,0,1,0,0,1,1,1,0,0,1,1,
 0,1,1,0,1,1,1,0,1,1,1,1,0,1,0,1,0,0,1,1,0,0,1,0,1,1,0,1,1,0,0,1,
 0,1,1,0,0,1,1,0,0,1,0,0,0,0,0,1,1,1,1,0,0,1,1,0,0,0,0,0,1,1,0,1,
-0,0,1,1,0,1,0,1,1,0,1,1,1,1,0,0,0,1,0,0,1,1,0,1,0,1,1,0,0,0,0,1,
-0,0,0,1,1,1,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,1,1,1,
-0,1,0,0,0,0,1,1,0,1,1,0,1,0,1,1,1,0,0,1,1,1,1,0,0,0,0,0,1,1,0,1,
-0,0,1,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,1,0,0,1,1,0,0,1,1,1,0,0,1,
+0,0,1,1,0,1,0,1,1,0,1,1,1,1,0,0,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,1,
+0,0,0,1,1,1,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
+0,1,0,0,0,0,1,1,0,1,1,0,1,0,1,1,1,0,0,1,1,1,1,0,0,0,1,0,1,1,0,1,
+0,0,1,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,1,0,0,1,1,0,1,1,1,1,0,0,1,
 0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,1,0,0,0,1,1,
 0,0,1,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,0,1,
 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
@@ -290,6 +290,20 @@
     <property name="sound" value="female-greetings"/>
     <property name="text" value="Go away! I don't want the creatures to find me."/>
     <property name="vars" value=""/>
+   </properties>
+  </object>
+  <object id="240" gid="7" x="128" y="160" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="forest-props"/>
+    <property name="id" value="forest-2_7f8c376b-f4cd-b8f8-dffd-f72739d25651"/>
+    <property name="name" value="tower"/>
+   </properties>
+  </object>
+  <object id="241" gid="7" x="800" y="832" width="32" height="32">
+   <properties>
+    <property name="atlasid" value="forest-props"/>
+    <property name="id" value="forest-2_817b6e7c-a182-ab58-a530-2ac45c365fb5"/>
+    <property name="name" value="ancient-tree"/>
    </properties>
   </object>
  </objectgroup>
@@ -548,8 +562,8 @@
     <property name="antsacs" type="int" value="0"/>
     <property name="attack" type="int" value="8"/>
     <property name="defence" type="int" value="6"/>
-    <property name="health" type="int" value="40"/>
-    <property name="health_max" type="int" value="40"/>
+    <property name="health" type="int" value="500"/>
+    <property name="health_max" type="int" value="500"/>
     <property name="id" value="forest-2_0ae07af9-bc85-6edd-3cbf-c31f38657757"/>
     <property name="imageid" value="ant-queen"/>
     <property name="sound_scream" value="ant-queen-scream"/>
