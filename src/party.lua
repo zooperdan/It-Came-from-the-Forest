@@ -523,8 +523,12 @@ end
 
 function Party:isSavegameAtSlot(index)
 
-	return love.filesystem.getInfo("savegame" .. index .. ".dat")
+	local name = "savegame" .. index .. ".dat"
 
+	local f = io.open(name, "r")
+	
+	return f ~= nil and io.close(f)
+   
 end
 
 function Party:loadGameFromSlot(index)

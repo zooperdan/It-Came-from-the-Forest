@@ -1,1 +1,0 @@
-copy /b love.exe+AtlasMaker-Dungeon-Example.love AtlasMaker-Dungeon-Example.exe"

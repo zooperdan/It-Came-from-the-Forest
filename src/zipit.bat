@@ -1,1 +1,0 @@
-7z a -tzip It-Came-from-the-Forest.love @ziplist.txt

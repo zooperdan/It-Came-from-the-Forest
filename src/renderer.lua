@@ -269,6 +269,7 @@ function Renderer:handleMousePressed(x, y, button)
 
 		if gameState == GameStates.GAMEOVER or gameState == GameStates.VICTORY then
 			fadeMusicVolume.v = savedsettings.musicVolume
+			settings.canContinue = party:isSavegameAtSlot(savedsettings.lastSavegameSlot)
 			assets:stopMusic("victory")
 			assets:stopMusic("gameover")
 			assets:stopMusic(level.data.tileset)
@@ -365,6 +366,7 @@ function Renderer:handleMousePressed(x, y, button)
 			for i = 1, #self.saveslots do
 				if intersect(x, y, self.saveslots[i].x, self.saveslots[i].y, self.saveslots[i].w, self.saveslots[i].h) then
 					if party:saveGameAtSlot(i) then
+						fadeMusicVolume.v = savedsettings.musicVolume
 						subState = SubStates.TWEENING
 						Timer.script(function(wait)
 							Timer.tween(1, fadeColor, {0,0,0}, 'in-out-quad')
@@ -402,6 +404,7 @@ function Renderer:handleMousePressed(x, y, button)
 				if bw > 0.99 then bw = 1.0 end
 				if bw < 0.01 then bw = 0.0 end
 				savedsettings.musicVolume = bw
+				fadeMusicVolume.y = bw
 				assets:setMusicVolume(level.data.tileset, bw)
 				assets:playSound("click-1")
 				return
