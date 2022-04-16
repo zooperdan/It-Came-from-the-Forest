@@ -621,6 +621,9 @@ function Party:saveGameAtSlot(index)
 		file:write(serialized)
 		file:close()
 		savedsettings.lastSavegameSlot = index
+		settings.savegameSlots[1] = self:isSavegameAtSlot(1)
+		settings.savegameSlots[2] = self:isSavegameAtSlot(2)
+		settings.savegameSlots[3] = self:isSavegameAtSlot(3)
 		Game:saveSettings()
 		subState = SubStates.IDLE
 		return true

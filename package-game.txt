@@ -1,0 +1,9 @@
+files\atlases\*.png
+files\fonts\*
+files\itemicons\*
+files\music\*
+files\sfx\*
+files\ui\*
+files\icon.png
+libs\*
+*.lua

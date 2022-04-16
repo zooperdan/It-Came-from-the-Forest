@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "city.tmx",
+    "activeFile": "forest-2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -46,7 +46,7 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 340,
+                "x": 339.6666666666667,
                 "y": 199.33333333333334
             }
         },
@@ -62,8 +62,8 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 510,
-                "y": 454.6666666666666
+                "x": 144.66666666666669,
+                "y": 272
             }
         },
         "dungeon-4.tmx": {
@@ -84,7 +84,7 @@
         },
         "dungeon-6.tmx": {
             "scale": 0.75,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 499.33333333333337,
                 "y": 438.6666666666666
@@ -108,7 +108,7 @@
         },
         "dungeon-8.tmx": {
             "scale": 0.75,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 580.6666666666665,
                 "y": 442.6666666666666
@@ -132,10 +132,10 @@
         },
         "forest-2.tmx": {
             "scale": 0.75,
-            "selectedLayer": 7,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 471.33333333333337,
-                "y": 401.33333333333337
+                "x": 466,
+                "y": 600
             }
         },
         "forest-3.tmx": {
@@ -172,23 +172,24 @@
     "map.width": 16,
     "openFiles": [
         "MainTiles.tsx",
-        "city.tmx"
+        "dungeon-9.tmx",
+        "forest-2.tmx"
     ],
     "project": "It Came from the Forest.tiled-project",
     "property.type": "string",
     "recentFiles": [
         "MainTiles.tsx",
-        "city.tmx",
-        "forest-1.tmx",
-        "forest-2.tmx",
         "dungeon-9.tmx",
+        "forest-2.tmx",
+        "dungeon-5.tmx",
         "dungeon-6.tmx",
-        "dungeon-2.tmx",
-        "garden.tmx",
+        "dungeon-7.tmx",
+        "dungeon-7b.tmx",
+        "dungeon-8.tmx",
+        "dungeon-4.tmx",
+        "dungeon-3.tmx",
         "dungeon-1.tmx",
-        "forest-3.tmx",
-        "test.tmx",
-        "area1.tmx"
+        "dungeon-2.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

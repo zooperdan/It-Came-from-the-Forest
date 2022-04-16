@@ -61,6 +61,10 @@ function Game:init()
 	
 	settings.canContinue = party:isSavegameAtSlot(savedsettings.lastSavegameSlot)
 	
+	settings.savegameSlots[1] = party:isSavegameAtSlot(1)
+	settings.savegameSlots[2] = party:isSavegameAtSlot(2)
+	settings.savegameSlots[3] = party:isSavegameAtSlot(3)
+	
 	party:updateStats()
 	
 	if settings.quickstart then

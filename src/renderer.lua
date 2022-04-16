@@ -269,7 +269,7 @@ function Renderer:handleMousePressed(x, y, button)
 
 		if gameState == GameStates.GAMEOVER or gameState == GameStates.VICTORY then
 			fadeMusicVolume.v = savedsettings.musicVolume
-			settings.canContinue = party:isSavegameAtSlot(savedsettings.lastSavegameSlot)
+			settings.canContinue = settings.savegameSlots[savedsettings.lastSavegameSlot]
 			assets:stopMusic("victory")
 			assets:stopMusic("gameover")
 			assets:stopMusic(level.data.tileset)
@@ -353,7 +353,7 @@ function Renderer:handleMousePressed(x, y, button)
 			end
 			
 			for i = 1, #self.loadslots do
-				if party:isSavegameAtSlot(i) then
+				if settings.savegameSlots[i] then
 					if intersect(x, y, self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h) then
 						if party:loadGameFromSlot(i) then
 						end
@@ -867,8 +867,6 @@ function Renderer:drawCredits()
 
 	self:drawText(0,340, "* Refer to attribution.txt for more information", {1,1,1,.25}, "center")
 
-	self:drawText(600,340, "v0.9", {1,1,1,.25}, "left")
-
 	love.graphics.setFont(assets.fonts["main"]);
 
 end
@@ -1027,7 +1025,7 @@ function Renderer:drawTavern()
 	self:drawText(textx, self.loadslots[1].y+2, "LOAD", {1,1,1,1})
 
 	for i = 1, #self.loadslots do
-		if party:isSavegameAtSlot(i) then
+		if settings.savegameSlots[i] then
 			if intersect(mx, my, self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h) then
 				self:box(self.loadslots[i].x, self.loadslots[i].y, self.loadslots[i].w, self.loadslots[i].h, {1,1,1,1}, false)
 			else
@@ -1585,6 +1583,8 @@ function Renderer:drawMainmenu()
 		end
 	
 	end
+
+	self:drawText(-10,340, "v" .. settings.version, {1,1,1,.15}, "right")
 
 	love.graphics.setFont(assets.fonts["main"]);
 
@@ -2452,6 +2452,7 @@ end
 
 function Renderer:onBackToMenuButtonClick()
 
+	settings.canContinue = settings.savegameSlots[savedsettings.lastSavegameSlot]
 	self:showSystemMenu(false)
 	fadeMusicVolume.v = savedsettings.musicVolume
 	assets:stopMusic(level.data.tileset)

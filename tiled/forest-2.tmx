@@ -216,7 +216,7 @@
    <properties>
     <property name="direction" type="int" value="2"/>
     <property name="id" value="forest-2_5d7f1c7d-7afd-c3a3-e6d6-635e550588c6"/>
-    <property name="keyid" value="key-2"/>
+    <property name="keyid" value="key-3"/>
     <property name="state" type="int" value="2"/>
    </properties>
   </object>

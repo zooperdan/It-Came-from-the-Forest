@@ -1,4 +1,5 @@
 settings = {
+	version = "0.9.1",
 	quickstart = false,
 	debugmode = false,
 	startingArea = "forest-1",
@@ -12,6 +13,11 @@ settings = {
 	frameColor = {105/255,102/255,130/255,1},
 	canContinue = nil,
 	sliderColor = {0.7,0.7,0.7,1},
+	savegameSlots = {
+		[1] = nil,
+		[2] = nil,
+		[3] = nil,
+	}
 }
 
 savedsettings = {

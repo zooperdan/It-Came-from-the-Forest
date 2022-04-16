@@ -2041,7 +2041,7 @@ bossgates={
 		properties={
 			direction=2,
 			id="forest-2_5d7f1c7d-7afd-c3a3-e6d6-635e550588c6",
-			keyid="key-2",
+			keyid="key-3",
 			state=2,
 		}
 	},
