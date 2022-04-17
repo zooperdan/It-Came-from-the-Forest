@@ -10,3 +10,5 @@ This is the source code for the [game](https://zooperdan.itch.io/it-came-from-th
 The source code is released under the [CC0-1.0 License](https://github.com/zooperdan/It-Came-from-the-Forest/blob/main/LICENSE) which basically means you can do whatever you want with it. Take it apart, change it, add to it and hopefully make a dungeon crawler with it :)
 
 Keep in mind that this was a 1 week jam and the source code reflects the time constraint. I did not have time for optimizing, structure and beautification. There are also not a lot of commenting. This was also my first attempt at making something with the LÖVE framework and LUA.
+
+All the in-game world graphics were generated using my [AtlasMaker](https://github.com/zooperdan/AtlasMaker-for-2D-Dungeon-Crawlers) tool.
