@@ -1,4 +1,0 @@
-files\*
-libs\*
-*.lua
-attribution.txt

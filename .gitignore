@@ -1,3 +1,9 @@
 npp/*
 love2d/*
 dist/*
+
+package-game.bat
+package-game.txt
+package-source.bat
+package-source.txt
+game.ico
