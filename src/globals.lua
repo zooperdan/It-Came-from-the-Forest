@@ -1,5 +1,5 @@
 settings = {
-	version = "0.9.1",
+	version = "0.9.2",
 	quickstart = false,
 	debugmode = false,
 	startingArea = "forest-1",
