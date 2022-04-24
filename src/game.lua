@@ -27,6 +27,8 @@ local Game = class('Game')
 itemtemplates = ItemTemplates:new()
 spelltemplates = SpellTemplates:new()
 
+local useFrench = false
+
 function Game:initialize()
 
 	math.randomseed(os.time())
@@ -293,47 +295,97 @@ function Game:handleInput(key)
 				--return
 			end
 
-			if key == 'left' or key == 'kp7' or key == 'q' then
-				party.direction = party.direction - 1
-				if party.direction < 0 then
-					party.direction = 3
+			if useFrench then
+			
+				if key == 'a' then
+					party.direction = party.direction - 1
+					if party.direction < 0 then
+						party.direction = 3
+					end
+					renderer:flipGround()
+					renderer:flipSky()
+					self:playFootstepSound()
+					return
 				end
-				renderer:flipGround()
-				renderer:flipSky()
-				self:playFootstepSound()
-				return
+
+				if key == 'e' then
+					party.direction = party.direction + 1
+					if party.direction > 3 then
+						party.direction = 0
+					end
+					renderer:flipGround()
+					renderer:flipSky()
+					self:playFootstepSound()
+					return
+				end
+				
+				if key == 'z' then
+					self:moveForward()
+					return
+				end
+				
+				if key == 's' then
+					self:moveBackward()
+					return
+				end
+				
+				if key == 'q' then
+					self:strafeLeft()
+					return
+				end
+				
+				if key == 'd' then
+					self:strafeRight()
+					return
+				end	
+			
+			else
+			
+				if key == 'left' or key == 'kp7' or key == 'q' then
+					party.direction = party.direction - 1
+					if party.direction < 0 then
+						party.direction = 3
+					end
+					renderer:flipGround()
+					renderer:flipSky()
+					self:playFootstepSound()
+					return
+				end
+
+				if key == 'right' or key == 'kp9' or key == 'e' then
+					party.direction = party.direction + 1
+					if party.direction > 3 then
+						party.direction = 0
+					end
+					renderer:flipGround()
+					renderer:flipSky()
+					self:playFootstepSound()
+					return
+				end
+				
+				if key == 'up' or key == 'kp8' or key == 'w' then
+					self:moveForward()
+					return
+				end
+				
+				if key == 'down' or key == 'kp2' or key == 's' then
+					self:moveBackward()
+					return
+				end
+				
+				if key == 'kp4' or key == 'a' then
+					self:strafeLeft()
+					return
+				end
+				
+				if key == 'kp6' or key == 'd' then
+					self:strafeRight()
+					return
+				end	
+			
 			end
 
-			if key == 'right' or key == 'kp9' or key == 'e' then
-				party.direction = party.direction + 1
-				if party.direction > 3 then
-					party.direction = 0
-				end
-				renderer:flipGround()
-				renderer:flipSky()
-				self:playFootstepSound()
-				return
-			end
-			
-			if key == 'up' or key == 'kp8' or key == 'w' then
-				self:moveForward()
-				return
-			end
-			
-			if key == 'down' or key == 'kp2' or key == 's' then
-				self:moveBackward()
-				return
-			end
-			
-			if key == 'kp4' or key == 'a' then
-				self:strafeLeft()
-				return
-			end
-			
-			if key == 'kp6' or key == 'd' then
-				self:strafeRight()
-				return
-			end			
+		
 
 			if key == 'i' then
 				if not renderer:inventoryShowing() then
